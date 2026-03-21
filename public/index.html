@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giovanni Lauffer — 3D Artist</title>
+<link rel="icon" type="image/png" href="https://giovannilauffer.com/wp-content/uploads/2025/07/cropped-Asset-2-logo-thumnail-final-1.png">
+<link rel="shortcut icon" type="image/png" href="https://giovannilauffer.com/wp-content/uploads/2025/07/cropped-Asset-2-logo-thumnail-final-1.png">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0d0e;--surf:#161618;--surf2:#1e1e21;
+  --brd:rgba(255,255,255,0.08);--brd2:rgba(255,255,255,0.16);
+  --txt:#eeebe5;--mut:#6e6b65;
+  /* dual accent: teal primary, orange secondary */
+  --acc:#0eb8a0;       /* teal */
+  --acc2:#e8621a;      /* orange */
+  --acc-glow:rgba(14,184,160,.18);
+  --acc2-glow:rgba(232,98,26,.18);
+  --fd:'Bebas Neue',sans-serif;
+  --fe:'Barlow Condensed',sans-serif; /* extended bold for hero */
+  --fb:'Inter',sans-serif;--fm:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:var(--fb);font-weight:300;overflow-x:hidden;cursor:none}
+
+/* ── CURSOR ── */
+#cur{position:fixed;width:8px;height:8px;background:var(--acc);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s}
+#curR{position:fixed;width:34px;height:34px;border:1px solid rgba(14,184,160,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .08s ease-out,top .08s ease-out,width .18s,height .18s}
+body.hov #cur{width:14px;height:14px}
+body.hov #curR{width:50px;height:50px;border-color:rgba(14,184,160,.65)}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 2.5rem;background:linear-gradient(to bottom,rgba(13,13,14,.98),transparent)}
+.nlogo{height:26px;cursor:pointer;display:flex;align-items:center}
+.nlogo img{height:100%;width:auto;filter:brightness(0) invert(1)}
+.nlogo span{font-family:var(--fd);font-size:1.3rem;letter-spacing:.1em;color:var(--txt)}
+.musicbtn{background:none;border:1px solid var(--brd);color:var(--mut);width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s,color .2s;flex-shrink:0;border-radius:0}
+.musicbtn:hover{border-color:var(--acc);color:var(--acc)}
+.musicbtn.playing{border-color:var(--acc);color:var(--acc)}
+.musicbtn.playing svg{animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.nmenu{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nmenu span{display:block;width:22px;height:2px;background:var(--txt);transition:all .3s}
+.nlinks{display:flex;gap:2rem;list-style:none}
+.nlinks a{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);text-decoration:none;transition:color .2s;font-weight:500}
+.nlinks a:hover{color:var(--txt)}
+.ncta{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding:.5rem 1.3rem;border:1px solid var(--acc);color:var(--acc);text-decoration:none;font-weight:500;transition:background .2s,color .2s}
+.ncta:hover{background:var(--acc);color:var(--bg)}
+
+/* ════════════════════════════════════
+   HOME — VIDEO REEL
+════════════════════════════════════ */
+#home{position:relative}
+#home.hidden{display:none}
+
+.reel{position:relative;width:100%;height:100vh;overflow:hidden;background:#000}
+.rslides{display:flex;height:100%;transition:transform .9s cubic-bezier(.77,0,.18,1)}
+.rslide{min-width:100%;height:100%;position:relative;flex-shrink:0;overflow:hidden}
+.rslide video{width:100%;height:100%;object-fit:cover;display:block}
+.rslide .vfb{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--fe);font-size:6rem;font-weight:800;letter-spacing:.04em;color:rgba(255,255,255,.03)}
+.fb1{background:linear-gradient(135deg,#030d0b,#071a14,#0a241c)}
+.fb2{background:linear-gradient(135deg,#0a0808,#180f0f,#200a0a)}
+.fb3{background:linear-gradient(135deg,#06080f,#0c1020,#080614);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--fe);font-size:6rem;font-weight:800;letter-spacing:.04em;color:rgba(255,255,255,.03)}
+.fb4{background:linear-gradient(135deg,#0c0a10,#18101e,#100c08);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--fe);font-size:6rem;font-weight:800;letter-spacing:.04em;color:rgba(255,255,255,.03)}
+
+/* direct mp4 video fills slide */
+.slide-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+
+.si-tag{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--acc2);font-weight:600;margin-bottom:.3rem}
+.si-title{font-family:var(--fd);font-size:1.4rem;letter-spacing:.06em}
+.si-sub{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--acc);margin-top:.3rem;font-weight:500}
+.rov{position:absolute;inset:0;background:linear-gradient(to right,rgba(13,13,14,.78) 0%,rgba(13,13,14,.25) 55%,transparent 100%);pointer-events:none}
+.rob{position:absolute;bottom:0;left:0;right:0;height:50%;background:linear-gradient(to top,var(--bg),transparent);pointer-events:none}
+
+.slide-info{position:absolute;bottom:9rem;right:2.5rem;text-align:right;z-index:10}
+
+.hero{position:absolute;top:50%;left:2.5rem;transform:translateY(-50%);z-index:10;max-width:660px}
+.htag{font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;color:var(--acc);font-weight:500;margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}
+.htag::before{content:'';display:block;width:1.8rem;height:1px;background:var(--acc)}
+
+/* ── HERO NAME: transparent outline extended bold ── */
+.hname{
+  font-family:var(--fe);
+  font-weight:800;
+  font-size:clamp(4rem,9vw,9rem);
+  line-height:.88;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  /* transparent fill, teal stroke = see-through bold outline */
+  -webkit-text-fill-color:transparent;
+  -webkit-text-stroke:1.5px rgba(238,235,229,.75);
+  color:transparent;
+  display:block;
+  user-select:none;
+}
+/* second line gets orange stroke for contrast */
+.hname .l2{
+  display:block;
+  -webkit-text-stroke:2px var(--acc);
+  -webkit-text-fill-color:transparent;
+}
+
+.hrole{font-size:.84rem;letter-spacing:.04em;color:var(--mut);margin-top:1.3rem;margin-bottom:2rem;line-height:1.8;font-weight:400}
+.hstats{display:flex;gap:2.2rem;margin-bottom:2.2rem}
+.sn{font-family:var(--fd);font-size:1.9rem;color:var(--txt)}
+.sl{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-top:.05rem;font-weight:500}
+.hbtns{display:flex;gap:.85rem;flex-wrap:wrap}
+.bprim{display:inline-flex;align-items:center;gap:.65rem;background:var(--acc);color:var(--bg);font-family:var(--fb);font-size:.74rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 1.8rem;text-decoration:none;transition:background .2s,gap .2s}
+.bprim:hover{background:#0dd4b8;gap:1rem}
+.bsec{display:inline-flex;align-items:center;font-size:.74rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);text-decoration:none;border:1px solid var(--brd);padding:.85rem 1.6rem;transition:color .2s,border-color .2s}
+.bsec:hover{color:var(--txt);border-color:var(--brd2)}
+
+.rctrl{position:absolute;bottom:3rem;left:2.5rem;right:2.5rem;display:flex;align-items:center;gap:1.8rem;z-index:20}
+.rdots{display:flex;gap:.45rem}
+.rdot{width:2.2rem;height:2px;background:rgba(255,255,255,.18);cursor:pointer;transition:background .3s,width .3s}
+.rdot.on{background:var(--acc);width:3.5rem}
+.rtim{font-size:.65rem;letter-spacing:.1em;color:var(--mut);font-family:var(--fm)}
+.rnav{margin-left:auto;display:flex;gap:.4rem}
+.rbtn{width:42px;height:42px;border:1px solid var(--brd);background:rgba(13,13,14,.5);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s,background .2s}
+.rbtn:hover{border-color:var(--acc);background:var(--acc-glow)}
+.rbtn svg{width:17px;height:17px;stroke:var(--txt);stroke-width:1.5;fill:none}
+
+/* ── HOME: about strip ── */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:5rem;padding:5rem 2.5rem 4rem;max-width:1280px;margin:0 auto}
+.sec-tag{font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--acc);font-weight:600;margin-bottom:1.2rem;display:flex;align-items:center;gap:.6rem}
+.sec-tag::before{content:'';display:block;width:1.2rem;height:1px;background:var(--acc)}
+.about h2{font-family:var(--fd);font-size:2.6rem;letter-spacing:.04em;margin-bottom:1.3rem;line-height:1}
+.about p{font-size:.86rem;line-height:1.87;color:#a09c95;font-weight:300}
+.about p+p{margin-top:.9rem}
+.aprof{display:flex;align-items:center;gap:1.2rem;margin-bottom:1.8rem}
+.aprof img{width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--brd2)}
+.apn{font-family:var(--fd);font-size:1.3rem;letter-spacing:.06em}
+.aps{font-size:.68rem;color:var(--mut);margin-top:.15rem}
+.langs{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.3rem}
+.lp{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .75rem;border:1px solid var(--brd);color:var(--mut);font-weight:500}
+.lp.nat{border-color:var(--acc);color:var(--acc)}
+.skgrid{display:grid;grid-template-columns:1fr 1fr}
+.ski{font-size:.67rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);font-family:var(--fm);padding:.5rem 0;border-bottom:1px solid var(--brd)}
+
+/* ── HOME: work strip ── */
+.wstrip{padding:0 2.5rem 4rem;max-width:1280px;margin:0 auto}
+.wsec{font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--mut);font-weight:600;margin-bottom:1.8rem;display:flex;align-items:center;gap:.8rem}
+.wsec::after{content:'';flex:1;height:1px;background:var(--brd)}
+.witems{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.wi{background:var(--surf);padding:1.8rem;display:flex;gap:1.3rem;align-items:flex-start}
+.wi-link{text-decoration:none;color:inherit;transition:background .2s,outline .2s;outline:1px solid transparent;cursor:pointer}
+.wi-link:hover{background:var(--surf2);outline-color:var(--acc)}
+.wi-link:hover .wlink{opacity:1}
+.winfo{display:flex;flex-direction:column;gap:.25rem;min-width:0}
+.wlogo{width:72px;flex-shrink:0;display:flex;align-items:center}
+.wlogo img{max-width:72px;max-height:36px;object-fit:contain;filter:brightness(0) invert(.6)}
+.wdiv{width:1px;background:var(--brd);flex-shrink:0}
+.wt{font-size:.84rem;font-weight:500;display:flex;align-items:center;gap:.35rem;flex-wrap:wrap}
+.wlink{font-size:.72rem;color:var(--acc);opacity:0;transition:opacity .2s;flex-shrink:0}
+.wd{font-size:.65rem;letter-spacing:.08em;color:var(--acc2);font-family:var(--fm);margin-bottom:.35rem}
+.wdsc{font-size:.77rem;line-height:1.75;color:var(--mut);font-weight:300}
+.wlist{font-size:.77rem;line-height:1.75;color:var(--mut);font-weight:300;padding-left:1rem;margin-top:.25rem}
+.wlist li{margin-bottom:.2rem}
+.wlist li::marker{color:var(--acc)}
+
+/* ── HOME: recs ── */
+.rstrip{padding:0 2.5rem 5rem}
+.recgrid{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+/* rec cards are now <a> tags — reset link styles */
+.rc{background:var(--surf);padding:1.8rem;display:block;text-decoration:none;color:inherit;transition:background .2s,outline .2s;outline:1px solid transparent}
+.rc:hover{background:#1c1c1f;outline-color:var(--acc)}
+.rq{font-size:.82rem;line-height:1.82;color:#8e8a84;font-style:italic;font-weight:300;margin-bottom:1.3rem;padding-left:.9rem;border-left:2px solid var(--acc)}
+.rp{display:flex;align-items:center;gap:.8rem}
+.rp img{width:40px;height:40px;border-radius:50%;object-fit:cover;border:1px solid var(--brd2);flex-shrink:0}
+.rn{font-size:.8rem;font-weight:500;display:flex;align-items:center;gap:.3rem}
+.rlink{font-size:.7rem;color:var(--acc);opacity:0;transition:opacity .2s;font-style:normal}
+.rc:hover .rlink{opacity:1}
+.rr{font-size:.64rem;color:var(--mut);margin-top:.15rem;line-height:1.4}
+
+/* ════════════════════════════════════
+   PORTFOLIO — ARTSTATION GRID
+════════════════════════════════════ */
+#portfolio{display:none;min-height:100vh}
+#portfolio.on{display:block}
+
+.phead{padding:7rem 2.5rem 2rem;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1.2rem}
+.phead h1{font-family:var(--fd);font-size:3rem;letter-spacing:.06em}
+.phead p{font-size:.76rem;color:var(--mut);margin-top:.35rem}
+.pfilt{display:flex;gap:.4rem;flex-wrap:wrap}
+.fb{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;padding:.45rem 1.1rem;border:1px solid var(--brd);background:transparent;color:var(--mut);cursor:pointer;transition:all .2s;font-family:var(--fb);font-weight:500}
+.fb:hover,.fb.on{border-color:var(--acc);color:var(--acc)}
+
+/* ArtStation-style masonry grid */
+.pgrid{padding:.5rem 2.5rem 6rem;columns:3 auto;column-gap:3px;orphans:1;widows:1}
+.pcard{break-inside:avoid;margin-bottom:3px;position:relative;overflow:hidden;background:var(--surf);cursor:pointer;display:block}
+.pcard img.thumb{width:100%;height:auto;display:block;transition:transform .55s cubic-bezier(.25,.46,.45,.94)}
+.pcard:hover img.thumb{transform:scale(1.04)}
+.pcard-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,13,14,.95) 0%,rgba(13,13,14,.3) 45%,transparent 70%);opacity:0;transition:opacity .35s;display:flex;flex-direction:column;justify-content:flex-end;padding:1.2rem}
+.pcard:hover .pcard-ov{opacity:1}
+.pcc{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);font-weight:600;margin-bottom:.3rem}
+.pcn{font-family:var(--fd);font-size:1.3rem;letter-spacing:.04em;line-height:1.1}
+.pcm{display:flex;gap:.4rem;margin-top:.5rem;flex-wrap:wrap}
+.pct{font-size:.56rem;letter-spacing:.09em;text-transform:uppercase;color:rgba(238,235,229,.55);border:1px solid rgba(255,255,255,.12);padding:.18rem .45rem}
+.cbadge{position:absolute;top:.85rem;left:.85rem;font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;padding:.25rem .6rem;background:var(--acc2);color:#fff;font-weight:600}
+.cgi-badge{background:var(--surf2);border:1px solid var(--brd);color:var(--mut)}
+.ts-badge{background:rgba(14,184,160,.15);border:1px solid var(--acc);color:var(--acc)}
+.personal-badge{background:rgba(238,235,229,.07);border:1px solid var(--brd2);color:var(--txt)}
+.ts-dl-btn{display:inline-flex;align-items:center;gap:.65rem;background:var(--acc2);color:#fff;font-family:var(--fb);font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.9rem 2rem;text-decoration:none;transition:background .2s,gap .2s}
+.ts-dl-btn:hover{background:#f07030;gap:1rem}
+.ts-dl-sub{font-size:.65rem;color:var(--mut);margin-top:.55rem;letter-spacing:.06em}
+.ts-dl-date{font-size:.68rem;color:var(--txt);margin-top:.4rem;letter-spacing:.06em;display:flex;align-items:center;gap:.5rem}
+.ts-dl-date-label{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);font-weight:600}
+
+/* ════════════════════════════════════
+   POST DETAIL — ArtStation pro style
+════════════════════════════════════ */
+#post{display:none;min-height:100vh}
+#post.on{display:block}
+
+.phero{position:relative;width:100%;height:75vh;overflow:hidden;background:#000}
+.phero img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.phero-ov{position:absolute;inset:0;background:linear-gradient(to top,var(--bg) 0%,rgba(13,13,14,.2) 60%,transparent 100%)}
+
+.pcnt{max-width:1180px;margin:0 auto;padding:0 2.5rem 5rem}
+.ptop{display:grid;grid-template-columns:1fr 300px;gap:3.5rem;margin-top:-3.5rem;position:relative;z-index:10}
+
+.pbc{display:inline-flex;align-items:center;gap:.45rem;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:1.8rem;cursor:pointer;transition:color .2s}
+.pbc:hover{color:var(--acc)}
+.pbc svg{width:13px;height:13px;stroke:currentColor;stroke-width:2;fill:none}
+
+.pm h1{font-family:var(--fd);font-size:clamp(2rem,4vw,3.5rem);letter-spacing:.03em;line-height:1;margin-bottom:1.2rem}
+.ptags{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.6rem}
+.ptag{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .72rem;border:1px solid var(--brd);color:var(--mut);font-weight:500}
+.ptag.h{border-color:var(--acc);color:var(--acc)}
+.pdesc{font-size:.88rem;line-height:1.9;color:#aba7a0;font-weight:300;max-width:600px}
+.pdesc p+p{margin-top:.9rem}
+
+/* sidebar */
+.psb .sb{border-top:1px solid var(--brd);padding:1rem 0}
+.psb .sb:first-child{border-top:none;padding-top:0}
+.sbl{font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);font-weight:600;margin-bottom:.42rem}
+.sbv{font-size:.82rem;color:var(--txt);font-weight:400}
+.sbv.m{font-family:var(--fm);font-size:.76rem;color:var(--acc)}
+.swl{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.2rem}
+.sw{font-size:.58rem;letter-spacing:.05em;padding:.24rem .55rem;background:var(--surf2);border:1px solid var(--brd);color:var(--mut);font-family:var(--fm)}
+
+/* image gallery */
+.galh{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);font-weight:600;margin:3.5rem 0 1.2rem;display:flex;align-items:center;gap:.8rem}
+.galh::after{content:'';flex:1;height:1px;background:var(--brd)}
+
+.gal{columns:2 auto;column-gap:3px}
+.gi{break-inside:avoid;margin-bottom:3px;overflow:hidden;cursor:pointer;position:relative}
+.gi img{width:100%;height:auto;display:block;transition:transform .45s}
+.gi:hover img{transform:scale(1.03)}
+.gi .gph{width:100%;min-height:220px;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:1.8rem;color:rgba(255,255,255,.05)}
+.gp1{background:linear-gradient(135deg,#071a14,#0d3024)}.gp2{background:linear-gradient(135deg,#1a0d07,#300d08)}.gp3{background:linear-gradient(135deg,#0d0d1a,#0d0d30)}.gp4{background:linear-gradient(135deg,#1a1a0d,#30280d)}.gp5{background:linear-gradient(135deg,#0d1a1a,#0d2828)}.gp6{background:linear-gradient(135deg,#1a0d1a,#280d28)}
+.gi.fw{column-span:all;break-inside:avoid}
+.gi.fw img{width:100%;height:auto;max-height:600px;object-fit:cover}
+.gi.yt-embed{break-inside:avoid;margin-bottom:3px;position:relative;column-span:all}
+.yt-facade{position:relative;width:100%;padding-bottom:56.25%;background:#000;cursor:pointer;overflow:hidden}
+.yt-facade img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:opacity .3s}
+.yt-facade:hover img{opacity:.85}
+.yt-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:72px;height:72px;background:rgba(10,10,11,.75);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s}
+.yt-facade:hover .yt-play{background:var(--acc2);transform:translate(-50%,-50%) scale(1.1)}
+.yt-play svg{width:28px;height:28px;fill:#fff;margin-left:4px}
+.yt-label{position:absolute;bottom:0;left:0;right:0;padding:.6rem .9rem;background:linear-gradient(to top,rgba(10,10,11,.9),transparent);font-size:.72rem;color:var(--txt);letter-spacing:.06em;font-weight:500}
+.yt-iframe-wrap{position:relative;width:100%;padding-bottom:56.25%;height:0;background:#000}
+.yt-iframe-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+
+/* breakdown */
+.bdsec{margin-top:3.5rem;padding-top:3rem;border-top:1px solid var(--brd)}
+.bdtit{font-family:var(--fd);font-size:1.6rem;letter-spacing:.06em;margin-bottom:2rem}
+.bdgrid{display:grid;grid-template-columns:1fr 1fr;gap:2.2rem}
+.bdi h4{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--acc2);font-weight:600;margin-bottom:.6rem}
+.bdi p{font-size:.82rem;line-height:1.87;color:#8e8a84;font-weight:300}
+
+/* related */
+/* team credits section */
+.credsec{margin-top:3.5rem;padding-top:3rem;border-top:1px solid var(--brd)}
+.credtit{font-family:var(--fd);font-size:1.6rem;letter-spacing:.06em;margin-bottom:.5rem}
+.credsub{font-size:.72rem;color:var(--mut);margin-bottom:2rem;line-height:1.7}
+.credgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:1.5rem}
+.credcard{background:var(--surf);padding:1.4rem 1.2rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:.75rem;text-decoration:none;color:inherit;border:1px solid var(--brd);transition:border-color .25s,background .25s}
+.credcard:hover{border-color:var(--acc);background:var(--surf2)}
+.credcard img{width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid var(--brd2);flex-shrink:0}
+.credname{font-size:.84rem;font-weight:500;color:var(--txt);line-height:1.3}
+.credrole{font-size:.65rem;letter-spacing:.06em;color:var(--acc);font-weight:500;margin-top:.1rem;line-height:1.4}
+.credexp{font-size:.63rem;color:var(--mut);line-height:1.5;margin-top:.15rem}
+.credli{display:inline-flex;align-items:center;gap:.3rem;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--acc2);margin-top:.4rem;font-weight:500}
+.credcard.mentor{grid-column:1/-1;flex-direction:row;text-align:left;gap:1.2rem;border-color:var(--acc2);padding:1.6rem}
+.credcard.mentor img{width:80px;height:80px;flex-shrink:0}
+.cred-mentor-info{display:flex;flex-direction:column;gap:.2rem}
+.cred-mentor-badge{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;background:var(--acc2);color:#fff;padding:.2rem .6rem;width:fit-content;font-weight:600;margin-bottom:.3rem}
+@media(max-width:540px){.credgrid{grid-template-columns:repeat(2,1fr)}.credcard.mentor{flex-direction:column;text-align:center}.credcard.mentor img{width:72px;height:72px}}
+
+.relsec{margin-top:4.5rem;padding-top:2.5rem;border-top:1px solid var(--brd)}
+.reltit{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);font-weight:600;margin-bottom:1.6rem}
+.relgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.relcard{position:relative;overflow:hidden;aspect-ratio:4/3;cursor:pointer}
+.relcard img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s}
+.relcard:hover img{transform:scale(1.05)}
+.relcard-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,13,14,.93) 0%,transparent 60%);opacity:0;transition:opacity .3s;padding:.9rem;display:flex;flex-direction:column;justify-content:flex-end}
+.relcard:hover .relcard-ov{opacity:1}
+.reln{font-family:var(--fd);font-size:1rem}
+.relc{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin-top:.18rem}
+
+/* lightbox */
+.lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.97);z-index:1000;align-items:center;justify-content:center}
+.lb.on{display:flex}
+.lb img{max-width:93vw;max-height:90vh;object-fit:contain;display:block}
+.lbc{position:fixed;top:1.3rem;right:1.3rem;width:42px;height:42px;border:1px solid var(--brd2);background:transparent;color:var(--txt);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,color .2s}
+.lbc:hover{border-color:var(--acc);color:var(--acc)}
+
+/* back nav */
+.bnav{position:fixed;top:50%;left:1rem;transform:translateY(-50%);z-index:50;display:none}
+.bnav.on{display:block}
+.bbtn{writing-mode:vertical-rl;transform:rotate(180deg);font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);cursor:pointer;display:flex;align-items:center;gap:.6rem;font-weight:500;transition:color .2s}
+.bbtn:hover{color:var(--acc)}
+.bl{width:1px;height:2.2rem;background:var(--brd)}
+
+/* hire bar */
+.hire{position:fixed;bottom:0;left:0;right:0;background:rgba(22,22,24,.98);border-top:1px solid var(--brd);padding:.85rem 2.5rem;display:flex;align-items:center;justify-content:space-between;z-index:90;transform:translateY(100%);transition:transform .4s cubic-bezier(.25,.46,.45,.94)}
+.hire.on{transform:translateY(0)}
+.hdot{width:7px;height:7px;border-radius:50%;background:#3ddc84;display:inline-block;margin-right:.65rem;flex-shrink:0}
+.htxt{font-size:.76rem;color:var(--mut);display:flex;align-items:center}
+.htxt strong{color:var(--txt);margin-right:.3rem}
+.hact{display:flex;gap:.6rem}
+.hl{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;padding:.5rem 1.2rem;font-weight:500;text-decoration:none;transition:all .2s;font-family:var(--fb)}
+.hlp{background:var(--acc2);color:#fff}
+.hlp:hover{background:#f07030}
+.hls{border:1px solid var(--brd);color:var(--mut)}
+.hls:hover{border-color:var(--brd2);color:var(--txt)}
+
+@keyframes fi{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.ai{animation:fi .6s ease both}
+.d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.3s}.d4{animation-delay:.4s}
+
+/* ════════════════════════════════════
+   MOBILE MENU OVERLAY
+════════════════════════════════════ */
+.mob-nav{position:fixed;inset:0;background:var(--bg);z-index:400;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;opacity:0;pointer-events:none;transition:opacity .3s}
+.mob-nav.open{opacity:1;pointer-events:all}
+.mob-nav a{font-family:var(--fd);font-size:2.5rem;letter-spacing:.08em;color:var(--txt);text-decoration:none;transition:color .2s}
+.mob-nav a:hover{color:var(--acc)}
+.mob-nav .mob-cta{font-size:1rem;letter-spacing:.1em;padding:.7rem 2rem;border:1px solid var(--acc);color:var(--acc);font-family:var(--fb);text-transform:uppercase;font-weight:500}
+.mob-close{position:absolute;top:1.2rem;right:1.2rem;background:none;border:none;color:var(--txt);font-size:1.8rem;cursor:pointer;padding:.5rem}
+
+/* ════════════════════════════════════
+   RESPONSIVE — TABLET (≤900px)
+════════════════════════════════════ */
+@media(max-width:900px){
+  /* cursor hidden on touch */
+  #cur,#curR{display:none}
+  body{cursor:auto}
+
+  /* nav: hide links, show hamburger */
+  nav{padding:1rem 1.4rem}
+  .nlinks{display:none}
+  .ncta{display:none}
+  .nmenu{display:flex}
+
+  /* hero: full width, smaller font, lower position */
+  .hero{left:1.4rem;right:1.4rem;max-width:100%;top:auto;bottom:10rem;transform:none}
+  .hname{font-size:clamp(3rem,11vw,6rem);-webkit-text-stroke:1px rgba(238,235,229,.7)}
+  .hname .l2{-webkit-text-stroke:1.5px var(--acc)}
+  .hrole{font-size:.78rem;margin-top:1rem;margin-bottom:1.5rem}
+  .hstats{gap:1.5rem;margin-bottom:1.5rem}
+  .sn{font-size:1.6rem}
+
+  /* reel controls shift up since hero moved */
+  .rctrl{bottom:2rem;left:1.4rem;right:1.4rem;gap:1rem}
+  .slide-info{bottom:auto;top:5rem;right:1.4rem}
+
+  /* about: single column */
+  .about{grid-template-columns:1fr;gap:2.5rem;padding:3rem 1.4rem 3rem}
+
+  /* work: single column */
+  .witems{grid-template-columns:1fr}
+  .witems .wi[style*="grid-column"]{grid-column:1}
+  .wstrip{padding:0 1.4rem 3rem}
+
+  /* recs: single column */
+  .recgrid{grid-template-columns:1fr}
+  .rstrip{padding:0 1.4rem 4rem}
+
+  /* portfolio grid: 2 cols */
+  .pgrid{padding:.5rem 1.4rem 5rem;columns:2}
+  .phead{padding:5.5rem 1.4rem 1.5rem;flex-direction:column;align-items:flex-start}
+
+  /* post detail: stack sidebar below content */
+  .ptop{grid-template-columns:1fr;gap:2rem;margin-top:-2rem}
+  .pcnt{padding:0 1.4rem 4rem}
+  .phero{height:50vh}
+  .gal{columns:1}
+  .gi.fw img{max-height:380px}
+  .bdgrid{grid-template-columns:1fr;gap:1.5rem}
+  .relgrid{grid-template-columns:1fr 1fr}
+  .bdsec{margin-top:2.5rem;padding-top:2rem}
+
+  /* hire bar: compact */
+  .hire{padding:.75rem 1.4rem;flex-direction:column;align-items:flex-start;gap:.75rem}
+  .hact{width:100%;justify-content:flex-end}
+  .htxt{font-size:.7rem}
+
+  /* back nav: hide (use breadcrumb instead) */
+  .bnav{display:none!important}
+}
+
+/* ════════════════════════════════════
+   RESPONSIVE — MOBILE (≤540px)
+════════════════════════════════════ */
+@media(max-width:540px){
+  /* reel hero: even more compact */
+  .hero{bottom:8.5rem}
+  .hname{font-size:clamp(2.6rem,13vw,4.5rem);-webkit-text-stroke:1px rgba(238,235,229,.65)}
+  .hname .l2{-webkit-text-stroke:1.2px var(--acc)}
+  .hrole{font-size:.72rem;display:none}/* hide on tiny screens to avoid clutter */
+  .htag{font-size:.58rem;margin-bottom:.7rem}
+  .hstats{gap:1.2rem;margin-bottom:1.2rem}
+  .sn{font-size:1.4rem}
+  .hbtns{flex-direction:column;gap:.6rem;align-items:flex-start}
+  .bprim,.bsec{font-size:.68rem;padding:.75rem 1.4rem}
+
+  /* reel controls tighter */
+  .rctrl{bottom:1.5rem;left:1rem;right:1rem;gap:.75rem}
+  .rdot{width:1.6rem}
+  .rdot.on{width:2.5rem}
+  .rtim{display:none}
+  .rnav{gap:.3rem}
+  .rbtn{width:36px;height:36px}
+
+  /* portfolio: single column */
+  .pgrid{columns:1;padding:.5rem 1rem 5rem}
+  .phead{padding:5rem 1rem 1.2rem}
+  .pfilt{gap:.3rem}
+  .fb{font-size:.6rem;padding:.38rem .85rem}
+
+  /* post detail */
+  .phero{height:40vh}
+  .pcnt{padding:0 1rem 4rem}
+  .pm h1{font-size:1.8rem}
+  .ptags{gap:.3rem}
+  .relgrid{grid-template-columns:1fr}
+
+  /* about */
+  .about{padding:2.5rem 1rem 2.5rem}
+  .wstrip{padding:0 1rem 2.5rem}
+  .rstrip{padding:0 1rem 3rem}
+
+  /* hire bar */
+  .hire{padding:.65rem 1rem;gap:.6rem}
+  .hact{gap:.4rem}
+  .hl{font-size:.6rem;padding:.45rem .9rem}
+  .htxt{font-size:.65rem}
+  .hdot{display:none}
+
+  /* slide info hidden on very small */
+  .slide-info{display:none}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="curR"></div>
+
+<!-- Mobile nav overlay -->
+<div class="mob-nav" id="mobnav">
+  <button class="mob-close" onclick="closeMob()">✕</button>
+  <a href="#" onclick="showHome();closeMob();return false">Home</a>
+  <a href="#" onclick="showPortfolio();closeMob();return false">Portfolio</a>
+  <a href="https://www.artstation.com/giovannilauffer" target="_blank" onclick="closeMob()">ArtStation</a>
+  <a href="https://www.linkedin.com/in/giovanni-lauffer-08558b185/" target="_blank" onclick="closeMob()">LinkedIn</a>
+  <a href="mailto:giovanni@giovannilauffer.com" class="mob-cta">Hire Me</a>
+</div>
+
+<nav>
+  <div class="nlogo" onclick="showHome()">
+    <img src="https://giovannilauffer.com/wp-content/uploads/2025/07/giodark.png" alt="Giovanni Lauffer"
+      onerror="this.style.display='none';this.parentNode.innerHTML+='<span>GIOVANNI LAUFFER</span>'">
+  </div>
+  <ul class="nlinks">
+    <li><a href="#" onclick="showHome();return false">Home</a></li>
+    <li><a href="#" onclick="showPortfolio();return false">Portfolio</a></li>
+    <li><a href="https://www.artstation.com/giovannilauffer" target="_blank">ArtStation</a></li>
+    <li><a href="https://www.linkedin.com/in/giovanni-lauffer-08558b185/" target="_blank">LinkedIn</a></li>
+  </ul>
+  <a href="mailto:giovanni@giovannilauffer.com" class="ncta">Hire Me</a>
+  <button class="musicbtn" id="musicbtn" onclick="toggleMusic()" title="Toggle music" aria-label="Toggle background music">
+    <svg id="musicicon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+    </svg>
+  </button>
+  <div class="nmenu" onclick="openMob()" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="bnav" id="bnav">
+  <div class="bbtn" onclick="goBack()">
+    <span>← Back</span><div class="bl"></div><span id="blbl">Portfolio</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     HOME
+══════════════════════════════════════ -->
+<div id="home">
+
+  <!-- VIDEO REEL: Witch Den + TimeSplitters -->
+  <div class="reel">
+    <div class="rslides" id="rslides">
+
+      <!-- Slide 1: TimeSplitters Rewind — direct MP4 from giovannilauffer.com -->
+      <div class="rslide">
+        <video class="slide-video" autoplay muted loop playsinline
+          poster="https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-giovanni-lauffer-thumbnail-4.jpg">
+          <source src="https://giovannilauffer.com/ts-rewind-2k-v3/" type="video/mp4">
+        </video>
+        <div class="rov"></div><div class="rob"></div>
+        <div class="slide-info"><div class="si-title">TimeSplitters: Rewind</div><div class="si-sub">Props · Characters · Vehicles · UE5</div></div>
+      </div>
+
+      <!-- Slide 2: Witch's Den — direct MP4 from giovannilauffer.com -->
+      <div class="rslide">
+        <video class="slide-video" autoplay muted loop playsinline>
+          <source src="https://giovannilauffer.com/wp-content/uploads/2025/12/WitchesDen-2k-1.mp4" type="video/mp4">
+        </video>
+        <div class="rov"></div><div class="rob"></div>
+        <div class="slide-info">
+          <div class="si-tag">Beyond Extent Challenge</div>
+          <div class="si-title">Witch's Den</div>
+          <div class="si-sub">Environment Art · Beyond Extent</div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Kingdom Below — Coming Soon -->
+      <div class="rslide">
+        <div class="vfb fb3">KINGDOM BELOW</div>
+        <div class="rov"></div><div class="rob"></div>
+        <div class="slide-info">
+          <div class="si-tag">Beyond Extent Challenge</div>
+          <div class="si-title">Kingdom Below</div>
+          <div class="si-sub">Environment Art · Coming Soon</div>
+        </div>
+      </div>
+
+      <!-- Slide 4: Underground Subway — Upcoming Personal Project -->
+      <div class="rslide">
+        <div class="vfb fb4">UNDERGROUND SUBWAY</div>
+        <div class="rov"></div><div class="rob"></div>
+        <div class="slide-info">
+          <div class="si-tag">Personal Project</div>
+          <div class="si-title">Underground Subway</div>
+          <div class="si-sub">Environment Art · Coming Soon</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="hero">
+      <div class="htag ai">3D Artist · Ede, Netherlands</div>
+      <h1 class="hname ai d1">GIOVANNI<span class="l2">LAUFFER</span></h1>
+      <p class="hrole ai d2">Props · Characters · Vehicles · Environments<br>Maya · ZBrush · Substance · UE5 · 3DS Max · VRay</p>
+      <div class="hstats ai d3">
+        <div><div class="sn">5+</div><div class="sl">Years Exp</div></div>
+        <div><div class="sn">2</div><div class="sl">Studios</div></div>
+        <div><div class="sn">4</div><div class="sl">Languages</div></div>
+      </div>
+      <div class="hbtns ai d4">
+        <a href="#" class="bprim" onclick="showPortfolio();return false">
+          View Portfolio
+          <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="1.8" fill="none"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="mailto:giovanni@giovannilauffer.com" class="bsec">Get In Touch</a>
+      </div>
+    </div>
+
+    <div class="rctrl">
+      <div class="rdots" id="rdots">
+        <div class="rdot on" onclick="gts(0)"></div>
+        <div class="rdot" onclick="gts(1)"></div>
+        <div class="rdot" onclick="gts(2)"></div>
+        <div class="rdot" onclick="gts(3)"></div>
+      </div>
+      <div class="rtim" id="rtim">01 / 04</div>
+      <div class="rnav">
+        <button class="rbtn" onclick="ps()"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
+        <button class="rbtn" onclick="ns()"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- About -->
+  <div class="about">
+    <div>
+      <div class="aprof">
+        <img src="https://giovannilauffer.com/wp-content/uploads/2025/10/Artstation-profile-pic.png" alt="Giovanni Lauffer">
+        <div><div class="apn">GIOVANNI LAUFFER</div><div class="aps">3D Artist · Ede, Netherlands</div></div>
+      </div>
+      <div class="sec-tag">About</div>
+      <h2>CRAFTING WORLDS,<br>ONE POLYGON AT A TIME</h2>
+      <p>A passionate 3D artist with a Bachelor's in Creative Media and Game Technologies from Saxion University of Applied Sciences. My aspiration is to create assets and worlds that give players a visceral, immersive experience.</p>
+      <p>Working on TimeSplitters: Rewind with Cinder Interactive since 2020 — contributing props, vehicles, and character assets to the largest free-content video game ever made. Mentored directly by industry veterans Cameron Williams (ex-Rockstar, Infinity Ward) and Samuel Freeman (Splash Damage).</p>
+      <p>I thrive on collaboration, embrace critique, and am driven by a "what's next" mindset.</p>
+      <div class="langs">
+        <span class="lp nat">English — Native</span>
+        <span class="lp nat">Papiamentu — Native</span>
+        <span class="lp">Spanish — Professional</span>
+        <span class="lp">Dutch — Professional</span>
+      </div>
+    </div>
+    <div>
+      <div class="sec-tag">Software</div>
+      <div class="skgrid">
+        <span class="ski">Autodesk Maya</span><span class="ski">3DS Max</span>
+        <span class="ski">ZBrush</span><span class="ski">Substance Painter</span>
+        <span class="ski">Substance Designer</span><span class="ski">Unreal Engine 5</span>
+        <span class="ski">Unity</span><span class="ski">VRay</span>
+        <span class="ski">Marmoset Toolbag</span><span class="ski">Photoshop</span>
+        <span class="ski">Trello / Asana</span><span class="ski">Scrum / Agile</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Work -->
+  <div class="wstrip">
+    <div class="wsec">Work Experience</div>
+    <div class="witems">
+
+      <a class="wi wi-link" href="https://www.timesplittersrewind.com/" target="_blank" rel="noopener">
+        <div class="wlogo"><img src="https://giovannilauffer.com/wp-content/uploads/2024/07/Cinder.png" alt="Cinder Interactive"></div>
+        <div class="wdiv"></div>
+        <div class="winfo">
+          <div class="wt">3D Artist — Cinder Interactive <span class="wlink">↗</span></div>
+          <div class="wd">Jan 2020 – Present · USA, Remotely from NL</div>
+          <ul class="wlist">
+            <li>Developed high-quality 3D assets for TimeSplitters remake, preserving original game aesthetics.</li>
+            <li>Ensured stylistic consistency through pipeline documentation and workflow monitoring.</li>
+            <li>Executed 3D modeling, UVing, and QA to enhance game quality.</li>
+            <li>Reimagined and redesigned all original assets.</li>
+            <li>Collaborated for efficient production pipelines.</li>
+            <li>Utilized Trello and HackNPlan for Scrum management.</li>
+          </ul>
+        </div>
+      </a>
+
+      <a class="wi wi-link" href="https://www.lukkien.com/" target="_blank" rel="noopener">
+        <div class="wlogo"><img src="https://giovannilauffer.com/wp-content/uploads/2024/07/LUKKIEN-1024x221.png" alt="Lukkien"></div>
+        <div class="wdiv"></div>
+        <div class="winfo">
+          <div class="wt">3D Artist — Lukkien <span class="wlink">↗</span></div>
+          <div class="wd">Aug 2022 – Dec 2024 · Ede, Netherlands</div>
+          <ul class="wlist">
+            <li>Crafted high-quality 3D models in Autodesk 3DS Max.</li>
+            <li>Generated photorealistic 1:1 VRay renders for Rituals' website.</li>
+            <li>Developed custom shaders for enhanced visuals.</li>
+            <li>Employed Asana for task management.</li>
+            <li>Utilized Scrum methodology for project efficiency.</li>
+            <li>Collaborated effectively with team members.</li>
+          </ul>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="wsec" style="margin-top:3rem">Education</div>
+    <div class="witems">
+
+      <a class="wi wi-link" href="https://www.saxion.nl/en" target="_blank" rel="noopener">
+        <div class="wlogo"><img src="https://giovannilauffer.com/wp-content/uploads/2024/07/lg_saxion_rgb.png" alt="Saxion"></div>
+        <div class="wdiv"></div>
+        <div class="winfo">
+          <div class="wt">Saxion University of Applied Sciences <span class="wlink">↗</span></div>
+          <div class="wd">Enschede, Netherlands</div>
+          <div class="wdsc"><strong style="color:var(--txt);font-weight:500">Bachelor Degree</strong> — Creative Media and Game Technologies</div>
+        </div>
+      </a>
+
+      <a class="wi wi-link" href="https://www.beyondextent.com/" target="_blank" rel="noopener">
+        <div class="wlogo"><img src="https://giovannilauffer.com/wp-content/uploads/2025/11/BeyondExtent_Logo_White_Monotone-150x150.png" alt="Beyond Extent"></div>
+        <div class="wdiv"></div>
+        <div class="winfo">
+          <div class="wt">Beyond Extent <span class="wlink">↗</span></div>
+          <div class="wd">Remote · Online Community</div>
+          <div class="wdsc"><strong style="color:var(--txt);font-weight:500">Witch's Den Challenge</strong> — Team environment art challenge</div>
+        </div>
+      </a>
+
+      <a class="wi wi-link" href="https://www.isc.cw/" target="_blank" rel="noopener">
+        <div class="wlogo"><img src="https://giovannilauffer.com/wp-content/uploads/2024/07/ISC.png" alt="ISC"></div>
+        <div class="wdiv"></div>
+        <div class="winfo">
+          <div class="wt">International School of Curaçao <span class="wlink">↗</span></div>
+          <div class="wd">Willemstad, Curaçao</div>
+          <div class="wdsc"><strong style="color:var(--txt);font-weight:500">International Baccalaureate Diploma</strong> — Specializing in High Level Art</div>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="wsec" style="margin-top:3rem">Awards</div>
+    <div class="witems">
+      <a class="wi wi-link" href="#" onclick="showPost('grabaduck');return false;" style="grid-column:1/-1">
+        <div class="wlogo" style="font-size:1.8rem;color:var(--acc2);width:72px;flex-shrink:0;display:flex;align-items:center;justify-content:center">🏆</div>
+        <div class="wdiv"></div>
+        <div class="winfo">
+          <div class="wt">"Grab a Duck" — Best Student First Year Game <span class="wlink">↗</span></div>
+          <div class="wd">Public Choice Award · Hengelo Heim Exhibition</div>
+          <div class="wdsc">Won the public choice award at the Heim Museum in Hengelo, The Netherlands. Responsible for all 3D modelling and texturing for the game's assets.</div>
+        </div>
+      </a>
+    </div>
+
+  </div>
+
+  <!-- Recommendations -->
+  <div class="rstrip">
+    <div class="wsec">Industry Recommendations</div>
+    <div class="recgrid">
+      <a class="rc" href="https://cameronwgames.com/" target="_blank" rel="noopener">
+        <div class="rq">"Giovanni has a striking mindset of 'what's next' and was always extremely enthusiastic in providing high quality assets. We put him on the highest quality hero assets, trusting him with some of the most commonly viewed props throughout the game. I highly recommend Giovanni — he'd do great in any studio."</div>
+        <div class="rp">
+          <img src="https://giovannilauffer.com/wp-content/uploads/2025/03/cam.jpg" alt="Cameron Williams">
+          <div>
+            <div class="rn">Cameron Williams <span class="rlink">↗</span></div>
+            <div class="rr">Senior Game Designer, Absurd Ventures<br>Formerly Infinity Ward · Rockstar Games</div>
+          </div>
+        </div>
+      </a>
+      <a class="rc" href="https://www.willemkranendonk.com/" target="_blank" rel="noopener">
+        <div class="rq">"Giovanni is an incredible person as well as a passionate developer. He is an adaptable artist who works well with others and strives to be better every single day. You will not only get a strong and passionate artist but you will also get a good person."</div>
+        <div class="rp">
+          <img src="https://giovannilauffer.com/wp-content/uploads/2025/03/willem.jpg" alt="Willem Kranendonk">
+          <div>
+            <div class="rn">Willem Kranendonk <span class="rlink">↗</span></div>
+            <div class="rr">Founder, Odyssey Cocktail Interactive<br>Formerly Level Designer at Zynga · Amazon Games · EA Velan · WAYFORWARD · TIC TOC GAMES</div>
+          </div>
+        </div>
+      </a>
+      <a class="rc" href="https://www.artstation.com/samueltfreeman" target="_blank" rel="noopener">
+        <div class="rq">"Giovanni demonstrated a strong work ethic and a remarkable ability to handle critique effectively. His dedication, receptive attitude, and effective collaboration make him a valuable asset to any creative endeavor."</div>
+        <div class="rp">
+          <img src="https://giovannilauffer.com/wp-content/uploads/2024/08/Samuel-Freeman.jpg" alt="Samuel Freeman">
+          <div>
+            <div class="rn">Samuel Freeman <span class="rlink">↗</span></div>
+            <div class="rr">Character Artist, Splash Damage<br>Formerly Bulkhead · Cinder Interactive</div>
+          </div>
+        </div>
+      </a>
+      <a class="rc" href="https://www.rituals.com/" target="_blank" rel="noopener">
+        <div class="rq">"Giovanni is a great co-worker with a strong drive to learn. He likes to perform and get things done."</div>
+        <div class="rp">
+          <img src="https://giovannilauffer.com/wp-content/uploads/2024/08/rutgher-e1684957341766.jpg" alt="Rutgher Jousma">
+          <div>
+            <div class="rn">Rutgher Jousma <span class="rlink">↗</span></div>
+            <div class="rr">CGI Developer, Lukkien<br>Formerly VHU Europe · Color Bleed</div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+</div><!-- /home -->
+
+<!-- ══════════════════════════════════════
+     PORTFOLIO — ArtStation grid
+══════════════════════════════════════ -->
+<div id="portfolio">
+  <div class="phead">
+    <div><h1>PORTFOLIO</h1><p>Props · Vehicles · Characters · Environments</p></div>
+    <div class="pfilt">
+      <button class="fb on" onclick="fc(this,'all')">All</button>
+      <button class="fb" onclick="fc(this,'beyond')" style="border-color:var(--acc2);color:var(--acc2)">Beyond Extent</button>
+      <button class="fb" onclick="fc(this,'ts')">TimeSplitters</button>
+      <button class="fb" onclick="fc(this,'personal')">Personal</button>
+      <button class="fb" onclick="fc(this,'cgi')">CGI</button>
+    </div>
+  </div>
+
+  <div class="pgrid" id="pgrid">
+    <!-- Cards injected by JS -->
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     POST DETAIL
+══════════════════════════════════════ -->
+<div id="post">
+  <div class="phero"><img id="phero" src="" alt=""><div class="phero-ov"></div></div>
+  <div class="pcnt">
+    <div class="pbc" onclick="showPortfolio()"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All Projects</div>
+    <div class="ptop">
+      <div class="pm">
+        <h1 id="ptit"></h1>
+        <div class="ptags" id="ptags"></div>
+        <div class="pdesc" id="pdesc"></div>
+        <div id="ts-dl" style="display:none;margin-top:1.8rem"></div>
+      </div>
+      <div class="psb" id="psb"></div>
+    </div>
+    <div class="galh">Images</div>
+    <div class="gal" id="pgal"></div>
+    <div class="bdsec" id="pbd"></div>
+    <div class="credsec" id="pcredits" style="display:none"></div>
+    <div class="relsec">
+      <div class="reltit">More Projects</div>
+      <div class="relgrid" id="prel"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lb" id="lb">
+  <button class="lbc" onclick="clb()">✕</button>
+  <img id="lbimg" src="" alt="">
+</div>
+
+<!-- Hire bar -->
+<div class="hire" id="hire">
+  <div class="htxt"><span class="hdot"></span><strong>Available for work</strong>&nbsp;— Senior 3D Artist roles · Game studios · Remote or on-site · Ede, NL</div>
+  <div class="hact">
+    <a href="https://www.artstation.com/giovannilauffer" target="_blank" class="hl hls">ArtStation</a>
+    <a href="https://www.linkedin.com/in/giovanni-lauffer-08558b185/" target="_blank" class="hl hls">LinkedIn</a>
+    <a href="mailto:giovanni@giovannilauffer.com" class="hl hlp">Contact Me →</a>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+document.addEventListener('DOMContentLoaded', function() {
+
+// ── cursor (RAF-based, starts hidden until first mouse move) ──
+const cur=document.getElementById('cur'),curR=document.getElementById('curR');
+let mx=window.innerWidth/2, my=window.innerHeight/2;
+let rx=mx, ry=my;
+cur.style.opacity='0'; curR.style.opacity='0';
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cur.style.opacity='1'; curR.style.opacity='1';
+  cur.style.left=mx+'px'; cur.style.top=my+'px';
+});
+(function loop(){
+  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+  curR.style.left=Math.round(rx)+'px'; curR.style.top=Math.round(ry)+'px';
+  requestAnimationFrame(loop);
+})();
+
+function addHov(sel){document.querySelectorAll(sel).forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
+});}
+addHov('a,button,.pcard,.gi,.relcard,.rbtn,.fb,.rc');
+
+// ── reel (3 slides) — also pause/play videos on slide change ──
+let cs=0; const T=4; let at;
+function gts(n){
+  cs=(n+T)%T;
+  document.getElementById('rslides').style.transform=`translateX(-${cs*100}%)`;
+  document.querySelectorAll('.rdot').forEach((d,i)=>d.classList.toggle('on',i===cs));
+  document.getElementById('rtim').textContent=`0${cs+1} / 0${T}`;
+  // play active slide video, pause others
+  document.querySelectorAll('.slide-video').forEach((v,i)=>{
+    if(i===cs){v.play && v.play().catch(()=>{});}
+    else{v.pause && v.pause();}
+  });
+  clearTimeout(at); at=setTimeout(()=>gts(cs+1),7000);
+}
+function ns(){gts(cs+1);}
+function ps(){gts(cs-1);}
+// expose to onclick handlers
+window.gts=gts; window.ns=ns; window.ps=ps;
+at=setTimeout(()=>gts(1),7000);
+
+// ── image base ──
+const B='https://giovannilauffer.com/wp-content/uploads/';
+
+// ── ALL PORTFOLIO DATA ──
+// Images: using the highest-res versions available from WordPress uploads
+// For assets with only thumbnails, thumbnail is used (it's what's publicly available)
+const POSTS={
+  turret:{
+    id:'turret',cat:'ts',
+    thumb:B+'2024/10/turret-thumbnail.jpg',
+    title:'TimeSplitters: Rewind — Turret',
+    tagline:'Prop · Cinder Interactive · UE5',
+    tags:[['Prop','h'],['Current Gen','h'],['ZBrush',''],['PBR Texturing',''],['Maya',''],['Normals Bake','']],
+    desc:`<p>Giovanni improved and reimagined the Turret asset for Rewind, enhancing its design for the current generation remake. With freedom from the technical constraints of the original, he added extra details to bring it up to modern standards.</p><p>Giovanni also maintained a low poly wireframe for optimal performance while maintaining as much of the visual fidelity as possible through usage of normals and PBR textures.</p>`,
+    studio:'Cinder Interactive',project:'TimeSplitters: Rewind',year:'2021',engine:'Unreal Engine 5',
+    sw:['Maya','ZBrush','Substance Painter','Marmoset Toolbag','UE5'],
+    tsUrl:'https://www.timesplittersrewind.com/',
+    images:[
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/Side-2.jpg', fw:false, type:'img', label:'Side'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/Perpesctive.jpg', fw:false, type:'img', label:'Perspective'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/Side-1.jpg', fw:false, type:'img', label:'Side 2'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/Front-1.jpg', fw:false, type:'img', label:'Front'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/Back-1.jpg', fw:false, type:'img', label:'Back'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-turret-6.jpg', fw:false, type:'img', label:'Turret 6'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-turret-3.jpg', fw:false, type:'img', label:'Turret 3'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-turret-2-1.jpg', fw:false, type:'img', label:'Turret 2'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-turret-2.jpg', fw:false, type:'img', label:'Turret 2b'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-turret-1-1.jpg', fw:false, type:'img', label:'Turret 1'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-turret-1.jpg', fw:false, type:'img', label:'Turret 1b'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-top-1.jpg', fw:false, type:'img', label:'Top'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-side-2-1.jpg', fw:false, type:'img', label:'Side 3'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-side-2.jpg', fw:false, type:'img', label:'Side 4'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-perpesctive.jpg', fw:false, type:'img', label:'Perspective 2'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-front-1.jpg', fw:false, type:'img', label:'Front 2'},
+      {src:'https://www.youtube.com/embed/ZzWSrgQ3eMI', fw:true, type:'youtube', label:'TimeSplitters Rewind — Early Access Trailer'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/11/ken-levine-tweet.jpeg', fw:false, type:'img', label:'Ken Levine (BioShock) Tweet about TimeSplitters Rewind'},
+    ],
+    bd:[
+      {t:'Reference & Concept',b:'The original PS2-era Turret was analysed in depth. The goal was to feel unmistakably TimeSplitters while looking definitively current-gen — adding mechanical housing detail, panel seams, and surface wear impossible in the original.'},
+      {t:'High Poly → Low Poly',b:'A detailed high poly sculpted in ZBrush served as the bake source. The game-ready low poly was built in Maya with clean topology, minimal Ngons, and sensible UV islands for maximum texel density.'},
+      {t:'PBR Texturing',b:'Substance Painter materials captured industrial metal wear: chipped paint, oil staining around joint recesses, and battle scoring. Smart material layering kept the workflow efficient and maintainable.'},
+      {t:'UE5 Integration',b:'Asset delivered to UE5 specification with LODs, collision meshes, and lightmap UVs. Nanite-compatible mesh for future scalability.'},
+    ],
+    rel:['spaceship','helicopter','cryogen']
+  },
+  spaceship:{
+    id:'spaceship',cat:'ts',
+    thumb:B+'2024/06/giovanni-lauffer-giovanni-lauffer-thumbnail-4.jpg',
+    title:'TimeSplitters: Rewind — Spaceship',
+    tagline:'Vehicle · Cinder Interactive · UE5',
+    tags:[['Vehicle','h'],['UE5','h'],['Low Poly',''],['PBR',''],['Maya',''],['Substance Painter','']],
+    desc:`<p>Giovanni crafted a futuristic spaceship, optimized for optimal in-game performance. Inspired by the Star Wars and Porsche collab project, this low-poly 3D model boasts striking design and meticulous detail.</p><p>3D environment artist Edward Rosen executed the level design and art for the map.</p>`,
+    studio:'Cinder Interactive',project:'TimeSplitters: Rewind',year:'2020',engine:'Unreal Engine 5',
+    sw:['Maya','Substance Painter','Marmoset Toolbag','UE5'],
+    tsUrl:'https://www.timesplittersrewind.com/',
+    images:[
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/10/spaceship.jpeg', fw:true, type:'img', label:'Hero Shot'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/HQ_04.png', fw:false, type:'img', label:'HQ 04'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/HQ_03-1.png', fw:false, type:'img', label:'HQ 03'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/HQ_01.png', fw:false, type:'img', label:'HQ 01'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/HQ_05-1.png', fw:false, type:'img', label:'HQ 05'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/HQ_06.png', fw:false, type:'img', label:'HQ 06'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/1.png', fw:false, type:'img', label:'Render 1'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/1_002.png', fw:false, type:'img', label:'Render 1 002'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/1_Viewport.png', fw:false, type:'img', label:'Viewport'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/1_Viewport_001.png', fw:false, type:'img', label:'Viewport 001'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/collection-1.png', fw:true, type:'img', label:'Collection'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/7e.png', fw:false, type:'img', label:'7e'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/6e.png', fw:false, type:'img', label:'6e'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/5e.png', fw:false, type:'img', label:'5e'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-hq-06-lp.jpg', fw:false, type:'img', label:'HQ 06 LP'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-hq-02.jpg', fw:false, type:'img', label:'HQ 02'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-hq-03.jpg', fw:false, type:'img', label:'HQ 03b'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-hq-04.jpg', fw:false, type:'img', label:'HQ 04b'},
+      {src:'https://www.youtube.com/embed/ZzWSrgQ3eMI', fw:true, type:'youtube', label:'TimeSplitters Rewind — Early Access Trailer'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/11/ken-levine-tweet.jpeg', fw:false, type:'img', label:'Ken Levine (BioShock) Tweet about TimeSplitters Rewind'},
+    ],
+    bd:[
+      {t:'Design Language',b:'Inspired by the Star Wars × Porsche collaboration, the ship prioritises a sleek aerodynamic silhouette with purposeful panel breaks. Extensive reference gathering ensured cohesive proportions and believable surface logic.'},
+      {t:'Modelling & UVs',b:'Built in Autodesk Maya to a strict poly budget. UV layout maximised texel density on the cockpit and engine nacelles — the areas receiving most player attention during gameplay.'},
+      {t:'PBR Texturing',b:'Full PBR suite in Substance Painter. Surface wear and panel-line reads built via procedural smart materials and hand-painted detail. Final presentation in Marmoset Toolbag.'},
+      {t:'Engine Integration',b:'LODs, collision, and lightmap UVs authored for UE5 and delivered to Edward Rosen\'s level.'},
+    ],
+    rel:['helicopter','airplane','turret']
+  },
+  helicopter:{
+    id:'helicopter',cat:'ts',
+    thumb:B+'2024/10/heli-thumbnail.jpg',
+    title:'TimeSplitters: Rewind — Helicopter',
+    tagline:'Vehicle · Cinder Interactive · UE5',
+    tags:[['Vehicle','h'],['Art Test','h'],['Maya',''],['Substance Painter',''],['Game Ready',''],['Cinder Interactive','']],
+    desc:`<p>Giovanni's first prop test — a meticulously crafted military helicopter — secured his place on Cinder Interactive. Built with attention to detail and optimized to be game ready.</p><p>Giovanni embraced feedback, defended his work with reference images when needed, and fostered a collaborative environment that facilitated learning and knowledge sharing.</p>`,
+    studio:'Cinder Interactive',project:'TimeSplitters: Rewind',year:'2020',engine:'Unreal Engine 5',
+    sw:['Maya','Substance Painter','Marmoset Toolbag'],
+    tsUrl:'https://www.timesplittersrewind.com/',
+    images:[
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/top-view-dark-grey-1.jpg', fw:true, type:'img', label:'Top View'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/Top-Perspective-dark-grey.jpg', fw:false, type:'img', label:'Top Perspective'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/Side-Dark-Gray-1.jpg', fw:false, type:'img', label:'Side'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/front-dark-grey.jpg', fw:false, type:'img', label:'Front'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/backside-dark-grey.jpg', fw:false, type:'img', label:'Backside'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/Top.png', fw:false, type:'img', label:'Top'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/Snow-Camo.jpg', fw:false, type:'img', label:'Snow Camo'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/Side.jpg', fw:false, type:'img', label:'Side 2'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/Desert-Camo.jpg', fw:false, type:'img', label:'Desert Camo'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/Front.jpg', fw:false, type:'img', label:'Front 2'},
+      {src:'https://www.youtube.com/embed/ZzWSrgQ3eMI', fw:true, type:'youtube', label:'TimeSplitters Rewind — Early Access Trailer'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/11/ken-levine-tweet.jpeg', fw:false, type:'img', label:'Ken Levine (BioShock) Tweet about TimeSplitters Rewind'},
+    ],
+    bd:[
+      {t:'Art Test Brief',b:'The task was to create a game-ready military helicopter demonstrating modelling capability and a strong grasp of game asset pipelines. This test was the gateway to joining Cinder Interactive.'},
+      {t:'Modelling',b:'Built in Maya from real-world reference. Careful attention to clean edge flow, no Ngons, and logical panel separation that reads well at all game draw distances.'},
+      {t:'Texturing',b:'Full PBR in Substance Painter. Weathering, panel line grime, and directional scratching layered via smart materials and custom generators to give the asset battlefield-worn authenticity.'},
+      {t:'Collaboration',b:'Multiple review rounds with senior artists. Giovanni defended design choices with reference imagery while remaining fully receptive to critique — a dynamic that defined his approach throughout Cinder.'},
+    ],
+    rel:['spaceship','airplane','turret']
+  },
+  impersonator:{
+    id:'impersonator',cat:'ts',
+    thumb:B+'2024/06/thumb-impersonator-1024x1022.png',
+    title:'TimeSplitters: Rewind — The Impersonator',
+    tagline:'Character · Cinder Interactive · UE5',
+    tags:[['Character','h'],['ZBrush','h'],['Retopology',''],['UV Mapping',''],['Substance Painter',''],['Maya','']],
+    desc:`<p>Giovanni assisted a character artist who was experiencing burnout by completing their high poly model in ZBrush, followed by retopologizing and UV mapping it in Autodesk Maya, and ultimately texturing it in Substance Painter.</p><p>Giovanni was guided through this process by lead character artist Samuel Freeman.</p>`,
+    studio:'Cinder Interactive',project:'TimeSplitters: Rewind',year:'2022',engine:'Unreal Engine 5',
+    sw:['ZBrush','Maya','Substance Painter','Marmoset Toolbag'],
+    tsUrl:'https://www.timesplittersrewind.com/',
+    images:[
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/tbrender_Viewport_003.png', fw:true, type:'img', label:'Marmoset Render'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/tbrender_Viewport_001.png', fw:false, type:'img', label:'Marmoset Front'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/tbrender_Viewport-2.png', fw:false, type:'img', label:'Marmoset 3/4'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/HighresScreenshot00009.png', fw:true, type:'img', label:'In-Engine'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/Wireframe.png', fw:false, type:'img', label:'Wireframe'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/BPR_Composite.jpg', fw:false, type:'img', label:'ZBrush Composite'},
+      {src:'https://www.youtube.com/embed/ZzWSrgQ3eMI', fw:true, type:'youtube', label:'TimeSplitters Rewind — Early Access Trailer'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/11/ken-levine-tweet.jpeg', fw:false, type:'img', label:'Ken Levine (BioShock) Tweet about TimeSplitters Rewind'},
+    ],
+    bd:[
+      {t:'Stepping In',b:'Completing an in-progress character sculpt required matching the existing style and quality. Costume details, fabric folds, and facial features were brought to final high poly standard under Samuel Freeman\'s guidance.'},
+      {t:'Retopology in Maya',b:'Clean retopo targeting the game\'s character poly budget. Edge loops placed to support the costume\'s major silhouette reads at any camera distance.'},
+      {t:'UV Mapping',b:'UVs unwrapped for consistent texel density across body and costume, with seams placed to minimise visible discontinuity on the textured asset.'},
+      {t:'Texturing',b:'Full PBR set in Substance Painter. The Impersonator\'s theatrical, exaggerated personality was captured through costume colour contrast, material layering, and hand-painted surface details.'},
+    ],
+    rel:['shoal','cryogen','spaceship']
+  },
+  airplane:{
+    id:'airplane',cat:'ts',
+    thumb:B+'2025/10/plane-2-with-logo-thumbnail-1024x1024.png',
+    title:'TimeSplitters: Rewind — Airplane',
+    tagline:'Vehicle · Cinder Interactive · UE5',
+    tags:[['Vehicle','h'],['Redesign','h'],['Cinder Interactive',''],['Maya',''],['Substance Painter',''],['UE5','']],
+    desc:`<p>Giovanni redesigned the airplane for TimeSplitters' Hangar level, highlighting his skill in 3D modeling and design, as well as his talent for revitalizing old assets with a fresh perspective.</p>`,
+    studio:'Cinder Interactive',project:'TimeSplitters: Rewind',year:'2022',engine:'Unreal Engine 5',
+    sw:['Maya','Substance Painter','UE5'],
+    tsUrl:'https://www.timesplittersrewind.com/',
+    images:[
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/10/plane-2.png', fw:true, type:'img', label:'Hero Shot'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/10/plane-4-scaled.png', fw:false, type:'img', label:'Angle 4'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/10/plane-3-scaled.png', fw:false, type:'img', label:'Angle 3'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/10/plane-1-scaled.png', fw:false, type:'img', label:'Angle 1'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-plane.jpg', fw:true, type:'img', label:'Classic Render'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-untitled-2.jpg', fw:false, type:'img', label:'Render 2'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-wireframe-2.jpg', fw:false, type:'img', label:'Wireframe 2'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-wireframe.jpg', fw:false, type:'img', label:'Wireframe'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-side.jpg', fw:false, type:'img', label:'Side'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/render3-1.png', fw:false, type:'img', label:'Render 3'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/render2-1.png', fw:false, type:'img', label:'Render 2b'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/Render1.png', fw:false, type:'img', label:'Render 1'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/render3.png', fw:false, type:'img', label:'Render 3b'},
+      {src:'https://www.youtube.com/embed/ZzWSrgQ3eMI', fw:true, type:'youtube', label:'TimeSplitters Rewind — Early Access Trailer'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/11/ken-levine-tweet.jpeg', fw:false, type:'img', label:'Ken Levine (BioShock) Tweet about TimeSplitters Rewind'},
+    ],
+    bd:[
+      {t:'Original Reference',b:'The TimeSplitters Hangar level airplane was a fan-recognisable asset. Extensive real-world military and civilian aircraft reference informed the surface detailing added to the current-gen version.'},
+      {t:'Modelling',b:'Fuselage, wings, undercarriage, and engine nacelles constructed as separate mesh pieces in Maya for efficient LOD generation and modular reuse.'},
+      {t:'Texturing',b:'Aluminium skin, painted livery markings, window seals, and mechanical wear across the landing gear and engine areas — Substance Painter.'},
+      {t:'Engine Integration',b:'Collision, LODs, and lightmap UVs set up to spec for the Hangar level layout in UE5.'},
+    ],
+    rel:['spaceship','helicopter','motorcycle']
+  },
+  carousel:{
+    id:'carousel',cat:'ts',
+    thumb:B+'2024/10/carousel-thumbnail.jpg',
+    title:'TimeSplitters: Rewind — Carousel',
+    tagline:'Hero Prop · Circus Level · Cinder Interactive',
+    tags:[['Prop','h'],['Hero Asset','h'],['Circus Level',''],['Maya',''],['Substance Painter',''],['UE5','']],
+    desc:`<p>Giovanni crafted the carousel hero prop for the circus level in TimeSplitters: Rewind, while the level design and art were skillfully executed by Edward Rosen.</p>`,
+    studio:'Cinder Interactive',project:'TimeSplitters: Rewind',year:'2022',engine:'Unreal Engine 5',
+    sw:['Maya','Substance Painter','UE5'],
+    tsUrl:'https://www.timesplittersrewind.com/',
+    images:[
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-c04-with-logo.jpg', fw:true, type:'img', label:'Hero Shot'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-wireframe-4.jpg', fw:false, type:'img', label:'Wireframe'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-frontside.jpg', fw:false, type:'img', label:'Front'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-backside.jpg', fw:false, type:'img', label:'Back'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/Untitled_Viewport_002.png', fw:false, type:'img', label:'Viewport 002'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/Untitled_Viewport_006.png', fw:false, type:'img', label:'Viewport 006'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/Untitled_Viewport_007.png', fw:false, type:'img', label:'Viewport 007'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/Untitled_Viewport_008.png', fw:false, type:'img', label:'Viewport 008'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/Untitled_Viewport_001.png', fw:false, type:'img', label:'Viewport 001'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/Untitled_Viewport.png', fw:false, type:'img', label:'Viewport'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/tbrender_Viewport-1.png', fw:false, type:'img', label:'Marmoset 1'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/tbrender_Viewport.png', fw:false, type:'img', label:'Marmoset 2'},
+      {src:'https://www.youtube.com/embed/ZzWSrgQ3eMI', fw:true, type:'youtube', label:'TimeSplitters Rewind — Early Access Trailer'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/11/ken-levine-tweet.jpeg', fw:false, type:'img', label:'Ken Levine (BioShock) Tweet about TimeSplitters Rewind'},
+    ],
+    bd:[
+      {t:'Hero Prop Responsibility',b:'As the centrepiece of the circus level, the carousel received maximum attention to surface detail, material layering, and visual storytelling within the poly budget.'},
+      {t:'Modelling',b:'Central pole, canopy, horses, decorative trim, and mechanical housing modelled as separate components in Maya for clean UVs and efficient LODs.'},
+      {t:'Materials',b:'Chipped painted metal, worn wood, faded fabric canopy, and metallic chrome trim — each material type authored in Substance Painter before final assembly.'},
+      {t:'Integration',b:'Asset handed to Edward Rosen\'s level build. Placement and lighting optimised so the carousel is the first thing the player\'s eye is drawn to on entering the map.'},
+    ],
+    rel:['crane','bulletproof','turret']
+  },
+  crane:{
+    id:'crane',cat:'ts',
+    thumb:B+'2024/10/crane-thumbnail.jpg',
+    title:'TimeSplitters: Rewind — Crane',
+    tagline:'Prop · Docks Level · Cinder Interactive',
+    tags:[['Prop','h'],['Redesign','h'],['Optimisation',''],['Ngon Fix',''],['Maya',''],['UE5','']],
+    desc:`<p>Giovanni refined the design of the crane for the Docks level that was originally from another 3D artist's art test, by addressing Ngons and wireframe issues. He substantially reduced the polycount while implementing crucial redesigns for improved performance and respecting the original level design's block out.</p>`,
+    studio:'Cinder Interactive',project:'TimeSplitters: Rewind — Docks',year:'2022',engine:'Unreal Engine 5',
+    sw:['Maya','Substance Painter','UE5'],
+    tsUrl:'https://www.timesplittersrewind.com/',
+    images:[
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-crane-in-scene.jpg', fw:true, type:'img', label:'In Scene'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-wireframe-3.jpg', fw:false, type:'img', label:'Wireframe'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-wireframe2.jpg', fw:false, type:'img', label:'Wireframe 2'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-crane-uplox.jpg', fw:false, type:'img', label:'Uplox'},
+      {src:'https://www.youtube.com/embed/ZzWSrgQ3eMI', fw:true, type:'youtube', label:'TimeSplitters Rewind — Early Access Trailer'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/11/ken-levine-tweet.jpeg', fw:false, type:'img', label:'Ken Levine (BioShock) Tweet about TimeSplitters Rewind'},
+    ],
+    bd:[
+      {t:'Audit',b:'Full geometry audit identified Ngons, non-manifold edges, and a bloated polycount impacting level render performance. All issues catalogued before work started.'},
+      {t:'Retopology',b:'Near-complete retopology in Maya. Polycount reduced substantially while maintaining the exact silhouette and scale locked by the level design blockout.'},
+      {t:'Redesign',b:'Mechanical sections redesigned to be more visually interesting and believable within the footprint set by the level design team.'},
+      {t:'Performance',b:'Final mesh exported with LODs and collision. Performance profiling in UE5 confirmed the render budget target was met for the Docks level.'},
+    ],
+    rel:['carousel','bulletproof','turret']
+  },
+  bulletproof:{
+    id:'bulletproof',cat:'ts',
+    thumb:B+'2024/10/bulletproof-thumbnail.jpg',
+    title:'TimeSplitters: Rewind — Bulletproof Pickup',
+    tagline:'Pickup Prop · Cinder Interactive · UE5',
+    tags:[['Pickup Prop','h'],['Current Gen','h'],['Game Ready',''],['Low Poly',''],['Maya',''],['Substance Painter','']],
+    desc:`<p>Giovanni revamped the Bulletproof Pickup asset for TimeSplitters: Rewind, updating its design for the current generation. This optimized, low-poly 3D model is game-ready with excellent edge flow, ensuring top performance while keeping a modern contemporary look.</p>`,
+    studio:'Cinder Interactive',project:'TimeSplitters: Rewind',year:'2023',engine:'Unreal Engine 5',
+    sw:['Maya','Substance Painter','UE5'],
+    tsUrl:'https://www.timesplittersrewind.com/',
+    images:[
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-top.jpg', fw:false, type:'img', label:'Top'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-side-1.jpg', fw:false, type:'img', label:'Side'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-front.jpg', fw:false, type:'img', label:'Front'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-back-perspective.jpg', fw:false, type:'img', label:'Back Perspective'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-back.jpg', fw:false, type:'img', label:'Back'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-armor-render-side-wireframe.jpg', fw:false, type:'img', label:'Side Wireframe'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-armor-render-back-wireframe.jpg', fw:false, type:'img', label:'Back Wireframe'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-armor-front-wireframe.jpg', fw:false, type:'img', label:'Front Wireframe'},
+      {src:'https://www.youtube.com/embed/ZzWSrgQ3eMI', fw:true, type:'youtube', label:'TimeSplitters Rewind — Early Access Trailer'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/11/ken-levine-tweet.jpeg', fw:false, type:'img', label:'Ken Levine (BioShock) Tweet about TimeSplitters Rewind'},
+    ],
+    bd:[
+      {t:'Design Intent',b:'A pickup needs to be instantly readable at distance by a player moving at speed. Clear silhouette and strong colour contrast ensure gameplay legibility.'},
+      {t:'Modelling',b:'Clean Maya mesh with excellent edge flow and zero Ngons. Polycount targeted for pickup prop spec — lighter than hero props while holding the key shape reads at every LOD.'},
+      {t:'Texturing',b:'Substance Painter: military-grade wear, strap buckles, plate carrier texture variety. TimeSplitters pickup colour language preserved from the original.'},
+      {t:'Current Gen',b:'Fabric weave normals, micro-surface roughness variation, and printed insignia added without losing the asset\'s iconic status.'},
+    ],
+    rel:['turret','carousel','cryogen']
+  },
+  cryogen:{
+    id:'cryogen',cat:'ts',
+    thumb:'https://giovannilauffer.com/wp-content/uploads/2025/10/cryogen-case-thumbnail.png',
+    title:'TimeSplitters: Rewind — Cryogen Case',
+    tagline:'Prop · Planet X Level · Cinder Interactive',
+    tags:[['Prop','h'],['Hi→Lo Bake','h'],['Planet X',''],['ZBrush',''],['Maya',''],['Substance Painter','']],
+    desc:`<p>Giovanni created the Cryogen Case with the Human Brain as a gaming-ready 3D asset prop for the Planet X level in TimeSplitters. He efficiently preserved the low poly count by baking information from the high poly brain onto the low poly model using normals in Substance Painter.</p>`,
+    studio:'Cinder Interactive',project:'TimeSplitters: Rewind — Planet X',year:'2023',engine:'Unreal Engine 5',
+    sw:['Maya','ZBrush','Substance Painter','Marmoset Toolbag'],
+    tsUrl:'https://www.timesplittersrewind.com/',
+    images:[
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/10/cryogen-scaled.png', fw:true,  type:'img', label:'Cryogen Case — Hero'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/10/cryogen-case-thumbnail.png', fw:false, type:'img', label:'Cryogen Case — Thumbnail'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/PlanetXBrain2.png', fw:true, type:'img', label:'Planet X — Hero'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/PlanetXBrain3.png', fw:false, type:'img', label:'Planet X — Brain'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/wireframe.jpg', fw:false, type:'img', label:'Wireframe'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-screenshot002.jpg', fw:false, type:'img', label:'Screenshot 002'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-screenshot001-1.jpg', fw:false, type:'img', label:'Screenshot 001'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-screenshot001.jpg', fw:false, type:'img', label:'Screenshot 001b'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-screenshot000.jpg', fw:false, type:'img', label:'Screenshot 000'},
+      {src:'https://www.youtube.com/embed/ZzWSrgQ3eMI', fw:true, type:'youtube', label:'TimeSplitters Rewind — Early Access Trailer'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/11/ken-levine-tweet.jpeg', fw:false, type:'img', label:'Ken Levine (BioShock) Tweet about TimeSplitters Rewind'},
+    ],
+    bd:[
+      {t:'Hard Surface — Case',b:'The cryogenic container was modelled in Maya with panel breaks, bolted flanges, and a transparent viewport panel — giving it a sci-fi medical read while keeping the mesh game-efficient.'},
+      {t:'Organic — Brain',b:'The human brain was sculpted in ZBrush to a high level of anatomical detail: cortical folds, sulci, and brain stem all present. This high poly served purely as the bake source.'},
+      {t:'Baking Workflow',b:'Normal, AO, and curvature maps baked from the ZBrush sculpt onto a low-poly mesh in Substance Painter. Polycount minimal while the normal map carries all organic complexity.'},
+      {t:'Texturing',b:'Metallic sci-fi container with frost edge wear. Brain textured as a preserved biological specimen — slightly discoloured, suspended in fluid suggested by the container\'s transparent panel.'},
+    ],
+    rel:['turret','impersonator','bulletproof']
+  },
+  shoal:{
+    id:'shoal',cat:'ts',
+    thumb:B+'2024/10/shoal-thumbnail.jpg',
+    title:'TimeSplitters: Rewind — The Shoal',
+    tagline:'Character · Cinder Interactive · UE5',
+    tags:[['Character','h'],['Unique Design','h'],['ZBrush',''],['Maya',''],['Substance Painter',''],['UE5','']],
+    desc:`<p>The Shoal is a group of fish surrounding a large whale, wearing a black top hat and smoking a pipe. Instead of arms, he uses smaller fish to wield and fire weapons. He's one of the unique floating characters in TimeSplitters.</p>`,
+    studio:'Cinder Interactive',project:'TimeSplitters: Rewind',year:'2023',engine:'Unreal Engine 5',
+    sw:['ZBrush','Maya','Substance Painter','UE5'],
+    tsUrl:'https://www.timesplittersrewind.com/',
+    images:[
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-render-1-as.jpg', fw:true, type:'img', label:'Hero Render'},
+      {src:'https://www.youtube.com/embed/ZzWSrgQ3eMI', fw:true, type:'youtube', label:'TimeSplitters Rewind — Early Access Trailer'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/11/ken-levine-tweet.jpeg', fw:false, type:'img', label:'Ken Levine (BioShock) Tweet about TimeSplitters Rewind'},
+    ],
+    bd:[
+      {t:'Absurdist Brief',b:'Realising the Shoal\'s cartoonish personality in current-gen fidelity without losing its iconic absurdist charm from the original TimeSplitters universe.'},
+      {t:'Whale Body',b:'Sculpted in ZBrush to capture rounded, exaggerated proportions. Hard-surface top hat and pipe modelled in Maya and integrated into the organic body.'},
+      {t:'Companion Fish',b:'A hero fish mesh instanced and varied in scale and pose to create the illusion of a dynamic school surrounding the main character.'},
+      {t:'Materials',b:'Slick cetacean skin, dapper hat fabric, worn pipe wood, and bright iridescent scales on the companion fish — each material reinforcing the character\'s comic personality.'},
+    ],
+    rel:['impersonator','cryogen','turret']
+  },
+  motorcycle:{
+    id:'motorcycle',cat:'personal',
+    thumb:B+'2024/10/s1000rr-thumbnail.jpg',
+    title:'BMW S1000RR — Motorcycle',
+    tagline:'Personal Portfolio · Vehicle · Hard Surface',
+    tags:[['Personal Project','h'],['Vehicle','h'],['Hard Surface',''],['Maya',''],['Substance Painter',''],['Marmoset Toolbag','']],
+    desc:`<p>As a compelling side project for his portfolio, Giovanni embraced the challenge of creating his first 3D motorcycle model, inspired by Edgar Heinrich's intriguing asymmetrical design. This project marked significant improvements over his previous Nissan Skyline model and offered valuable learning experiences. Giovanni looks forward to applying the insights gained from this endeavor to future models.</p>`,
+    studio:'Personal',project:'Portfolio Piece',year:'2023',engine:'Marmoset Toolbag',
+    sw:['Maya','Substance Painter','Marmoset Toolbag 3','Photoshop'],
+    images:[
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-bmw-s1000rr-sport-bike-1.jpg', fw:true, type:'img', label:'Hero Shot'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-s1000rr-back-side-backside-back-back2-1.jpg', fw:false, type:'img', label:'Backside'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-s1000rr-front-side-thumbnail-1.jpg', fw:false, type:'img', label:'Front'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-sport-bike-bmw-s1000rr-v1-0-6-1.jpg', fw:false, type:'img', label:'Side'},
+    ],
+    bd:[
+      {t:'Design Reference',b:'Edgar Heinrich\'s asymmetrical S1000RR — the iconic off-centre headlight and mixed fairing geometry — defined the modelling challenge. Extensive photo reference gathered before a single poly was placed.'},
+      {t:'Modelling Complexity',b:'Complex compound fairing curves that needed to flow seamlessly into each other presented the greatest challenge. Engine block, frame, and mechanical components tackled as separate objects before final assembly.'},
+      {t:'Texturing',b:'Painted carbon fibre fairings, brushed aluminium engine casings, rubber tyres, chrome exhaust, and matte plastic trim — all authored in Substance Painter.'},
+      {t:'Presentation',b:'Final renders in Marmoset Toolbag using a three-point studio rig. HDRI environment lighting supplemented key lights for convincing metallic reflections.'},
+    ],
+    rel:['spaceship','airplane','grabaduck']
+  },
+  grabaduck:{
+    id:'grabaduck',cat:'personal',
+    thumb:B+'2024/10/grab-a-duck-thumbnail.jpg',
+    title:'Grab a Duck — Award Winning Student Game',
+    tagline:'Game · Dead Salmon · Unity · 4-Week Sprint',
+    tags:[['🏆 Best Student Game','h'],['Team Project','h'],['Maya',''],['Substance Painter',''],['Unity',''],['4-Week Sprint','']],
+    desc:`<p>Giovanni played a key role in the creation of 'Grab a Duck,' a multiplayer bathtub-themed game developed in just four weeks by Dead Salmon, a dynamic team of two engineers and four designers. The game won the Best First-Year Game award at the Heim Museum in Hengelo, The Netherlands.</p><p>Giovanni was responsible for 3D modelling and texturing assets for Grab a Duck.</p>`,
+    studio:'Dead Salmon (Saxion University)',project:'Grab a Duck',year:'2020',engine:'Unity',
+    sw:['Maya','Substance Painter','Unity','Photoshop'],
+    images:[
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/giovanni-lauffer-grab-a-duck-mainmenu-2.png', fw:true, type:'img', label:'Main Menu'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/10/grab-a-duck-credits.png', fw:false, type:'img', label:'Credits Screen'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-gameplay.jpg', fw:false, type:'img', label:'Gameplay'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/giovanni-lauffer-grab-a-duck-certifcate.jpg', fw:false, type:'img', label:'Award Certificate'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2024/06/Grab-a-Duck-Trailer_1080p.mp4', fw:true, type:'video', label:'Grab a Duck — Game Trailer'},
+    ],
+    hasVideo:'https://giovannilauffer.com/wp-content/uploads/2024/06/Grab-a-Duck-Trailer_1080p.mp4',
+    bd:[
+      {t:'Scope & Timeline',b:'A full game asset list — environment, characters, and props — delivered in four weeks for Saxion University\'s first-year game project. Fast decision-making on art style and an efficient pipeline were critical.'},
+      {t:'Art Direction',b:'A clean, colourful toy-like aesthetic matching the light-hearted multiplayer concept. Low poly meshes with bold, saturated textures kept the art consistent and instantly readable in motion.'},
+      {t:'3D Modelling',b:'All game assets modelled in Autodesk Maya. UV mapping handled alongside modelling to keep the pipeline moving at pace. Key assets: oversized bathtub environment, duck characters, pickup props.'},
+      {t:'Award',b:'Won the Public Choice Award for Best First-Year Game at the Hengelo Heim Museum Exhibition — recognising that the game was immediately enjoyable and visually appealing to a public audience.'},
+    ],
+    rel:['motorcycle','turret','spaceship']
+  },
+  // CGI — deprioritised, listed last with different badge
+  rituals:{
+    id:'rituals',cat:'cgi',
+    thumb:B+'2024/11/1117154-limitededitions-summer-bodyserum-100ml_Square-1120x1120.webp',
+    title:'Rituals Cosmetics — Product CGI',
+    tagline:'Commercial CGI · Lukkien · VRay',
+    tags:[['Commercial CGI','h'],['Lukkien','h'],['3DS Max',''],['VRay',''],['Photorealistic',''],['NDA','']],
+    desc:`<p>During his time at Lukkien (Aug 2022 – Dec 2024), Giovanni contributed to photorealistic 1:1 CGI renders of Rituals cosmetics products for use on the brand's website and marketing materials. Work covered modelling, UV mapping, custom shader networks, texturing, and rendering across a wide range of product lines. NDA restrictions limit what can be shown publicly.</p>`,
+    studio:'Lukkien',project:'Rituals Cosmetics',year:'2022–2024',engine:'3DS Max + VRay',
+    sw:['3DS Max','VRay','Photoshop','Asana'],
+    images:[
+      {src:B+'2024/11/1117154-limitededitions-summer-bodyserum-100ml_Square-1120x1120.webp',fw:false},
+      {src:B+'2024/11/1118107-rituals-sakura-naturalboosterbody-100ml1_Square-1120x1120.webp',fw:false},
+      {src:B+'2024/11/1116917-karma-giftset-m-pack-open-inlay-png_Square-1120x1120.webp',fw:false},
+      {src:B+'2024/11/1116188FragranceStickls_Square-1120x1120.webp',fw:false},
+      {src:B+'2024/11/1117150-limitededitions-summer-foamingshowergel-50ml_Square-1120x1120.webp',fw:false},
+      {src:B+'2024/11/1115260_hairbodymist-20ml_Square-1120x1120.webp',fw:false},
+    ],
+    bd:[
+      {t:'Modelling & UV Mapping',b:'Precise 1:1 modelling from physical product samples and engineering drawings. Maximum texel density for extremely close render distances.'},
+      {t:'Shader Networks',b:'Custom VRay material nodes for each product category — glass, translucent liquids, metallic caps, matte plastic bodies, and embossed label papers — all built for reuse across variants.'},
+      {t:'Label Texturing',b:'Rituals design team artwork integrated with careful attention to paper translucency, emboss depth, and print colour accuracy against the physical product.'},
+      {t:'Rendering',b:'Final renders in VRay for 3DS Max. Lighting tailored to each product\'s material characteristics — soft diffuse for matte cosmetics, sharper studio setups for metallic and glass.'},
+    ],
+    rel:['motorcycle','spaceship','turret']
+  },
+  witchden:{
+    id:'witchden',cat:'beyond',
+    thumb:'https://giovannilauffer.com/wp-content/uploads/2025/12/5-edited.png',
+    isVideo:false,
+    title:"Witch's Den — Beyond Extent Team Challenge",
+    tagline:'Environment Art · Beyond Extent · Team Project',
+    tags:[['Environment Art','h'],['Beyond Extent','h'],['Hero Prop',''],['Skulls',''],['Voodoo Decals',''],['UE5','']],
+    desc:`<p>I recently took part in the Witches' Den team challenge with Beyond Extent. Over the course of five weeks, our team of five artists planned, developed, and produced a full set of 3D game-ready assets to bring this environment to life.</p><p>Working with the team was an incredibly rewarding experience, and I'm really proud of what we achieved together. My contributions included creating a hero prop (a boat), sculpting and modelling skull assets, high poly to low poly baking, producing Voodoo veve alphas for decal texturing, and collaborating on the overall level design from the initial blockout all the way to the final result.</p><p>Be sure to check out the amazing work from the rest of the team:<br>
+      <a href="https://www.artstation.com/jackshergold" target="_blank" style="color:var(--acc)">Jack Shergold</a> ·
+      <a href="https://www.artstation.com/joebates1" target="_blank" style="color:var(--acc)">Joe Bates</a> ·
+      <a href="https://www.artstation.com/danielkent8" target="_blank" style="color:var(--acc)">Daniel Kent</a> ·
+      <a href="https://www.artstation.com/mekval" target="_blank" style="color:var(--acc)">Mekval</a></p>
+      <p>Mentor: <a href="https://www.artstation.com/bronzegear" target="_blank" style="color:var(--acc)">Bronzegear</a> &nbsp;·&nbsp; Special thanks: <a href="https://www.artstation.com/timothydries" target="_blank" style="color:var(--acc)">Timothy Dries</a> · <a href="https://www.artstation.com/sunnyday" target="_blank" style="color:var(--acc)">Sunnyday</a></p>`,
+    studio:'Beyond Extent',project:"Witch's Den Team Challenge",year:'Nov 2025',engine:'Unreal Engine 5',
+    sw:['Maya','ZBrush','Substance Painter','UE5','Marmoset Toolbag'],
+    images:[
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/12/5-edited.png',         fw:true,  type:'img', label:'Final Environment — Hero Shot'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/12/Gio-Dockshot.webp',               fw:false, type:'img', label:'Environment — Dock Shot'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/12/Giovanni-Lauffer-post-5.webp', fw:false, type:'img', label:'Environment Detail'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/12/WitchesDen-2k-1.mp4', fw:true,  type:'video',label:'Cinematic Flythrough'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/11/1-edited-1-scaled.png',fw:true,  type:'img', label:'Full Environment — Wide'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/11/2-edited-1-scaled.png',fw:false, type:'img', label:'Environment — Angle 2'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/11/3-edited-1-scaled.png',fw:false, type:'img', label:'Environment — Angle 3'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/11/4-edited.png',          fw:true,  type:'img', label:'Environment — Angle 4'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/11/Hand-In-scaled.png',   fw:true,  type:'img', label:'Hand-In Render'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/11/Benchmark-scaled.png', fw:false, type:'img', label:'Benchmark Reference'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/12/gio-team-miro-board.webp',   fw:false, type:'img', label:'Team Miro Board'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/12/gio-challenge-details.webp', fw:false, type:'img', label:'Challenge Details'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/11/Initial-Block-Outs-scaled.png',fw:true,  type:'img', label:'Initial Blockouts'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/11/Boat-1.png',                fw:false, type:'img', label:'Boat — Final'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/11/Boat-1-Zbrush-High-Poly-scaled.png',fw:false,type:'img',label:'Boat — ZBrush High Poly'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/11/Boat-1-wireframe.png',         fw:false, type:'img', label:'Boat — Wireframe'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/11/Boat-1-wireframe-materials-showcase-scaled.png',fw:true,type:'img',label:'Boat — Materials Showcase'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/11/Skull-High-Poly-scaled.png',fw:false, type:'img', label:'Skull — High Poly'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/11/Skull-Low-Poly-scaled.png', fw:false, type:'img', label:'Skull — Low Poly'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/11/ProgressGifVideo.mp4', fw:true,  type:'video',label:'Environment Progress — Development Stages'},
+      {src:'https://giovannilauffer.com/wp-content/uploads/2025/11/ProgressGif.gif',       fw:true,  type:'img',  label:'Development Stages — Progress Timelapse'},
+    ],
+    hasVideo:'https://giovannilauffer.com/wp-content/uploads/2025/12/WitchesDen-2k-1.mp4',
+    artstation:'https://www.artstation.com/artwork/nJR2yo',
+    mentor:{
+      name:'Adam Dencker',
+      img:'https://giovannilauffer.com/wp-content/uploads/2025/11/Mentor-Adam-Dencker.jpg',
+      exp:'EA DICE (Battlefield 6) · IO Interactive (007: First Light)',
+    },
+    team:[
+      {name:'Jack Shergold', role:'Lead Artist · Foliage Artist · Lighting Artist', img:'https://giovannilauffer.com/wp-content/uploads/2025/11/Jack-Shergold.jpg',    li:'https://www.linkedin.com/in/jack-shergold/'},
+      {name:'Joe Bates',     role:'Prop Artist · Modular Kit Artist',               img:'https://giovannilauffer.com/wp-content/uploads/2025/11/Joe-Bates.jpg',         li:'https://www.linkedin.com/in/joesbates/'},
+      {name:'Daniel Kent',   role:'Prop Artist · Engine Support Artist',            img:'https://giovannilauffer.com/wp-content/uploads/2025/11/Daniel-Kent.jpg',       li:'https://www.linkedin.com/in/daniel-kent-8b3942289/'},
+      {name:'Malte Ekvall',  role:'Prop Artist · Material · VFX · Blueprint Artist',img:'https://giovannilauffer.com/wp-content/uploads/2025/11/Malte-Ekvall.jpg',     li:'https://www.linkedin.com/in/malteekvall/'},
+    ],
+    bd:[
+      {t:'Hero Prop — The Boat',b:'The centrepiece prop for the environment was a weathered witchcraft boat, fully modelled and textured to hero-prop standard. It anchors the environment visually and communicates the narrative of the Witch\'s Den at a glance.'},
+      {t:'Skull Assets',b:'Sculpted and modelled a set of skull props in ZBrush with full high-to-low poly baking pipeline. The skulls were designed to work both as standalone scattered props and in clustered arrangements across the environment.'},
+      {t:'Voodoo Veve Alphas',b:'Produced a set of Voodoo veve symbol alphas used as decal textures throughout the environment — painted onto wood, rock, and fabric surfaces to add narrative depth and occult atmosphere without additional geometry cost.'},
+      {t:'Level Design & Blockout',b:'Collaborated with the team on the overall level design from initial blockout through to final composition, ensuring the environment read clearly at a distance and rewarded exploration with detail at close range.'},
+    ],
+    rel:['turret','motorcycle','spaceship']
+  }
+};
+
+// ── order for grid display (Beyond Extent first, then gaming, CGI last) ──
+const ORDER=['witchden','turret','spaceship','helicopter','impersonator','airplane','carousel','crane','bulletproof','cryogen','shoal','motorcycle','grabaduck','rituals'];
+
+// ── render portfolio grid ──
+function renderGrid(filter){
+  const grid=document.getElementById('pgrid');
+  grid.innerHTML='';
+  ORDER.filter(id=>filter==='all'||POSTS[id].cat===filter).forEach(id=>{
+    const p=POSTS[id];
+    const isCgi=p.cat==='cgi';
+    const isBeyond=p.cat==='beyond';
+    const isTs=p.cat==='ts';
+    const isPersonal=p.cat==='personal';
+    const div=document.createElement('div');
+    div.className='pcard'+(isCgi?' cgi-card':'');
+    div.dataset.cat=p.cat;
+    div.onclick=()=>showPost(id);
+    // video-thumbnail cards use a video element instead of img
+    const thumbHTML=p.isVideo
+      ? `<video class="thumb" autoplay muted loop playsinline style="width:100%;height:auto;display:block;object-fit:cover;max-height:340px"><source src="${p.thumb}" type="video/mp4"></video>`
+      : `<img class="thumb" src="${p.thumb}" alt="${p.title}" loading="lazy">`;
+    div.innerHTML=`
+      ${thumbHTML}
+      ${isCgi?`<span class="cbadge cgi-badge">CGI · Non-Gaming</span>`:''}
+      ${isBeyond?`<span class="cbadge" style="background:var(--acc2)">Beyond Extent</span>`:''}
+      ${isTs?`<span class="cbadge ts-badge">TimeSplitters: Rewind</span>`:''}
+      ${isPersonal?`<span class="cbadge personal-badge">Personal Project</span>`:''}
+      <div class="pcard-ov">
+        <div class="pcc">${p.tagline}</div>
+        <div class="pcn">${p.title.replace("Witch's Den — ",'').replace('TimeSplitters: Rewind — ','')}</div>
+        <div class="pcm">${p.tags.slice(0,3).map(([t])=>`<span class="pct">${t}</span>`).join('')}</div>
+      </div>`;
+    grid.appendChild(div);
+  });
+  addHov('.pcard');
+}
+
+// ── pages ──
+function showHome(){
+  document.getElementById('home').classList.remove('hidden');
+  document.getElementById('portfolio').classList.remove('on');
+  document.getElementById('post').classList.remove('on');
+  document.getElementById('bnav').classList.remove('on');
+  document.getElementById('hire').classList.remove('on');
+  window.scrollTo(0,0);
+}
+function showPortfolio(){
+  document.getElementById('home').classList.add('hidden');
+  document.getElementById('portfolio').classList.add('on');
+  document.getElementById('post').classList.remove('on');
+  document.getElementById('bnav').classList.remove('on');
+  document.getElementById('hire').classList.add('on');
+  document.getElementById('blbl').textContent='Home';
+  renderGrid('all');
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+  document.querySelector('.fb').classList.add('on');
+  window.scrollTo(0,0);
+}
+function fc(btn,cat){
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderGrid(cat);
+}
+
+function showPost(id){
+  const p=POSTS[id];if(!p)return;
+  document.getElementById('home').classList.add('hidden');
+  document.getElementById('portfolio').classList.remove('on');
+  document.getElementById('post').classList.add('on');
+  document.getElementById('bnav').classList.add('on');
+  document.getElementById('blbl').textContent='Portfolio';
+  document.getElementById('hire').classList.add('on');
+
+  // hero — use video if post has one, otherwise static image
+  const phero=document.getElementById('phero');
+  // ensure persistent video element exists
+  let vhero=document.getElementById('phero-vid');
+  if(!vhero){
+    vhero=document.createElement('video');
+    vhero.id='phero-vid';
+    vhero.autoplay=true; vhero.muted=true; vhero.loop=true; vhero.playsInline=true;
+    vhero.style='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none';
+    phero.parentNode.insertBefore(vhero,phero);
+  }
+  if(p.hasVideo){
+    // video hero: hide img, show video with thumb as poster while loading
+    phero.style.display='none';
+    vhero.poster=p.thumb;
+    // only reload if source changed
+    const newSrc=p.hasVideo;
+    if(vhero.dataset.src!==newSrc){
+      vhero.dataset.src=newSrc;
+      vhero.innerHTML=`<source src="${newSrc}" type="video/mp4">`;
+      vhero.load();
+    }
+    vhero.style.display='block';
+    vhero.play().catch(()=>{});
+  } else {
+    // image hero
+    vhero.style.display='none';
+    vhero.pause && vhero.pause();
+    phero.style.display='block';
+    phero.src=p.thumb; phero.alt=p.title;
+  }
+
+  // title + tags + desc
+  document.getElementById('ptit').textContent=p.title;
+  document.getElementById('ptags').innerHTML=p.tags.map(([t,h])=>`<span class="ptag ${h==='h'?'h':''}">${t}</span>`).join('');
+  document.getElementById('pdesc').innerHTML=p.desc;
+
+  // TS download button
+  const dlWrap=document.getElementById('ts-dl');
+  if(p.tsUrl){
+    dlWrap.innerHTML=`<a href="${p.tsUrl}" target="_blank" rel="noopener" class="ts-dl-btn">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download TimeSplitters: Rewind — Free
+    </a>
+    <div class="ts-dl-sub">Free to play · Largest free-content game ever made</div>
+    <div class="ts-dl-date"><span class="ts-dl-date-label">Release Date</span> Nov 23, 2025</div>`;
+    dlWrap.style.display='block';
+  } else {
+    dlWrap.innerHTML='';
+    dlWrap.style.display='none';
+  }
+
+  // sidebar
+  document.getElementById('psb').innerHTML=`
+    <div class="sb"><div class="sbl">Studio</div><div class="sbv">${p.studio}</div></div>
+    <div class="sb"><div class="sbl">Project</div><div class="sbv">${p.project}</div></div>
+    <div class="sb"><div class="sbl">Year</div><div class="sbv m">${p.year}</div></div>
+    <div class="sb"><div class="sbl">Engine / Renderer</div><div class="sbv">${p.engine}</div></div>
+    <div class="sb"><div class="sbl">Software</div><div class="swl">${p.sw.map(s=>`<span class="sw">${s}</span>`).join('')}</div></div>
+    ${p.artstation?`<div class="sb"><div class="sbl">ArtStation Post</div><a href="${p.artstation}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.4rem;font-size:.78rem;color:var(--acc);text-decoration:none;margin-top:.1rem;transition:color .2s" onmouseover="this.style.color='var(--txt)'" onmouseout="this.style.color='var(--acc)'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View on ArtStation ↗</a></div>`:''}
+  `;
+
+  // gallery — masonry, handles mixed img + video items
+  const gph=['gp1','gp2','gp3','gp4','gp5','gp6'];
+  let galHTML=p.images.map((item,i)=>{
+    if(item.type==='youtube'){
+      // Extract video ID from embed URL or full URL
+      const ytid=item.src.replace('https://www.youtube.com/embed/','').split('?')[0];
+      const thumb=`https://i.ytimg.com/vi/${ytid}/maxresdefault.jpg`;
+      const thumbFallback=`https://i.ytimg.com/vi/${ytid}/hqdefault.jpg`;
+      return`<div class="gi yt-embed">
+        <div class="yt-facade" onclick="ytPlay(this,'${ytid}')">
+          <img src="${thumb}" onerror="this.src='${thumbFallback}'" alt="${item.label||''}">
+          <div class="yt-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+          <div class="yt-label">${item.label||''}</div>
+        </div>
+      </div>`;
+    }
+    if(item.type==='video'){
+      return`<div class="gi${item.fw?' fw':''}" style="cursor:default">
+        <video controls loop style="width:100%;height:auto;display:block" poster="${p.thumb}">
+          <source src="${item.src}" type="video/mp4">
+        </video>
+      </div>`;
+    }
+    return`<div class="gi${item.fw?' fw':''}" onclick="olb('${item.src}','${item.label||''}')">
+      <img src="${item.src}" alt="${item.label||p.title}" loading="lazy"
+        onerror="this.style.display='none';this.nextSibling.style.display='flex'">
+      <div class="gph ${gph[i%6]}" style="display:none">${item.label||p.title}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('pgal').innerHTML=galHTML;
+
+  // breakdown
+  document.getElementById('pbd').innerHTML=`
+    <div class="bdtit">Production Breakdown</div>
+    <div class="bdgrid">${p.bd.map(b=>`<div class="bdi"><h4>${b.t}</h4><p>${b.b}</p></div>`).join('')}</div>
+  `;
+
+  // team credits — only shown when post has team data
+  const credsec=document.getElementById('pcredits');
+  if(p.team && p.team.length){
+    const liIcon=`<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>`;
+    const mentorHTML=p.mentor?`
+      <a class="credcard mentor" href="https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(p.mentor.name)}" target="_blank" rel="noopener">
+        <img src="${p.mentor.img}" alt="${p.mentor.name}" loading="lazy">
+        <div class="cred-mentor-info">
+          <span class="cred-mentor-badge">Mentor</span>
+          <div class="credname">${p.mentor.name}</div>
+          <div class="credexp">${p.mentor.exp}</div>
+          <span class="credli">${liIcon} View LinkedIn</span>
+        </div>
+      </a>`:'';
+    const memberHTML=p.team.map(m=>`
+      <a class="credcard" href="${m.li}" target="_blank" rel="noopener">
+        <img src="${m.img}" alt="${m.name}" loading="lazy">
+        <div>
+          <div class="credname">${m.name}</div>
+          <div class="credrole">${m.role}</div>
+        </div>
+        <span class="credli">${liIcon} LinkedIn</span>
+      </a>`).join('');
+    credsec.innerHTML=`
+      <div class="credtit">Team Credits</div>
+      <div class="credsub">Five artists · Five weeks · One environment.<br>Click any card to view their LinkedIn profile.</div>
+      <div class="credgrid">${mentorHTML}${memberHTML}</div>`;
+    credsec.style.display='block';
+  } else {
+    credsec.style.display='none';
+    credsec.innerHTML='';
+  }
+
+  // related
+  document.getElementById('prel').innerHTML=p.rel.map(rid=>{
+    const r=POSTS[rid];if(!r)return'';
+    const relThumb=r.isVideo
+      ? `<video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block"><source src="${r.hasVideo}" type="video/mp4"></video>`
+      : `<img src="${r.thumb}" alt="${r.title}" loading="lazy">`;
+    return`<div class="relcard" onclick="showPost('${rid}')">
+      ${relThumb}
+      <div class="relcard-ov"><div class="reln">${r.title.replace("Witch's Den — ",'').replace('TimeSplitters: Rewind — ','')}</div><div class="relc">${r.tagline}</div></div>
+    </div>`;
+  }).join('');
+
+  window.scrollTo(0,0);
+}
+
+function goBack(){
+  document.getElementById('blbl').textContent==='Portfolio'?showPortfolio():showHome();
+}
+
+// expose everything used by inline onclick attributes
+// YouTube facade click-to-play
+function ytPlay(facade, ytid){
+  const wrap=document.createElement('div');
+  wrap.className='yt-iframe-wrap';
+  const iframe=document.createElement('iframe');
+  iframe.src=`https://www.youtube-nocookie.com/embed/${ytid}?autoplay=1&rel=0&modestbranding=1&color=white`;
+  iframe.allow='autoplay; encrypted-media; fullscreen';
+  iframe.allowFullscreen=true;
+  iframe.title='TimeSplitters: Rewind';
+  wrap.appendChild(iframe);
+  facade.parentNode.replaceChild(wrap,facade);
+}
+window.ytPlay=ytPlay;
+
+window.showHome=showHome;
+window.showPortfolio=showPortfolio;
+window.showPost=showPost;
+window.goBack=goBack;
+window.fc=fc;
+window.olb=olb;
+window.clb=clb;
+
+// lightbox
+function olb(src,label){document.getElementById('lbimg').src=src;document.getElementById('lbimg').alt=label||'';document.getElementById('lb').classList.add('on');}
+function clb(){document.getElementById('lb').classList.remove('on');}
+document.getElementById('lb').addEventListener('click',e=>{if(e.target.id==='lb')clb();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')clb();});
+
+// mobile nav
+function openMob(){document.getElementById('mobnav').classList.add('open');document.body.style.overflow='hidden';}
+function closeMob(){document.getElementById('mobnav').classList.remove('open');document.body.style.overflow='';}
+window.openMob=openMob; window.closeMob=closeMob;
+
+// music player — off by default
+const bgAudio=document.createElement('audio');
+bgAudio.src='https://giovannilauffer.com/wp-content/uploads/2025/05/Sync24-Comfortable-Void-07-Something-Something.mp3';
+bgAudio.loop=true; bgAudio.volume=0.25;
+let musicOn=false;
+function toggleMusic(){
+  const btn=document.getElementById('musicbtn');
+  if(musicOn){
+    bgAudio.pause();
+    musicOn=false;
+    btn.classList.remove('playing');
+    btn.title='Play music';
+  } else {
+    bgAudio.play().then(()=>{
+      musicOn=true;
+      btn.classList.add('playing');
+      btn.title='Pause music';
+    }).catch(()=>{});
+  }
+}
+window.toggleMusic=toggleMusic;
+
+// touch: first tap reveals overlay, second tap opens post
+let lastCard=null;
+document.addEventListener('touchstart',function(e){
+  const card=e.target.closest('.pcard');
+  if(!card)return;
+  const ov=card.querySelector('.pcard-ov');
+  if(!ov)return;
+  if(card===lastCard){lastCard=null;return;}
+  e.preventDefault();
+  document.querySelectorAll('.pcard-ov').forEach(o=>{o.style.opacity='0';});
+  ov.style.opacity='1';
+  lastCard=card;
+},{passive:false});
+
+}); // end DOMContentLoaded
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+# Backups (large, not for git)
+backups/
+
+# Original source file
+site/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+.vercel
+
+# URL extraction artifacts
+asset-urls.txt
