@@ -61,7 +61,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .musicbtn.playing{border-color:var(--acc);color:var(--acc)}
 .musicbtn.playing svg{animation:pulse 2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
-.nmenu{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nmenu{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
 .nmenu span{display:block;width:22px;height:2px;background:var(--txt);transition:all .3s}
 .nlinks{display:flex;gap:2rem;list-style:none}
 .nlinks a{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);text-decoration:none;transition:color .2s;font-weight:500}
@@ -328,6 +328,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .lbc{position:fixed;top:1.3rem;right:1.3rem;width:42px;height:42px;border:1px solid var(--brd2);background:transparent;color:var(--txt);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,color .2s}
 .lbc:hover{border-color:var(--acc);color:var(--acc)}
 
+/* ── FOCUS-VISIBLE for keyboard navigation ── */
+a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-visible,.gi:focus-visible,.relcard:focus-visible,.rc:focus-visible,.wi-link:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+
+/* ── REDUCED MOTION ── */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;scroll-behavior:auto!important}
+  body{cursor:auto}
+  #cur,#curR{display:none}
+  .pcard img.thumb,.gi img,.relcard img{transition:none}
+  .rslides{transition:none}
+}
+
 /* back nav */
 .bnav{position:fixed;top:50%;left:1rem;transform:translateY(-50%);z-index:50;display:none}
 .bnav.on{display:block}
@@ -478,12 +490,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 </head>
 <body>
 
-<div id="cur"></div>
-<div id="curR"></div>
+<div id="cur" aria-hidden="true"></div>
+<div id="curR" aria-hidden="true"></div>
 
 <!-- Mobile nav overlay -->
-<div class="mob-nav" id="mobnav">
-  <button class="mob-close" onclick="closeMob()">✕</button>
+<div class="mob-nav" id="mobnav" role="dialog" aria-label="Mobile navigation menu">
+  <button class="mob-close" onclick="closeMob()" aria-label="Close menu">✕</button>
   <a href="#" onclick="showHome();closeMob();return false">Home</a>
   <a href="#" onclick="showPortfolio();closeMob();return false">Portfolio</a>
   <a href="https://www.artstation.com/giovannilauffer" target="_blank" rel="noopener noreferrer" onclick="closeMob()">ArtStation</a>
@@ -491,8 +503,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
   <a href="mailto:giovanni@giovannilauffer.com" class="mob-cta">Hire Me</a>
 </div>
 
-<nav>
-  <div class="nlogo" onclick="showHome()">
+<nav aria-label="Main navigation">
+  <div class="nlogo" onclick="showHome()" role="button" tabindex="0" aria-label="Go to homepage">
     <img src="/wp-content/uploads/2025/07/giodark.png" alt="Giovanni Lauffer" fetchpriority="high" decoding="async"
       onerror="this.style.display='none';this.parentNode.innerHTML+='<span>GIOVANNI LAUFFER</span>'">
   </div>
@@ -508,13 +520,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
       <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
     </svg>
   </button>
-  <div class="nmenu" onclick="openMob()" aria-label="Open menu">
+  <button class="nmenu" onclick="openMob()" aria-label="Open menu" aria-expanded="false" aria-controls="mobnav">
     <span></span><span></span><span></span>
-  </div>
+  </button>
 </nav>
 
 <div class="bnav" id="bnav">
-  <div class="bbtn" onclick="goBack()">
+  <div class="bbtn" onclick="goBack()" role="button" tabindex="0" aria-label="Go back">
     <span>← Back</span><div class="bl"></div><span id="blbl">Portfolio</span>
   </div>
 </div>
@@ -595,15 +607,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 
     <div class="rctrl">
       <div class="rdots" id="rdots">
-        <div class="rdot on" onclick="gts(0)"></div>
-        <div class="rdot" onclick="gts(1)"></div>
-        <div class="rdot" onclick="gts(2)"></div>
-        <div class="rdot" onclick="gts(3)"></div>
+        <div class="rdot on" onclick="gts(0)" role="button" tabindex="0" aria-label="Go to slide 1"></div>
+        <div class="rdot" onclick="gts(1)" role="button" tabindex="0" aria-label="Go to slide 2"></div>
+        <div class="rdot" onclick="gts(2)" role="button" tabindex="0" aria-label="Go to slide 3"></div>
+        <div class="rdot" onclick="gts(3)" role="button" tabindex="0" aria-label="Go to slide 4"></div>
       </div>
       <div class="rtim" id="rtim">01 / 04</div>
       <div class="rnav">
-        <button class="rbtn" onclick="ps()"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
-        <button class="rbtn" onclick="ns()"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        <button class="rbtn" onclick="ps()" aria-label="Previous slide"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
+        <button class="rbtn" onclick="ns()" aria-label="Next slide"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
       </div>
     </div>
   </div>
@@ -806,7 +818,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 <div id="post">
   <div class="phero"><img id="phero" src="" alt=""><div class="phero-ov"></div></div>
   <div class="pcnt">
-    <div class="pbc" onclick="showPortfolio()"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All Projects</div>
+    <div class="pbc" onclick="showPortfolio()" role="button" tabindex="0" aria-label="Back to all projects"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All Projects</div>
     <div class="ptop">
       <div class="pm">
         <h1 id="ptit"></h1>
@@ -828,8 +840,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 </div>
 
 <!-- Lightbox -->
-<div class="lb" id="lb">
-  <button class="lbc" onclick="clb()">✕</button>
+<div class="lb" id="lb" role="dialog" aria-label="Image lightbox">
+  <button class="lbc" onclick="clb()" aria-label="Close lightbox">✕</button>
   <img id="lbimg" src="" alt="">
 </div>
 
@@ -1364,6 +1376,10 @@ function renderGrid(filter){
     div.className='pcard'+(isCgi?' cgi-card':'');
     div.dataset.cat=p.cat;
     div.onclick=()=>showPost(id);
+    div.setAttribute('role','button');
+    div.setAttribute('tabindex','0');
+    div.setAttribute('aria-label',p.title);
+    div.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showPost(id);}});
     // video-thumbnail cards use a video element instead of img
     const thumbHTML=p.isVideo
       ? `<video class="thumb" autoplay muted loop playsinline style="width:100%;height:auto;display:block;object-fit:cover;max-height:340px"><source src="${p.thumb}" type="video/mp4"></video>`
@@ -1601,8 +1617,8 @@ document.getElementById('lb').addEventListener('click',e=>{if(e.target.id==='lb'
 document.addEventListener('keydown',e=>{if(e.key==='Escape')clb();});
 
 // mobile nav
-function openMob(){document.getElementById('mobnav').classList.add('open');document.body.style.overflow='hidden';}
-function closeMob(){document.getElementById('mobnav').classList.remove('open');document.body.style.overflow='';}
+function openMob(){document.getElementById('mobnav').classList.add('open');document.body.style.overflow='hidden';var hb=document.querySelector('.nmenu');if(hb)hb.setAttribute('aria-expanded','true');}
+function closeMob(){document.getElementById('mobnav').classList.remove('open');document.body.style.overflow='';var hb=document.querySelector('.nmenu');if(hb)hb.setAttribute('aria-expanded','false');}
 window.openMob=openMob; window.closeMob=closeMob;
 
 // music player — off by default
