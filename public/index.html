@@ -52,7 +52,7 @@ body.hov #cur{width:14px;height:14px}
 body.hov #curR{width:50px;height:50px;border-color:rgba(14,184,160,.65)}
 
 /* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 2.5rem;background:linear-gradient(to bottom,rgba(13,13,14,.98),transparent)}
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;gap:1.5rem;padding:1.2rem 2.5rem;background:linear-gradient(to bottom,rgba(13,13,14,.98),transparent)}
 .nlogo{height:26px;cursor:pointer;display:flex;align-items:center}
 .nlogo img{height:100%;width:auto;filter:brightness(0) invert(1)}
 .nlogo span{font-family:var(--fd);font-size:1.3rem;letter-spacing:.1em;color:var(--txt)}
@@ -63,7 +63,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
 .nmenu{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
 .nmenu span{display:block;width:22px;height:2px;background:var(--txt);transition:all .3s}
-.nlinks{display:flex;gap:2rem;list-style:none}
+.nlinks{display:flex;gap:2rem;list-style:none;margin-left:auto}
 .nlinks a{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);text-decoration:none;transition:color .2s;font-weight:500}
 .nlinks a:hover{color:var(--txt)}
 .ncta{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding:.5rem 1.3rem;border:1px solid var(--acc);color:var(--acc);text-decoration:none;font-weight:500;transition:background .2s,color .2s}
@@ -207,9 +207,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .fb{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;padding:.45rem 1.1rem;border:1px solid var(--brd);background:transparent;color:var(--mut);cursor:pointer;transition:all .2s;font-family:var(--fb);font-weight:500}
 .fb:hover,.fb.on{border-color:var(--acc);color:var(--acc)}
 
-/* ArtStation-style masonry grid */
-.pgrid{padding:.5rem 2.5rem 6rem;columns:3 auto;column-gap:3px;orphans:1;widows:1}
-.pcard{break-inside:avoid;margin-bottom:3px;position:relative;overflow:hidden;background:var(--surf);cursor:pointer;display:block}
+/* Portfolio grid */
+.pgrid{padding:.5rem 2.5rem 6rem;display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.pcard{position:relative;overflow:hidden;background:var(--surf);cursor:pointer;display:block}
 .pcard img.thumb{width:100%;height:auto;display:block;transition:transform .55s cubic-bezier(.25,.46,.45,.94)}
 .pcard:hover img.thumb{transform:scale(1.04)}
 .pcard-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,13,14,.95) 0%,rgba(13,13,14,.3) 45%,transparent 70%);opacity:0;transition:opacity .35s;display:flex;flex-direction:column;justify-content:flex-end;padding:1.2rem}
@@ -265,15 +265,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .galh{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);font-weight:600;margin:3.5rem 0 1.2rem;display:flex;align-items:center;gap:.8rem}
 .galh::after{content:'';flex:1;height:1px;background:var(--brd)}
 
-.gal{columns:2 auto;column-gap:3px}
-.gi{break-inside:avoid;margin-bottom:3px;overflow:hidden;cursor:pointer;position:relative}
+.gal{display:flex;flex-direction:column;gap:3px}
+.gi{overflow:hidden;cursor:pointer;position:relative}
 .gi img{width:100%;height:auto;display:block;transition:transform .45s}
 .gi:hover img{transform:scale(1.03)}
 .gi .gph{width:100%;min-height:220px;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:1.8rem;color:rgba(255,255,255,.05)}
 .gp1{background:linear-gradient(135deg,#071a14,#0d3024)}.gp2{background:linear-gradient(135deg,#1a0d07,#300d08)}.gp3{background:linear-gradient(135deg,#0d0d1a,#0d0d30)}.gp4{background:linear-gradient(135deg,#1a1a0d,#30280d)}.gp5{background:linear-gradient(135deg,#0d1a1a,#0d2828)}.gp6{background:linear-gradient(135deg,#1a0d1a,#280d28)}
-.gi.fw{column-span:all;break-inside:avoid}
+.gi.fw{}
 .gi.fw img{width:100%;height:auto;max-height:600px;object-fit:cover}
-.gi.yt-embed{break-inside:avoid;margin-bottom:3px;position:relative;column-span:all}
+.gi.yt-embed{position:relative}
 .yt-facade{position:relative;width:100%;padding-bottom:56.25%;background:#000;cursor:pointer;overflow:hidden}
 .yt-facade img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:opacity .3s}
 .yt-facade:hover img{opacity:.85}
@@ -413,14 +413,14 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   .rstrip{padding:0 1.4rem 4rem}
 
   /* portfolio grid: 2 cols */
-  .pgrid{padding:.5rem 1.4rem 5rem;columns:2}
+  .pgrid{padding:.5rem 1.4rem 5rem;grid-template-columns:repeat(2,1fr)}
   .phead{padding:5.5rem 1.4rem 1.5rem;flex-direction:column;align-items:flex-start}
 
   /* post detail: stack sidebar below content */
   .ptop{grid-template-columns:1fr;gap:2rem;margin-top:-2rem}
   .pcnt{padding:0 1.4rem 4rem}
   .phero{height:50vh}
-  .gal{columns:1}
+  .gal{flex-direction:column}
   .gi.fw img{max-height:380px}
   .bdgrid{grid-template-columns:1fr;gap:1.5rem}
   .relgrid{grid-template-columns:1fr 1fr}
@@ -459,7 +459,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   .rbtn{width:36px;height:36px}
 
   /* portfolio: single column */
-  .pgrid{columns:1;padding:.5rem 1rem 5rem}
+  .pgrid{grid-template-columns:1fr;padding:.5rem 1rem 5rem}
   .phead{padding:5rem 1rem 1.2rem}
   .pfilt{gap:.3rem}
   .fb{font-size:.6rem;padding:.38rem .85rem}
@@ -847,7 +847,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 
 <!-- Hire bar -->
 <div class="hire" id="hire">
-  <div class="htxt"><span class="hdot"></span><strong>Available for work</strong>&nbsp;— Senior 3D Artist roles · Game studios · Remote or on-site · Ede, NL</div>
+  <div class="htxt"><span class="hdot"></span><strong>Available for work</strong>&nbsp;— 3D Artist roles · Game studios · Remote or on-site · Ede, NL</div>
   <div class="hact">
     <a href="https://www.artstation.com/giovannilauffer" target="_blank" rel="noopener noreferrer" class="hl hls">ArtStation</a>
     <a href="https://www.linkedin.com/in/giovanni-lauffer-08558b185/" target="_blank" rel="noopener noreferrer" class="hl hls">LinkedIn</a>
