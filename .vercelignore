@@ -1,0 +1,6 @@
+site/
+backups/
+asset-urls.txt
+.git/
+.claude/
+.remember/
