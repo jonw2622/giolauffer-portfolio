@@ -50,6 +50,10 @@ body{background:var(--bg);color:var(--txt);font-family:var(--fb);font-weight:300
 #curR{position:fixed;width:34px;height:34px;border:1px solid rgba(14,184,160,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .08s ease-out,top .08s ease-out,width .18s,height .18s}
 body.hov #cur{width:14px;height:14px}
 body.hov #curR{width:50px;height:50px;border-color:rgba(14,184,160,.65)}
+#curH{position:fixed;pointer-events:none;z-index:10000;opacity:0;transform:translate(-7px,0);transition:opacity .1s}
+body.ptr #cur,body.ptr #curR{opacity:0!important;transition:none}
+body.ptr #curH{opacity:1}
+body.ptr *{cursor:none!important}
 
 /* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;gap:1.5rem;padding:1.2rem 2.5rem;background:linear-gradient(to bottom,rgba(13,13,14,.98),transparent)}
@@ -335,7 +339,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;scroll-behavior:auto!important}
   body{cursor:auto}
-  #cur,#curR{display:none}
+  #cur,#curR,#curH{display:none}
   .pcard img.thumb,.gi img,.relcard img{transition:none}
   .rslides{transition:none}
 }
@@ -379,7 +383,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 ════════════════════════════════════ */
 @media(max-width:900px){
   /* cursor hidden on touch */
-  #cur,#curR{display:none}
+  #cur,#curR,#curH{display:none}
   body{cursor:auto}
 
   /* nav: hide links, show hamburger */
@@ -492,6 +496,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 
 <div id="cur" aria-hidden="true"></div>
 <div id="curR" aria-hidden="true"></div>
+<div id="curH" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="26" viewBox="0 0 22 26"><path d="M7 0 L7 14 L4 10 L2 12 L7 20 L10 22 L17 22 L19 20 L19 9 L16.5 9 L16.5 5.5 L14 5.5 L14 2.5 L11 2.5 L11 0 Z" fill="rgba(14,184,160,0.12)" stroke="#0eb8a0" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/><line x1="11" y1="0" x2="11" y2="9" stroke="#0eb8a0" stroke-width="0.75" opacity="0.5"/><line x1="14" y1="2.5" x2="14" y2="9" stroke="#0eb8a0" stroke-width="0.75" opacity="0.5"/><line x1="16.5" y1="5.5" x2="16.5" y2="9" stroke="#0eb8a0" stroke-width="0.75" opacity="0.5"/><circle cx="7" cy="0.5" r="1.5" fill="#0eb8a0"/></svg></div>
 
 <!-- Mobile nav overlay -->
 <div class="mob-nav" id="mobnav" role="dialog" aria-label="Mobile navigation menu">
@@ -859,7 +864,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 document.addEventListener('DOMContentLoaded', function() {
 
 // ── cursor (RAF-based, starts hidden until first mouse move) ──
-const cur=document.getElementById('cur'),curR=document.getElementById('curR');
+const cur=document.getElementById('cur'),curR=document.getElementById('curR'),curH=document.getElementById('curH');
 let mx=window.innerWidth/2, my=window.innerHeight/2;
 let rx=mx, ry=my;
 cur.style.opacity='0'; curR.style.opacity='0';
@@ -867,6 +872,7 @@ document.addEventListener('mousemove',e=>{
   mx=e.clientX; my=e.clientY;
   cur.style.opacity='1'; curR.style.opacity='1';
   cur.style.left=mx+'px'; cur.style.top=my+'px';
+  curH.style.left=mx+'px'; curH.style.top=my+'px';
 });
 (function loop(){
   rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
@@ -875,8 +881,8 @@ document.addEventListener('mousemove',e=>{
 })();
 
 function addHov(sel){document.querySelectorAll(sel).forEach(el=>{
-  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
-  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hov','ptr'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov','ptr'));
 });}
 addHov('a,button,.pcard,.gi,.relcard,.rbtn,.fb,.rc');
 
