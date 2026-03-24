@@ -326,6 +326,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .reln{font-family:var(--fd);font-size:1rem}
 .relc{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin-top:.18rem}
 
+/* ── SKETCHFAB 3D VIEWER ── */
+.sf-wrap{position:relative;width:100%;padding-bottom:56.25%;height:0;background:#080809;border:1px solid var(--brd);overflow:hidden}
+.sf-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none;display:block}
+.sf-label{position:absolute;bottom:0;left:0;right:0;padding:.55rem 1rem;background:linear-gradient(to top,rgba(8,8,9,.9),transparent);font-size:.68rem;color:rgba(238,235,229,.7);letter-spacing:.08em;display:flex;align-items:center;gap:.5rem;pointer-events:none;z-index:2}
+.sf-label-icon{width:14px;height:14px;flex-shrink:0;opacity:.7}
+.sf-badge{position:absolute;top:.75rem;left:.75rem;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;padding:.22rem .6rem;background:rgba(14,184,160,.15);border:1px solid rgba(14,184,160,.4);color:var(--acc);font-weight:600;pointer-events:none;z-index:2}
+
 /* lightbox */
 .lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.97);z-index:1000;align-items:center;justify-content:center}
 .lb.on{display:flex}
@@ -1081,6 +1088,8 @@ const POSTS={
       {src:'/wp-content/uploads/2026/03/t14.webp', fw:false, type:'img', label:''},
       {src:'https://www.youtube.com/embed/ZzWSrgQ3eMI', fw:true, type:'youtube', label:'TimeSplitters Rewind — Early Access Trailer'},
       {src:'/wp-content/uploads/2025/11/ken-levine-tweet.webp', fw:false, type:'img', label:'Ken Levine (BioShock) Tweet about TimeSplitters Rewind'},
+    
+      {src:'4483efa1e6d14726902aa9a8e20d8b9b', type:'sketchfab', label:'Turret — Interactive 3D Model'},
     ],
     bd:[
       {t:'Reference & Concept',b:'The original PS2-era Turret was analysed in depth. The goal was to feel unmistakably TimeSplitters while looking definitively current-gen — adding mechanical housing detail, panel seams, and surface wear impossible in the original.'},
@@ -1112,6 +1121,8 @@ const POSTS={
       {src:'/wp-content/uploads/2026/03/ss10.webp', fw:false, type:'img', label:''},
       {src:'https://www.youtube.com/embed/ZzWSrgQ3eMI', fw:true, type:'youtube', label:'TimeSplitters Rewind — Early Access Trailer'},
       {src:'/wp-content/uploads/2025/11/ken-levine-tweet.webp', fw:false, type:'img', label:'Ken Levine (BioShock) Tweet about TimeSplitters Rewind'},
+    
+      {src:'1b8ccc92684647358f848878585d5f80', type:'sketchfab', label:'Spaceship — Interactive 3D Model'},
     ],
     bd:[
       {t:'Design Language',b:'Inspired by the Star Wars × Porsche collaboration, the ship prioritises a sleek aerodynamic silhouette with purposeful panel breaks. Extensive reference gathering ensured cohesive proportions and believable surface logic.'},
@@ -1140,6 +1151,8 @@ const POSTS={
       {src:'/wp-content/uploads/2026/03/h6.webp', fw:false, type:'img', label:''},
       {src:'https://www.youtube.com/embed/ZzWSrgQ3eMI', fw:true, type:'youtube', label:'TimeSplitters Rewind — Early Access Trailer'},
       {src:'/wp-content/uploads/2025/11/ken-levine-tweet.webp', fw:false, type:'img', label:'Ken Levine (BioShock) Tweet about TimeSplitters Rewind'},
+    
+      {src:'d17e9bd136bb424caea54af372461dfc', type:'sketchfab', label:'Helicopter — Interactive 3D Model'},
     ],
     bd:[
       {t:'Art Test Brief',b:'The task was to create a game-ready military helicopter demonstrating modelling capability and a strong grasp of game asset pipelines. This test was the gateway to joining Cinder Interactive.'},
@@ -1200,6 +1213,8 @@ const POSTS={
       {src:'/wp-content/uploads/2026/03/a10.webp', fw:false, type:'img', label:''},
       {src:'https://www.youtube.com/embed/ZzWSrgQ3eMI', fw:true, type:'youtube', label:'TimeSplitters Rewind — Early Access Trailer'},
       {src:'/wp-content/uploads/2025/11/ken-levine-tweet.webp', fw:false, type:'img', label:'Ken Levine (BioShock) Tweet about TimeSplitters Rewind'},
+    
+      {src:'3330fa067c1d4a6cb08528ae9bd658aa', type:'sketchfab', label:'Airplane — Interactive 3D Model'},
     ],
     bd:[
       {t:'Original Reference',b:'The TimeSplitters Hangar level airplane was a fan-recognisable asset. Extensive real-world military and civilian aircraft reference informed the surface detailing added to the current-gen version.'},
@@ -1233,6 +1248,8 @@ const POSTS={
       {src:'/wp-content/uploads/2026/03/c11-reference-original-game.webp', fw:false, type:'img', label:''},
       {src:'https://www.youtube.com/embed/ZzWSrgQ3eMI', fw:true, type:'youtube', label:'TimeSplitters Rewind — Early Access Trailer'},
       {src:'/wp-content/uploads/2025/11/ken-levine-tweet.webp', fw:false, type:'img', label:'Ken Levine (BioShock) Tweet about TimeSplitters Rewind'},
+    
+      {src:'08aa65bd8d724fbc946c788168671c1b', type:'sketchfab', label:'Carousel — Interactive 3D Model'},
     ],
     bd:[
       {t:'Hero Prop Responsibility',b:'As the centrepiece of the circus level, the carousel received maximum attention to surface detail, material layering, and visual storytelling within the poly budget.'},
@@ -1264,6 +1281,8 @@ const POSTS={
       {src:'/wp-content/uploads/2026/03/cr9.webp', fw:false, type:'img', label:''},
       {src:'https://www.youtube.com/embed/ZzWSrgQ3eMI', fw:true, type:'youtube', label:'TimeSplitters Rewind — Early Access Trailer'},
       {src:'/wp-content/uploads/2025/11/ken-levine-tweet.webp', fw:false, type:'img', label:'Ken Levine (BioShock) Tweet about TimeSplitters Rewind'},
+    
+      {src:'1b54ecbf34564f47ac4559b046d29376', type:'sketchfab', label:'Crane — Interactive 3D Model'},
     ],
     bd:[
       {t:'Audit',b:'Full geometry audit identified Ngons, non-manifold edges, and a bloated polycount impacting level render performance. All issues catalogued before work started.'},
@@ -1296,6 +1315,8 @@ const POSTS={
       {src:'/wp-content/uploads/2026/03/bp10.webp', fw:false, type:'img', label:''},
       {src:'https://www.youtube.com/embed/ZzWSrgQ3eMI', fw:true, type:'youtube', label:'TimeSplitters Rewind — Early Access Trailer'},
       {src:'/wp-content/uploads/2025/11/ken-levine-tweet.webp', fw:false, type:'img', label:'Ken Levine (BioShock) Tweet about TimeSplitters Rewind'},
+    
+      {src:'c3b9584cb71740b98c52298b21c02282', type:'sketchfab', label:'Bulletproof Pickup — Interactive 3D Model'},
     ],
     bd:[
       {t:'Design Intent',b:'A pickup needs to be instantly readable at distance by a player moving at speed. Clear silhouette and strong colour contrast ensure gameplay legibility.'},
@@ -1350,6 +1371,8 @@ const POSTS={
       {src:'/wp-content/uploads/2026/03/ts4.webp', fw:false, type:'img', label:''},
       {src:'https://www.youtube.com/embed/ZzWSrgQ3eMI', fw:true, type:'youtube', label:'TimeSplitters Rewind — Early Access Trailer'},
       {src:'/wp-content/uploads/2025/11/ken-levine-tweet.webp', fw:false, type:'img', label:'Ken Levine (BioShock) Tweet about TimeSplitters Rewind'},
+    
+      {src:'5cda27be9dda408ba6fd1502038387c1', type:'sketchfab', label:'The Shoal — Interactive 3D Model'},
     ],
     bd:[
       {t:'Absurdist Brief',b:'Realising the Shoal\'s cartoonish personality in current-gen fidelity without losing its iconic absurdist charm from the original TimeSplitters universe.'},
@@ -1373,6 +1396,8 @@ const POSTS={
       {src:'/wp-content/uploads/2026/03/giovanni-lauffer-s1000rr-front-side-thumbnail.webp', fw:false, type:'img', label:''},
       {src:'/wp-content/uploads/2026/03/giovanni-lauffer-bmw-s1000rr-sport-bike.webp', fw:false, type:'img', label:''},
       {src:'/wp-content/uploads/2026/03/giovanni-lauffer-sport-bike-bmw-s1000rr-v1-0-6.webp', fw:false, type:'img', label:''},
+    
+      {src:'0135f5871d1742499182d98c9218ed11', type:'sketchfab', label:'BMW S1000RR — Interactive 3D Model'},
     ],
     bd:[
       {t:'Design Reference',b:'Edgar Heinrich\'s asymmetrical S1000RR — the iconic off-centre headlight and mixed fairing geometry — defined the modelling challenge. Extensive photo reference gathered before a single poly was placed.'},
@@ -1471,6 +1496,8 @@ const POSTS={
       {src:'/wp-content/uploads/2026/03/wd20.webp', fw:false, type:'img', label:''},
       {src:'/wp-content/uploads/2026/03/wd21.webp', fw:false, type:'img', label:''},
       {src:'/wp-content/uploads/2025/11/ProgressGifVideo.mp4', fw:true, type:'video', label:'Environment Progress — Development Stages'},
+    
+      {src:'66b7d0981ff64709a6bdb15034baf987', type:'sketchfab', label:'Boat — Interactive 3D Model'},
     ],
     hasVideo:'/wp-content/uploads/2025/12/WitchesDen-2k-1.mp4',
     artstation:'https://www.artstation.com/artwork/nJR2yo',
@@ -1637,6 +1664,15 @@ function showPost(id){
   // gallery — masonry, handles mixed img + video items
   const gph=['gp1','gp2','gp3','gp4','gp5','gp6'];
   let galHTML=p.images.map((item,i)=>{
+    if(item.type==='sketchfab'){
+      return`<div class="gi fw">
+        <div class="sf-wrap">
+          <iframe title="${item.label||'3D Model'}" src="https://sketchfab.com/models/${item.src}/embed?autostart=0&ui_infos=0&ui_watermark=1&ui_watermark_link=1&ui_hint=2" allow="autoplay; fullscreen; xr-spatial-tracking" loading="lazy"></iframe>
+          <div class="sf-badge">Interactive 3D</div>
+          <div class="sf-label"><svg class="sf-label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l9 4.5v9L12 20l-9-4.5v-9L12 2z"/><polyline points="12 2 12 11.5"/><line x1="21" y1="6.5" x2="12" y2="11.5"/><line x1="3" y1="6.5" x2="12" y2="11.5"/></svg>Drag to rotate · Scroll to zoom · Double-click to focus</div>
+        </div>
+      </div>`;
+    }
     if(item.type==='youtube'){
       // Extract video ID from embed URL or full URL
       const ytid=item.src.replace('https://www.youtube.com/embed/','').split('?')[0];
@@ -1663,6 +1699,8 @@ function showPost(id){
       <div class="gph ${gph[i%6]}" style="display:none">${item.label||p.title}</div>
     </div>`;
   }).join('');
+  const has3d=p.images.some(i=>i.type==='sketchfab');
+  document.querySelector('.galh').textContent=has3d?'3D Viewer & Images':'Images';
   document.getElementById('pgal').innerHTML=galHTML;
 
   // breakdown
