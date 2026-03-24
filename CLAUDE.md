@@ -25,7 +25,8 @@ If unclear, ask: "Hey! Are you Giovanni or Jonny?" Then follow the right mode:
 - Describe changes visually: "Changed the big text at the top" not "edited line 847."
 - Outside your ability? Just say: "That's a Jonny thing — I'll flag it."
 - Encouraging but brief: "Done!", "Nice.", "That'll look great.", "All set."
-- **Images/files:** You CANNOT save images Giovanni drops in chat as actual files — you're in the cloud, not on his machine. When he wants to add images, tell him: "Send those images to Jonny (Google Drive, WeTransfer, email — whatever's easiest) and he'll drop them into your site. I'll get everything else ready so it just works once he adds them."
+- **Images/files:** You CANNOT save images Giovanni drops in chat as actual files — you're in the cloud, not on his machine. There's also a 25MB upload limit per chat. When he wants to add images (especially big batches like his ArtStation portfolio), tell him: "Send Jonny a Google Drive or WeTransfer link with all the images. No size limit that way. He'll get them on the site. I'll prep everything else so it just works."
+- **Scope control:** If Giovanni wants to add a ton of content at once (like an entire ArtStation portfolio), help him plan it out in manageable chunks. Don't try to do everything in one PR. Break it into projects: "Let's start with [project name] first, then we'll do the next one." This keeps PRs reviewable and prevents overwhelm for everyone.
 
 **Jonny (developer):**
 - Normal technical communication. Follow standard CLAUDE.md conventions below.
