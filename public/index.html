@@ -336,6 +336,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 /* ── FOCUS-VISIBLE for keyboard navigation ── */
 a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-visible,.gi:focus-visible,.relcard:focus-visible,.rc:focus-visible,.wi-link:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 
+/* ── SCROLL PROGRESS BAR ── */
+#spbar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(to right,var(--acc),var(--acc2));z-index:299;width:0%;pointer-events:none}
+
+/* ── SCROLL TO TOP ── */
+#sttb{position:fixed;bottom:5.2rem;right:1.5rem;width:38px;height:38px;border:1px solid var(--brd);background:rgba(13,13,14,.92);color:var(--mut);display:flex;align-items:center;justify-content:center;cursor:none;z-index:89;opacity:0;pointer-events:none;transform:translateY(6px);transition:opacity .3s,transform .3s,border-color .2s,color .2s;border-radius:8px}
+#sttb.on{opacity:1;pointer-events:all;transform:translateY(0)}
+#sttb:hover{border-color:var(--acc);color:var(--acc)}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}.reveal.d3{transition-delay:.3s}
+
 /* ── REDUCED MOTION ── */
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;scroll-behavior:auto!important;cursor:auto!important}
@@ -343,6 +356,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   #cur,#curR{display:none}
   .pcard img.thumb,.gi img,.relcard img{transition:none}
   .rslides{transition:none}
+  .reveal{opacity:1;transform:none;transition:none}
 }
 
 /* back nav */
@@ -503,6 +517,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 </head>
 <body>
 
+<div id="spbar" aria-hidden="true"></div>
+<button id="sttb" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="1.5" fill="none"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg></button>
 <div id="cur" aria-hidden="true"><svg class="cur-hand" viewBox="0 0 24 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 1v12M10 1C10 1 10 1 8 1S6 2.5 6 3.5V11M10 1c0 0 0 0 2 0s2 1.5 2 2.5V11M14 5c1.5 0 2.5.8 2.5 2.5V11M6 11c-1.8 0-3 1.2-3 3v3c0 5 3.5 8 7.5 8S18 22 18 17v-6" stroke="#F97316" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 <div id="curR" aria-hidden="true"></div>
 
@@ -635,7 +651,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   </div>
 
   <!-- About -->
-  <div class="about">
+  <div class="about reveal">
     <div>
       <div class="aprof">
         <img src="/wp-content/uploads/2025/10/Artstation-profile-pic.webp" alt="Giovanni Lauffer" loading="lazy" decoding="async">
@@ -667,7 +683,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   </div>
 
   <!-- Work -->
-  <div class="wstrip">
+  <div class="wstrip reveal">
     <div class="wsec">Work Experience</div>
     <div class="witems">
 
@@ -758,7 +774,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   </div>
 
   <!-- Recommendations -->
-  <div class="rstrip">
+  <div class="rstrip reveal">
     <div class="wsec">Industry Recommendations</div>
     <div class="recgrid">
       <a class="rc" href="https://cameronwgames.com/" target="_blank" rel="noopener noreferrer">
@@ -1650,6 +1666,23 @@ function toggleMusic(){
   }
 }
 window.toggleMusic=toggleMusic;
+
+// ── scroll progress bar + scroll-to-top ──
+const spbar=document.getElementById('spbar');
+const sttb=document.getElementById('sttb');
+window.addEventListener('scroll',()=>{
+  const pct=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100;
+  if(spbar)spbar.style.width=pct+'%';
+  if(sttb)sttb.classList.toggle('on',window.scrollY>420);
+},{passive:true});
+
+// ── reveal on scroll ──
+(function(){
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.07,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+})();
 
 // touch: first tap reveals overlay, second tap opens post
 let lastCard=null;
