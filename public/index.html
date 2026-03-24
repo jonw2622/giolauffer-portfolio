@@ -332,6 +332,29 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .lbc{position:fixed;top:1.3rem;right:1.3rem;width:42px;height:42px;border:1px solid var(--brd2);background:transparent;color:var(--txt);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,color .2s}
 .lbc:hover{border-color:var(--acc);color:var(--acc)}
 
+/* ── CONTACT MODAL ── */
+.ctm{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:1100;align-items:center;justify-content:center;padding:1.5rem}
+.ctm.on{display:flex}
+.ctm-box{background:var(--surf);border:1px solid var(--brd2);max-width:460px;width:100%;position:relative;padding:2.5rem}
+.ctm-close{position:absolute;top:1rem;right:1rem;width:38px;height:38px;border:1px solid var(--brd);background:transparent;color:var(--mut);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,color .2s}
+.ctm-close:hover{border-color:var(--acc);color:var(--acc)}
+.ctm-tag{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);margin-bottom:.8rem;font-family:var(--fm)}
+.ctm-title{font-family:var(--fd);font-size:2.4rem;letter-spacing:.04em;margin-bottom:.35rem}
+.ctm-sub{font-size:.8rem;color:var(--mut);margin-bottom:2rem}
+.ctm-field{margin-bottom:1.2rem}
+.ctm-field label{display:block;font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;color:var(--mut);margin-bottom:.4rem;font-weight:500}
+.ctm-field input,.ctm-field textarea{width:100%;background:var(--bg);border:1px solid var(--brd);color:var(--txt);font-family:var(--fb);font-size:.83rem;padding:.7rem .9rem;outline:none;transition:border-color .2s;border-radius:0;-webkit-appearance:none}
+.ctm-field input:focus,.ctm-field textarea:focus{border-color:var(--acc)}
+.ctm-field textarea{resize:vertical;min-height:110px;line-height:1.5}
+.ctm-submit{width:100%;background:var(--acc);color:#0d0d0e;border:none;font-family:var(--fb);font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:.9rem;cursor:pointer;transition:opacity .2s;margin-top:.5rem}
+.ctm-submit:hover{opacity:.82}
+.ctm-submit:disabled{opacity:.45;cursor:default}
+.ctm-ok{display:none;text-align:center;padding:2.5rem 0}
+.ctm-ok.on{display:block}
+.ctm-ok svg{display:block;margin:0 auto 1.2rem;stroke:var(--acc)}
+.ctm-ok strong{display:block;font-family:var(--fd);font-size:1.6rem;letter-spacing:.05em;margin-bottom:.5rem}
+.ctm-ok p{font-size:.8rem;color:var(--mut)}
+
 /* ── FOCUS-VISIBLE for keyboard navigation ── */
 a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-visible,.gi:focus-visible,.relcard:focus-visible,.rc:focus-visible,.wi-link:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 
@@ -505,7 +528,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   <a href="#" onclick="showPortfolio();closeMob();return false">Portfolio</a>
   <a href="https://www.artstation.com/giovannilauffer" target="_blank" rel="noopener noreferrer" onclick="closeMob()">ArtStation</a>
   <a href="https://www.linkedin.com/in/giovanni-lauffer-08558b185/" target="_blank" rel="noopener noreferrer" onclick="closeMob()">LinkedIn</a>
-  <a href="mailto:giovanni@giovannilauffer.com" class="mob-cta">Hire Me</a>
+  <a href="#" onclick="openCTM();closeMob();return false;" class="mob-cta">Hire Me</a>
 </div>
 
 <nav aria-label="Main navigation">
@@ -519,7 +542,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
     <li><a href="https://www.artstation.com/giovannilauffer" target="_blank" rel="noopener noreferrer">ArtStation</a></li>
     <li><a href="https://www.linkedin.com/in/giovanni-lauffer-08558b185/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
   </ul>
-  <a href="mailto:giovanni@giovannilauffer.com" class="ncta">Hire Me</a>
+  <a href="#" onclick="openCTM();return false;" class="ncta">Hire Me</a>
   <button class="musicbtn" id="musicbtn" onclick="toggleMusic()" title="Toggle music" aria-label="Toggle background music">
     <svg id="musicicon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5">
       <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
@@ -606,7 +629,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
           View Portfolio
           <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="1.8" fill="none"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
-        <a href="mailto:giovanni@giovannilauffer.com" class="bsec">Get In Touch</a>
+        <a href="#" onclick="openCTM();return false;" class="bsec">Get In Touch</a>
       </div>
     </div>
 
@@ -850,13 +873,43 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   <img id="lbimg" src="" alt="">
 </div>
 
+<!-- Contact modal -->
+<div class="ctm" id="ctm" role="dialog" aria-modal="true" aria-label="Contact Giovanni">
+  <div class="ctm-box">
+    <button class="ctm-close" onclick="closeCTM()" aria-label="Close">✕</button>
+    <p class="ctm-tag">Available for work</p>
+    <h2 class="ctm-title">Get In Touch</h2>
+    <p class="ctm-sub">Tell me about your project and I'll get back to you.</p>
+    <form id="ctm-form">
+      <div class="ctm-field">
+        <label for="ctm-name">Name</label>
+        <input type="text" id="ctm-name" name="name" required placeholder="Your name">
+      </div>
+      <div class="ctm-field">
+        <label for="ctm-email">Email</label>
+        <input type="email" id="ctm-email" name="email" required placeholder="your@email.com">
+      </div>
+      <div class="ctm-field">
+        <label for="ctm-msg">Message</label>
+        <textarea id="ctm-msg" name="message" required placeholder="Tell me about your project, timeline, budget..."></textarea>
+      </div>
+      <button type="submit" class="ctm-submit" id="ctm-submit">Send Message</button>
+    </form>
+    <div class="ctm-ok" id="ctm-ok">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="20"/><polyline points="16 24 22 30 33 18"/></svg>
+      <strong>Message Sent</strong>
+      <p>Thanks! Giovanni will be in touch soon.</p>
+    </div>
+  </div>
+</div>
+
 <!-- Hire bar -->
 <div class="hire" id="hire">
   <div class="htxt"><span class="hdot"></span><strong>Available for work</strong>&nbsp;— 3D Artist roles · Game studios · Remote or on-site · Ede, NL</div>
   <div class="hact">
     <a href="https://www.artstation.com/giovannilauffer" target="_blank" rel="noopener noreferrer" class="hl hls">ArtStation</a>
     <a href="https://www.linkedin.com/in/giovanni-lauffer-08558b185/" target="_blank" rel="noopener noreferrer" class="hl hls">LinkedIn</a>
-    <a href="mailto:giovanni@giovannilauffer.com" class="hl hlp">Contact Me →</a>
+    <a href="#" onclick="openCTM();return false;" class="hl hlp">Contact Me →</a>
   </div>
 </div>
 
@@ -884,7 +937,7 @@ function addHov(sel){document.querySelectorAll(sel).forEach(el=>{
   el.addEventListener('mouseenter',()=>document.body.classList.add('hov','ptr'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('hov','ptr'));
 });}
-addHov('a,button,.pcard,.gi,.relcard,.rbtn,.fb,.rc');
+addHov('a,button,.pcard,.gi,.relcard,.rbtn,.fb,.rc,.ctm-submit,.ctm-close');
 
 // ── reel (3 slides) — also pause/play videos on slide change ──
 let cs=0; const T=4; let at;
@@ -1620,6 +1673,31 @@ window.clb=clb;
 function olb(src,label){document.getElementById('lbimg').src=src;document.getElementById('lbimg').alt=label||'';document.getElementById('lb').classList.add('on');}
 function clb(){document.getElementById('lb').classList.remove('on');}
 document.getElementById('lb').addEventListener('click',e=>{if(e.target.id==='lb')clb();});
+
+// contact modal
+function openCTM(){document.getElementById('ctm').classList.add('on');document.body.style.overflow='hidden';}
+function closeCTM(){document.getElementById('ctm').classList.remove('on');document.body.style.overflow='';}
+document.getElementById('ctm').addEventListener('click',e=>{if(e.target.id==='ctm')closeCTM();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCTM();});
+document.getElementById('ctm-form').addEventListener('submit',async function(e){
+  e.preventDefault();
+  const btn=document.getElementById('ctm-submit');
+  btn.disabled=true; btn.textContent='Sending…';
+  try{
+    const res=await fetch('https://formspree.io/f/xkoqdzqb',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({name:document.getElementById('ctm-name').value,email:document.getElementById('ctm-email').value,message:document.getElementById('ctm-msg').value})
+    });
+    if(res.ok){
+      document.getElementById('ctm-form').style.display='none';
+      document.getElementById('ctm-ok').classList.add('on');
+    } else {
+      btn.disabled=false; btn.textContent='Send Message';
+    }
+  }catch{btn.disabled=false; btn.textContent='Send Message';}
+});
+window.openCTM=openCTM; window.closeCTM=closeCTM;
 document.addEventListener('keydown',e=>{if(e.key==='Escape')clb();});
 
 // mobile nav
