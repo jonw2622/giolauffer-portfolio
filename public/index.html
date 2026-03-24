@@ -360,6 +360,59 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 /* ── FOCUS-VISIBLE for keyboard navigation ── */
 a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-visible,.gi:focus-visible,.relcard:focus-visible,.rc:focus-visible,.wi-link:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 
+/* ── SCROLL PROGRESS BAR ── */
+#spbar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(to right,var(--acc),var(--acc2));z-index:10002;width:0%;pointer-events:none}
+
+/* ── AVAILABLE FOR WORK BADGE ── */
+.avail-hero{display:inline-flex;align-items:center;gap:.5rem;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:#3ddc84;font-weight:600;margin-bottom:.8rem}
+.avail-dot{width:7px;height:7px;border-radius:50%;background:#3ddc84;flex-shrink:0;box-shadow:0 0 0 0 rgba(61,220,132,.5);animation:avpulse 2.2s ease-in-out infinite}
+@keyframes avpulse{0%,100%{box-shadow:0 0 0 0 rgba(61,220,132,.45)}60%{box-shadow:0 0 0 6px rgba(61,220,132,0)}}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}.reveal.d3{transition-delay:.3s}
+
+/* ── SPECIALIZATIONS STRIP ── */
+.spec-strip{padding:0 2.5rem 4rem;max-width:1280px;margin:0 auto}
+.spec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.spec-card{background:var(--surf);padding:1.8rem 1.5rem;display:flex;flex-direction:column;gap:.9rem;transition:background .2s,outline .2s;outline:1px solid transparent}
+.spec-card:hover{background:var(--surf2);outline-color:var(--acc)}
+.spec-icon{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid var(--brd);border-radius:6px;flex-shrink:0}
+.spec-icon svg{width:18px;height:18px;stroke:var(--acc);stroke-width:1.5;fill:none}
+.spec-name{font-size:.78rem;font-weight:500;color:var(--txt);letter-spacing:.02em}
+.spec-desc{font-size:.72rem;line-height:1.75;color:var(--mut);font-weight:300}
+@media(max-width:900px){.spec-grid{grid-template-columns:repeat(2,1fr)}.spec-strip{padding:0 1.4rem 3rem}}
+@media(max-width:540px){.spec-grid{grid-template-columns:1fr}.spec-strip{padding:0 1rem 2.5rem}}
+
+/* ── SKILL CATEGORIES ── */
+.skill-cats{display:flex;flex-direction:column;gap:1.5rem}
+.skill-cat-label{font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--acc2);font-weight:600;margin-bottom:.5rem}
+.skill-cat-items{display:flex;flex-wrap:wrap;gap:.35rem}
+
+/* ── OPEN TO (availability pills) ── */
+.avail-pills{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.7rem}
+.avail-pill{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .75rem;border:1px solid rgba(14,184,160,.3);color:var(--acc);font-weight:500;display:inline-flex;align-items:center;gap:.35rem}
+.avail-pill::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--acc);flex-shrink:0}
+
+/* ── FOOTER ── */
+.site-footer{border-top:1px solid var(--brd);padding:3rem 2.5rem 6.5rem;max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr auto;align-items:start;gap:2rem}
+.footer-name{font-family:var(--fd);font-size:1.5rem;letter-spacing:.08em;color:var(--txt)}
+.footer-role{font-size:.68rem;color:var(--mut);margin-top:.2rem;letter-spacing:.06em}
+.footer-links{display:flex;gap:1.8rem;margin-top:1.2rem;flex-wrap:wrap}
+.footer-links a{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);text-decoration:none;font-weight:500;transition:color .2s}
+.footer-links a:hover{color:var(--acc)}
+.footer-copy{font-size:.6rem;color:rgba(110,107,101,.4);margin-top:.85rem;letter-spacing:.06em}
+.footer-cta{display:flex;flex-direction:column;align-items:flex-end;gap:.8rem}
+.footer-cta .bprim{font-size:.68rem;padding:.72rem 1.5rem;white-space:nowrap}
+.footer-email{font-size:.68rem;color:var(--mut);letter-spacing:.04em;font-family:var(--fm)}
+@media(max-width:700px){.site-footer{grid-template-columns:1fr;padding:2.5rem 1.4rem 6.5rem}.footer-cta{align-items:flex-start}}
+
+/* ── SCROLL TO TOP ── */
+#sttb{position:fixed;bottom:5.2rem;right:1.5rem;width:38px;height:38px;border:1px solid var(--brd);background:rgba(13,13,14,.92);color:var(--mut);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:89;opacity:0;pointer-events:none;transform:translateY(6px);transition:opacity .3s,transform .3s,border-color .2s,color .2s;border-radius:8px}
+#sttb.on{opacity:1;pointer-events:all;transform:translateY(0)}
+#sttb:hover{border-color:var(--acc);color:var(--acc)}
+
 /* ── REDUCED MOTION ── */
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;scroll-behavior:auto!important}
@@ -367,6 +420,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   #cur,#curR,#curH{display:none}
   .pcard img.thumb,.gi img,.relcard img{transition:none}
   .rslides{transition:none}
+  .reveal{opacity:1;transform:none;transition:none}
 }
 
 /* back nav */
@@ -519,6 +573,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 </head>
 <body>
 
+<div id="spbar" aria-hidden="true"></div>
+<button id="sttb" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="1.5" fill="none"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg></button>
 <div id="cur" aria-hidden="true"></div>
 <div id="curR" aria-hidden="true"></div>
 <div id="curH" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="13" fill="#0d0d0e"/><path d="M13 0 A13 13 0 0 0 13 26 A6.5 6.5 0 0 0 13 13 A6.5 6.5 0 0 1 13 0 Z" fill="#0eb8a0"/><circle cx="13" cy="6.5" r="2.5" fill="#0d0d0e"/><circle cx="13" cy="19.5" r="2.5" fill="#0eb8a0"/><circle cx="13" cy="13" r="12.5" fill="none" stroke="#0eb8a0" stroke-width="1"/></svg></div>
@@ -618,12 +674,14 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
     </div>
 
     <div class="hero">
+      <div class="avail-hero ai"><span class="avail-dot"></span>Available for Work</div>
       <div class="htag ai">3D Prop & Environment Artist · Ede, Netherlands</div>
       <h1 class="hname ai d1">GIOVANNI<span class="l2">LAUFFER</span></h1>
       <p class="hrole ai d2">Props · Characters · Vehicles · Environments<br>Maya · ZBrush · Substance · UE5 · 3DS Max · VRay</p>
       <div class="hstats ai d3">
         <div><div class="sn">5+</div><div class="sl">Years Exp</div></div>
         <div><div class="sn">2</div><div class="sl">Studios</div></div>
+        <div><div class="sn">12+</div><div class="sl">Assets Shipped</div></div>
         <div><div class="sn">4</div><div class="sl">Languages</div></div>
       </div>
       <div class="hbtns ai d4">
@@ -632,6 +690,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
           <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="1.8" fill="none"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
         <a href="#" onclick="openCTM();return false;" class="bsec">Get In Touch</a>
+        <!-- JONNY: Upload Giovanni's CV as /cv-giovanni-lauffer.pdf then change href below -->
+        <a href="/cv-giovanni-lauffer.pdf" download class="bsec" id="cv-btn" onclick="if(!this.getAttribute('href').endsWith('.pdf')){alert('CV coming soon!');return false}">Download CV</a>
       </div>
     </div>
 
@@ -651,7 +711,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   </div>
 
   <!-- About -->
-  <div class="about">
+  <div class="about reveal">
     <div>
       <div class="aprof">
         <img src="/wp-content/uploads/2025/10/Artstation-profile-pic.webp" alt="Giovanni Lauffer" loading="lazy" decoding="async">
@@ -687,20 +747,85 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
       </div>
     </div>
     <div>
-      <div class="sec-tag">Software</div>
-      <div class="skgrid">
-        <span class="ski">Autodesk Maya</span><span class="ski">3DS Max</span>
-        <span class="ski">ZBrush</span><span class="ski">Substance Painter</span>
-        <span class="ski">Substance Designer</span><span class="ski">Unreal Engine 5</span>
-        <span class="ski">Unity</span><span class="ski">VRay</span>
-        <span class="ski">Marmoset Toolbag</span><span class="ski">Photoshop</span>
-        <span class="ski">Trello / Asana</span><span class="ski">Scrum / Agile</span>
+      <div class="sec-tag">Skills & Software</div>
+      <div class="skill-cats">
+        <div class="skill-cat">
+          <div class="skill-cat-label">3D Modeling</div>
+          <div class="skill-cat-items">
+            <span class="ski">Autodesk Maya</span>
+            <span class="ski">ZBrush</span>
+            <span class="ski">3DS Max</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <div class="skill-cat-label">Texturing</div>
+          <div class="skill-cat-items">
+            <span class="ski">Substance Painter</span>
+            <span class="ski">Substance Designer</span>
+            <span class="ski">Photoshop</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <div class="skill-cat-label">Real-time & Rendering</div>
+          <div class="skill-cat-items">
+            <span class="ski">Unreal Engine 5</span>
+            <span class="ski">Unity</span>
+            <span class="ski">Marmoset Toolbag</span>
+            <span class="ski">VRay</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <div class="skill-cat-label">Pipeline & Workflow</div>
+          <div class="skill-cat-items">
+            <span class="ski">Trello / Asana</span>
+            <span class="ski">Scrum / Agile</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:2rem">
+        <div class="sec-tag">Open To</div>
+        <div class="avail-pills">
+          <span class="avail-pill">Remote</span>
+          <span class="avail-pill">On-site</span>
+          <span class="avail-pill">Relocation</span>
+          <span class="avail-pill">Freelance</span>
+          <span class="avail-pill">Contract</span>
+          <span class="avail-pill">Full-time</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Specializations -->
+  <div class="spec-strip reveal">
+    <div class="wsec">What I Do</div>
+    <div class="spec-grid">
+      <div class="spec-card">
+        <div class="spec-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+        <div class="spec-name">Hard Surface Modeling</div>
+        <div class="spec-desc">Vehicles, weapons, props, and machinery. Game-ready meshes with clean topology built for performance.</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <div class="spec-name">UV Mapping & Normal Baking</div>
+        <div class="spec-desc">Efficient UV layouts that maximize texel density. High-poly to low-poly bakes that hold up under scrutiny.</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+        <div class="spec-name">PBR Texturing</div>
+        <div class="spec-desc">Physically based materials in Substance Painter and Designer. Metal, wear, grime, and surface storytelling.</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <div class="spec-name">Environment Art</div>
+        <div class="spec-desc">Modular sets, props, and dressing that build believable game worlds. Architecture and organic structures.</div>
       </div>
     </div>
   </div>
 
   <!-- Work -->
-  <div class="wstrip">
+  <div class="wstrip reveal">
     <div class="wsec">Work Experience</div>
     <div class="witems">
 
@@ -791,7 +916,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   </div>
 
   <!-- Recommendations -->
-  <div class="rstrip">
+  <div class="rstrip reveal">
     <div class="wsec">Industry Recommendations</div>
     <div class="recgrid">
       <a class="rc" href="https://cameronwgames.com/" target="_blank" rel="noopener noreferrer">
@@ -836,6 +961,28 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
       </a>
     </div>
   </div>
+
+  <!-- Footer -->
+  <footer class="site-footer reveal">
+    <div class="footer-l">
+      <div class="footer-name">GIOVANNI LAUFFER</div>
+      <div class="footer-role">3D Prop & Environment Artist · Ede, Netherlands</div>
+      <div class="footer-links">
+        <a href="https://www.artstation.com/giovannilauffer" target="_blank" rel="noopener noreferrer">ArtStation</a>
+        <a href="https://www.linkedin.com/in/giovanni-lauffer-08558b185/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="#" onclick="showPortfolio();return false">Portfolio</a>
+        <a href="#" onclick="openCTM();return false">Get In Touch</a>
+      </div>
+      <div class="footer-copy">© 2026 Giovanni Lauffer · All rights reserved</div>
+    </div>
+    <div class="footer-cta">
+      <a href="#" class="bprim" onclick="openCTM();return false">
+        Hire Me
+        <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="1.8" fill="none"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <div class="footer-email">giovanni@giovannilauffer.com</div>
+    </div>
+  </footer>
 
 </div><!-- /home -->
 
@@ -1745,6 +1892,23 @@ function toggleMusic(){
   }
 }
 window.toggleMusic=toggleMusic;
+
+// ── scroll progress bar + scroll-to-top ──
+const spbar=document.getElementById('spbar');
+const sttb=document.getElementById('sttb');
+window.addEventListener('scroll',()=>{
+  const pct=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100;
+  if(spbar)spbar.style.width=pct+'%';
+  if(sttb)sttb.classList.toggle('on',window.scrollY>420);
+},{passive:true});
+
+// ── reveal on scroll (IntersectionObserver) ──
+(function(){
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.07,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+})();
 
 // touch: first tap reveals overlay, second tap opens post
 let lastCard=null;
