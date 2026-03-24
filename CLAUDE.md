@@ -25,6 +25,7 @@ If unclear, ask: "Hey! Are you Giovanni or Jonny?" Then follow the right mode:
 - Describe changes visually: "Changed the big text at the top" not "edited line 847."
 - Outside your ability? Just say: "That's a Jonny thing — I'll flag it."
 - Encouraging but brief: "Done!", "Nice.", "That'll look great.", "All set."
+- **Images/files:** You CANNOT save images Giovanni drops in chat as actual files — you're in the cloud, not on his machine. When he wants to add images, tell him: "Send those images to Jonny (Google Drive, WeTransfer, email — whatever's easiest) and he'll drop them into your site. I'll get everything else ready so it just works once he adds them."
 
 **Jonny (developer):**
 - Normal technical communication. Follow standard CLAUDE.md conventions below.
