@@ -441,6 +441,14 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 }
 
 /* ════════════════════════════════════
+   RESPONSIVE — TABLET TOUCH (pointer:coarse)
+════════════════════════════════════ */
+@media(pointer:coarse){
+  *,a,button,input,select,textarea,[role="button"]{cursor:auto!important}
+  #cur,#curR{display:none}
+}
+
+/* ════════════════════════════════════
    RESPONSIVE — MOBILE (≤540px)
 ════════════════════════════════════ */
 @media(max-width:540px){
@@ -866,6 +874,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 document.addEventListener('DOMContentLoaded', function() {
 
 // ── cursor (RAF-based, starts hidden until first mouse move) ──
+if(window.matchMedia('(pointer:fine)').matches){
 const cur=document.getElementById('cur'),curR=document.getElementById('curR');
 let mx=window.innerWidth/2, my=window.innerHeight/2;
 let rx=mx, ry=my;
@@ -888,6 +897,7 @@ function addHov(sel){document.querySelectorAll(sel).forEach(el=>{
 addHov('a,button,.pcard,.gi,.relcard,.rbtn,.fb,.rc');
 document.addEventListener('mousedown',()=>document.body.classList.add('clicking'));
 document.addEventListener('mouseup',()=>document.body.classList.remove('clicking'));
+}
 
 // ── reel (3 slides) — also pause/play videos on slide change ──
 let cs=0; const T=4; let at;
@@ -1513,7 +1523,7 @@ function showPost(id){
       </div>`;
     }
     if(item.type==='video'){
-      return`<div class="gi${item.fw?' fw':''}" style="cursor:none">
+      return`<div class="gi${item.fw?' fw':''}">
         <video controls loop style="width:100%;height:auto;display:block" poster="${p.thumb}">
           <source src="${item.src}" type="video/mp4">
         </video>
