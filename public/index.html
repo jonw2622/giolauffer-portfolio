@@ -160,10 +160,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .apn{font-family:var(--fd);font-size:1.3rem;letter-spacing:.06em}
 .aps{font-size:.68rem;color:var(--mut);margin-top:.15rem}
 .langs{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.3rem}
-.lp{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .75rem;border:1px solid var(--brd);color:var(--mut);font-weight:500;border-radius:9999px}
+.lp{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .75rem;border:1px solid var(--brd);color:var(--mut);font-weight:500}
 .lp.nat{border-color:var(--acc);color:var(--acc)}
-.skgrid{display:flex;flex-wrap:wrap;gap:.35rem}
-.ski{font-size:.67rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);font-family:var(--fm);padding:.28rem .75rem;border:1px solid var(--brd);border-radius:9999px}
+.skgrid{display:grid;grid-template-columns:1fr 1fr}
+.ski{font-size:.67rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);font-family:var(--fm);padding:.5rem 0;border-bottom:1px solid var(--brd)}
 
 /* ── HOME: work strip ── */
 .wstrip{padding:0 2.5rem 4rem;max-width:1280px;margin:0 auto}
@@ -223,7 +223,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .pcc{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);font-weight:600;margin-bottom:.3rem}
 .pcn{font-family:var(--fd);font-size:1.3rem;letter-spacing:.04em;line-height:1.1}
 .pcm{display:flex;gap:.4rem;margin-top:.5rem;flex-wrap:wrap}
-.pct{font-size:.56rem;letter-spacing:.09em;text-transform:uppercase;color:rgba(238,235,229,.55);border:1px solid rgba(255,255,255,.12);padding:.18rem .45rem;border-radius:9999px}
+.pct{font-size:.56rem;letter-spacing:.09em;text-transform:uppercase;color:rgba(238,235,229,.55);border:1px solid rgba(255,255,255,.12);padding:.18rem .45rem}
 .cbadge{position:absolute;top:.85rem;left:.85rem;font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;padding:.25rem .6rem;background:var(--acc2);color:#fff;font-weight:600}
 .cgi-badge{background:var(--surf2);border:1px solid var(--brd);color:var(--mut)}
 .ts-badge{background:rgba(14,184,160,.15);border:1px solid var(--acc);color:var(--acc)}
@@ -253,7 +253,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 
 .pm h1{font-family:var(--fd);font-size:clamp(2rem,4vw,3.5rem);letter-spacing:.03em;line-height:1;margin-bottom:1.2rem}
 .ptags{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.6rem}
-.ptag{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .72rem;border:1px solid var(--brd);color:var(--mut);font-weight:500;border-radius:9999px}
+.ptag{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .72rem;border:1px solid var(--brd);color:var(--mut);font-weight:500}
 .ptag.h{border-color:var(--acc);color:var(--acc)}
 .pdesc{font-size:.88rem;line-height:1.9;color:#aba7a0;font-weight:300;max-width:600px}
 .pdesc p+p{margin-top:.9rem}
@@ -365,7 +365,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 
 /* ── OPEN TO (availability pills) ── */
 .avail-pills{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.7rem}
-.avail-pill{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .75rem;border:1px solid rgba(14,184,160,.3);color:var(--acc);font-weight:500;display:inline-flex;align-items:center;gap:.35rem;border-radius:9999px}
+.avail-pill{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .75rem;border:1px solid rgba(14,184,160,.3);color:var(--acc);font-weight:500;display:inline-flex;align-items:center;gap:.35rem}
 .avail-pill::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--acc);flex-shrink:0}
 
 /* ── FOOTER ── */
