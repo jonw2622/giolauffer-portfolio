@@ -59,8 +59,8 @@ body.ptr #curH{opacity:1}
 
 /* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;gap:1.5rem;padding:1.2rem 2.5rem;background:linear-gradient(to bottom,rgba(13,13,14,.98),transparent)}
-.nlogo{height:26px;width:26px;overflow:hidden;cursor:none;display:flex;align-items:center;flex-shrink:0}
-.nlogo img{height:100%;width:auto;object-fit:cover;object-position:100% center;filter:brightness(0) invert(1)}
+.nlogo{height:26px;cursor:none;display:flex;align-items:center}
+.nlogo img{height:100%;width:auto}
 .nlogo span{font-family:var(--fd);font-size:1.3rem;letter-spacing:.1em;color:var(--txt)}
 .musicbtn{background:none;border:1px solid var(--brd);color:var(--mut);width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:none;transition:border-color .2s,color .2s;flex-shrink:0;border-radius:9999px}
 .musicbtn:hover{border-color:var(--acc);color:var(--acc)}
@@ -583,7 +583,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 
 <nav aria-label="Main navigation">
   <div class="nlogo" onclick="showHome()" role="button" tabindex="0" aria-label="Go to homepage">
-    <img src="/wp-content/uploads/2025/07/giodark.png" alt="Giovanni Lauffer" fetchpriority="high" decoding="async"
+    <img src="/wp-content/uploads/2025/07/logo_transparent_white.png" alt="Giovanni Lauffer" fetchpriority="high" decoding="async"
       onerror="this.style.display='none'">
   </div>
   <ul class="nlinks">
