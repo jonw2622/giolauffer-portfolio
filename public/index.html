@@ -1845,7 +1845,7 @@ window.clb=clb;
 function olb(src,label){document.getElementById('lbimg').src=src;document.getElementById('lbimg').alt=label||'';document.getElementById('lb').classList.add('on');}
 function clb(){document.getElementById('lb').classList.remove('on');}
 document.getElementById('lb').addEventListener('click',e=>{if(e.target.id==='lb')clb();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')clb();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(document.getElementById('cfModal').classList.contains('on'))closeContact();else clb();}});
 
 // mobile nav
 function openMob(){document.getElementById('mobnav').classList.add('open');document.body.style.overflow='hidden';var hb=document.querySelector('.nmenu');if(hb)hb.setAttribute('aria-expanded','true');}
@@ -1906,12 +1906,14 @@ document.addEventListener('touchstart',function(e){
 },{passive:false});
 
 // ── contact modal ──
+var cfTimer;
 function openContact(){
   document.getElementById('cfModal').classList.add('on');
   document.body.style.overflow='hidden';
   document.getElementById('cfName').focus();
 }
 function closeContact(){
+  if(cfTimer){clearTimeout(cfTimer);cfTimer=null;}
   document.getElementById('cfModal').classList.remove('on');
   document.body.style.overflow='';
   document.getElementById('cfForm').reset();
@@ -1922,9 +1924,6 @@ function closeContact(){
 }
 document.getElementById('cfModal').addEventListener('click',e=>{
   if(e.target.id==='cfModal') closeContact();
-});
-document.addEventListener('keydown',e=>{
-  if(e.key==='Escape' && document.getElementById('cfModal').classList.contains('on')) closeContact();
 });
 
 async function submitContact(e){
@@ -1957,7 +1956,7 @@ async function submitContact(e){
       status.textContent='Message sent! Giovanni will get back to you soon.';
       status.className='cf-status ok';
       btnTxt.textContent='Sent!';
-      setTimeout(()=>closeContact(),3000);
+      cfTimer=setTimeout(()=>closeContact(),3000);
     }else{
       status.textContent=data.error||'Something went wrong. Please try again.';
       status.className='cf-status err';

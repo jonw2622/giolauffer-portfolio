@@ -2,7 +2,7 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// In-memory rate limit: IP -> [timestamps]
+// Per-instance rate limit (resets on cold start — acceptable for portfolio traffic).
 const rateMap = new Map();
 const WINDOW_MS = 15 * 60 * 1000; // 15 minutes
 const MAX_REQUESTS = 5;
@@ -16,21 +16,25 @@ function checkRate(ip) {
   return true;
 }
 
+function esc(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  const { name, email, subject, message, _trap } = req.body;
+
+  // Honeypot first — don't burn a rate-limit slot on bot hits
+  if (_trap) {
+    return res.status(200).json({ ok: true });
+  }
+
   const ip = req.headers['x-forwarded-for']?.split(',')[0]?.trim() || 'unknown';
   if (!checkRate(ip)) {
     return res.status(429).json({ error: 'Too many requests. Please wait before trying again.' });
-  }
-
-  const { name, email, subject, message, _trap } = req.body;
-
-  // Honeypot: bots fill this, humans don't
-  if (_trap) {
-    return res.status(200).json({ ok: true });
   }
 
   // Validation
@@ -55,10 +59,10 @@ export default async function handler(req, res) {
       replyTo: email.trim(),
       subject: subjectLine,
       text: `Name: ${name.trim()}\nEmail: ${email.trim()}\nSubject: ${subject?.trim() || 'Not specified'}\n\n${message.trim()}`,
-      html: `<p><strong>From:</strong> ${name.trim()} &lt;${email.trim()}&gt;</p>
-             <p><strong>Subject:</strong> ${subject?.trim() || 'Not specified'}</p>
+      html: `<p><strong>From:</strong> ${esc(name.trim())} &lt;${esc(email.trim())}&gt;</p>
+             <p><strong>Subject:</strong> ${esc(subject?.trim() || 'Not specified')}</p>
              <hr>
-             <p>${message.trim().replace(/\n/g, '<br>')}</p>`,
+             <p>${esc(message.trim()).replace(/\n/g, '<br>')}</p>`,
     });
     return res.status(200).json({ ok: true });
   } catch (err) {
