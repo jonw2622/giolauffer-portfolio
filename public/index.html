@@ -47,22 +47,17 @@ body{background:var(--bg);color:var(--txt);font-family:var(--fb);font-weight:300
 
 /* ── CURSOR ── */
 *,a,button,input,select,textarea,[role="button"]{cursor:none!important}
-#cur{position:fixed;width:8px;height:8px;background:var(--acc);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s}
-#curR{position:fixed;width:34px;height:34px;border:1px solid rgba(14,184,160,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .08s ease-out,top .08s ease-out,width .18s,height .18s,border-color .2s}
-#curH{position:fixed;pointer-events:none;z-index:10000;opacity:0;transform:translate(-13px,-13px);transition:opacity .15s}
-#curH svg{animation:yy-spin 2s linear infinite;transform-box:fill-box;transform-origin:center}
-@keyframes yy-spin{to{transform:rotate(360deg)}}
-body.hov #cur{width:14px;height:14px}
-body.hov #curR{width:50px;height:50px;border-color:rgba(14,184,160,.65)}
-body.ptr #cur,body.ptr #curR{opacity:0!important;transition:none}
-body.ptr #curH{opacity:1}
+#cursor{position:fixed;width:12px;height:12px;border:1.5px solid #fff;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:difference;transition:width .15s ease,height .15s ease,opacity .3s;will-change:left,top;opacity:0}
+body.hov #cursor{width:28px;height:28px}
 
 /* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;gap:1.5rem;padding:1.2rem 2.5rem;background:linear-gradient(to bottom,rgba(13,13,14,.98),transparent)}
-.nlogo{height:26px;cursor:none;display:flex;align-items:center}
-.nlogo img{height:100%;width:auto;filter:brightness(0) invert(1)}
+.nlogo{height:40px;cursor:none;display:flex;align-items:center;position:relative}
+.nlogo img{height:100%;width:auto}
+.nlogo::after{content:'';position:absolute;top:13px;left:13px;width:14px;height:14px;background:#fff;border-radius:50%;transform:scaleY(0);transform-origin:center top;animation:lidblink 4s ease-in-out infinite;pointer-events:none;z-index:1}
+@keyframes lidblink{0%,80%{transform:scaleY(0)}84%{transform:scaleY(1)}88%,100%{transform:scaleY(0)}}
 .nlogo span{font-family:var(--fd);font-size:1.3rem;letter-spacing:.1em;color:var(--txt)}
-.musicbtn{background:none;border:1px solid var(--brd);color:var(--mut);width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:none;transition:border-color .2s,color .2s;flex-shrink:0;border-radius:0}
+.musicbtn{background:none;border:1px solid var(--brd);color:var(--mut);width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:none;transition:border-color .2s,color .2s;flex-shrink:0;border-radius:9999px}
 .musicbtn:hover{border-color:var(--acc);color:var(--acc)}
 .musicbtn.playing{border-color:var(--acc);color:var(--acc)}
 .musicbtn.playing svg{animation:pulse 2s ease-in-out infinite}
@@ -72,7 +67,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .nlinks{display:flex;gap:2rem;list-style:none;margin-left:auto}
 .nlinks a{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);text-decoration:none;transition:color .2s;font-weight:500}
 .nlinks a:hover{color:var(--txt)}
-.ncta{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding:.5rem 1.3rem;border:1px solid var(--acc);color:var(--acc);text-decoration:none;font-weight:500;transition:background .2s,color .2s}
+.ncta{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding:.5rem 1.3rem;border:1px solid var(--acc);color:var(--acc);text-decoration:none;font-weight:500;transition:background .2s,color .2s;border-radius:9999px}
 .ncta:hover{background:var(--acc);color:var(--bg)}
 
 /* ════════════════════════════════════
@@ -133,9 +128,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .sn{font-family:var(--fd);font-size:1.9rem;color:var(--txt)}
 .sl{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-top:.05rem;font-weight:500}
 .hbtns{display:flex;gap:.85rem;flex-wrap:wrap}
-.bprim{display:inline-flex;align-items:center;gap:.65rem;background:var(--acc);color:var(--bg);font-family:var(--fb);font-size:.74rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 1.8rem;text-decoration:none;transition:background .2s,gap .2s}
+.bprim{display:inline-flex;align-items:center;gap:.65rem;background:var(--acc);color:var(--bg);font-family:var(--fb);font-size:.74rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 1.8rem;text-decoration:none;transition:background .2s,gap .2s;border-radius:9999px}
 .bprim:hover{background:#0dd4b8;gap:1rem}
-.bsec{display:inline-flex;align-items:center;font-size:.74rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);text-decoration:none;border:1px solid var(--brd);padding:.85rem 1.6rem;transition:color .2s,border-color .2s}
+.bsec{display:inline-flex;align-items:center;font-size:.74rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);text-decoration:none;border:1px solid var(--brd);padding:.85rem 1.6rem;transition:color .2s,border-color .2s;border-radius:9999px}
 .bsec:hover{color:var(--txt);border-color:var(--brd2)}
 
 .rctrl{position:absolute;bottom:3rem;left:2.5rem;right:2.5rem;display:flex;align-items:center;gap:1.8rem;z-index:20}
@@ -144,7 +139,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .rdot.on{background:var(--acc);width:3.5rem}
 .rtim{font-size:.65rem;letter-spacing:.1em;color:var(--mut);font-family:var(--fm)}
 .rnav{margin-left:auto;display:flex;gap:.4rem}
-.rbtn{width:42px;height:42px;border:1px solid var(--brd);background:rgba(13,13,14,.5);display:flex;align-items:center;justify-content:center;cursor:none;transition:border-color .2s,background .2s}
+.rbtn{width:42px;height:42px;border:1px solid var(--brd);background:rgba(13,13,14,.5);display:flex;align-items:center;justify-content:center;cursor:none;transition:border-color .2s,background .2s;border-radius:50%}
 .rbtn:hover{border-color:var(--acc);background:var(--acc-glow)}
 .rbtn svg{width:17px;height:17px;stroke:var(--txt);stroke-width:1.5;fill:none}
 
@@ -210,7 +205,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .phead h1{font-family:var(--fd);font-size:3rem;letter-spacing:.06em}
 .phead p{font-size:.76rem;color:var(--mut);margin-top:.35rem}
 .pfilt{display:flex;gap:.4rem;flex-wrap:wrap}
-.fb{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;padding:.45rem 1.1rem;border:1px solid var(--brd);background:transparent;color:var(--mut);cursor:none;transition:all .2s;font-family:var(--fb);font-weight:500}
+.fb{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;padding:.45rem 1.1rem;border:1px solid var(--brd);background:transparent;color:var(--mut);cursor:none;transition:all .2s;font-family:var(--fb);font-weight:500;border-radius:9999px}
 .fb:hover,.fb.on{border-color:var(--acc);color:var(--acc)}
 
 /* Portfolio grid */
@@ -332,7 +327,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .sf-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none;display:block}
 .sf-label{position:absolute;bottom:0;left:0;right:0;padding:.55rem 1rem;background:linear-gradient(to top,rgba(8,8,9,.9),transparent);font-size:.68rem;color:rgba(238,235,229,.7);letter-spacing:.08em;display:flex;align-items:center;gap:.5rem;pointer-events:none;z-index:2}
 .sf-label-icon{width:14px;height:14px;flex-shrink:0;opacity:.7}
-.sf-badge{position:absolute;top:.75rem;left:.75rem;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;padding:.22rem .6rem;background:rgba(14,184,160,.15);border:1px solid rgba(14,184,160,.4);color:var(--acc);font-weight:600;pointer-events:none;z-index:2}
+.sf-badge{position:absolute;bottom:.75rem;right:.75rem;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;padding:.22rem .6rem;background:rgba(14,184,160,.15);border:1px solid rgba(14,184,160,.4);color:var(--acc);font-weight:600;pointer-events:none;z-index:2}
 
 /* lightbox */
 .lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.97);z-index:1000;align-items:center;justify-content:center}
@@ -342,9 +337,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .lbc:hover{border-color:var(--acc);color:var(--acc)}
 
 /* ── AVAILABLE FOR WORK BADGE ── */
-.avail-hero{display:inline-flex;align-items:center;gap:.5rem;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:#3ddc84;font-weight:600;margin-bottom:.8rem}
-.avail-dot{width:7px;height:7px;border-radius:50%;background:#3ddc84;flex-shrink:0;box-shadow:0 0 0 0 rgba(61,220,132,.5);animation:avpulse 2.2s ease-in-out infinite}
-@keyframes avpulse{0%,100%{box-shadow:0 0 0 0 rgba(61,220,132,.45)}60%{box-shadow:0 0 0 6px rgba(61,220,132,0)}}
+.avail-hero{display:inline-flex;align-items:center;gap:.5rem;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:#e8621a;font-weight:600;margin-bottom:.8rem}
+.avail-dot{width:7px;height:7px;border-radius:50%;background:#e8621a;flex-shrink:0;box-shadow:0 0 0 0 rgba(232,98,26,.5);animation:avpulse 2.2s ease-in-out infinite}
+@keyframes avpulse{0%,100%{box-shadow:0 0 0 0 rgba(232,98,26,.45)}60%{box-shadow:0 0 0 6px rgba(232,98,26,0)}}
 
 /* ── SPECIALIZATIONS STRIP ── */
 .spec-strip{padding:0 2.5rem 4rem;max-width:1280px;margin:0 auto}
@@ -401,7 +396,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;scroll-behavior:auto!important;cursor:auto!important}
   body{cursor:auto!important}
-  #cur,#curR,#curH{display:none}
+  #cursor{display:none}
   .pcard img.thumb,.gi img,.relcard img{transition:none}
   .rslides{transition:none}
   .reveal{opacity:1;transform:none;transition:none}
@@ -417,11 +412,11 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 /* hire bar */
 .hire{position:fixed;bottom:0;left:0;right:0;background:rgba(22,22,24,.98);border-top:1px solid var(--brd);padding:.85rem 2.5rem;display:flex;align-items:center;justify-content:space-between;z-index:90;transform:translateY(100%);transition:transform .4s cubic-bezier(.25,.46,.45,.94)}
 .hire.on{transform:translateY(0)}
-.hdot{width:7px;height:7px;border-radius:50%;background:#3ddc84;display:inline-block;margin-right:.65rem;flex-shrink:0}
+.hdot{width:7px;height:7px;border-radius:50%;background:#e8621a;display:inline-block;margin-right:.65rem;flex-shrink:0}
 .htxt{font-size:.76rem;color:var(--mut);display:flex;align-items:center}
 .htxt strong{color:var(--txt);margin-right:.3rem}
 .hact{display:flex;gap:.6rem}
-.hl{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;padding:.5rem 1.2rem;font-weight:500;text-decoration:none;transition:all .2s;font-family:var(--fb)}
+.hl{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;padding:.5rem 1.2rem;font-weight:500;text-decoration:none;transition:all .2s;font-family:var(--fb);border-radius:9999px}
 .hlp{background:var(--acc2);color:#fff}
 .hlp:hover{background:#f07030}
 .hls{border:1px solid var(--brd);color:var(--mut)}
@@ -438,7 +433,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 .mob-nav.open{opacity:1;pointer-events:all}
 .mob-nav a{font-family:var(--fd);font-size:2.5rem;letter-spacing:.08em;color:var(--txt);text-decoration:none;transition:color .2s}
 .mob-nav a:hover{color:var(--acc)}
-.mob-nav .mob-cta{font-size:1rem;letter-spacing:.1em;padding:.7rem 2rem;border:1px solid var(--acc);color:var(--acc);font-family:var(--fb);text-transform:uppercase;font-weight:500}
+.mob-nav .mob-cta{font-size:1rem;letter-spacing:.1em;padding:.7rem 2rem;border:1px solid var(--acc);color:var(--acc);font-family:var(--fb);text-transform:uppercase;font-weight:500;border-radius:9999px}
 .mob-close{position:absolute;top:1.2rem;right:1.2rem;background:none;border:none;color:var(--txt);font-size:1.8rem;cursor:none;padding:.5rem}
 
 /* ════════════════════════════════════
@@ -447,7 +442,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 @media(max-width:900px){
   /* cursor restored on mobile */
   *,a,button,input,select,textarea,[role="button"]{cursor:auto!important}
-  #cur,#curR,#curH{display:none}
+  #cursor{display:none}
 
   /* nav: hide links, show hamburger */
   nav{padding:1rem 1.4rem}
@@ -507,7 +502,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 ════════════════════════════════════ */
 @media(pointer:coarse){
   *,a,button,input,select,textarea,[role="button"]{cursor:auto!important}
-  #cur,#curR,#curH{display:none}
+  #cursor{display:none}
 }
 
 /* ════════════════════════════════════
@@ -567,9 +562,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 
 <div id="spbar" aria-hidden="true"></div>
 <button id="sttb" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="1.5" fill="none"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg></button>
-<div id="cur" aria-hidden="true"></div>
-<div id="curR" aria-hidden="true"></div>
-<div id="curH" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="13" fill="#0d0d0e"/><path d="M13 0 A13 13 0 0 0 13 26 A6.5 6.5 0 0 0 13 13 A6.5 6.5 0 0 1 13 0 Z" fill="#0eb8a0"/><circle cx="13" cy="6.5" r="2.5" fill="#0d0d0e"/><circle cx="13" cy="19.5" r="2.5" fill="#0eb8a0"/><circle cx="13" cy="13" r="12.5" fill="none" stroke="#0eb8a0" stroke-width="1"/></svg></div>
+<div id="cursor" aria-hidden="true"></div>
 
 <!-- Mobile nav overlay -->
 <div class="mob-nav" id="mobnav" role="dialog" aria-label="Mobile navigation menu">
@@ -583,7 +576,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 
 <nav aria-label="Main navigation">
   <div class="nlogo" onclick="showHome()" role="button" tabindex="0" aria-label="Go to homepage">
-    <img src="/wp-content/uploads/2025/07/giodark.png" alt="Giovanni Lauffer" fetchpriority="high" decoding="async"
+    <img src="/wp-content/uploads/2025/07/logo_transparent_white.png" alt="Giovanni Lauffer" fetchpriority="high" decoding="async"
       onerror="this.style.display='none';this.parentNode.innerHTML+='<span>GIOVANNI LAUFFER</span>'">
   </div>
   <ul class="nlinks">
@@ -625,7 +618,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
           <source src="/ts-rewind-2k-v3.mp4" type="video/mp4">
         </video>
         <div class="rov"></div><div class="rob"></div>
-        <div class="slide-info"><div class="si-title">TimeSplitters: Rewind</div><div class="si-sub">Props · Characters · Vehicles · UE5</div></div>
+        <div class="slide-info"><div class="si-tag">Cinder Interactive</div><div class="si-title">TimeSplitters: Rewind</div><div class="si-sub">Props · Characters · Vehicles · UE5</div></div>
       </div>
 
       <!-- Slide 2: Witch's Den — direct MP4 from giovannilauffer.com -->
@@ -769,12 +762,12 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
         <div class="spec-desc">Efficient UV layouts that maximize texel density. High-poly to low-poly bakes that hold up under scrutiny.</div>
       </div>
       <div class="spec-card">
-        <div class="spec-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+        <div class="spec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 12 12 17 22 12"/><polyline points="2 17 12 22 22 17"/></svg></div>
         <div class="spec-name">PBR Texturing</div>
         <div class="spec-desc">Physically based materials in Substance Painter and Designer. Metal, wear, grime, and surface storytelling.</div>
       </div>
       <div class="spec-card">
-        <div class="spec-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <div class="spec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="2 20 9 6 14 14 18 9 22 20 2 20"/><line x1="2" y1="20" x2="22" y2="20"/></svg></div>
         <div class="spec-name">Environment Art</div>
         <div class="spec-desc">Modular sets, props, and dressing that build believable game worlds. Architecture and organic structures.</div>
       </div>
@@ -1012,25 +1005,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ── cursor (RAF-based, starts hidden until first mouse move) ──
 if(window.matchMedia('(pointer:fine)').matches){
-const cur=document.getElementById('cur'),curR=document.getElementById('curR'),curH=document.getElementById('curH');
+const cursor=document.getElementById('cursor');
 let mx=window.innerWidth/2, my=window.innerHeight/2;
-let rx=mx, ry=my;
-cur.style.opacity='0'; curR.style.opacity='0';
+let cx=mx, cy=my;
 document.addEventListener('mousemove',e=>{
   mx=e.clientX; my=e.clientY;
-  cur.style.opacity='1'; curR.style.opacity='1';
-  cur.style.left=mx+'px'; cur.style.top=my+'px';
-  curH.style.left=mx+'px'; curH.style.top=my+'px';
+  cursor.style.opacity='1';
 });
 (function loop(){
-  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
-  curR.style.left=Math.round(rx)+'px'; curR.style.top=Math.round(ry)+'px';
+  cx+=(mx-cx)*0.5; cy+=(my-cy)*0.5;
+  cursor.style.left=Math.round(cx*10)/10+'px'; cursor.style.top=Math.round(cy*10)/10+'px';
   requestAnimationFrame(loop);
 })();
 
 function addHov(sel){document.querySelectorAll(sel).forEach(el=>{
-  el.addEventListener('mouseenter',()=>document.body.classList.add('hov','ptr'));
-  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov','ptr'));
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
 });}
 addHov('a,button,.pcard,.gi,.relcard,.rbtn,.fb,.rc');
 }
