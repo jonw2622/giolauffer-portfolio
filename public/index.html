@@ -1013,7 +1013,7 @@ document.addEventListener('mousemove',e=>{
   cursor.style.opacity='1';
 });
 (function loop(){
-  cx+=(mx-cx)*0.2; cy+=(my-cy)*0.2;
+  cx+=(mx-cx)*0.28; cy+=(my-cy)*0.28;
   cursor.style.left=Math.round(cx*10)/10+'px'; cursor.style.top=Math.round(cy*10)/10+'px';
   requestAnimationFrame(loop);
 })();
