@@ -47,15 +47,8 @@ body{background:var(--bg);color:var(--txt);font-family:var(--fb);font-weight:300
 
 /* ── CURSOR ── */
 *,a,button,input,select,textarea,[role="button"]{cursor:none!important}
-#cur{position:fixed;width:8px;height:8px;background:var(--acc);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s}
-#curR{position:fixed;width:34px;height:34px;border:1px solid rgba(14,184,160,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .08s ease-out,top .08s ease-out,width .18s,height .18s,border-color .2s}
-#curH{position:fixed;pointer-events:none;z-index:10000;opacity:0;transform:translate(-13px,-13px);transition:opacity .15s}
-#curH svg{animation:yy-spin 2s linear infinite;transform-box:fill-box;transform-origin:center}
-@keyframes yy-spin{to{transform:rotate(360deg)}}
-body.hov #cur{width:14px;height:14px}
-body.hov #curR{width:50px;height:50px;border-color:rgba(14,184,160,.65)}
-body.ptr #cur,body.ptr #curR{opacity:0!important;transition:none}
-body.ptr #curH{opacity:1}
+#cursor{position:fixed;width:12px;height:12px;border:1.5px solid #fff;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:difference;transition:width .25s ease,height .25s ease,opacity .3s;will-change:left,top;opacity:0}
+body.hov #cursor{width:44px;height:44px}
 
 /* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;gap:1.5rem;padding:1.2rem 2.5rem;background:linear-gradient(to bottom,rgba(13,13,14,.98),transparent)}
@@ -403,7 +396,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;scroll-behavior:auto!important;cursor:auto!important}
   body{cursor:auto!important}
-  #cur,#curR,#curH{display:none}
+  #cursor{display:none}
   .pcard img.thumb,.gi img,.relcard img{transition:none}
   .rslides{transition:none}
   .reveal{opacity:1;transform:none;transition:none}
@@ -449,7 +442,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 @media(max-width:900px){
   /* cursor restored on mobile */
   *,a,button,input,select,textarea,[role="button"]{cursor:auto!important}
-  #cur,#curR,#curH{display:none}
+  #cursor{display:none}
 
   /* nav: hide links, show hamburger */
   nav{padding:1rem 1.4rem}
@@ -509,7 +502,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 ════════════════════════════════════ */
 @media(pointer:coarse){
   *,a,button,input,select,textarea,[role="button"]{cursor:auto!important}
-  #cur,#curR,#curH{display:none}
+  #cursor{display:none}
 }
 
 /* ════════════════════════════════════
@@ -569,9 +562,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 
 <div id="spbar" aria-hidden="true"></div>
 <button id="sttb" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="1.5" fill="none"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg></button>
-<div id="cur" aria-hidden="true"></div>
-<div id="curR" aria-hidden="true"></div>
-<div id="curH" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="13" fill="#fff"/><path d="M13 0 A13 13 0 0 0 13 26 A6.5 6.5 0 0 0 13 13 A6.5 6.5 0 0 1 13 0 Z" fill="#0eb8a0"/><circle cx="13" cy="6.5" r="2.5" fill="#fff"/><circle cx="13" cy="19.5" r="2.5" fill="#0eb8a0"/><circle cx="13" cy="13" r="12.5" fill="none" stroke="#0eb8a0" stroke-width="1"/></svg></div>
+<div id="cursor" aria-hidden="true"></div>
 
 <!-- Mobile nav overlay -->
 <div class="mob-nav" id="mobnav" role="dialog" aria-label="Mobile navigation menu">
@@ -1014,25 +1005,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ── cursor (RAF-based, starts hidden until first mouse move) ──
 if(window.matchMedia('(pointer:fine)').matches){
-const cur=document.getElementById('cur'),curR=document.getElementById('curR'),curH=document.getElementById('curH');
+const cursor=document.getElementById('cursor');
 let mx=window.innerWidth/2, my=window.innerHeight/2;
-let rx=mx, ry=my;
-cur.style.opacity='0'; curR.style.opacity='0';
+let cx=mx, cy=my;
 document.addEventListener('mousemove',e=>{
   mx=e.clientX; my=e.clientY;
-  cur.style.opacity='1'; curR.style.opacity='1';
-  cur.style.left=mx+'px'; cur.style.top=my+'px';
-  curH.style.left=mx+'px'; curH.style.top=my+'px';
+  cursor.style.opacity='1';
 });
 (function loop(){
-  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
-  curR.style.left=Math.round(rx)+'px'; curR.style.top=Math.round(ry)+'px';
+  cx+=(mx-cx)*0.1; cy+=(my-cy)*0.1;
+  cursor.style.left=Math.round(cx*10)/10+'px'; cursor.style.top=Math.round(cy*10)/10+'px';
   requestAnimationFrame(loop);
 })();
 
 function addHov(sel){document.querySelectorAll(sel).forEach(el=>{
-  el.addEventListener('mouseenter',()=>document.body.classList.add('hov','ptr'));
-  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov','ptr'));
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
 });}
 addHov('a,button,.pcard,.gi,.relcard,.rbtn,.fb,.rc');
 }
