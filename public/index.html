@@ -339,7 +339,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 /* ── AVAILABLE FOR WORK BADGE ── */
 .avail-hero{display:inline-flex;align-items:center;gap:.5rem;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--acc2);font-weight:600;margin-bottom:.8rem}
 .avail-dot{width:7px;height:7px;border-radius:50%;background:var(--acc2);flex-shrink:0;box-shadow:0 0 0 0 var(--acc2-glow);animation:avpulse 2.2s ease-in-out infinite}
-@keyframes avpulse{0%,100%{box-shadow:0 0 0 0 rgba(232,98,26,.45)}60%{box-shadow:0 0 0 6px rgba(232,98,26,0)}}
+@keyframes avpulse{0%,100%{box-shadow:0 0 0 0 rgba(244,132,95,.45)}60%{box-shadow:0 0 0 6px rgba(244,132,95,0)}}
 
 /* ── SPECIALIZATIONS STRIP ── */
 .spec-strip{padding:0 2.5rem 4rem;max-width:1280px;margin:0 auto}
@@ -648,9 +648,9 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem
 }
 
-/* reveal animation */
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
-.reveal.visible{opacity:1;transform:none}
+/* about reveal animation (scoped to avoid overriding site-wide .reveal) */
+#about .reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
+#about .reveal.visible{opacity:1;transform:none}
 </style>
 </head>
 <body>
@@ -1805,6 +1805,7 @@ function showPortfolio(){
   document.getElementById('home').classList.add('hidden');
   document.getElementById('portfolio').classList.add('on');
   document.getElementById('post').classList.remove('on');
+  document.getElementById('about').classList.remove('on');
   document.getElementById('bnav').classList.remove('on');
   document.getElementById('hire').classList.add('on');
   document.getElementById('blbl').textContent='Home';
@@ -1823,6 +1824,7 @@ function showPost(id){
   const p=POSTS[id];if(!p)return;
   document.getElementById('home').classList.add('hidden');
   document.getElementById('portfolio').classList.remove('on');
+  document.getElementById('about').classList.remove('on');
   document.getElementById('post').classList.add('on');
   document.getElementById('bnav').classList.add('on');
   document.getElementById('blbl').textContent='Portfolio';
