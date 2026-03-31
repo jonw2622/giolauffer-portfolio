@@ -1987,12 +1987,15 @@ function showAbout(){
       yrTimer=setTimeout(()=>{yrEl.textContent='';yrEl.classList.remove('yr-out');},160);
     }
     const triggerP=document.querySelector('#about [data-year="1994"] .about-content p');
+    yrEl.textContent='1994';
+    const cachedYrTop=yrEl.getBoundingClientRect().top;
+    yrEl.textContent='';
     let yrTick=false;
     function updateAboutYear(){
       if(yrTick)return; yrTick=true;
       requestAnimationFrame(()=>{
         const pBottom=triggerP.getBoundingClientRect().bottom;
-        const yrTop=yrEl.getBoundingClientRect().top;
+        const yrTop=cachedYrTop;
         if(pBottom<=yrTop){
           const blocks=[...document.querySelectorAll('#about [data-year]')];
           const vCenter=window.innerHeight/2;
