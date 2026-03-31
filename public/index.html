@@ -587,8 +587,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   #about .about-hero{padding:7rem 1.4rem 3rem;flex-direction:column;align-items:flex-start;gap:2rem}
   #about .about-hero-inner{max-width:100%}
   #about .about-hero-inner h1{font-size:clamp(2.4rem,10vw,3.5rem)}
-  .about-photo-wall{width:100%;height:200px}
-  .apw-strip img{height:90px}
+  .about-hero-photo{width:100%;height:220px}
+  .aps-track img{height:130px}
   #about .about-body{padding:0 1.4rem 4rem}
   .about-block{grid-template-columns:1fr;gap:.75rem;padding-left:1rem}
   .about-label{min-width:0;font-size:.58rem;padding-top:0;border-top:none;border-bottom:1px solid var(--brd);padding-bottom:.6rem}
@@ -609,19 +609,19 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   display:flex;align-items:center;justify-content:space-between;gap:4rem
 }
 #about .about-hero-inner{max-width:500px;flex-shrink:0}
-.about-photo-wall{
-  width:320px;flex-shrink:0;height:420px;overflow:hidden;position:relative;
-  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 12%,#000 88%,transparent 100%);
-  mask-image:linear-gradient(to bottom,transparent 0%,#000 12%,#000 88%,transparent 100%);
-  display:flex;gap:8px
+.about-hero-photo{width:240px;height:310px;flex-shrink:0;position:relative}
+.about-hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;filter:grayscale(12%)}
+.about-hero-photo::after{content:'';position:absolute;inset:0;border:1px solid var(--acc);transform:translate(10px,10px);pointer-events:none;z-index:-1}
+.about-photo-strip{
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(to right,transparent 0%,#000 7%,#000 93%,transparent 100%);
+  mask-image:linear-gradient(to right,transparent 0%,#000 7%,#000 93%,transparent 100%);
+  border-top:1px solid var(--brd);border-bottom:1px solid var(--brd)
 }
-.about-photo-wall:hover .apw-strip{animation-play-state:paused}
-.apw-col{flex:1;overflow:hidden}
-.apw-strip{display:flex;flex-direction:column;gap:8px}
-.apw-strip1{animation:apwScroll 32s linear infinite}
-.apw-strip2{animation:apwScroll 24s linear infinite reverse;margin-top:-80px}
-.apw-strip img{width:100%;height:112px;object-fit:cover;display:block;border-radius:3px}
-@keyframes apwScroll{0%{transform:translateY(0)}100%{transform:translateY(-50%)}}
+.about-photo-strip:hover .aps-track{animation-play-state:paused}
+.aps-track{display:flex;gap:6px;width:max-content;animation:apsScroll 48s linear infinite}
+.aps-track img{height:190px;width:auto;object-fit:cover;display:block;flex-shrink:0}
+@keyframes apsScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .about-hero-stats{display:flex;gap:2rem;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--brd);flex-wrap:wrap}
 .about-stat-n{font-family:var(--fd);font-size:2rem;letter-spacing:.04em;color:var(--acc);line-height:1}
 .about-stat-l{font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin-top:.3rem}
@@ -1107,61 +1107,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
         <div><div class="about-stat-n">4</div><div class="about-stat-l">Languages</div></div>
       </div>
     </div>
-    <div class="about-hero-logo" aria-hidden="true">
-      <img src="/wp-content/uploads/2025/07/logo_transparent_white.png" alt="">
-    </div>
-
-    <div class="about-photo-wall" aria-hidden="true">
-      <div class="apw-col">
-        <div class="apw-strip apw-strip1">
-          <img src="/wp-content/uploads/2026/04/gio-baby.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-paris1.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-portrait1.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-curacao.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-work.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-1999.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-beach.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-mom.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-mountain.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-berlin.jpg" alt="" loading="lazy">
-          <!-- duplicate for seamless loop -->
-          <img src="/wp-content/uploads/2026/04/gio-baby.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-paris1.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-portrait1.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-curacao.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-work.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-1999.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-beach.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-mom.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-mountain.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-berlin.jpg" alt="" loading="lazy">
-        </div>
-      </div>
-      <div class="apw-col">
-        <div class="apw-strip apw-strip2">
-          <img src="/wp-content/uploads/2026/04/gio-childhood.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-paris2.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-portrait2.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-ferrari.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-leather.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-iceskating.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-airport.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-car.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-paris3.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-paris4.jpg" alt="" loading="lazy">
-          <!-- duplicate for seamless loop -->
-          <img src="/wp-content/uploads/2026/04/gio-childhood.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-paris2.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-portrait2.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-ferrari.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-leather.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-iceskating.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-airport.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-car.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-paris3.jpg" alt="" loading="lazy">
-          <img src="/wp-content/uploads/2026/04/gio-paris4.jpg" alt="" loading="lazy">
-        </div>
-      </div>
+    <div class="about-hero-photo">
+      <img src="/wp-content/uploads/2025/10/Artstation-profile-pic.webp" alt="Giovanni Lauffer" loading="eager" decoding="async">
     </div>
   </div>
 
@@ -1185,6 +1132,52 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 
     <div class="about-quote-break reveal">
       "Movies get two hours.<br><span>Games last much longer.</span>"
+    </div>
+
+    <div class="about-photo-strip" aria-hidden="true">
+      <div class="aps-track">
+        <img src="/wp-content/uploads/2026/04/gio-baby.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-childhood.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-1999.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-iceskating.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-curacao.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-paris1.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-paris2.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-paris3.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-paris4.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-berlin.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-portrait1.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-portrait2.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-ferrari.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-leather.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-beach.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-airport.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-mountain.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-work.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-car.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-mom.jpg" alt="" loading="lazy">
+        <!-- duplicate for seamless loop -->
+        <img src="/wp-content/uploads/2026/04/gio-baby.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-childhood.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-1999.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-iceskating.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-curacao.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-paris1.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-paris2.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-paris3.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-paris4.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-berlin.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-portrait1.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-portrait2.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-ferrari.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-leather.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-beach.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-airport.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-mountain.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-work.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-car.jpg" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-mom.jpg" alt="" loading="lazy">
+      </div>
     </div>
 
     <div class="about-block reveal">
