@@ -1971,11 +1971,20 @@ function showAbout(){
   // background year counter
   const yrEl=document.getElementById('about-year');
   if(yrEl){
+    let yrTimer=null;
     function setAboutYear(y){
+      clearTimeout(yrTimer);
       if(yrEl.dataset.y===y)return;
       yrEl.dataset.y=y;
       yrEl.classList.add('yr-out');
-      setTimeout(()=>{yrEl.textContent=y;yrEl.classList.remove('yr-out');},160);
+      yrTimer=setTimeout(()=>{yrEl.textContent=y;yrEl.classList.remove('yr-out');},160);
+    }
+    function clearAboutYear(){
+      if(!yrEl.dataset.y)return;
+      clearTimeout(yrTimer);
+      yrEl.dataset.y='';
+      yrEl.classList.add('yr-out');
+      yrTimer=setTimeout(()=>{yrEl.textContent='';yrEl.classList.remove('yr-out');},160);
     }
     const triggerP=document.querySelector('#about [data-year="1994"] .about-content p');
     let yrTick=false;
@@ -1995,8 +2004,9 @@ function showAbout(){
             if(bCenter>0&&bCenter<window.innerHeight&&dist<closestDist){closestDist=dist;closest=b;}
           });
           if(closest)setAboutYear(closest.dataset.year);
-        } else if(yrEl.dataset.y){
-          yrEl.classList.add('yr-out');setTimeout(()=>{yrEl.textContent='';yrEl.dataset.y='';yrEl.classList.remove('yr-out');},160);
+          else clearAboutYear();
+        } else {
+          clearAboutYear();
         }
         yrTick=false;
       });
