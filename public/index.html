@@ -2041,24 +2041,19 @@ function showAbout(){
   },50);
   // background year counter
   const yrEl=document.getElementById('about-year');
-  if(yrEl){
-    let yrTimer=null;
-    function setAboutYear(y){
-      clearTimeout(yrTimer);
-      if(yrEl.dataset.y===y)return;
-      yrEl.dataset.y=y;
-      yrEl.classList.add('yr-out');
-      yrTimer=setTimeout(()=>{yrEl.textContent=y;yrEl.classList.remove('yr-out');},160);
-    }
-    function clearAboutYear(){
-      clearTimeout(yrTimer);
-      if(!yrEl.dataset.y)return;
-      yrEl.dataset.y='';
-      yrEl.classList.add('yr-out');
-      yrTimer=setTimeout(()=>{yrEl.textContent='';yrEl.classList.remove('yr-out');},160);
-    }
+  if(yrEl&&!window._yrListenerAdded){
+    window._yrListenerAdded=true;
     const yrBlocks=[...document.querySelectorAll('#about [data-year]')];
-    function pickYear(){
+    const heroEl=document.querySelector('#about .about-hero');
+    function setYr(y){
+      if(yrEl.textContent===y)return;
+      yrEl.style.opacity='0';
+      setTimeout(()=>{yrEl.textContent=y;yrEl.style.opacity='';},180);
+    }
+    function onYrScroll(){
+      if(!document.getElementById('about').classList.contains('on'))return;
+      const heroH=heroEl.offsetHeight;
+      if(window.scrollY<heroH*0.8){setYr('');return;}
       const vCenter=window.innerHeight/2;
       let closest=null,closestDist=Infinity;
       yrBlocks.forEach(b=>{
@@ -2067,25 +2062,10 @@ function showAbout(){
         const dist=Math.abs(bCenter-vCenter);
         if(dist<closestDist){closestDist=dist;closest=b;}
       });
-      if(closest)setAboutYear(closest.dataset.year);
+      if(closest)setYr(closest.dataset.year);
     }
-    let yrTick=false;
-    function onYrScroll(){
-      if(yrTick)return; yrTick=true;
-      requestAnimationFrame(()=>{pickYear();yrTick=false;});
-    }
-    // show year only once hero has scrolled out of view
-    const heroEl=document.querySelector('#about .about-hero');
-    const heroIO=new IntersectionObserver(([entry])=>{
-      if(!entry.isIntersecting){
-        pickYear();
-        window.addEventListener('scroll',onYrScroll,{passive:true});
-      } else {
-        clearAboutYear();
-        window.removeEventListener('scroll',onYrScroll);
-      }
-    },{threshold:0,rootMargin:'0px 0px -60% 0px'});
-    heroIO.observe(heroEl);
+    window.addEventListener('scroll',onYrScroll,{passive:true});
+    setTimeout(onYrScroll,100);
   }
 }
 function showPortfolio(){
