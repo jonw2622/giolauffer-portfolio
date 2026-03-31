@@ -658,7 +658,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   font-size:1.05rem;line-height:1.7;color:#a09c95;font-weight:300;max-width:520px
 }
 #about .about-body{
-  max-width:840px;margin:0 auto;padding:4rem 2.5rem 6rem;
+  max-width:1080px;margin:0 auto;padding:4rem 2.5rem 6rem;
   display:flex;flex-direction:column;gap:0
 }
 .about-block{
@@ -669,18 +669,36 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   position:relative;
   transition:border-left-color .5s ease .15s,background .2s
 }
-.about-block-img{grid-template-columns:160px 1fr 200px}
-.ablock-img{display:flex;flex-direction:column;gap:8px;padding-top:.18rem}
-.ablock-img img{
-  width:100%;border-radius:3px;object-fit:cover;height:130px;display:block;
-  filter:grayscale(20%);transition:filter .4s,transform .4s;cursor:zoom-in
+.about-block-img{grid-template-columns:160px 1fr 260px;align-items:start}
+.about-content{max-width:500px}
+.ablock-img{display:flex;flex-direction:column;gap:12px;margin:-2rem 0}
+.ablock-img-wrap{
+  position:relative;border-radius:20px;overflow:hidden;
+  box-shadow:0 16px 48px rgba(0,0,0,.55),0 4px 14px rgba(0,0,0,.4);
+  border:1px solid rgba(255,255,255,.08)
 }
-.ablock-img img:hover{filter:grayscale(0%);transform:scale(1.03)}
+.ablock-img-wrap::after{
+  content:'';position:absolute;inset:0;pointer-events:none;border-radius:20px;
+  background:
+    radial-gradient(circle at 0% 0%,rgba(13,13,14,.75) 0%,transparent 40%),
+    radial-gradient(circle at 100% 0%,rgba(13,13,14,.75) 0%,transparent 40%),
+    radial-gradient(circle at 0% 100%,rgba(13,13,14,.75) 0%,transparent 40%),
+    radial-gradient(circle at 100% 100%,rgba(13,13,14,.75) 0%,transparent 40%);
+  transition:opacity .45s ease
+}
+.ablock-img-wrap:hover::after{opacity:.2}
+.ablock-img-wrap img{
+  display:block;width:100%;height:180px;object-fit:cover;
+  filter:grayscale(18%);transition:transform .5s ease,filter .45s ease
+}
+.ablock-img-wrap:hover img{transform:scale(1.06);filter:grayscale(0%)}
 .ablock-logo{
-  background:rgba(255,255,255,.04);border:1px solid var(--brd);
-  border-radius:3px;padding:1.2rem;display:flex;align-items:center;justify-content:center
+  border-radius:20px;padding:2rem;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 8px 30px rgba(0,0,0,.35)
 }
-.ablock-logo img{width:100%;height:auto;object-fit:contain;filter:none;transform:none;cursor:default}
+.ablock-logo img{width:100%;height:auto;object-fit:contain}
+@media(max-width:1060px){.about-block-img{grid-template-columns:160px 1fr}.ablock-img{display:none}}
 .about-block.visible{border-left-color:var(--acc)}
 .about-block:hover{background:rgba(14,184,160,.025)}
 .about-label{
@@ -1185,8 +1203,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
         <p>I was born in Groningen, but left at nine months old for Curaçao, where I grew up with my mother and stepfather Harry Lauffer, brother of the Dutch-Antillean poet Pierre Lauffer. I was always drawing, always looking at things. Give me a pencil and a blank page and I could disappear for hours.</p>
       </div>
       <div class="ablock-img">
-        <img src="/wp-content/uploads/2026/05/Curacao.jpg" alt="Willemstad, Curaçao" loading="lazy">
-        <img src="/wp-content/uploads/2026/05/Martini Ziekenhuis.avif" alt="Martini Ziekenhuis, Groningen" loading="lazy" style="object-position:center center">
+        <div class="ablock-img-wrap"><img src="/wp-content/uploads/2026/05/Curacao.jpg" alt="Willemstad, Curaçao" loading="lazy"></div>
+        <div class="ablock-img-wrap"><img src="/wp-content/uploads/2026/05/Martini Ziekenhuis.avif" alt="Martini Ziekenhuis, Groningen" loading="lazy"></div>
       </div>
     </div>
 
@@ -1198,7 +1216,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
         <p>I opened it anyway. It was a Nintendo 64. 3D graphics, a generation ahead of anything I had seen. Super Mario 64, Mario Kart 64, Donkey Kong 64. I forgot everything I was angry about. Then someone moving to the Netherlands gave away their kid's game collection before leaving. I got Conker's Bad Fur Day, Perfect Dark, and GoldenEye 64 in one afternoon. That's when it clicked. <strong>People make these for a living.</strong> I was eight, and I already knew what I wanted to do.</p>
       </div>
       <div class="ablock-img">
-        <img src="/wp-content/uploads/2026/05/goldeneye.jpg" alt="GoldenEye 007 on N64" loading="lazy" style="height:180px">
+        <div class="ablock-img-wrap"><img src="/wp-content/uploads/2026/05/goldeneye.jpg" alt="GoldenEye 007 on N64" loading="lazy" style="height:220px"></div>
       </div>
     </div>
 
@@ -1236,8 +1254,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
         <p>I applied four times to NHTV Breda (now Breda University of Applied Sciences). Saxion gave me my shot, and I took it seriously. That's where I found 3D. Not because it was the obvious path, but because it matched what I was good at and actually got me interested. By the time I finished, I'd figured something out I hadn't expected: I enjoy <em>making</em> games more than playing them. And I love playing games.</p>
       </div>
       <div class="ablock-img">
-        <img src="/wp-content/uploads/2026/05/International School of Curacao.jpg" alt="International School of Curaçao" loading="lazy">
-        <img src="/wp-content/uploads/2026/05/Saxion.jpg" alt="Saxion University" loading="lazy">
+        <div class="ablock-img-wrap"><img src="/wp-content/uploads/2026/05/International School of Curacao.jpg" alt="International School of Curaçao" loading="lazy"></div>
+        <div class="ablock-img-wrap"><img src="/wp-content/uploads/2026/05/Saxion.jpg" alt="Saxion University" loading="lazy"></div>
       </div>
     </div>
 
