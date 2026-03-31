@@ -671,6 +671,14 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 }
 .about-block-img{grid-template-columns:160px 1fr 260px;align-items:start}
 .about-content{max-width:500px}
+#about-year{
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:var(--fe);font-size:clamp(140px,22vw,340px);font-weight:800;
+  color:var(--txt);opacity:.04;pointer-events:none;z-index:0;
+  letter-spacing:-.02em;line-height:1;white-space:nowrap;
+  user-select:none;transition:opacity .18s ease
+}
+#about-year.yr-out{opacity:0!important}
 .ablock-img{display:flex;flex-direction:column;gap:12px;margin:-2rem 0}
 .ablock-img-wrap{
   position:relative;border-radius:20px;overflow:hidden;
@@ -1132,6 +1140,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
      ABOUT / MY STORY
 ══════════════════════════════════════ -->
 <div id="about">
+  <div id="about-year">1994</div>
   <div class="about-hero">
     <div class="about-hero-top">
       <div class="about-hero-inner">
@@ -1197,7 +1206,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 
   <div class="about-body">
 
-    <div class="about-block about-block-img reveal">
+    <div class="about-block about-block-img reveal" data-year="1994">
       <div class="about-label">Origin</div>
       <div class="about-content">
         <p>I was born in Groningen, but left at nine months old for Curaçao, where I grew up with my mother and stepfather Harry Lauffer, brother of the Dutch-Antillean poet Pierre Lauffer. I was always drawing, always looking at things. Give me a pencil and a blank page and I could disappear for hours.</p>
@@ -1208,7 +1217,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
       </div>
     </div>
 
-    <div class="about-block about-block-img reveal">
+    <div class="about-block about-block-img reveal" data-year="2002">
       <div class="about-label">The Spark</div>
       <div class="about-content">
         <p>It started at a party I had no business being at. I was a bored kid surrounded by adults until someone sat me down in front of his NES. The second I touched that controller, that was it. Mario. Star Fox. Mario Kart. I would not stop begging my Mom for one.</p>
@@ -1224,7 +1233,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
       "Movies get two hours.<br><span>Games last much longer.</span>"
     </div>
 
-    <div class="about-block reveal">
+    <div class="about-block reveal" data-year="2002">
       <div class="about-label">Games That Shaped Me</div>
       <div class="about-content">
         <div class="about-games">
@@ -1247,7 +1256,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
       </div>
     </div>
 
-    <div class="about-block about-block-img reveal">
+    <div class="about-block about-block-img reveal" data-year="2007">
       <div class="about-label">Education</div>
       <div class="about-content">
         <p>I always attended art class. At the International School of Curaçao I paid close attention in both Art and Computer classes and started building a real portfolio. To push further, I went to Adriana's Academy of Art alongside school, studying realism and sharpening the fundamentals everything else is built on.</p>
@@ -1259,7 +1268,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
       </div>
     </div>
 
-    <div class="about-block about-block-img reveal">
+    <div class="about-block about-block-img reveal" data-year="2020">
       <div class="about-label">Career</div>
       <div class="about-content">
         <p>After Saxion I joined Lukkien, doing photorealistic CGI renders for Rituals cosmetics: modelling, UV mapping, shader networks, texturing, and rendering across their product range. I'm grateful for what they taught me. But CGI was never where I wanted to end up. Games always was.</p>
@@ -1272,7 +1281,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
       </div>
     </div>
 
-    <div class="about-block reveal">
+    <div class="about-block reveal" data-year="2025">
       <div class="about-label">Right Now</div>
       <div class="about-content">
         <p>Still contributing to TimeSplitters: Rewind, still pushing the quality of every asset that goes through my hands. And actively looking for a full-time studio role: environment art, props, hard surface, whatever the work demands.</p>
@@ -1280,7 +1289,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
       </div>
     </div>
 
-    <div class="about-block reveal">
+    <div class="about-block reveal" data-year="2026">
       <div class="about-label">What I'm After</div>
       <div class="about-content">
         <p>The gaming industry is having a rough stretch. The layoffs are real and the uncertainty is real. I'm not blind to it. But I believe in this medium, in the people making it, and in what I can bring to the table.</p>
@@ -1959,6 +1968,21 @@ function showAbout(){
       io.observe(el);
     });
   },50);
+  // background year counter
+  const yrEl=document.getElementById('about-year');
+  if(yrEl){
+    function setAboutYear(y){
+      if(yrEl.dataset.y===y)return;
+      yrEl.dataset.y=y;
+      yrEl.classList.add('yr-out');
+      setTimeout(()=>{yrEl.textContent=y;yrEl.classList.remove('yr-out');},160);
+    }
+    setAboutYear('1994');
+    const yrIO=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{if(e.isIntersecting&&e.target.dataset.year)setAboutYear(e.target.dataset.year);});
+    },{threshold:0,rootMargin:'-40% 0px -40% 0px'});
+    document.querySelectorAll('#about [data-year]').forEach(el=>yrIO.observe(el));
+  }
 }
 function showPortfolio(){
   document.getElementById('home').classList.add('hidden');
