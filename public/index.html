@@ -1140,7 +1140,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
      ABOUT / MY STORY
 ══════════════════════════════════════ -->
 <div id="about">
-  <div id="about-year">1994</div>
+  <div id="about-year"></div>
   <div class="about-hero">
     <div class="about-hero-top">
       <div class="about-hero-inner">
@@ -1166,7 +1166,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
         <img src="/wp-content/uploads/2026/04/gio-paris4.jpg" alt="" loading="lazy">
         <img src="/wp-content/uploads/2026/04/gio-berlin.jpg" alt="" loading="lazy" style="object-position:center 20%">
         <img src="/wp-content/uploads/2026/04/gio-portrait1.jpg" alt="" loading="lazy">
-        <img src="/wp-content/uploads/2026/04/gio-portrait2.jpg" alt="" loading="lazy" style="object-position:center 15%">
+        <img src="/wp-content/uploads/2026/04/gio-redblue.jpg" alt="" loading="lazy" style="object-position:center 25%">
         <img src="/wp-content/uploads/2026/04/gio-ferrari.jpg" alt="" loading="lazy">
         <img src="/wp-content/uploads/2026/04/gio-leather.jpg" alt="" loading="lazy" style="object-position:center 15%">
         <img src="/wp-content/uploads/2026/04/gio-beach.jpg" alt="" loading="lazy">
@@ -1187,7 +1187,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
         <img src="/wp-content/uploads/2026/04/gio-paris4.jpg" alt="" loading="lazy">
         <img src="/wp-content/uploads/2026/04/gio-berlin.jpg" alt="" loading="lazy" style="object-position:center 20%">
         <img src="/wp-content/uploads/2026/04/gio-portrait1.jpg" alt="" loading="lazy">
-        <img src="/wp-content/uploads/2026/04/gio-portrait2.jpg" alt="" loading="lazy" style="object-position:center 15%">
+        <img src="/wp-content/uploads/2026/04/gio-redblue.jpg" alt="" loading="lazy" style="object-position:center 25%">
         <img src="/wp-content/uploads/2026/04/gio-ferrari.jpg" alt="" loading="lazy">
         <img src="/wp-content/uploads/2026/04/gio-leather.jpg" alt="" loading="lazy" style="object-position:center 15%">
         <img src="/wp-content/uploads/2026/04/gio-beach.jpg" alt="" loading="lazy">
@@ -1977,11 +1977,25 @@ function showAbout(){
       yrEl.classList.add('yr-out');
       setTimeout(()=>{yrEl.textContent=y;yrEl.classList.remove('yr-out');},160);
     }
-    setAboutYear('1994');
-    const yrIO=new IntersectionObserver(entries=>{
-      entries.forEach(e=>{if(e.isIntersecting&&e.target.dataset.year)setAboutYear(e.target.dataset.year);});
-    },{threshold:0,rootMargin:'-40% 0px -40% 0px'});
-    document.querySelectorAll('#about [data-year]').forEach(el=>yrIO.observe(el));
+    let yrTick=false;
+    function updateAboutYear(){
+      if(yrTick)return; yrTick=true;
+      requestAnimationFrame(()=>{
+        const blocks=[...document.querySelectorAll('#about [data-year]')];
+        const vCenter=window.innerHeight/2;
+        let closest=null,closestDist=Infinity;
+        blocks.forEach(b=>{
+          const r=b.getBoundingClientRect();
+          const bCenter=r.top+r.height/2;
+          const dist=Math.abs(bCenter-vCenter);
+          if(r.bottom>0&&r.top<window.innerHeight&&dist<closestDist){closestDist=dist;closest=b;}
+        });
+        if(closest){setAboutYear(closest.dataset.year);}
+        else if(yrEl.dataset.y){yrEl.classList.add('yr-out');setTimeout(()=>{yrEl.textContent='';yrEl.dataset.y='';yrEl.classList.remove('yr-out');},160);}
+        yrTick=false;
+      });
+    }
+    window.addEventListener('scroll',updateAboutYear,{passive:true});
   }
 }
 function showPortfolio(){
