@@ -2005,7 +2005,7 @@ function showAbout(){
             const r=b.getBoundingClientRect();
             const bCenter=r.top+r.height/2;
             const dist=Math.abs(bCenter-vCenter);
-            if(bCenter>0&&bCenter<window.innerHeight&&dist<closestDist){closestDist=dist;closest=b;}
+            if(dist<closestDist){closestDist=dist;closest=b;}
           });
           if(closest)setAboutYear(closest.dataset.year);
           else clearAboutYear();
