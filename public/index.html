@@ -593,6 +593,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   .aps-track img{height:130px;width:160px}
   #about .about-body{padding:0 1.4rem 4rem}
   .about-block{grid-template-columns:1fr;gap:.75rem;padding-left:1rem}
+  .about-block-img{grid-template-columns:1fr}
+  .ablock-img{display:none}
   .about-label{min-width:0;font-size:.58rem;padding-top:0;border-top:none;border-bottom:1px solid var(--brd);padding-bottom:.6rem}
   .about-games{grid-template-columns:1fr 1fr}
   .about-quote-break{padding:3rem 1.4rem;font-size:clamp(1.5rem,6vw,2rem)}
@@ -667,6 +669,18 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   position:relative;
   transition:border-left-color .5s ease .15s,background .2s
 }
+.about-block-img{grid-template-columns:160px 1fr 200px}
+.ablock-img{display:flex;flex-direction:column;gap:8px;padding-top:.18rem}
+.ablock-img img{
+  width:100%;border-radius:3px;object-fit:cover;height:130px;display:block;
+  filter:grayscale(20%);transition:filter .4s,transform .4s;cursor:zoom-in
+}
+.ablock-img img:hover{filter:grayscale(0%);transform:scale(1.03)}
+.ablock-logo{
+  background:rgba(255,255,255,.04);border:1px solid var(--brd);
+  border-radius:3px;padding:1.2rem;display:flex;align-items:center;justify-content:center
+}
+.ablock-logo img{width:100%;height:auto;object-fit:contain;filter:none;transform:none;cursor:default}
 .about-block.visible{border-left-color:var(--acc)}
 .about-block:hover{background:rgba(14,184,160,.025)}
 .about-label{
@@ -1165,19 +1179,26 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 
   <div class="about-body">
 
-    <div class="about-block reveal">
+    <div class="about-block about-block-img reveal">
       <div class="about-label">Origin</div>
       <div class="about-content">
         <p>I was born in Groningen, but left at nine months old for Curaçao, where I grew up with my mother and stepfather Harry Lauffer, brother of the Dutch-Antillean poet Pierre Lauffer. I was always drawing, always looking at things. Give me a pencil and a blank page and I could disappear for hours.</p>
       </div>
+      <div class="ablock-img">
+        <img src="/wp-content/uploads/2026/05/Curacao.jpg" alt="Willemstad, Curaçao" loading="lazy">
+        <img src="/wp-content/uploads/2026/05/Martini Ziekenhuis.avif" alt="Martini Ziekenhuis, Groningen" loading="lazy" style="object-position:center center">
+      </div>
     </div>
 
-    <div class="about-block reveal">
+    <div class="about-block about-block-img reveal">
       <div class="about-label">The Spark</div>
       <div class="about-content">
         <p>It started at a party I had no business being at. I was a bored kid surrounded by adults until someone sat me down in front of his NES. The second I touched that controller, that was it. Mario. Star Fox. Mario Kart. I would not stop begging my Mom for one.</p>
         <p>The day we went to buy it, I found the NES in the shop, stood in front of it, and told her: <em>this one, not the others.</em> The shop employee had other ideas and convinced her to go with the black box that looked nothing like what I wanted. I was furious the whole ride home.</p>
         <p>I opened it anyway. It was a Nintendo 64. 3D graphics, a generation ahead of anything I had seen. Super Mario 64, Mario Kart 64, Donkey Kong 64. I forgot everything I was angry about. Then someone moving to the Netherlands gave away their kid's game collection before leaving. I got Conker's Bad Fur Day, Perfect Dark, and GoldenEye 64 in one afternoon. That's when it clicked. <strong>People make these for a living.</strong> I was eight, and I already knew what I wanted to do.</p>
+      </div>
+      <div class="ablock-img">
+        <img src="/wp-content/uploads/2026/05/goldeneye.jpg" alt="GoldenEye 007 on N64" loading="lazy" style="height:180px">
       </div>
     </div>
 
@@ -1208,19 +1229,28 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
       </div>
     </div>
 
-    <div class="about-block reveal">
+    <div class="about-block about-block-img reveal">
       <div class="about-label">Education</div>
       <div class="about-content">
         <p>I always attended art class. At the International School of Curaçao I paid close attention in both Art and Computer classes and started building a real portfolio. To push further, I went to Adriana's Academy of Art alongside school, studying realism and sharpening the fundamentals everything else is built on.</p>
         <p>I applied four times to NHTV Breda (now Breda University of Applied Sciences). Saxion gave me my shot, and I took it seriously. That's where I found 3D. Not because it was the obvious path, but because it matched what I was good at and actually got me interested. By the time I finished, I'd figured something out I hadn't expected: I enjoy <em>making</em> games more than playing them. And I love playing games.</p>
       </div>
+      <div class="ablock-img">
+        <img src="/wp-content/uploads/2026/05/International School of Curacao.jpg" alt="International School of Curaçao" loading="lazy">
+        <img src="/wp-content/uploads/2026/05/Saxion.jpg" alt="Saxion University" loading="lazy">
+      </div>
     </div>
 
-    <div class="about-block reveal">
+    <div class="about-block about-block-img reveal">
       <div class="about-label">Career</div>
       <div class="about-content">
         <p>After Saxion I joined Lukkien, doing photorealistic CGI renders for Rituals cosmetics: modelling, UV mapping, shader networks, texturing, and rendering across their product range. I'm grateful for what they taught me. But CGI was never where I wanted to end up. Games always was.</p>
         <p>Since 2020 I've been shipping props, vehicles, and character assets for <strong>TimeSplitters: Rewind</strong> with Cinder Interactive, the largest free-content game ever made. Getting to work under Cameron Williams (ex-Rockstar, Infinity Ward) and Samuel Freeman (Splash Damage) has pushed my craft further than school ever did.</p>
+      </div>
+      <div class="ablock-img">
+        <div class="ablock-logo">
+          <img src="/wp-content/uploads/2026/05/TimeSplitters_Rewind_Logo.png" alt="TimeSplitters Rewind" loading="lazy">
+        </div>
       </div>
     </div>
 
