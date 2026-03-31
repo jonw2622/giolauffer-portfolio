@@ -619,14 +619,14 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 .about-hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;filter:grayscale(12%)}
 .about-hero-photo::after{content:'';position:absolute;inset:0;border:1px solid var(--acc);transform:translate(10px,10px);pointer-events:none;z-index:-1}
 .about-photo-strip{
-  width:200px;flex-shrink:0;overflow:hidden;align-self:stretch;
-  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 10%,#000 90%,transparent 100%);
-  mask-image:linear-gradient(to bottom,transparent 0%,#000 10%,#000 90%,transparent 100%)
+  flex:1;overflow:hidden;align-self:stretch;min-width:0;
+  -webkit-mask-image:linear-gradient(to right,transparent 0%,#000 8%,#000 92%,transparent 100%);
+  mask-image:linear-gradient(to right,transparent 0%,#000 8%,#000 92%,transparent 100%)
 }
 .about-photo-strip:hover .aps-track{animation-play-state:paused}
-.aps-track{display:flex;flex-direction:column;gap:6px;animation:apsScroll 72s linear infinite}
-.aps-track img{height:160px;width:200px;object-fit:cover;display:block;flex-shrink:0}
-@keyframes apsScroll{0%{transform:translateY(0)}100%{transform:translateY(-50%)}}
+.aps-track{display:flex;flex-direction:row;gap:6px;width:max-content;animation:apsScroll 72s linear infinite;height:100%;align-items:center}
+.aps-track img{height:160px;width:160px;object-fit:cover;display:block;flex-shrink:0}
+@keyframes apsScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .about-hero-stats{display:flex;gap:2rem;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--brd);flex-wrap:wrap}
 .about-stat-n{font-family:var(--fd);font-size:2rem;letter-spacing:.04em;color:var(--acc);line-height:1}
 .about-stat-l{font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin-top:.3rem}
