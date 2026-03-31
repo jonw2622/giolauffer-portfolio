@@ -584,7 +584,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   .slide-info{display:none}
 
   /* about page: tighter spacing on mobile */
-  #about .about-hero{padding:7rem 1.4rem 3rem;flex-direction:column;align-items:flex-start;gap:2rem}
+  #about .about-hero{flex-direction:column}
+  .about-hero-top{padding:7rem 1.4rem 2rem;flex-direction:column;align-items:flex-start;gap:2rem}
   #about .about-hero-inner{max-width:100%}
   #about .about-hero-inner h1{font-size:clamp(2.4rem,10vw,3.5rem)}
   .about-hero-photo{width:100%;height:220px}
@@ -603,10 +604,14 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 #about.on{display:block}
 
 #about .about-hero{
-  position:relative;padding:8rem 4rem 5rem;
+  position:relative;
   border-bottom:1px solid var(--brd);
   background:radial-gradient(ellipse 60% 60% at 50% 0%,var(--acc-glow),transparent 70%);
-  display:flex;align-items:center;justify-content:space-between;gap:4rem
+  display:flex;flex-direction:column;gap:0
+}
+.about-hero-top{
+  display:flex;align-items:center;justify-content:space-between;gap:4rem;
+  padding:8rem 4rem 3rem
 }
 #about .about-hero-inner{max-width:500px;flex-shrink:0}
 .about-hero-photo{width:240px;height:310px;flex-shrink:0;position:relative}
@@ -616,7 +621,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   overflow:hidden;
   -webkit-mask-image:linear-gradient(to right,transparent 0%,#000 7%,#000 93%,transparent 100%);
   mask-image:linear-gradient(to right,transparent 0%,#000 7%,#000 93%,transparent 100%);
-  border-top:1px solid var(--brd);border-bottom:1px solid var(--brd)
+  border-top:1px solid var(--brd)
 }
 .about-photo-strip:hover .aps-track{animation-play-state:paused}
 .aps-track{display:flex;gap:6px;width:max-content;animation:apsScroll 72s linear infinite}
@@ -1096,41 +1101,20 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 ══════════════════════════════════════ -->
 <div id="about">
   <div class="about-hero">
-    <div class="about-hero-inner">
-      <div class="wsec">My Story</div>
-      <h1 class="about-title">Hooked at Eight.<br>Still Going.</h1>
-      <p class="about-sub">A 3D artist who grew up on games and never stopped wanting to make them.</p>
-      <div class="about-hero-stats">
-        <div><div class="about-stat-n">5+</div><div class="about-stat-l">Years Exp</div></div>
-        <div><div class="about-stat-n">2</div><div class="about-stat-l">Studios</div></div>
-        <div><div class="about-stat-n">4</div><div class="about-stat-l">Languages</div></div>
+    <div class="about-hero-top">
+      <div class="about-hero-inner">
+        <div class="wsec">My Story</div>
+        <h1 class="about-title">Hooked at Eight.<br>Still Going.</h1>
+        <p class="about-sub">A 3D artist who grew up on games and never stopped wanting to make them.</p>
+        <div class="about-hero-stats">
+          <div><div class="about-stat-n">5+</div><div class="about-stat-l">Years Exp</div></div>
+          <div><div class="about-stat-n">2</div><div class="about-stat-l">Studios</div></div>
+          <div><div class="about-stat-n">4</div><div class="about-stat-l">Languages</div></div>
+        </div>
       </div>
-    </div>
-    <div class="about-hero-photo">
-      <img src="/wp-content/uploads/2025/10/Artstation-profile-pic.webp" alt="Giovanni Lauffer" loading="eager" decoding="async">
-    </div>
-  </div>
-
-  <div class="about-body">
-
-    <div class="about-block reveal">
-      <div class="about-label">Origin</div>
-      <div class="about-content">
-        <p>I was born in Groningen, but left at nine months old for Curaçao, where I grew up with my mother and stepfather Harry Lauffer, brother of the Dutch-Antillean poet Pierre Lauffer. I was always drawing, always looking at things. Give me a pencil and a blank page and I could disappear for hours.</p>
+      <div class="about-hero-photo">
+        <img src="/wp-content/uploads/2025/10/Artstation-profile-pic.webp" alt="Giovanni Lauffer" loading="eager" decoding="async">
       </div>
-    </div>
-
-    <div class="about-block reveal">
-      <div class="about-label">The Spark</div>
-      <div class="about-content">
-        <p>It started at a party I had no business being at. I was a bored kid surrounded by adults until someone sat me down in front of his NES. The second I touched that controller, that was it. Mario. Star Fox. Mario Kart. I would not stop begging my Mom for one.</p>
-        <p>The day we went to buy it, I found the NES in the shop, stood in front of it, and told her: <em>this one, not the others.</em> The shop employee had other ideas and convinced her to go with the black box that looked nothing like what I wanted. I was furious the whole ride home.</p>
-        <p>I opened it anyway. It was a Nintendo 64. 3D graphics, a generation ahead of anything I had seen. Super Mario 64, Mario Kart 64, Donkey Kong 64. I forgot everything I was angry about. Then someone moving to the Netherlands gave away their kid's game collection before leaving. I got Conker's Bad Fur Day, Perfect Dark, and GoldenEye 64 in one afternoon. That's when it clicked. <strong>People make these for a living.</strong> I was eight, and I already knew what I wanted to do.</p>
-      </div>
-    </div>
-
-    <div class="about-quote-break reveal">
-      "Movies get two hours.<br><span>Games last much longer.</span>"
     </div>
 
     <div class="about-photo-strip" aria-hidden="true">
@@ -1177,6 +1161,29 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
         <img src="/wp-content/uploads/2026/04/gio-car.jpg" alt="" loading="lazy">
         <img src="/wp-content/uploads/2026/04/gio-mom.jpg" alt="" loading="lazy">
       </div>
+    </div>
+  </div>
+
+  <div class="about-body">
+
+    <div class="about-block reveal">
+      <div class="about-label">Origin</div>
+      <div class="about-content">
+        <p>I was born in Groningen, but left at nine months old for Curaçao, where I grew up with my mother and stepfather Harry Lauffer, brother of the Dutch-Antillean poet Pierre Lauffer. I was always drawing, always looking at things. Give me a pencil and a blank page and I could disappear for hours.</p>
+      </div>
+    </div>
+
+    <div class="about-block reveal">
+      <div class="about-label">The Spark</div>
+      <div class="about-content">
+        <p>It started at a party I had no business being at. I was a bored kid surrounded by adults until someone sat me down in front of his NES. The second I touched that controller, that was it. Mario. Star Fox. Mario Kart. I would not stop begging my Mom for one.</p>
+        <p>The day we went to buy it, I found the NES in the shop, stood in front of it, and told her: <em>this one, not the others.</em> The shop employee had other ideas and convinced her to go with the black box that looked nothing like what I wanted. I was furious the whole ride home.</p>
+        <p>I opened it anyway. It was a Nintendo 64. 3D graphics, a generation ahead of anything I had seen. Super Mario 64, Mario Kart 64, Donkey Kong 64. I forgot everything I was angry about. Then someone moving to the Netherlands gave away their kid's game collection before leaving. I got Conker's Bad Fur Day, Perfect Dark, and GoldenEye 64 in one afternoon. That's when it clicked. <strong>People make these for a living.</strong> I was eight, and I already knew what I wanted to do.</p>
+      </div>
+    </div>
+
+    <div class="about-quote-break reveal">
+      "Movies get two hours.<br><span>Games last much longer.</span>"
     </div>
 
     <div class="about-block reveal">
