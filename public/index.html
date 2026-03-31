@@ -1988,9 +1988,10 @@ function showAbout(){
           const r=b.getBoundingClientRect();
           const bCenter=r.top+r.height/2;
           const dist=Math.abs(bCenter-vCenter);
-          if(bCenter>0&&bCenter<window.innerHeight&&dist<closestDist){closestDist=dist;closest=b;}
+          const lo=window.innerHeight*0.30,hi=window.innerHeight*0.70;
+          if(bCenter>lo&&bCenter<hi&&dist<closestDist){closestDist=dist;closest=b;}
         });
-        if(closest && closestDist < window.innerHeight*0.28){setAboutYear(closest.dataset.year);}
+        if(closest){setAboutYear(closest.dataset.year);}
         else if(yrEl.dataset.y){yrEl.classList.add('yr-out');setTimeout(()=>{yrEl.textContent='';yrEl.dataset.y='';yrEl.classList.remove('yr-out');},160);}
         yrTick=false;
       });
