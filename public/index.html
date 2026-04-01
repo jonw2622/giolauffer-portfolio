@@ -208,6 +208,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .pfilt{display:flex;gap:.4rem;flex-wrap:wrap}
 .fb{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;padding:.45rem 1.1rem;border:1px solid var(--brd);background:transparent;color:var(--mut);cursor:none;transition:all .2s;font-family:var(--fb);font-weight:500;border-radius:9999px}
 .fb:hover,.fb.on{border-color:var(--acc);color:var(--acc)}
+.fb-beyond.on,.fb-beyond:hover{border-color:var(--acc2);color:var(--acc2)}
 
 /* Portfolio grid */
 .pgrid{padding:.5rem 2.5rem 6rem;display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
@@ -1146,7 +1147,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
     <div><h1>PORTFOLIO</h1><p>Props · Vehicles · Characters · Environments</p></div>
     <div class="pfilt">
       <button class="fb on" onclick="fc(this,'all')">All</button>
-      <button class="fb" onclick="fc(this,'beyond')">Beyond Extent</button>
+      <button class="fb fb-beyond" onclick="fc(this,'beyond')">Beyond Extent</button>
       <button class="fb" onclick="fc(this,'ts')">TimeSplitters</button>
       <button class="fb" onclick="fc(this,'personal')">Personal</button>
       <button class="fb" onclick="fc(this,'cgi')">CGI</button>
