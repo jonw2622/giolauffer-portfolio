@@ -29,6 +29,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+.aps-track img,.gstr-track img,.ablock-img-wrap img{-webkit-user-drag:none;user-drag:none;-webkit-user-select:none;user-select:none}
 :root{
   --bg:#0d0d0e;--surf:#161618;--surf2:#1e1e21;
   --brd:rgba(255,255,255,0.08);--brd2:rgba(255,255,255,0.16);
@@ -584,12 +585,20 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   .slide-info{display:none}
 
   /* about page: tighter spacing on mobile */
-  #about .about-hero{padding:7rem 1rem 3rem}
+  #about .about-hero{flex-direction:column}
+  .about-hero-top{padding:7rem 1.4rem 2rem;flex-direction:column;align-items:flex-start;gap:2rem}
+  .about-photo-strip{display:none}
+  #about .about-hero-inner{max-width:100%}
   #about .about-hero-inner h1{font-size:clamp(2.4rem,10vw,3.5rem)}
-  #about .about-body{padding:0 1rem 4rem}
-  .about-block{grid-template-columns:1fr;gap:.75rem}
+  .about-hero-photo{width:100%;height:220px}
+  .aps-track img{height:220px;width:180px}
+  #about .about-body{padding:0 1.4rem 4rem}
+  .about-block{grid-template-columns:1fr;gap:.75rem;padding-left:1rem}
+  .about-block-img{grid-template-columns:1fr}
+  .ablock-img{display:none}
   .about-label{min-width:0;font-size:.58rem;padding-top:0;border-top:none;border-bottom:1px solid var(--brd);padding-bottom:.6rem}
   .about-games{grid-template-columns:1fr 1fr}
+  .about-quote-break{padding:3rem 1.4rem;font-size:clamp(1.5rem,6vw,2rem)}
 }
 
 /* ════════════════════════════════════
@@ -599,11 +608,54 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 #about.on{display:block}
 
 #about .about-hero{
-  position:relative;padding:9rem 2.5rem 5rem;
+  position:relative;
   border-bottom:1px solid var(--brd);
-  background:radial-gradient(ellipse 60% 60% at 50% 0%,var(--acc-glow),transparent 70%)
+  background:radial-gradient(ellipse 60% 60% at 50% 0%,var(--acc-glow),transparent 70%);
+  display:flex;flex-direction:column;gap:0
 }
-#about .about-hero-inner{max-width:760px}
+.about-hero-top{
+  display:flex;align-items:center;justify-content:space-between;gap:4rem;
+  padding:8rem 4rem 3rem
+}
+#about .about-hero-inner{max-width:500px;flex-shrink:0}
+.about-hero-photo{width:240px;height:310px;flex-shrink:0;position:relative}
+.about-hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;filter:grayscale(12%);border-radius:14px}
+.about-hero-photo::after{content:'';position:absolute;inset:0;border:1px solid var(--acc);transform:translate(10px,10px);pointer-events:none;z-index:-1;border-radius:14px}
+.about-photo-strip{
+  flex:1;overflow:hidden;align-self:stretch;min-width:0;
+  -webkit-mask-image:linear-gradient(to right,transparent 0%,#000 8%,#000 92%,transparent 100%);
+  mask-image:linear-gradient(to right,transparent 0%,#000 8%,#000 92%,transparent 100%)
+}
+.aps-track{display:flex;flex-direction:row;gap:6px;width:max-content;animation:apsScroll 72s linear infinite;height:100%;align-items:center}
+.aps-track img{height:310px;width:220px;object-fit:cover;display:block;flex-shrink:0;border-radius:14px}
+@keyframes apsScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.games-strip{grid-column:1/-1;overflow:hidden;margin-top:1.5rem;
+  -webkit-mask-image:linear-gradient(to right,transparent 0%,#000 6%,#000 94%,transparent 100%);
+  mask-image:linear-gradient(to right,transparent 0%,#000 6%,#000 94%,transparent 100%)}
+.gstr-track{display:flex;flex-direction:row;gap:8px;width:max-content;animation:gstrScroll 60s linear infinite}
+.gstr-track img{height:190px;width:130px;object-fit:cover;display:block;flex-shrink:0;border-radius:6px}
+@keyframes gstrScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.about-hero-stats{display:flex;gap:2rem;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--brd);flex-wrap:wrap}
+.about-stat-n{font-family:var(--fd);font-size:2rem;letter-spacing:.04em;color:var(--acc);line-height:1}
+.about-stat-l{font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin-top:.3rem}
+.about-quote-break{
+  padding:5rem 4rem;text-align:center;
+  border-top:1px solid var(--brd);border-bottom:1px solid var(--brd);
+  font-family:var(--fd);font-size:clamp(2rem,4vw,3.2rem);
+  letter-spacing:.05em;line-height:1.35;color:var(--txt)
+}
+.about-quote-break span{color:var(--acc)}
+.about-hero-logo{flex-shrink:0;display:flex;align-items:center;height:160px;position:relative}
+@media(max-width:900px){.about-hero-logo{display:none}}
+.about-hero-logo img{height:160px;width:auto;display:block}
+.about-hero-logo::after{content:'';position:absolute;top:52px;left:44px;width:72px;height:56px;background:#fff;clip-path:path('M 0 28 Q 36 0 72 28 Q 36 56 0 28 Z');transform:scaleY(0);transform-origin:center top;animation:lidblinkLg 5s linear infinite;pointer-events:none;z-index:1}
+@keyframes lidblinkLg{
+  0%,76%{transform:scaleY(0);animation-timing-function:cubic-bezier(.7,0,1,.6)}
+  79%{transform:scaleY(1);animation-timing-function:linear}
+  82%{transform:scaleY(1);animation-timing-function:cubic-bezier(0,.4,.3,1)}
+  87%{transform:scaleY(0)}
+  100%{transform:scaleY(0)}
+}
 .about-title{
   font-family:var(--fe);font-size:clamp(3rem,8vw,5.5rem);
   font-weight:800;letter-spacing:-.01em;line-height:1.05;
@@ -613,13 +665,57 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   font-size:1.05rem;line-height:1.7;color:#a09c95;font-weight:300;max-width:520px
 }
 #about .about-body{
-  max-width:840px;margin:0 auto;padding:4rem 2.5rem 6rem;
+  max-width:1080px;margin:0 auto;padding:4rem 2.5rem 6rem;
   display:flex;flex-direction:column;gap:0
 }
 .about-block{
   display:grid;grid-template-columns:160px 1fr;gap:2rem;
-  padding:2.5rem 0;border-top:1px solid var(--brd)
+  padding:2.5rem 0 2.5rem 1.5rem;
+  border-top:1px solid var(--brd);
+  border-left:2px solid transparent;
+  position:relative;
+  transition:border-left-color .5s ease .15s,background .2s
 }
+.about-block-img{grid-template-columns:160px 1fr 260px;align-items:start}
+.about-content{max-width:500px}
+#about-year{
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:var(--fe);font-size:clamp(140px,22vw,340px);font-weight:800;
+  color:var(--acc2);opacity:.07;pointer-events:none;z-index:0;
+  letter-spacing:-.02em;line-height:1;white-space:nowrap;
+  user-select:none;transition:opacity .18s ease
+}
+#about-year.yr-out{opacity:0!important}
+.ablock-img{display:flex;flex-direction:column;gap:12px;margin:-2rem 0}
+.ablock-img-wrap{
+  position:relative;border-radius:20px;overflow:hidden;
+  box-shadow:0 16px 48px rgba(0,0,0,.55),0 4px 14px rgba(0,0,0,.4);
+  border:1px solid rgba(255,255,255,.08)
+}
+.ablock-img-wrap::after{
+  content:'';position:absolute;inset:0;pointer-events:none;border-radius:20px;
+  background:
+    radial-gradient(circle at 0% 0%,rgba(13,13,14,.75) 0%,transparent 40%),
+    radial-gradient(circle at 100% 0%,rgba(13,13,14,.75) 0%,transparent 40%),
+    radial-gradient(circle at 0% 100%,rgba(13,13,14,.75) 0%,transparent 40%),
+    radial-gradient(circle at 100% 100%,rgba(13,13,14,.75) 0%,transparent 40%);
+  transition:opacity .45s ease
+}
+.ablock-img-wrap:hover::after{opacity:.2}
+.ablock-img-wrap img{
+  display:block;width:100%;height:180px;object-fit:cover;
+  filter:grayscale(18%);transition:transform .5s ease,filter .45s ease
+}
+.ablock-img-wrap:hover img{transform:scale(1.06);filter:grayscale(0%)}
+.ablock-logo{
+  border-radius:20px;padding:2rem;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 8px 30px rgba(0,0,0,.35)
+}
+.ablock-logo img{width:100%;height:auto;object-fit:contain}
+@media(max-width:1060px){.about-block-img{grid-template-columns:160px 1fr}.ablock-img{display:none}}
+.about-block.visible{border-left-color:var(--acc)}
+.about-block:hover{background:rgba(14,184,160,.025)}
 .about-label{
   font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;
   color:var(--acc);font-weight:600;padding-top:.18rem;min-width:160px
@@ -1051,36 +1147,101 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
      ABOUT / MY STORY
 ══════════════════════════════════════ -->
 <div id="about">
+  <div id="about-year"></div>
   <div class="about-hero">
-    <div class="about-hero-inner">
-      <div class="wsec">My Story</div>
-      <h1 class="about-title">Hooked at Eight.<br>Still Going.</h1>
-      <p class="about-sub">A 3D artist who grew up on games and never stopped wanting to make them.</p>
+    <div class="about-hero-top">
+      <div class="about-hero-inner">
+        <div class="wsec">My Story</div>
+        <h1 class="about-title">Hooked at Eight.<br>Still Going.</h1>
+        <p class="about-sub">A 3D artist who grew up on games and never stopped wanting to make them.</p>
+        <div class="about-hero-stats">
+          <div><div class="about-stat-n">5+</div><div class="about-stat-l">Years Exp</div></div>
+          <div><div class="about-stat-n">2</div><div class="about-stat-l">Studios</div></div>
+          <div><div class="about-stat-n">4</div><div class="about-stat-l">Languages</div></div>
+        </div>
+      </div>
+      <div class="about-photo-strip" aria-hidden="true">
+      <div class="aps-track">
+        <img src="/wp-content/uploads/2026/04/gio-redblue.webp" alt="" loading="lazy" style="object-position:center 25%">
+        <img src="/wp-content/uploads/2026/04/gio-childhood.webp" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-1999.webp" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-iceskating.webp" alt="" loading="lazy" style="object-position:center 20%">
+        <img src="/wp-content/uploads/2026/04/gio-curacao.webp" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-paris1.webp" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-paris2.webp" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-paris3.webp" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-paris4.webp" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-berlin.webp" alt="" loading="lazy" style="object-position:center 20%">
+        <img src="/wp-content/uploads/2026/04/gio-portrait1.webp" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-redblue.webp" alt="" loading="lazy" style="object-position:center 25%">
+        <img src="/wp-content/uploads/2026/04/gio-ferrari.webp" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-leather.webp" alt="" loading="lazy" style="object-position:center 15%">
+        <img src="/wp-content/uploads/2026/04/gio-beach.webp" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-campus.webp" alt="" loading="lazy" style="object-position:center 20%">
+        <img src="/wp-content/uploads/2026/04/gio-mountain.webp" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-work.webp" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-car.webp" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-mom.webp" alt="" loading="lazy">
+        <!-- duplicate for seamless loop -->
+        <img src="/wp-content/uploads/2026/04/gio-redblue.webp" alt="" loading="lazy" style="object-position:center 25%">
+        <img src="/wp-content/uploads/2026/04/gio-childhood.webp" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-1999.webp" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-iceskating.webp" alt="" loading="lazy" style="object-position:center 20%">
+        <img src="/wp-content/uploads/2026/04/gio-curacao.webp" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-paris1.webp" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-paris2.webp" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-paris3.webp" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-paris4.webp" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-berlin.webp" alt="" loading="lazy" style="object-position:center 20%">
+        <img src="/wp-content/uploads/2026/04/gio-portrait1.webp" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-redblue.webp" alt="" loading="lazy" style="object-position:center 25%">
+        <img src="/wp-content/uploads/2026/04/gio-ferrari.webp" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-leather.webp" alt="" loading="lazy" style="object-position:center 15%">
+        <img src="/wp-content/uploads/2026/04/gio-beach.webp" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-campus.webp" alt="" loading="lazy" style="object-position:center 20%">
+        <img src="/wp-content/uploads/2026/04/gio-mountain.webp" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-work.webp" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-car.webp" alt="" loading="lazy">
+        <img src="/wp-content/uploads/2026/04/gio-mom.webp" alt="" loading="lazy">
+      </div>
+      </div>
+      <div class="about-hero-photo">
+        <img src="/wp-content/uploads/2025/10/Artstation-profile-pic.webp" alt="Giovanni Lauffer" loading="eager" decoding="async">
+      </div>
     </div>
-
-
   </div>
 
   <div class="about-body">
 
-    <div class="about-block reveal">
+    <div class="about-block about-block-img reveal" data-year="1994">
       <div class="about-label">Origin</div>
       <div class="about-content">
         <p>I was born in Groningen, but left at nine months old for Curaçao, where I grew up with my mother and stepfather Harry Lauffer, brother of the Dutch-Antillean poet Pierre Lauffer. I was always drawing, always looking at things. Give me a pencil and a blank page and I could disappear for hours.</p>
       </div>
+      <div class="ablock-img">
+        <div class="ablock-img-wrap"><img src="/wp-content/uploads/2026/05/martini-ziekenhuis.webp" alt="Martini Ziekenhuis, Groningen" loading="lazy"></div>
+        <div class="ablock-img-wrap"><img src="/wp-content/uploads/2026/05/curacao.webp" alt="Willemstad, Curaçao" loading="lazy"></div>
+      </div>
     </div>
 
-    <div class="about-block reveal">
+    <div class="about-block about-block-img reveal" data-year="2002">
       <div class="about-label">The Spark</div>
       <div class="about-content">
         <p>It started at a party I had no business being at. I was a bored kid surrounded by adults until someone sat me down in front of his NES. The second I touched that controller, that was it. Mario. Star Fox. Mario Kart. I would not stop begging my Mom for one.</p>
         <p>The day we went to buy it, I found the NES in the shop, stood in front of it, and told her: <em>this one, not the others.</em> The shop employee had other ideas and convinced her to go with the black box that looked nothing like what I wanted. I was furious the whole ride home.</p>
         <p>I opened it anyway. It was a Nintendo 64. 3D graphics, a generation ahead of anything I had seen. Super Mario 64, Mario Kart 64, Donkey Kong 64. I forgot everything I was angry about. Then someone moving to the Netherlands gave away their kid's game collection before leaving. I got Conker's Bad Fur Day, Perfect Dark, and GoldenEye 64 in one afternoon. That's when it clicked. <strong>People make these for a living.</strong> I was eight, and I already knew what I wanted to do.</p>
-        <p class="about-quote">"Movies get two hours. Games last much longer — and build a connection that nothing else comes close to."</p>
+      </div>
+      <div class="ablock-img" style="margin:0;align-self:center">
+        <div class="ablock-img-wrap"><img src="/wp-content/uploads/2026/05/goldeneye.webp" alt="GoldenEye 007 on N64" loading="lazy" style="height:220px"></div>
+        <div class="ablock-img-wrap"><img src="/wp-content/uploads/2026/04/goldeneye-gameplay.webp" alt="GoldenEye 007 gameplay" loading="lazy"></div>
       </div>
     </div>
 
-    <div class="about-block reveal">
+    <div class="about-quote-break reveal">
+      "Movies get two hours.<br><span>Games last much longer.</span>"
+    </div>
+
+    <div class="about-block about-block-img reveal" data-year="2002">
       <div class="about-label">Games That Shaped Me</div>
       <div class="about-content">
         <div class="about-games">
@@ -1101,35 +1262,115 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
         </div>
         <p style="margin-top:1.5rem">Consoles along the way: N64, Gaming PC, PS2, PS3, GameCube, PS5. Motorsport has always been a second obsession, which is a big part of why vehicles and hard surface work feel so natural.</p>
       </div>
+      <div class="ablock-img" style="justify-content:center;margin:0;align-self:stretch">
+        <div class="ablock-img-wrap"><img src="/wp-content/uploads/2026/04/scheveningen-beach.webp" alt="Scheveningen beach" loading="lazy"></div>
+      </div>
+      <div class="games-strip" aria-hidden="true">
+        <div class="gstr-track">
+          <img src="/wp-content/uploads/2026/06/oot.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/bad-fur-day.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/goldeneye.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/perfect-dark.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/jet-force-gemini.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/super-mario-64.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/gta-san-andreas.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/vice-city.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/gta-4.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/hitman.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/skyrim.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/red-dead-redemption-ii.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/most-wanted.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/underground-2.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/witcher-3-wild-hunt.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/cyberpunk-2077.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/jak-and-daxter.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/mirrors-edge.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/badco-2.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/pokemon-yellow.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/super-smash-bros.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/bully.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/prostreet.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/gta-2.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/mirrors-edge-1.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/oot.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/bad-fur-day.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/goldeneye.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/perfect-dark.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/jet-force-gemini.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/super-mario-64.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/gta-san-andreas.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/vice-city.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/gta-4.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/hitman.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/skyrim.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/red-dead-redemption-ii.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/most-wanted.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/underground-2.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/witcher-3-wild-hunt.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/cyberpunk-2077.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/jak-and-daxter.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/mirrors-edge.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/badco-2.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/pokemon-yellow.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/super-smash-bros.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/bully.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/prostreet.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/gta-2.webp" alt="" loading="lazy">
+          <img src="/wp-content/uploads/2026/06/mirrors-edge-1.webp" alt="" loading="lazy">
+        </div>
+      </div>
     </div>
 
-    <div class="about-block reveal">
+    <div class="about-block about-block-img reveal" data-year="2007">
       <div class="about-label">Education</div>
       <div class="about-content">
         <p>I always attended art class. At the International School of Curaçao I paid close attention in both Art and Computer classes and started building a real portfolio. To push further, I went to Adriana's Academy of Art alongside school, studying realism and sharpening the fundamentals everything else is built on.</p>
         <p>I applied four times to NHTV Breda (now Breda University of Applied Sciences). Saxion gave me my shot, and I took it seriously. That's where I found 3D. Not because it was the obvious path, but because it matched what I was good at and actually got me interested. By the time I finished, I'd figured something out I hadn't expected: I enjoy <em>making</em> games more than playing them. And I love playing games.</p>
       </div>
+      <div class="ablock-img">
+        <div class="ablock-img-wrap"><img src="/wp-content/uploads/2026/05/international-school-of-curacao.webp" alt="International School of Curaçao" loading="lazy"></div>
+        <div class="ablock-img-wrap"><img src="/wp-content/uploads/2026/05/saxion.webp" alt="Saxion University" loading="lazy"></div>
+      </div>
     </div>
 
-    <div class="about-block reveal">
+    <div class="about-block about-block-img reveal" data-year="2020">
       <div class="about-label">Career</div>
       <div class="about-content">
         <p>After Saxion I joined Lukkien, doing photorealistic CGI renders for Rituals cosmetics: modelling, UV mapping, shader networks, texturing, and rendering across their product range. I'm grateful for what they taught me. But CGI was never where I wanted to end up. Games always was.</p>
         <p>Since 2020 I've been shipping props, vehicles, and character assets for <strong>TimeSplitters: Rewind</strong> with Cinder Interactive, the largest free-content game ever made. Getting to work under Cameron Williams (ex-Rockstar, Infinity Ward) and Samuel Freeman (Splash Damage) has pushed my craft further than school ever did.</p>
-        <p>I'm now based in Ede, working on what I set out to do at age eight.</p>
+      </div>
+      <div class="ablock-img">
+        <div class="ablock-logo">
+          <img src="/wp-content/uploads/2026/05/timesplitters-rewind-logo.webp" alt="TimeSplitters Rewind" loading="lazy">
+        </div>
+        <div class="ablock-img-wrap"><img src="/wp-content/uploads/2026/04/workplace.webp" alt="At work" loading="lazy"></div>
       </div>
     </div>
 
-    <div class="about-block reveal">
+    <div class="about-block about-block-img reveal" data-year="2026">
+      <div class="about-label">Right Now</div>
+      <div class="about-content">
+        <p>Still contributing to TimeSplitters: Rewind, still pushing the quality of every asset that goes through my hands. And actively looking for a full-time studio role: environment art, props, hard surface, whatever the work demands.</p>
+        <p>Open to anywhere. The goal has been the same since I was eight.</p>
+      </div>
+      <div class="ablock-img">
+        <div class="ablock-img-wrap"><img src="/wp-content/uploads/2026/04/gio-work.webp" alt="At the desk" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="about-block about-block-img reveal" data-year="2026">
       <div class="about-label">What I'm After</div>
       <div class="about-content">
         <p>The gaming industry is having a rough stretch. The layoffs are real and the uncertainty is real. I'm not blind to it. But I believe in this medium, in the people making it, and in what I can bring to the table.</p>
         <p>I'm open to roles in 3D environment art, prop art, and hard surface. Remote, on-site, relocation, freelance, contract. I'll go where the work is and where I can keep getting better. The goal is to get in the door. Everything else follows.</p>
         <div class="about-cta-row">
           <a href="#" onclick="showPortfolio();return false" class="bprim">View Portfolio <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="1.8" fill="none"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-          <a href="#" onclick="showHome();return false" class="bsec">Return to Home</a>
           <a href="#" onclick="openContact();return false" class="bsec">Get In Touch</a>
+          <a href="#" onclick="showHome();return false" class="bsec">Return to Home</a>
         </div>
+      </div>
+      <div class="ablock-img" style="margin-top:0">
+        <div class="ablock-img-wrap"><img src="/wp-content/uploads/2026/04/433910099_435216765627992_1878211585255646378_n.webp" alt="" loading="lazy"></div>
       </div>
     </div>
 
@@ -1800,6 +2041,39 @@ function showAbout(){
       io.observe(el);
     });
   },50);
+  // background year counter
+  const yrEl=document.getElementById('about-year');
+  if(yrEl&&!window._yrListenerAdded){
+    window._yrListenerAdded=true;
+    const yrBlocks=[...document.querySelectorAll('#about [data-year]')];
+    const heroEl=document.querySelector('#about .about-hero');
+    function setYr(y){
+      if(yrEl.textContent===y)return;
+      yrEl.style.opacity='0';
+      setTimeout(()=>{yrEl.textContent=y;yrEl.style.opacity='';},180);
+    }
+    let yrTick=false;
+    function onYrScroll(){
+      if(yrTick)return;yrTick=true;
+      requestAnimationFrame(()=>{
+        yrTick=false;
+        if(!document.getElementById('about').classList.contains('on'))return;
+        const heroH=heroEl.offsetHeight;
+        if(window.scrollY<heroH*0.8){setYr('');return;}
+        const vCenter=window.innerHeight/2;
+        let closest=null,closestDist=Infinity;
+        yrBlocks.forEach(b=>{
+          const r=b.getBoundingClientRect();
+          const bCenter=r.top+r.height/2;
+          const dist=Math.abs(bCenter-vCenter);
+          if(dist<closestDist){closestDist=dist;closest=b;}
+        });
+        if(closest)setYr(closest.dataset.year);
+      });
+    }
+    window.addEventListener('scroll',onYrScroll,{passive:true});
+    setTimeout(onYrScroll,100);
+  }
 }
 function showPortfolio(){
   document.getElementById('home').classList.add('hidden');
