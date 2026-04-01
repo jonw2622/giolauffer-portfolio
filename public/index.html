@@ -1146,7 +1146,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
     <div><h1>PORTFOLIO</h1><p>Props · Vehicles · Characters · Environments</p></div>
     <div class="pfilt">
       <button class="fb on" onclick="fc(this,'all')">All</button>
-      <button class="fb" onclick="fc(this,'beyond')" style="border-color:var(--acc2);color:var(--acc2)">Beyond Extent</button>
+      <button class="fb" onclick="fc(this,'beyond')">Beyond Extent</button>
       <button class="fb" onclick="fc(this,'ts')">TimeSplitters</button>
       <button class="fb" onclick="fc(this,'personal')">Personal</button>
       <button class="fb" onclick="fc(this,'cgi')">CGI</button>
@@ -2026,7 +2026,7 @@ function renderGrid(filter){
       </div>`;
     grid.appendChild(div);
   });
-  addHov('.pcard');
+  if(typeof addHov==='function')addHov('.pcard');
 }
 
 // ── pages ──
