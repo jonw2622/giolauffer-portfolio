@@ -23,6 +23,11 @@
 <meta name="twitter:image" content="https://www.giovannilauffer.com/wp-content/uploads/2025/12/Gio-Dockshot.webp">
 
 <link rel="icon" type="image/png" href="/wp-content/uploads/2025/07/cropped-Asset-2-logo-thumnail-final-1.webp">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Giovanni Lauffer","jobTitle":"3D Prop & Environment Artist","url":"https://www.giovannilauffer.com","image":"https://www.giovannilauffer.com/wp-content/uploads/2025/10/Artstation-profile-pic.webp","sameAs":["https://www.artstation.com/giovannilauffer","https://www.linkedin.com/in/giovanni-lauffer-08558b185/"],"knowsAbout":["3D Modeling","Maya","ZBrush","Substance Painter","Unreal Engine 5","Game Asset Creation"],"worksFor":{"@type":"Organization","name":"Cinder Interactive"}}
+</script>
 <link rel="shortcut icon" type="image/png" href="/wp-content/uploads/2025/07/cropped-Asset-2-logo-thumnail-final-1.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,7 +38,7 @@
 :root{
   --bg:#0d0d0e;--surf:#161618;--surf2:#1e1e21;
   --brd:rgba(255,255,255,0.08);--brd2:rgba(255,255,255,0.16);
-  --txt:#eeebe5;--mut:#6e6b65;
+  --txt:#eeebe5;--mut:#7a7773;
   /* dual accent: teal primary, orange secondary */
   --acc:#0eb8a0;       /* teal */
   --acc2:#f4845f;      /* orange */
@@ -626,13 +631,13 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   -webkit-mask-image:linear-gradient(to right,transparent 0%,#000 8%,#000 92%,transparent 100%);
   mask-image:linear-gradient(to right,transparent 0%,#000 8%,#000 92%,transparent 100%)
 }
-.aps-track{display:flex;flex-direction:row;gap:6px;width:max-content;animation:apsScroll 72s linear infinite;height:100%;align-items:center}
+.aps-track{display:flex;flex-direction:row;gap:6px;width:max-content;animation:apsScroll 72s linear infinite;height:100%;align-items:center;will-change:transform}
 .aps-track img{height:310px;width:220px;object-fit:cover;display:block;flex-shrink:0;border-radius:14px}
 @keyframes apsScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .games-strip{grid-column:1/-1;overflow:hidden;margin-top:1.5rem;
   -webkit-mask-image:linear-gradient(to right,transparent 0%,#000 6%,#000 94%,transparent 100%);
   mask-image:linear-gradient(to right,transparent 0%,#000 6%,#000 94%,transparent 100%)}
-.gstr-track{display:flex;flex-direction:row;gap:8px;width:max-content;animation:gstrScroll 60s linear infinite}
+.gstr-track{display:flex;flex-direction:row;gap:8px;width:max-content;animation:gstrScroll 60s linear infinite;will-change:transform}
 .gstr-track img{height:190px;width:130px;object-fit:cover;display:block;flex-shrink:0;border-radius:6px}
 @keyframes gstrScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .about-hero-stats{display:flex;gap:2rem;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--brd);flex-wrap:wrap}
@@ -872,10 +877,10 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 
     <div class="rctrl">
       <div class="rdots" id="rdots">
-        <div class="rdot on" onclick="gts(0)" role="button" tabindex="0" aria-label="Go to slide 1"></div>
-        <div class="rdot" onclick="gts(1)" role="button" tabindex="0" aria-label="Go to slide 2"></div>
-        <div class="rdot" onclick="gts(2)" role="button" tabindex="0" aria-label="Go to slide 3"></div>
-        <div class="rdot" onclick="gts(3)" role="button" tabindex="0" aria-label="Go to slide 4"></div>
+        <div class="rdot on" onclick="gts(0)" onkeydown="if(event.key==='Enter'||event.key===' '){gts(0);event.preventDefault()}" role="button" tabindex="0" aria-label="Go to slide 1"></div>
+        <div class="rdot" onclick="gts(1)" onkeydown="if(event.key==='Enter'||event.key===' '){gts(1);event.preventDefault()}" role="button" tabindex="0" aria-label="Go to slide 2"></div>
+        <div class="rdot" onclick="gts(2)" onkeydown="if(event.key==='Enter'||event.key===' '){gts(2);event.preventDefault()}" role="button" tabindex="0" aria-label="Go to slide 3"></div>
+        <div class="rdot" onclick="gts(3)" onkeydown="if(event.key==='Enter'||event.key===' '){gts(3);event.preventDefault()}" role="button" tabindex="0" aria-label="Go to slide 4"></div>
       </div>
       <div class="rtim" id="rtim">01 / 04</div>
       <div class="rnav">
@@ -1147,7 +1152,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
      ABOUT / MY STORY
 ══════════════════════════════════════ -->
 <div id="about">
-  <div id="about-year"></div>
+  <div id="about-year" aria-hidden="true"></div>
   <div class="about-hero">
     <div class="about-hero-top">
       <div class="about-hero-inner">
@@ -2289,8 +2294,8 @@ window.olb=olb;
 window.clb=clb;
 
 // lightbox
-function olb(src,label){document.getElementById('lbimg').src=src;document.getElementById('lbimg').alt=label||'';document.getElementById('lb').classList.add('on');}
-function clb(){document.getElementById('lb').classList.remove('on');}
+function olb(src,label){const lb=document.getElementById('lb');document.getElementById('lbimg').src=src;document.getElementById('lbimg').alt=label||'';lb.classList.add('on');trapFocus(lb);}
+function clb(){const lb=document.getElementById('lb');untrapFocus(lb);lb.classList.remove('on');}
 document.getElementById('lb').addEventListener('click',e=>{if(e.target.id==='lb')clb();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(document.getElementById('cfModal').classList.contains('on'))closeContact();else clb();}});
 
@@ -2352,15 +2357,27 @@ document.addEventListener('touchstart',function(e){
   lastCard=card;
 },{passive:false});
 
+// ── focus trap helper ──
+function trapFocus(el){
+  const sel='button:not([disabled]),a[href],input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
+  const nodes=el.querySelectorAll(sel);
+  const first=nodes[0],last=nodes[nodes.length-1];
+  function h(e){if(e.key!=='Tab')return;if(e.shiftKey){if(document.activeElement===first){e.preventDefault();last.focus();}}else{if(document.activeElement===last){e.preventDefault();first.focus();}}}
+  el._ft=h;el.addEventListener('keydown',h);
+}
+function untrapFocus(el){if(el._ft){el.removeEventListener('keydown',el._ft);delete el._ft;}}
+
 // ── contact modal ──
 var cfTimer;
 function openContact(){
   document.getElementById('cfModal').classList.add('on');
   document.body.style.overflow='hidden';
   document.getElementById('cfName').focus();
+  trapFocus(document.getElementById('cfModal'));
 }
 function closeContact(){
   if(cfTimer){clearTimeout(cfTimer);cfTimer=null;}
+  untrapFocus(document.getElementById('cfModal'));
   document.getElementById('cfModal').classList.remove('on');
   document.body.style.overflow='';
   document.getElementById('cfForm').reset();
