@@ -143,6 +143,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .rbtn{width:42px;height:42px;border:1px solid var(--brd);background:rgba(13,13,14,.5);display:flex;align-items:center;justify-content:center;cursor:none;transition:border-color .2s,background .2s;border-radius:50%}
 .rbtn:hover{border-color:var(--acc);background:var(--acc-glow)}
 .rbtn svg{width:17px;height:17px;stroke:var(--txt);stroke-width:1.5;fill:none}
+/* ── scroll hint ── */
+#scroll-hint{position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.25rem;z-index:20;pointer-events:none;opacity:.55;transition:opacity .6s}
+#scroll-hint.gone{opacity:0}
+#scroll-hint span{font-size:.62rem;letter-spacing:.04em;color:var(--mut);white-space:nowrap;font-family:var(--fb);font-weight:400}
+#scroll-hint hr{width:100%;border:none;border-top:1px solid var(--mut);margin:0}
+#scroll-hint svg{stroke:var(--mut);animation:shBounce 2s ease-in-out infinite}
+@keyframes shBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
 
 /* ── HOME: about strip ── */
 .about{display:grid;grid-template-columns:1fr 1fr;gap:5rem;padding:5rem 2.5rem 4rem;max-width:1280px;margin:0 auto}
@@ -492,6 +499,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   /* reel controls shift up since hero moved */
   .rctrl{bottom:2rem;left:1.4rem;right:1.4rem;gap:1rem}
   .slide-info{bottom:auto;top:5rem;right:1.4rem}
+  #scroll-hint{bottom:2rem}
 
   /* about: single column */
   .about{grid-template-columns:1fr;gap:2.5rem;padding:3rem 1.4rem 3rem}
@@ -930,6 +938,12 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
         <button class="rbtn" onclick="ps()" aria-label="Previous slide"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
         <button class="rbtn" onclick="ns()" aria-label="Next slide"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
       </div>
+    </div>
+
+    <div id="scroll-hint" aria-hidden="true">
+      <span>Resume &amp; Recommendations</span>
+      <hr>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="1.6"><line x1="12" y1="4" x2="12" y2="20"/><polyline points="5 13 12 20 19 13"/></svg>
     </div>
   </div>
 
@@ -1554,6 +1568,8 @@ window.gts=gts; window.ns=ns; window.ps=ps;
 at=setTimeout(()=>gts(1),7000);
 // explicitly play slide 0 video — HTML autoplay is unreliable on mobile
 (function(){const v=document.querySelectorAll('.slide-video')[0];if(v)v.play&&v.play().catch(()=>{});})();
+// scroll hint — vanishes once user scrolls
+(function(){var sh=document.getElementById('scroll-hint');if(!sh)return;window.addEventListener('scroll',function(){sh.classList.toggle('gone',window.scrollY>60);},{passive:true});})();
 
 // ── image base ──
 const B='/wp-content/uploads/';
