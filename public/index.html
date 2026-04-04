@@ -375,7 +375,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .footer-copy{font-size:.6rem;color:var(--mut);margin-top:.85rem;letter-spacing:.06em}
 .footer-cta{display:flex;flex-direction:column;align-items:flex-end;gap:.8rem}
 .footer-cta .bprim{font-size:.68rem;padding:.72rem 1.5rem;white-space:nowrap}
-.footer-email{font-size:.68rem;color:var(--mut);letter-spacing:.04em;font-family:var(--fm)}
+.footer-email{font-size:.68rem;color:var(--mut);letter-spacing:.04em;font-family:var(--fm);text-decoration:none;transition:color .2s}
+.footer-email:hover{color:var(--acc)}
 @media(max-width:700px){.site-footer{grid-template-columns:1fr;padding:2.5rem 1.4rem 6.5rem}.footer-cta{align-items:flex-start}}
 
 /* ── FOCUS-VISIBLE for keyboard navigation ── */
@@ -408,7 +409,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 .cf-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:1000;align-items:center;justify-content:center;padding:1rem}
 .cf-modal.on{display:flex}
 .cf-panel{background:var(--surf);border:1px solid var(--brd2);width:100%;max-width:540px;max-height:90vh;overflow-y:auto;padding:2.5rem;position:relative}
-.cf-close{position:absolute;top:1rem;right:1rem;width:38px;height:38px;border:1px solid var(--brd2);background:transparent;color:var(--txt);font-size:1.1rem;cursor:none;display:flex;align-items:center;justify-content:center;transition:border-color .2s,color .2s;border-radius:0}
+.cf-close{position:absolute;top:1rem;right:1rem;width:44px;height:44px;border:1px solid var(--brd2);background:transparent;color:var(--txt);font-size:1.1rem;cursor:none;display:flex;align-items:center;justify-content:center;transition:border-color .2s,color .2s;border-radius:0}
 .cf-close:hover{border-color:var(--acc);color:var(--acc)}
 .cf-tag{font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--acc);font-weight:600;margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}
 .cf-tag::before{content:'';display:block;width:1.2rem;height:1px;background:var(--acc)}
@@ -505,12 +506,15 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   .rstrip{padding:0 1.4rem 4rem}
 
   /* portfolio grid: 2 cols */
-  .pgrid{padding:.5rem 1.4rem 5rem;grid-template-columns:repeat(2,1fr)}
+  .pgrid{padding:.5rem 1.4rem 7rem;grid-template-columns:repeat(2,1fr)}
   .phead{padding:5.5rem 1.4rem 1.5rem;flex-direction:column;align-items:flex-start}
+  /* portfolio filters: horizontal scroll, no wrapping */
+  .pfilt{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px;max-width:100%}
+  .pfilt::-webkit-scrollbar{display:none}
 
   /* post detail: stack sidebar below content */
   .ptop{grid-template-columns:1fr;gap:2rem;margin-top:-2rem}
-  .pcnt{padding:0 1.4rem 4rem}
+  .pcnt{padding:0 1.4rem 6rem}
   .phero{height:50vh}
   .gal{flex-direction:column}
   .gi.fw img{max-height:380px}
@@ -521,8 +525,13 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   /* hire bar: compact */
   .hire{padding:.75rem 1.4rem;flex-direction:row;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap}
   .hact{gap:.5rem;flex-wrap:wrap}
-  .htxt{font-size:.7rem}
+  .htxt{font-size:.7rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1}
   .hdot{display:none}
+  /* touch targets: prev/next + scroll-to-top must be ≥44px */
+  .rbtn{width:44px;height:44px}
+  #sttb{width:44px;height:44px}
+  /* hire bar links: ensure 44px tap height */
+  .hl{min-height:44px;display:inline-flex;align-items:center}
 
   /* back nav: hide (use breadcrumb instead) */
   .bnav{display:none!important}
@@ -548,8 +557,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   .htag{font-size:.58rem;margin-bottom:.7rem}
   .hstats{gap:1.2rem;margin-bottom:1.2rem}
   .sn{font-size:1.4rem}
-  .hbtns{flex-direction:column;gap:.6rem;align-items:flex-start}
-  .bprim,.bsec{font-size:.68rem;padding:.75rem 1.4rem}
+  .hbtns{flex-direction:column;gap:.6rem;align-items:stretch}
+  .bprim,.bsec{font-size:.68rem;padding:.75rem 1.4rem;justify-content:center}
 
   /* reel controls tighter */
   .rctrl{bottom:1.5rem;left:1rem;right:1rem;gap:.75rem}
@@ -560,14 +569,14 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   .rbtn{width:36px;height:36px}
 
   /* portfolio: single column */
-  .pgrid{grid-template-columns:1fr;padding:.5rem 1rem 5rem}
+  .pgrid{grid-template-columns:1fr;padding:.5rem 1rem 7rem}
   .phead{padding:5rem 1rem 1.2rem}
   .pfilt{gap:.3rem}
-  .fb{font-size:.6rem;padding:.38rem .85rem}
+  .fb{font-size:.6rem;padding:.42rem .9rem;min-height:36px}
 
   /* post detail */
   .phero{height:40vh}
-  .pcnt{padding:0 1rem 4rem}
+  .pcnt{padding:0 1rem 6rem}
   .pm h1{font-size:1.8rem}
   .ptags{gap:.3rem}
   .relgrid{grid-template-columns:1fr}
@@ -580,8 +589,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   /* hire bar */
   .hire{padding:.65rem 1rem;gap:.6rem}
   .hact{gap:.4rem}
-  .hl{font-size:.6rem;padding:.45rem .9rem}
-  .htxt{font-size:.65rem}
+  .hl{font-size:.6rem;padding:.45rem .9rem;min-height:44px}
+  .htxt{font-size:.65rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1}
   .hdot{display:none}
 
   /* slide info hidden on very small */
@@ -593,15 +602,30 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   .about-photo-strip{display:none}
   #about .about-hero-inner{max-width:100%}
   #about .about-hero-inner h1{font-size:clamp(2.4rem,10vw,3.5rem)}
-  .about-hero-photo{width:100%;height:220px}
-  .aps-track img{height:220px;width:180px}
-  #about .about-body{padding:0 1.4rem 4rem}
+  .about-hero-photo{width:100%;height:280px}
+  .aps-track img{height:280px;width:200px}
+  #about .about-body{padding:0 1.4rem 6rem}
   .about-block{grid-template-columns:1fr;gap:.75rem;padding-left:1rem}
   .about-block-img{grid-template-columns:1fr}
   .ablock-img{display:none}
   .about-label{min-width:0;font-size:.58rem;padding-top:0;border-top:none;border-bottom:1px solid var(--brd);padding-bottom:.6rem}
   .about-games{grid-template-columns:1fr 1fr}
   .about-quote-break{padding:3rem 1.4rem;font-size:clamp(1.5rem,6vw,2rem)}
+}
+
+/* ════════════════════════════════════
+   TOUCH DEVICES — kill sticky hover states
+════════════════════════════════════ */
+@media(hover:none){
+  .pcard:hover img.thumb,.pcard:hover video.thumb{transform:none}
+  .fb:hover:not(.on){border-color:var(--brd);color:var(--mut)}
+  .fb-beyond:hover:not(.on){border-color:var(--brd);color:var(--mut)}
+  .hlp:hover{background:var(--acc2)}
+  .hls:hover{border-color:var(--brd);color:var(--mut)}
+  .mob-nav a:hover{color:var(--txt)}
+  .footer-links a:hover{color:var(--mut)}
+  .bprim:hover{background:var(--acc);gap:.65rem}
+  .bsec:hover{color:var(--mut);border-color:var(--brd)}
 }
 
 /* ════════════════════════════════════
@@ -776,6 +800,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   <button class="mob-close" onclick="closeMob()" aria-label="Close menu">✕</button>
   <a href="#" onclick="showHome();closeMob();return false">Home</a>
   <a href="#" onclick="showPortfolio();closeMob();return false">Portfolio</a>
+  <a href="#" onclick="showAbout();closeMob();return false">My Story</a>
   <a href="https://www.artstation.com/giovannilauffer" target="_blank" rel="noopener noreferrer" onclick="closeMob()">ArtStation</a>
   <a href="https://www.linkedin.com/in/giovanni-lauffer-08558b185/" target="_blank" rel="noopener noreferrer" onclick="closeMob()">LinkedIn</a>
   <a href="#" onclick="openContact();closeMob();return false" class="mob-cta">Hire Me</a>
@@ -1133,7 +1158,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
         Hire Me
         <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="1.8" fill="none"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
-      <div class="footer-email">giovannielauffer@gmail.com</div>
+      <a href="mailto:giovannielauffer@gmail.com" class="footer-email">giovannielauffer@gmail.com</a>
     </div>
   </footer>
 
