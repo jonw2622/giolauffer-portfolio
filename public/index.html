@@ -147,6 +147,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 #scroll-hint{position:absolute;bottom:6.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.3rem;z-index:20;pointer-events:none;opacity:.55;transition:opacity .6s}
 #scroll-hint.gone{opacity:0}
 #scroll-hint span{font-size:.62rem;letter-spacing:.06em;color:var(--mut);white-space:nowrap;font-family:var(--fm)}
+#scroll-hint hr{width:100%;border:none;border-top:1px solid var(--mut);margin:0}
 #scroll-hint svg{stroke:var(--mut);animation:shBounce 2s ease-in-out infinite}
 @keyframes shBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
 
@@ -909,6 +910,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 
     <div id="scroll-hint" aria-hidden="true">
       <span>Resume &amp; Recommendations</span>
+      <hr>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="1.6"><line x1="12" y1="4" x2="12" y2="20"/><polyline points="5 13 12 20 19 13"/></svg>
     </div>
   </div>
