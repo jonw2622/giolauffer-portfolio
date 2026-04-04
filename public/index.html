@@ -1520,6 +1520,8 @@ function ps(){gts(cs-1);}
 // expose to onclick handlers
 window.gts=gts; window.ns=ns; window.ps=ps;
 at=setTimeout(()=>gts(1),7000);
+// explicitly play slide 0 video — HTML autoplay is unreliable on mobile
+(function(){const v=document.querySelectorAll('.slide-video')[0];if(v)v.play&&v.play().catch(()=>{});})();
 
 // ── image base ──
 const B='/wp-content/uploads/';
