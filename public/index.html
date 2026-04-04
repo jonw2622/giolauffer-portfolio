@@ -1535,7 +1535,7 @@ function gts(n){
   document.getElementById('rtim').textContent=`0${cs+1} / 0${T}`;
   // play active slide video, pause others
   document.querySelectorAll('.slide-video').forEach((v,i)=>{
-    if(i===cs){v.play && v.play().catch(()=>{});}
+    if(i===cs){v.currentTime=0; v.play && v.play().catch(()=>{});}
     else{v.pause && v.pause();}
   });
   clearTimeout(at); at=setTimeout(()=>gts(cs+1),7000);
