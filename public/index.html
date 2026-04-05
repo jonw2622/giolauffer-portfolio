@@ -781,6 +781,14 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 }
 #about-runner.yr-runner-on{opacity:.16}
 @media(max-width:1280px){#about-runner{display:none}}
+#about-gamer{
+  position:fixed;left:calc((100vw - 1080px) / 4 + 1.25rem);top:50%;transform:translate(-50%,-50%);
+  pointer-events:none;z-index:0;
+  opacity:0;transition:opacity .6s ease;
+  color:var(--acc2);user-select:none;will-change:opacity
+}
+#about-gamer.yr-gamer-on{opacity:.16}
+@media(max-width:1280px){#about-gamer{display:none}}
 .ablock-img{display:flex;flex-direction:column;gap:12px;margin:-2rem 0}
 .ablock-img-wrap{
   position:relative;border-radius:20px;overflow:hidden;
@@ -1381,6 +1389,76 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
       <path d="M76,130 Q86,150 94,163" stroke-width="1.9"/>
       <!-- back foot (toe push-off) -->
       <path d="M94,163 Q102,162 106,156 Q104,150 96,152" stroke-width="1.6"/>
+    </svg>
+  </div>
+  <div id="about-gamer" aria-hidden="true">
+    <svg viewBox="0 0 155 210" fill="none" xmlns="http://www.w3.org/2000/svg" width="140" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <!-- monitor screen -->
+      <rect x="8" y="18" width="76" height="86" rx="4" stroke-width="2.2"/>
+      <!-- screen content lines -->
+      <line x1="18" y1="38" x2="74" y2="38" stroke-width="1" opacity="0.45"/>
+      <line x1="18" y1="52" x2="68" y2="52" stroke-width="1" opacity="0.45"/>
+      <line x1="18" y1="66" x2="72" y2="66" stroke-width="1" opacity="0.45"/>
+      <line x1="18" y1="80" x2="58" y2="80" stroke-width="1" opacity="0.45"/>
+      <line x1="18" y1="91" x2="64" y2="91" stroke-width="1" opacity="0.45"/>
+      <!-- inner bezel -->
+      <rect x="14" y="24" width="64" height="74" rx="2" stroke-width="0.9" opacity="0.35"/>
+      <!-- monitor stand neck -->
+      <path d="M46,104 L46,112" stroke-width="2.2"/>
+      <!-- stand base -->
+      <path d="M33,112 Q46,110 59,112" stroke-width="2"/>
+      <!-- desk surface -->
+      <rect x="5" y="113" width="145" height="8" rx="2" stroke-width="2"/>
+      <!-- desk legs -->
+      <path d="M14,121 L12,205" stroke-width="2"/>
+      <path d="M136,121 L138,205" stroke-width="2"/>
+      <!-- desk crossbar -->
+      <path d="M14,170 L136,170" stroke-width="1.6"/>
+      <!-- keyboard -->
+      <rect x="84" y="106" width="54" height="7" rx="2" stroke-width="1.8"/>
+      <line x1="90" y1="108" x2="132" y2="108" stroke-width="0.8" opacity="0.6"/>
+      <line x1="90" y1="110" x2="132" y2="110" stroke-width="0.8" opacity="0.6"/>
+      <line x1="90" y1="112" x2="132" y2="112" stroke-width="0.8" opacity="0.6"/>
+      <!-- mouse -->
+      <ellipse cx="145" cy="109" rx="5" ry="6.5" stroke-width="1.5"/>
+      <line x1="145" y1="105" x2="145" y2="107" stroke-width="1.1"/>
+      <!-- gaming chair back -->
+      <path d="M98,178 Q97,90 104,76 Q115,70 126,76 Q133,90 132,178" stroke-width="1.8"/>
+      <!-- chair headrest -->
+      <rect x="104" y="68" width="22" height="12" rx="6" stroke-width="1.7"/>
+      <!-- chair armrests -->
+      <path d="M99,142 Q93,140 92,132" stroke-width="1.4"/>
+      <path d="M131,142 Q137,140 138,132" stroke-width="1.4"/>
+      <!-- head -->
+      <ellipse cx="115" cy="47" rx="13" ry="14" stroke-width="2"/>
+      <!-- headphones band -->
+      <path d="M102,41 Q102,27 115,23 Q128,27 128,41" stroke-width="1.9"/>
+      <!-- headphone cups -->
+      <rect x="99" y="38" width="7" height="11" rx="3" stroke-width="1.6"/>
+      <rect x="124" y="38" width="7" height="11" rx="3" stroke-width="1.6"/>
+      <!-- eyebrows (focused) -->
+      <path d="M106,40 Q110,38 114,40" stroke-width="1.3"/>
+      <path d="M116,40 Q120,38 124,40" stroke-width="1.3"/>
+      <!-- eyes -->
+      <ellipse cx="110" cy="45" rx="3.5" ry="3" stroke-width="1.4"/>
+      <circle cx="110.5" cy="45.5" r="1.8" fill="currentColor" stroke-width="0"/>
+      <ellipse cx="120" cy="45" rx="3.5" ry="3" stroke-width="1.4"/>
+      <circle cx="120.5" cy="45.5" r="1.8" fill="currentColor" stroke-width="0"/>
+      <!-- nose -->
+      <path d="M115,50 Q113,54 115,56" stroke-width="1.3"/>
+      <!-- mouth (slight smile) -->
+      <path d="M109,61 Q115,64 121,61" stroke-width="1.4"/>
+      <!-- neck -->
+      <path d="M110,61 L108,71" stroke-width="1.7"/>
+      <path d="M120,61 L122,71" stroke-width="1.7"/>
+      <!-- shoulders -->
+      <path d="M90,79 Q104,72 108,73 Q115,73 122,73 Q126,72 140,79" stroke-width="2"/>
+      <!-- torso -->
+      <path d="M92,81 L94,113" stroke-width="1.8"/>
+      <path d="M138,81 L136,113" stroke-width="1.8"/>
+      <!-- shirt detail -->
+      <path d="M108,75 Q110,91 111,110" stroke-width="1" opacity="0.5"/>
+      <path d="M122,75 Q120,91 119,110" stroke-width="1" opacity="0.5"/>
     </svg>
   </div>
   <div class="about-hero">
@@ -2317,6 +2395,8 @@ function showAbout(){
       if(kidEl)kidEl.classList.toggle('yr-kid-on',y==='1994'||y==='2002');
       const runnerEl=document.getElementById('about-runner');
       if(runnerEl)runnerEl.classList.toggle('yr-runner-on',y==='2007');
+      const gamerEl=document.getElementById('about-gamer');
+      if(gamerEl)gamerEl.classList.toggle('yr-gamer-on',y!==''&&Number(y)>=2020);
     }
     let yrTick=false;
     function onYrScroll(){
