@@ -26,7 +26,7 @@
 <link rel="shortcut icon" type="image/png" href="/wp-content/uploads/2025/07/cropped-Asset-2-logo-thumnail-final-1.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Bebas+Neue&family=Caveat:wght@500&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 .aps-track img,.gstr-track img,.ablock-img-wrap img{-webkit-user-drag:none;user-drag:none;-webkit-user-select:none;user-select:none}
@@ -144,11 +144,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .rbtn:hover{border-color:var(--acc);background:var(--acc-glow)}
 .rbtn svg{width:17px;height:17px;stroke:var(--txt);stroke-width:1.5;fill:none}
 /* ── scroll hint ── */
-#scroll-hint{position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.25rem;z-index:20;pointer-events:none;opacity:.55;transition:opacity .6s}
+#scroll-hint{position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.25rem;z-index:20;pointer-events:auto;opacity:.55;transition:opacity .6s;cursor:none}
 #scroll-hint.gone{opacity:0}
-#scroll-hint span{font-size:.62rem;letter-spacing:.04em;color:var(--mut);white-space:nowrap;font-family:var(--fb);font-weight:400}
-#scroll-hint hr{width:100%;border:none;border-top:1px solid var(--mut);margin:0}
-#scroll-hint svg{stroke:var(--mut);animation:shBounce 2s ease-in-out infinite}
+#scroll-hint span{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--txt);white-space:nowrap;font-family:var(--fb);font-weight:600;line-height:1.6;text-align:center}
+#scroll-hint span em{font-style:normal;color:var(--acc);font-family:var(--fb);font-size:1em;letter-spacing:.22em;text-transform:uppercase;display:block}
+#scroll-hint svg{stroke:var(--acc2);animation:shBounce 2s ease-in-out infinite}
 @keyframes shBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
 
 /* ── HOME: about strip ── */
@@ -248,7 +248,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .phero img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
 .phero-ov{position:absolute;inset:0;background:linear-gradient(to top,var(--bg) 0%,rgba(13,13,14,.2) 60%,transparent 100%)}
 
-.pcnt{max-width:1180px;margin:0 auto;padding:0 2.5rem 5rem}
+.pcnt{max-width:1180px;margin:0 auto;padding:0 2.5rem 12rem}
 .ptop{display:grid;grid-template-columns:1fr 300px;gap:3.5rem;margin-top:-3.5rem;position:relative;z-index:10}
 
 .pbc{display:inline-flex;align-items:center;gap:.45rem;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:1.8rem;cursor:none;transition:color .2s}
@@ -323,7 +323,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .relsec{margin-top:4.5rem;padding-top:2.5rem;border-top:1px solid var(--brd)}
 .reltit{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);font-weight:600;margin-bottom:1.6rem}
 .relgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
-.relcard{position:relative;overflow:hidden;aspect-ratio:4/3;cursor:none}
+.relcard{position:relative;overflow:hidden;aspect-ratio:1/1;cursor:none}
 .relcard img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s}
 .relcard:hover img{transform:scale(1.05)}
 .relcard-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,13,14,.93) 0%,transparent 60%);opacity:0;transition:opacity .3s;padding:.9rem;display:flex;flex-direction:column;justify-content:flex-end}
@@ -495,20 +495,29 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   .hrole{font-size:.78rem;margin-top:1rem;margin-bottom:1.5rem}
   .hstats{gap:1.5rem;margin-bottom:1.5rem}
   .sn{font-size:1.6rem}
+  /* buttons: View Portfolio + Get In Touch on row 1, Download CV under View Portfolio */
+  .hbtns{display:grid;grid-template-columns:auto auto;width:max-content;gap:.85rem}
 
   /* reel controls shift up since hero moved */
   .rctrl{bottom:2rem;left:1.4rem;right:1.4rem;gap:1rem}
-  .slide-info{bottom:auto;top:5rem;right:1.4rem}
-  #scroll-hint{bottom:2rem}
+  .slide-info{bottom:7rem;right:1.4rem}
+  #scroll-hint{bottom:1.5rem;gap:.08rem}
+  #scroll-hint span{display:none}
+  #scroll-hint svg{width:12px;height:14px}
 
   /* about: single column */
   .about{grid-template-columns:1fr;gap:2.5rem;padding:3rem 1.4rem 3rem}
   /* about hero: stack on tablets — prevents 3-col from cramping at iPad-portrait widths */
   .about-hero-top{flex-direction:column;align-items:flex-start;padding:7rem 1.4rem 2rem;gap:2rem}
-  .about-photo-strip{display:none}
-  #about .about-hero-inner{max-width:100%}
+  /* about hero: same order as mobile — pic+hobbies → strip+quote → my story */
+  .about-strip-col::before{display:none}
+  .about-hero-photo-wrap::before{display:none}
+  .about-hero-photo-wrap{order:1;width:280px;margin-left:auto;margin-right:auto;align-self:auto}
+  .about-strip-col{order:2}
+  #about .about-hero-inner{order:3;max-width:100%}
   .about-hero-photo{width:100%;height:300px}
-  .aps-track img{height:300px;width:210px}
+  .about-photo-strip{display:block;height:160px;margin-left:-1.4rem;margin-right:-1.4rem}
+  .aps-track img{height:160px;width:120px}
 
   /* work: single column */
   .witems{grid-template-columns:1fr}
@@ -571,7 +580,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   .htag{font-size:.58rem;margin-bottom:.7rem}
   .hstats{gap:1.2rem;margin-bottom:1.2rem}
   .sn{font-size:1.4rem}
-  .hbtns{flex-direction:column;gap:.6rem;align-items:stretch}
+  .hbtns{display:flex;flex-direction:column;gap:.6rem;align-items:stretch}
   .bprim,.bsec{font-size:.68rem;padding:.75rem 1.4rem;justify-content:center}
 
   /* reel controls tighter */
@@ -610,14 +619,26 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   /* slide info hidden on very small */
   .slide-info{display:none}
 
-  /* about page: tighter spacing on mobile */
+  /* about page: mobile reorder + show hobbies + quote */
   #about .about-hero{flex-direction:column}
-  .about-hero-top{padding:7rem 1.4rem 0;flex-direction:column;align-items:flex-start;gap:2rem}
-  #about .about-hero-inner{max-width:100%;order:1}
+  .about-hero-top{padding:7rem 1.4rem 0;flex-direction:column;align-items:flex-start;gap:1.5rem}
+  .about-strip-col::before{display:none}
+  .about-hero-photo-wrap::before{display:none}
+  /* reorder: profile pic+hobbies → slider+quote → my story */
+  .about-hero-photo-wrap{order:1;width:100%;align-self:auto}
+  .about-strip-col{order:2;width:100%}
+  #about .about-hero-inner{order:3;max-width:100%}
   #about .about-hero-inner h1{font-size:clamp(2.4rem,10vw,3.5rem)}
-  .about-hero-photo{order:2;width:100%;height:280px}
-  /* photo strip: show below profile photo, compact height, full-bleed */
-  .about-photo-strip{display:block;order:3;height:140px;margin-left:-1.4rem;margin-right:-1.4rem}
+  /* profile pic full width */
+  .about-hero-photo{width:100%;height:280px}
+  /* show hobbies on mobile */
+  .about-hero-hobbies{display:block;margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--brd)}
+  .about-hobbies-label{font-size:.52rem;margin-bottom:.4rem}
+  .about-hero-hobbies .about-game{font-size:.52rem;padding:.18rem .45rem}
+  /* show quote on mobile */
+  .about-strip-quote{display:block;font-size:.85rem;text-align:left;padding-top:0;border-top:none;margin-top:2.75rem;margin-bottom:-20px}
+  /* photo strip: compact height, full-bleed */
+  .about-photo-strip{display:block;height:140px;margin-left:-1.4rem;margin-right:-1.4rem}
   .aps-track img{height:140px;width:105px}
   #about .about-body{padding:0 1.4rem 6rem}
   .about-block{grid-template-columns:1fr;gap:.75rem;padding-left:1rem}
@@ -656,15 +677,31 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   display:flex;flex-direction:column;gap:0
 }
 .about-hero-top{
-  display:flex;align-items:center;justify-content:space-between;gap:4rem;
+  display:flex;align-items:flex-start;justify-content:space-between;gap:4rem;
   padding:8rem 4rem 3rem
 }
 #about .about-hero-inner{max-width:500px;flex-shrink:0}
-.about-hero-photo{width:240px;height:310px;flex-shrink:0;position:relative}
+.about-hero-photo-wrap{flex-shrink:0;width:240px;display:flex;flex-direction:column;align-self:stretch;position:relative}
+.about-hero-photo-wrap::before{content:'';position:absolute;top:6px;left:0;right:0;height:1px;background:var(--brd);pointer-events:none}
+.about-hero-photo-inner{flex:1;display:flex;align-items:center}
+.about-hero-hobbies{padding-top:1rem;border-top:1px solid var(--brd);overflow:hidden}
+.about-hobbies-label{font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin-bottom:.5rem}
+.about-hobbies-pills{display:flex;flex-wrap:wrap;gap:.25rem}
+.about-hero-hobbies .about-game{padding:.13rem .4rem;font-size:.5rem;letter-spacing:.06em}
+.about-hero-photo{width:240px;height:310px;position:relative}
 .about-hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;filter:grayscale(12%);border-radius:14px}
 .about-hero-photo::after{content:'';position:absolute;inset:0;border:1px solid var(--acc);transform:translate(10px,10px);pointer-events:none;z-index:-1;border-radius:14px}
+.about-strip-col{flex:1;min-width:0;display:flex;flex-direction:column;align-self:stretch;position:relative}
+.about-strip-col::before{content:'';position:absolute;top:6px;left:0;right:0;height:1px;background:var(--brd);pointer-events:none}
+.about-strip-center{flex:1;display:flex;align-items:center}
+.about-strip-quote{
+  padding-top:1rem;border-top:1px solid var(--brd);
+  font-family:var(--fd);font-size:clamp(.9rem,1.8vw,1.3rem);
+  letter-spacing:.05em;line-height:1.35;color:var(--txt);text-align:center
+}
+.about-strip-quote span{color:var(--acc)}
 .about-photo-strip{
-  flex:1;overflow:hidden;align-self:stretch;min-width:0;
+  overflow:hidden;width:100%;height:310px;
   -webkit-mask-image:linear-gradient(to right,transparent 0%,#000 8%,#000 92%,transparent 100%);
   mask-image:linear-gradient(to right,transparent 0%,#000 8%,#000 92%,transparent 100%)
 }
@@ -940,10 +977,12 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
       </div>
     </div>
 
-    <div id="scroll-hint" aria-hidden="true">
-      <span>Resume &amp; Recommendations</span>
-      <hr>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="1.6"><line x1="12" y1="4" x2="12" y2="20"/><polyline points="5 13 12 20 19 13"/></svg>
+    <div id="scroll-hint" aria-hidden="true" onclick="(function(){var el=document.querySelector('.about.reveal');if(el)el.scrollIntoView({behavior:'smooth'});})();">
+      <span>Resume &amp;<em>Recommendations</em></span>
+      <svg width="18" height="22" viewBox="0 0 18 22" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="2 2 9 9 16 2"/>
+        <polyline points="2 11 9 18 16 11"/>
+      </svg>
     </div>
   </div>
 
@@ -1172,7 +1211,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
         <a href="#" onclick="showPortfolio();return false">Portfolio</a>
         <a href="#" onclick="openContact();return false">Get In Touch</a>
       </div>
-      <div class="footer-copy">&copy; 2026 Giovanni Lauffer &middot; All rights reserved</div>
+      <div class="footer-copy">&copy; <span id="copy-yr">2026</span> Giovanni Lauffer &middot; All rights reserved</div>
     </div>
     <div class="footer-cta">
       <a href="#" onclick="openContact();return false" class="bprim">
@@ -1222,6 +1261,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
           <div><div class="about-stat-n">4</div><div class="about-stat-l">Languages</div></div>
         </div>
       </div>
+      <div class="about-strip-col">
+      <div class="about-strip-center">
       <div class="about-photo-strip" aria-hidden="true">
       <div class="aps-track">
         <img src="/wp-content/uploads/2026/04/gio-redblue.webp" alt="" loading="lazy" style="object-position:center 25%">
@@ -1267,8 +1308,26 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
         <img src="/wp-content/uploads/2026/04/gio-mom.webp" alt="" loading="lazy">
       </div>
       </div>
-      <div class="about-hero-photo">
-        <img src="/wp-content/uploads/2025/10/Artstation-profile-pic.webp" alt="Giovanni Lauffer" loading="eager" decoding="async">
+      </div>
+      <p class="about-strip-quote">"Travel is how I stock<br><span>my reference folder."</span></p>
+      </div>
+      <div class="about-hero-photo-wrap">
+        <div class="about-hero-photo-inner">
+          <div class="about-hero-photo">
+            <img src="/wp-content/uploads/2025/10/Artstation-profile-pic.webp" alt="Giovanni Lauffer" loading="eager" decoding="async">
+          </div>
+        </div>
+        <div class="about-hero-hobbies">
+          <div class="about-hobbies-label">Hobbies</div>
+          <div class="about-hobbies-pills">
+            <span class="about-game">Windsurfing</span>
+            <span class="about-game">Basketball</span>
+            <span class="about-game">Tennis</span>
+            <span class="about-game">Running in Nature</span>
+            <span class="about-game">Motorsport</span>
+            <span class="about-game">Gaming</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1409,7 +1468,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
       </div>
     </div>
 
-    <div class="about-block about-block-img reveal" data-year="2026">
+    <div class="about-block about-block-img reveal" data-year="now">
       <div class="about-label">Right Now</div>
       <div class="about-content">
         <p>Still contributing to TimeSplitters: Rewind, still pushing the quality of every asset that goes through my hands. And actively looking for a full-time studio role: environment art, props, hard surface, whatever the work demands.</p>
@@ -1420,7 +1479,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
       </div>
     </div>
 
-    <div class="about-block about-block-img reveal" data-year="2026">
+    <div class="about-block about-block-img reveal" data-year="now">
       <div class="about-label">What I'm After</div>
       <div class="about-content">
         <p>The gaming industry is having a rough stretch. The layoffs are real and the uncertainty is real. I'm not blind to it. But I believe in this medium, in the people making it, and in what I can bring to the table.</p>
@@ -1524,6 +1583,9 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+
+// ── auto-update current year (footer + about counter) ──
+const _yr=document.getElementById('copy-yr');if(_yr)_yr.textContent=new Date().getFullYear();
 
 // ── cursor (RAF-based, starts hidden until first mouse move) ──
 if(window.matchMedia('(pointer:fine)').matches){
@@ -2134,7 +2196,7 @@ function showAbout(){
           const dist=Math.abs(bCenter-vCenter);
           if(dist<closestDist){closestDist=dist;closest=b;}
         });
-        if(closest)setYr(closest.dataset.year);
+        if(closest){const y=closest.dataset.year;setYr(y==='now'?String(new Date().getFullYear()):y);}
       });
     }
     window.addEventListener('scroll',onYrScroll,{passive:true});
