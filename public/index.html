@@ -323,7 +323,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .relsec{margin-top:4.5rem;padding-top:2.5rem;border-top:1px solid var(--brd)}
 .reltit{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);font-weight:600;margin-bottom:1.6rem}
 .relgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
-.relcard{position:relative;overflow:hidden;aspect-ratio:4/3;cursor:none}
+.relcard{position:relative;overflow:hidden;aspect-ratio:1/1;cursor:none}
 .relcard img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s}
 .relcard:hover img{transform:scale(1.05)}
 .relcard-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,13,14,.93) 0%,transparent 60%);opacity:0;transition:opacity .3s;padding:.9rem;display:flex;flex-direction:column;justify-content:flex-end}
@@ -495,6 +495,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   .hrole{font-size:.78rem;margin-top:1rem;margin-bottom:1.5rem}
   .hstats{gap:1.5rem;margin-bottom:1.5rem}
   .sn{font-size:1.6rem}
+  /* buttons: View Portfolio + Get In Touch on row 1, Download CV under View Portfolio */
+  .hbtns{display:grid;grid-template-columns:auto auto;width:max-content;gap:.85rem}
 
   /* reel controls shift up since hero moved */
   .rctrl{bottom:2rem;left:1.4rem;right:1.4rem;gap:1rem}
@@ -510,7 +512,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   /* about hero: same order as mobile — pic+hobbies → strip+quote → my story */
   .about-strip-col::before{display:none}
   .about-hero-photo-wrap::before{display:none}
-  .about-hero-photo-wrap{order:1;align-self:auto}
+  .about-hero-photo-wrap{order:1;width:280px;margin-left:auto;margin-right:auto;align-self:auto}
   .about-strip-col{order:2}
   #about .about-hero-inner{order:3;max-width:100%}
   .about-hero-photo{width:100%;height:300px}
@@ -578,7 +580,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   .htag{font-size:.58rem;margin-bottom:.7rem}
   .hstats{gap:1.2rem;margin-bottom:1.2rem}
   .sn{font-size:1.4rem}
-  .hbtns{flex-direction:column;gap:.6rem;align-items:stretch}
+  .hbtns{display:flex;flex-direction:column;gap:.6rem;align-items:stretch}
   .bprim,.bsec{font-size:.68rem;padding:.75rem 1.4rem;justify-content:center}
 
   /* reel controls tighter */
