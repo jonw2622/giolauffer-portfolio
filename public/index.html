@@ -1211,7 +1211,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
         <a href="#" onclick="showPortfolio();return false">Portfolio</a>
         <a href="#" onclick="openContact();return false">Get In Touch</a>
       </div>
-      <div class="footer-copy">&copy; 2026 Giovanni Lauffer &middot; All rights reserved</div>
+      <div class="footer-copy">&copy; <span id="copy-yr">2026</span> Giovanni Lauffer &middot; All rights reserved</div>
     </div>
     <div class="footer-cta">
       <a href="#" onclick="openContact();return false" class="bprim">
@@ -1468,7 +1468,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
       </div>
     </div>
 
-    <div class="about-block about-block-img reveal" data-year="2026">
+    <div class="about-block about-block-img reveal" data-year="now">
       <div class="about-label">Right Now</div>
       <div class="about-content">
         <p>Still contributing to TimeSplitters: Rewind, still pushing the quality of every asset that goes through my hands. And actively looking for a full-time studio role: environment art, props, hard surface, whatever the work demands.</p>
@@ -1479,7 +1479,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
       </div>
     </div>
 
-    <div class="about-block about-block-img reveal" data-year="2026">
+    <div class="about-block about-block-img reveal" data-year="now">
       <div class="about-label">What I'm After</div>
       <div class="about-content">
         <p>The gaming industry is having a rough stretch. The layoffs are real and the uncertainty is real. I'm not blind to it. But I believe in this medium, in the people making it, and in what I can bring to the table.</p>
@@ -1583,6 +1583,9 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+
+// ── auto-update current year (footer + about counter) ──
+const _yr=document.getElementById('copy-yr');if(_yr)_yr.textContent=new Date().getFullYear();
 
 // ── cursor (RAF-based, starts hidden until first mouse move) ──
 if(window.matchMedia('(pointer:fine)').matches){
@@ -2193,7 +2196,7 @@ function showAbout(){
           const dist=Math.abs(bCenter-vCenter);
           if(dist<closestDist){closestDist=dist;closest=b;}
         });
-        if(closest)setYr(closest.dataset.year);
+        if(closest){const y=closest.dataset.year;setYr(y==='now'?String(new Date().getFullYear()):y);}
       });
     }
     window.addEventListener('scroll',onYrScroll,{passive:true});
