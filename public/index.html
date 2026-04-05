@@ -499,7 +499,10 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   /* reel controls shift up since hero moved */
   .rctrl{bottom:2rem;left:1.4rem;right:1.4rem;gap:1rem}
   .slide-info{bottom:auto;top:5rem;right:1.4rem}
-  #scroll-hint{bottom:2rem}
+  #scroll-hint{bottom:1.65rem;gap:.1rem}
+  #scroll-hint span{font-size:.44rem;line-height:1.2}
+  #scroll-hint span em{display:inline}
+  #scroll-hint svg{width:10px;height:12px}
 
   /* about: single column */
   .about{grid-template-columns:1fr;gap:2.5rem;padding:3rem 1.4rem 3rem}
@@ -610,18 +613,26 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   /* slide info hidden on very small */
   .slide-info{display:none}
 
-  /* about page: tighter spacing on mobile */
+  /* about page: mobile reorder + show hobbies + quote */
   #about .about-hero{flex-direction:column}
-  .about-hero-top{padding:7rem 1.4rem 0;flex-direction:column;align-items:flex-start;gap:2rem}
-  .about-strip-quote{display:none}
+  .about-hero-top{padding:7rem 1.4rem 0;flex-direction:column;align-items:flex-start;gap:1.5rem}
   .about-strip-col::before{display:none}
-  .about-hero-hobbies{display:none}
   .about-hero-photo-wrap::before{display:none}
-  #about .about-hero-inner{max-width:100%;order:1}
+  /* reorder: profile pic+hobbies → slider+quote → my story */
+  .about-hero-photo-wrap{order:1;width:100%;align-self:auto}
+  .about-strip-col{order:2;width:100%}
+  #about .about-hero-inner{order:3;max-width:100%}
   #about .about-hero-inner h1{font-size:clamp(2.4rem,10vw,3.5rem)}
-  .about-hero-photo{order:2;width:100%;height:280px}
-  /* photo strip: show below profile photo, compact height, full-bleed */
-  .about-photo-strip{display:block;order:3;height:140px;margin-left:-1.4rem;margin-right:-1.4rem}
+  /* profile pic full width */
+  .about-hero-photo{width:100%;height:280px}
+  /* show hobbies on mobile */
+  .about-hero-hobbies{display:block;padding-top:.75rem;border-top:1px solid var(--brd)}
+  .about-hobbies-label{font-size:.52rem;margin-bottom:.4rem}
+  .about-hero-hobbies .about-game{font-size:.52rem;padding:.18rem .45rem}
+  /* show quote on mobile */
+  .about-strip-quote{display:block;font-size:.85rem;text-align:left;padding-top:.75rem;border-top:1px solid var(--brd)}
+  /* photo strip: compact height, full-bleed */
+  .about-photo-strip{display:block;height:140px;margin-left:-1.4rem;margin-right:-1.4rem}
   .aps-track img{height:140px;width:105px}
   #about .about-body{padding:0 1.4rem 6rem}
   .about-block{grid-template-columns:1fr;gap:.75rem;padding-left:1rem}
