@@ -615,6 +615,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   .about-hero-top{padding:7rem 1.4rem 0;flex-direction:column;align-items:flex-start;gap:2rem}
   .about-strip-quote{display:none}
   .about-strip-col::before{display:none}
+  .about-hero-hobbies{display:none}
+  .about-hero-photo-wrap::before{display:none}
   #about .about-hero-inner{max-width:100%;order:1}
   #about .about-hero-inner h1{font-size:clamp(2.4rem,10vw,3.5rem)}
   .about-hero-photo{order:2;width:100%;height:280px}
@@ -662,9 +664,13 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   padding:8rem 4rem 3rem
 }
 #about .about-hero-inner{max-width:500px;flex-shrink:0}
-.about-hero-photo-wrap{flex-shrink:0;display:flex;flex-direction:column;align-self:stretch}
+.about-hero-photo-wrap{flex-shrink:0;width:240px;display:flex;flex-direction:column;align-self:stretch;position:relative}
+.about-hero-photo-wrap::before{content:'';position:absolute;top:6px;left:0;right:0;height:1px;background:var(--brd);pointer-events:none}
 .about-hero-photo-inner{flex:1;display:flex;align-items:center}
-.about-hero-photo-foot{padding-top:1rem;font-size:clamp(.9rem,1.8vw,1.3rem);line-height:1.35;visibility:hidden;pointer-events:none}
+.about-hero-hobbies{padding-top:1rem;border-top:1px solid var(--brd);overflow:hidden}
+.about-hobbies-label{font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin-bottom:.5rem}
+.about-hobbies-pills{display:flex;flex-wrap:wrap;gap:.25rem}
+.about-hero-hobbies .about-game{padding:.13rem .4rem;font-size:.5rem;letter-spacing:.06em}
 .about-hero-photo{width:240px;height:310px;position:relative}
 .about-hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;filter:grayscale(12%);border-radius:14px}
 .about-hero-photo::after{content:'';position:absolute;inset:0;border:1px solid var(--acc);transform:translate(10px,10px);pointer-events:none;z-index:-1;border-radius:14px}
@@ -1292,7 +1298,17 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
             <img src="/wp-content/uploads/2025/10/Artstation-profile-pic.webp" alt="Giovanni Lauffer" loading="eager" decoding="async">
           </div>
         </div>
-        <div class="about-hero-photo-foot" aria-hidden="true">"The world is the reference.<br><span>I'm just taking notes."</span></div>
+        <div class="about-hero-hobbies">
+          <div class="about-hobbies-label">Hobbies</div>
+          <div class="about-hobbies-pills">
+            <span class="about-game">Windsurfing</span>
+            <span class="about-game">Basketball</span>
+            <span class="about-game">Tennis</span>
+            <span class="about-game">Running in Nature</span>
+            <span class="about-game">Motorsport</span>
+            <span class="about-game">Gaming</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
