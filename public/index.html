@@ -144,7 +144,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .rbtn:hover{border-color:var(--acc);background:var(--acc-glow)}
 .rbtn svg{width:17px;height:17px;stroke:var(--txt);stroke-width:1.5;fill:none}
 /* ── scroll hint ── */
-#scroll-hint{position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.25rem;z-index:20;pointer-events:none;opacity:.55;transition:opacity .6s}
+#scroll-hint{position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.25rem;z-index:20;pointer-events:auto;opacity:.55;transition:opacity .6s;cursor:none}
 #scroll-hint.gone{opacity:0}
 #scroll-hint span{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--txt);white-space:nowrap;font-family:var(--fb);font-weight:600;line-height:1.6;text-align:center}
 #scroll-hint span em{font-style:normal;color:var(--acc);font-family:var(--fb);font-size:1em;letter-spacing:.22em;text-transform:uppercase;display:block}
@@ -960,7 +960,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
       </div>
     </div>
 
-    <div id="scroll-hint" aria-hidden="true">
+    <div id="scroll-hint" aria-hidden="true" onclick="document.querySelector('.about.reveal').scrollIntoView({behavior:'smooth'})">
       <span>Resume &amp;<em>Recommendations</em></span>
       <svg width="18" height="22" viewBox="0 0 18 22" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="2 2 9 9 16 2"/>
