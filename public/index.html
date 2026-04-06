@@ -322,7 +322,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 
 .relsec{margin-top:4.5rem;padding-top:2.5rem;border-top:1px solid var(--brd)}
 .reltit{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);font-weight:600;margin-bottom:1.6rem}
-.relgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.relgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;margin:0 -2.5rem}
 .relcard{position:relative;overflow:hidden;aspect-ratio:1/1;cursor:none}
 .relcard img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s}
 .relcard:hover img{transform:scale(1.05)}
@@ -542,7 +542,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   .gal{flex-direction:column}
   .gi.fw img{max-height:380px}
   .bdgrid{grid-template-columns:1fr;gap:1.5rem}
-  .relgrid{grid-template-columns:1fr 1fr}
+  .relgrid{grid-template-columns:repeat(4,1fr);margin:0 -1.4rem}
   .bdsec{margin-top:2.5rem;padding-top:2rem}
 
   /* hire bar: compact */
@@ -602,7 +602,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   .pcnt{padding:0 1rem 6rem}
   .pm h1{font-size:1.8rem}
   .ptags{gap:.3rem}
-  .relgrid{grid-template-columns:1fr}
+  .relgrid{grid-template-columns:repeat(2,1fr);margin:0 -1rem}
 
   /* about */
   .about{padding:2.5rem 1rem 2.5rem}
@@ -2426,7 +2426,7 @@ function showPost(id){
   }
 
   // related
-  document.getElementById('prel').innerHTML=p.rel.map(rid=>{
+  document.getElementById('prel').innerHTML=ORDER.filter(rid=>rid!==id).map(rid=>{
     const r=POSTS[rid];if(!r)return'';
     const relThumb=r.isVideo
       ? `<video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block"><source src="${r.hasVideo}" type="video/mp4"></video>`
