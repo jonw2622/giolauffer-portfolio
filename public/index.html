@@ -43,8 +43,20 @@
   --fe:'Barlow Condensed',sans-serif; /* extended bold for hero */
   --fb:'Inter',sans-serif;--fm:'DM Mono',monospace;
 }
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scrollbar-color:#f4845f #141414}
 body{background:var(--bg);color:var(--txt);font-family:var(--fb);font-weight:300;overflow-x:hidden;cursor:none}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:#141414}
+::-webkit-scrollbar-thumb{background:#f4845f;border-radius:2px}
+::-webkit-scrollbar-thumb:hover{background:#e8621a}
+::-webkit-scrollbar-button{background:#f4845f!important;display:block}
+::-webkit-scrollbar-button:vertical:decrement{background:#f4845f!important;height:12px}
+::-webkit-scrollbar-button:vertical:increment{background:#f4845f!important;height:12px}
+::-webkit-scrollbar-button:vertical:start:decrement{background:#f4845f!important}
+::-webkit-scrollbar-button:vertical:end:increment{background:#f4845f!important}
+::-webkit-scrollbar-button:hover{background:#e8621a!important}
 
 /* ── CURSOR ── */
 *,a,button,input,select,textarea,[role="button"]{cursor:none!important}
@@ -68,8 +80,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .nlinks{display:flex;gap:2rem;list-style:none;margin-left:auto}
 .nlinks a{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);text-decoration:none;transition:color .2s;font-weight:500}
 .nlinks a:hover{color:var(--txt)}
-.ncta{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding:.5rem 1.3rem;border:1px solid var(--acc);color:var(--acc);text-decoration:none;font-weight:500;transition:background .2s,color .2s;border-radius:9999px}
-.ncta:hover{background:var(--acc);color:var(--bg)}
+.ncta{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding:.5rem 1.3rem;border:1px solid var(--acc2);color:var(--acc2);text-decoration:none;font-weight:500;transition:background .2s,color .2s;border-radius:9999px}
+.ncta:hover{background:var(--acc2);color:var(--bg)}
 
 /* ════════════════════════════════════
    HOME — VIDEO REEL
@@ -99,8 +111,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .slide-info{position:absolute;bottom:9rem;right:2.5rem;text-align:right;z-index:10}
 
 .hero{position:absolute;top:50%;left:2.5rem;transform:translateY(-50%);z-index:10;max-width:528px}
-.htag{font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;color:var(--acc);font-weight:500;margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}
-.htag::before{content:'';display:block;width:1.8rem;height:1px;background:var(--acc)}
+.htag{font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;color:var(--acc);font-weight:500;margin-bottom:1rem}
 
 /* ── HERO NAME: transparent outline extended bold ── */
 .hname{
@@ -110,18 +121,63 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
   line-height:.88;
   letter-spacing:.04em;
   text-transform:uppercase;
-  /* transparent fill, teal stroke = see-through bold outline */
   -webkit-text-fill-color:transparent;
   -webkit-text-stroke:1.5px rgba(238,235,229,.75);
   color:transparent;
   display:block;
   user-select:none;
 }
-/* second line gets orange stroke for contrast */
+/* first line wrapper */
+.hname .l1{display:block;position:relative}
+/* outline layer */
+.hname .l1-o{display:block}
+/* fill layer — white, wave-clipped to bottom half */
+.hname .l1-f{
+  display:block;
+  position:absolute;
+  top:0;left:0;right:0;
+  -webkit-text-fill-color:rgba(238,235,229,.92);
+  -webkit-text-stroke:0;
+  clip-path:polygon(0% 100%,100% 100%,100% 62%,90% 65%,80% 60%,70% 60%,60% 65%,50% 62%,40% 59%,30% 64%,20% 64%,10% 59%,0% 62%);
+  animation:milk-wave 3s ease-in-out infinite;
+}
+@keyframes milk-wave{
+  0%,100%{clip-path:polygon(0% 100%,100% 100%,100% 62%,90% 65%,80% 60%,70% 60%,60% 65%,50% 62%,40% 59%,30% 64%,20% 64%,10% 59%,0% 62%)}
+  50%{clip-path:polygon(0% 100%,100% 100%,100% 62%,90% 59%,80% 64%,70% 64%,60% 59%,50% 62%,40% 65%,30% 60%,20% 60%,10% 65%,0% 62%)}
+}
+/* ship layer — same text-clip as milk water, above-wave area only */
+.hname .l1-ship{
+  display:block;
+  position:absolute;
+  top:0;left:0;right:0;
+  -webkit-text-fill-color:transparent;
+  color:transparent;
+  -webkit-text-stroke:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 44 28' xmlns='http://www.w3.org/2000/svg' fill='white'%3E%3Cpath d='M2,20 L0,25 Q22,28 44,25 L42,20 Z'/%3E%3Crect x='0' y='18' width='44' height='2'/%3E%3Crect x='4' y='11' width='13' height='7'/%3E%3Crect x='6' y='6' width='9' height='5'/%3E%3Crect x='8' y='2' width='4' height='5'/%3E%3Crect x='10' y='0' width='2' height='3'/%3E%3Crect x='27' y='12' width='9' height='6'/%3E%3Crect x='29' y='7' width='5' height='5'/%3E%3Crect x='30' y='3' width='3' height='5'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-size:40px auto;
+  background-position:23% 66%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  clip-path:polygon(0% 0%,100% 0%,100% 62%,90% 65%,80% 60%,70% 60%,60% 65%,50% 62%,40% 59%,30% 64%,20% 64%,10% 59%,0% 62%);
+  animation:ship-wave 3s ease-in-out infinite;
+}
+@keyframes ship-wave{
+  0%,100%{
+    clip-path:polygon(0% 0%,100% 0%,100% 62%,90% 65%,80% 60%,70% 60%,60% 65%,50% 62%,40% 59%,30% 64%,20% 64%,10% 59%,0% 62%);
+    background-position:23% 66%
+  }
+  50%{
+    clip-path:polygon(0% 0%,100% 0%,100% 62%,90% 59%,80% 64%,70% 64%,60% 59%,50% 62%,40% 65%,30% 60%,20% 60%,10% 65%,0% 62%);
+    background-position:23% 62%
+  }
+}
+/* second line: solid teal fill */
 .hname .l2{
   display:block;
-  -webkit-text-stroke:2px var(--acc);
-  -webkit-text-fill-color:transparent;
+  -webkit-text-stroke:0;
+  -webkit-text-fill-color:var(--acc);
+  background:none;
 }
 
 .hrole{font-size:.84rem;letter-spacing:.04em;color:var(--mut);margin-top:1.3rem;margin-bottom:2rem;line-height:1.8;font-weight:400}
@@ -129,8 +185,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .sn{font-family:var(--fd);font-size:1.9rem;color:var(--txt)}
 .sl{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-top:.05rem;font-weight:500}
 .hbtns{display:flex;gap:.85rem;flex-wrap:wrap}
-.bprim{display:inline-flex;align-items:center;gap:.65rem;background:var(--acc);color:var(--bg);font-family:var(--fb);font-size:.74rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 1.8rem;text-decoration:none;transition:background .2s,gap .2s;border-radius:9999px}
-.bprim:hover{background:#0dd4b8;gap:1rem}
+.bprim{display:inline-flex;align-items:center;gap:.65rem;background:var(--acc2);color:var(--bg);font-family:var(--fb);font-size:.74rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 1.8rem;text-decoration:none;transition:background .2s,gap .2s;border-radius:9999px}
+.bprim:hover{background:#e8621a;gap:1rem}
 .bsec{display:inline-flex;align-items:center;font-size:.74rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);text-decoration:none;border:1px solid var(--brd);padding:.85rem 1.6rem;transition:color .2s,border-color .2s;border-radius:9999px}
 .bsec:hover{color:var(--txt);border-color:var(--brd2)}
 
@@ -178,7 +234,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .wi-link:hover{background:var(--surf2);outline-color:var(--acc)}
 .wi-link:hover .wlink{opacity:1}
 .winfo{display:flex;flex-direction:column;gap:.25rem;min-width:0}
-.wlogo{width:72px;flex-shrink:0;display:flex;align-items:center}
+.wlogo{width:72px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
 .wlogo img{max-width:72px;max-height:36px;object-fit:contain;filter:brightness(0) invert(.6)}
 .wdiv{width:1px;background:var(--brd);flex-shrink:0}
 .wt{font-size:.84rem;font-weight:500;display:flex;align-items:center;gap:.35rem;flex-wrap:wrap}
@@ -218,9 +274,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .fb-beyond.on,.fb-beyond:hover{border-color:var(--acc2);color:var(--acc2)}
 
 /* Portfolio grid */
-.pgrid{padding:.5rem 2.5rem 6rem;display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
-.pcard{position:relative;overflow:hidden;background:var(--surf);cursor:none;display:block}
-.pcard img.thumb{width:100%;height:auto;display:block;transition:transform .55s cubic-bezier(.25,.46,.45,.94)}
+.pgrid{padding:.5rem 0 6rem;display:grid;grid-template-columns:repeat(6,1fr);gap:3px}
+.pcard{position:relative;overflow:hidden;background:var(--surf);cursor:none;display:block;aspect-ratio:1/1}
+.pcard img.thumb{width:100%;height:100%;display:block;object-fit:cover;transition:transform .55s cubic-bezier(.25,.46,.45,.94)}
 .pcard:hover img.thumb{transform:scale(1.04)}
 .pcard-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,13,14,.95) 0%,rgba(13,13,14,.3) 45%,transparent 70%);opacity:0;transition:opacity .35s;display:flex;flex-direction:column;justify-content:flex-end;padding:1.2rem}
 .pcard:hover .pcard-ov{opacity:1}
@@ -322,7 +378,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 
 .relsec{margin-top:4.5rem;padding-top:2.5rem;border-top:1px solid var(--brd)}
 .reltit{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);font-weight:600;margin-bottom:1.6rem}
-.relgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.relgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin:0 -2.5rem}
 .relcard{position:relative;overflow:hidden;aspect-ratio:1/1;cursor:none}
 .relcard img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s}
 .relcard:hover img{transform:scale(1.05)}
@@ -480,6 +536,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   /* cursor restored on mobile */
   *,a,button,input,select,textarea,[role="button"]{cursor:auto!important}
   #cursor{display:none}
+  .sv-witchden{object-position:72% center}
+  .sv-ts{object-position:center 30%}
 
   /* nav: hide links, show hamburger — logo left, controls right */
   nav{padding:1rem 1.4rem}
@@ -492,7 +550,10 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   .hero{left:1.4rem;right:1.4rem;max-width:100%;top:auto;bottom:10rem;transform:none}
   .hname{font-size:clamp(3rem,11vw,6rem);-webkit-text-stroke:1px rgba(238,235,229,.7)}
   .hname .l2{-webkit-text-stroke:1.5px var(--acc)}
-  .hrole{font-size:.78rem;margin-top:1rem;margin-bottom:1.5rem}
+  .avail-hero{margin-bottom:1rem}
+  .htag{margin-bottom:1rem}
+  .hname{margin-bottom:.5rem}
+  .hrole{font-size:.78rem;margin-top:.8rem;margin-bottom:1.5rem}
   .hstats{gap:1.5rem;margin-bottom:1.5rem}
   .sn{font-size:1.6rem}
   /* buttons: View Portfolio + Get In Touch on row 1, Download CV under View Portfolio */
@@ -528,8 +589,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   .recgrid{grid-template-columns:1fr}
   .rstrip{padding:0 1.4rem 4rem}
 
-  /* portfolio grid: 2 cols */
-  .pgrid{padding:.5rem 1.4rem 7rem;grid-template-columns:repeat(2,1fr)}
+  /* portfolio grid: 4 cols on tablet */
+  .pgrid{padding:.5rem 0 7rem;grid-template-columns:repeat(4,1fr)}
   .phead{padding:5.5rem 1.4rem 1.5rem;flex-direction:column;align-items:flex-start}
   /* portfolio filters: horizontal scroll, no wrapping */
   .pfilt{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px;max-width:100%}
@@ -538,11 +599,12 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   /* post detail: stack sidebar below content */
   .ptop{grid-template-columns:1fr;gap:2rem;margin-top:-2rem}
   .pcnt{padding:0 1.4rem 6rem}
+  .pbc{margin-bottom:3rem}
   .phero{height:50vh}
   .gal{flex-direction:column}
   .gi.fw img{max-height:380px}
   .bdgrid{grid-template-columns:1fr;gap:1.5rem}
-  .relgrid{grid-template-columns:1fr 1fr}
+  .relgrid{grid-template-columns:repeat(2,1fr);margin:0 -1.4rem}
   .bdsec{margin-top:2.5rem;padding-top:2rem}
 
   /* hire bar: compact */
@@ -577,8 +639,10 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   .hname{font-size:clamp(2.6rem,13vw,4.5rem);-webkit-text-stroke:1px rgba(238,235,229,.65)}
   .hname .l2{-webkit-text-stroke:1.2px var(--acc)}
   .hrole{font-size:.72rem;display:none}/* hide on tiny screens to avoid clutter */
-  .htag{font-size:.58rem;margin-bottom:.7rem}
-  .hstats{gap:1.2rem;margin-bottom:1.2rem}
+  .avail-hero{margin-bottom:1.2rem}
+  .htag{font-size:.58rem;margin-bottom:1.1rem}
+  .hname{margin-bottom:1.1rem}
+  .hstats{gap:1.2rem;margin-bottom:1.4rem}
   .sn{font-size:1.4rem}
   .hbtns{display:flex;flex-direction:column;gap:.6rem;align-items:stretch}
   .bprim,.bsec{font-size:.68rem;padding:.75rem 1.4rem;justify-content:center}
@@ -591,8 +655,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   .rnav{gap:.3rem}
   .rbtn{width:36px;height:36px}
 
-  /* portfolio: single column */
-  .pgrid{grid-template-columns:1fr;padding:.5rem 1rem 7rem}
+  /* portfolio: 2 columns on mobile */
+  .pgrid{grid-template-columns:repeat(2,1fr);padding:.5rem 0 7rem}
   .phead{padding:5rem 1rem 1.2rem}
   .pfilt{gap:.3rem}
   .fb{font-size:.6rem;padding:.42rem .9rem;min-height:36px}
@@ -602,7 +666,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   .pcnt{padding:0 1rem 6rem}
   .pm h1{font-size:1.8rem}
   .ptags{gap:.3rem}
-  .relgrid{grid-template-columns:1fr}
+  .relgrid{grid-template-columns:repeat(2,1fr);margin:0 -1rem}
 
   /* about */
   .about{padding:2.5rem 1rem 2.5rem}
@@ -652,6 +716,12 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 /* ════════════════════════════════════
    TOUCH DEVICES — kill sticky hover states
 ════════════════════════════════════ */
+@media(max-width:1024px){
+  .cbadge{display:none}
+  .pcc{display:none}
+  .pcm{display:none}
+  .pcn{font-size:.7rem;letter-spacing:.03em}
+}
 @media(hover:none){
   .pcard:hover img.thumb,.pcard:hover video.thumb{transform:none}
   .fb:hover:not(.on){border-color:var(--brd);color:var(--mut)}
@@ -660,7 +730,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   .hls:hover{border-color:var(--brd);color:var(--mut)}
   .mob-nav a:hover{color:var(--txt)}
   .footer-links a:hover{color:var(--mut)}
-  .bprim:hover{background:var(--acc);gap:.65rem}
+  .bprim:hover{background:var(--acc2);gap:.65rem}
   .bsec:hover{color:var(--mut);border-color:var(--brd)}
 }
 
@@ -926,8 +996,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 
       <!-- Slide 1: TimeSplitters Rewind — direct MP4 from giovannilauffer.com -->
       <div class="rslide">
-        <video class="slide-video" autoplay muted loop playsinline preload="metadata"
-          poster="/wp-content/uploads/2024/06/giovanni-lauffer-giovanni-lauffer-thumbnail-4.webp">
+        <video class="slide-video sv-ts" autoplay muted loop playsinline preload="auto">
           <source src="/ts-rewind-2k-v3.mp4" type="video/mp4">
         </video>
         <div class="rov"></div><div class="rob"></div>
@@ -936,7 +1005,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 
       <!-- Slide 2: Witch's Den — direct MP4 from giovannilauffer.com -->
       <div class="rslide">
-        <video class="slide-video" autoplay muted loop playsinline preload="metadata">
+        <video class="slide-video sv-witchden" autoplay muted loop playsinline preload="metadata">
           <source src="/wp-content/uploads/2025/12/WitchesDen-2k-1.mp4" type="video/mp4">
         </video>
         <div class="rov"></div><div class="rob"></div>
@@ -974,7 +1043,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
     <div class="hero">
       <div class="avail-hero ai"><span class="avail-dot"></span>Available for Work</div>
       <div class="htag ai">3D Prop & Environment Artist · Ede, Netherlands</div>
-      <h1 class="hname ai d1">GIOVANNI<span class="l2">LAUFFER</span></h1>
+      <h1 class="hname ai d1"><span class="l1"><span class="l1-o">GIOVANNI</span><span class="l1-f" aria-hidden="true">GIOVANNI</span><span class="l1-ship" aria-hidden="true">GIOVANNI</span></span><span class="l2">LAUFFER</span></h1>
       <p class="hrole ai d2">Props · Characters · Vehicles · Environments<br>Maya · ZBrush · Substance · UE5 · 3DS Max · VRay</p>
       <div class="hstats ai d3">
         <div><div class="sn">5+</div><div class="sl">Years Exp</div></div>
@@ -1101,7 +1170,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
     <div class="witems">
 
       <a class="wi wi-link" href="https://www.timesplittersrewind.com/" target="_blank" rel="noopener noreferrer">
-        <div class="wlogo"><img src="/wp-content/uploads/2024/07/Cinder.webp" alt="Cinder Interactive" loading="lazy" decoding="async"></div>
+        <div class="wlogo"><img src="/wp-content/uploads/2024/07/Cinder.webp" alt="Cinder Interactive" loading="lazy" decoding="async" style="max-height:64px;max-width:72px"></div>
         <div class="wdiv"></div>
         <div class="winfo">
           <div class="wt">3D Artist — Cinder Interactive <span class="wlink">↗</span></div>
@@ -1116,7 +1185,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
       </a>
 
       <a class="wi wi-link" href="https://www.lukkien.com/" target="_blank" rel="noopener noreferrer">
-        <div class="wlogo"><img src="/wp-content/uploads/2024/07/LUKKIEN-1024x221.webp" alt="Lukkien" loading="lazy" decoding="async"></div>
+        <div class="wlogo" style="margin-top:24px"><img src="/wp-content/uploads/2024/07/LUKKIEN-1024x221.webp" alt="Lukkien" loading="lazy" decoding="async"></div>
         <div class="wdiv"></div>
         <div class="winfo">
           <div class="wt">3D Artist — Lukkien <span class="wlink">↗</span></div>
@@ -1140,7 +1209,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
         <div class="wdiv"></div>
         <div class="winfo">
           <div class="wt">Saxion University of Applied Sciences <span class="wlink">↗</span></div>
-          <div class="wd">Enschede, Netherlands &middot; 2016 – 2020</div>
+          <div class="wd">2016 – 2020 &middot; Enschede, Netherlands</div>
           <div class="wdsc"><strong style="color:var(--txt);font-weight:500">Bachelor Degree</strong><br>Creative Media and Game Technologies</div>
         </div>
       </a>
@@ -1150,18 +1219,28 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
         <div class="wdiv"></div>
         <div class="winfo">
           <div class="wt">Beyond Extent <span class="wlink">↗</span></div>
-          <div class="wd">Remote · Online Community</div>
+          <div class="wd">Nov 2025 &middot; Remote · Online Community</div>
           <div class="wdsc"><strong style="color:var(--txt);font-weight:500">Witch's Den Challenge</strong><br>Team environment art challenge</div>
         </div>
       </a>
 
       <a class="wi wi-link" href="https://www.isc.cw/" target="_blank" rel="noopener noreferrer">
-        <div class="wlogo"><img src="/wp-content/uploads/2024/07/ISC.webp" alt="ISC" loading="lazy" decoding="async"></div>
+        <div class="wlogo"><img src="/wp-content/uploads/2024/07/ISC.webp" alt="ISC" loading="lazy" decoding="async" style="max-height:48px;max-width:72px"></div>
         <div class="wdiv"></div>
         <div class="winfo">
           <div class="wt">International School of Curaçao <span class="wlink">↗</span></div>
-          <div class="wd">Willemstad, Curaçao &middot; 2007 – 2013</div>
+          <div class="wd">2007 – 2013 &middot; Willemstad, Curaçao</div>
           <div class="wdsc"><strong style="color:var(--txt);font-weight:500">International Baccalaureate Diploma</strong><br>Specializing in High Level Art</div>
+        </div>
+      </a>
+
+      <a class="wi wi-link" href="https://www.beyondextent.com/" target="_blank" rel="noopener noreferrer">
+        <div class="wlogo"><img src="/wp-content/uploads/2025/11/BeyondExtent_Logo_White_Monotone-150x150.webp" alt="Beyond Extent" loading="lazy" decoding="async"></div>
+        <div class="wdiv"></div>
+        <div class="winfo">
+          <div class="wt">Beyond Extent <span class="wlink">↗</span></div>
+          <div class="wd">Apr 2026 &middot; Remote · Online Community</div>
+          <div class="wdsc"><strong style="color:var(--txt);font-weight:500">Kingdom Below Challenge</strong><br>Team environment art challenge</div>
         </div>
       </a>
 
@@ -1656,7 +1735,7 @@ function gts(n){
   document.getElementById('rtim').textContent=`0${cs+1} / 0${T}`;
   // play active slide video, pause others
   document.querySelectorAll('.slide-video').forEach((v,i)=>{
-    if(i===cs){v.currentTime=0; v.play && v.play().catch(()=>{});}
+    if(i===cs){if(v.querySelector('source')?.getAttribute('src')!=='/ts-rewind-2k-v3.mp4')v.currentTime=0;v.play&&v.play().catch(()=>{});}
     else{v.pause && v.pause();}
   });
   clearTimeout(at); at=setTimeout(()=>gts(cs+1),7000);
@@ -1680,7 +1759,7 @@ const B='/wp-content/uploads/';
 const POSTS={
   turret:{
     id:'turret',cat:'ts',
-    thumb:B+'2026/03/turret-thumbnail.webp',
+    thumb:B+'2026/03/turret-thumbnail.webp',hasVideo:'/ts-rewind-2k-v3.mp4',
     title:'TimeSplitters: Rewind — Turret',
     tagline:'Prop · Cinder Interactive · UE5',
     tags:[['Prop','h'],['Current Gen','h'],['ZBrush',''],['PBR Texturing',''],['Maya',''],['Normals Bake','']],
@@ -1718,7 +1797,7 @@ const POSTS={
   },
   spaceship:{
     id:'spaceship',cat:'ts',
-    thumb:B+'2026/03/spaceship-thumbnail.webp',
+    thumb:B+'2026/03/spaceship-thumbnail.webp',hasVideo:'/ts-rewind-2k-v3.mp4',
     title:'TimeSplitters: Rewind — Spaceship',
     tagline:'Vehicle · Cinder Interactive · UE5',
     tags:[['Vehicle','h'],['UE5','h'],['Low Poly',''],['PBR',''],['Maya',''],['Substance Painter','']],
@@ -1751,7 +1830,7 @@ const POSTS={
   },
   helicopter:{
     id:'helicopter',cat:'ts',
-    thumb:B+'2026/03/helicopter-thumbnail.webp',
+    thumb:B+'2026/03/helicopter-thumbnail.webp',hasVideo:'/ts-rewind-2k-v3.mp4',
     title:'TimeSplitters: Rewind — Helicopter',
     tagline:'Vehicle · Cinder Interactive · UE5',
     tags:[['Vehicle','h'],['Art Test','h'],['Maya',''],['Substance Painter',''],['Game Ready',''],['Cinder Interactive','']],
@@ -1781,7 +1860,7 @@ const POSTS={
   },
   impersonator:{
     id:'impersonator',cat:'ts',
-    thumb:B+'2024/06/thumb-impersonator.webp',
+    thumb:B+'2024/06/thumb-impersonator.webp',hasVideo:'/ts-rewind-2k-v3.mp4',
     title:'TimeSplitters: Rewind — The Impersonator',
     tagline:'Character · Cinder Interactive · UE5',
     tags:[['Character','h'],['ZBrush','h'],['Retopology',''],['UV Mapping',''],['Substance Painter',''],['Maya','']],
@@ -1809,7 +1888,7 @@ const POSTS={
   },
   airplane:{
     id:'airplane',cat:'ts',
-    thumb:B+'2026/03/airplane-thumbnail.webp',
+    thumb:B+'2026/03/airplane-thumbnail.webp',hasVideo:'/ts-rewind-2k-v3.mp4',
     title:'TimeSplitters: Rewind — Airplane',
     tagline:'Vehicle · Cinder Interactive · UE5',
     tags:[['Vehicle','h'],['Redesign','h'],['Cinder Interactive',''],['Maya',''],['Substance Painter',''],['UE5','']],
@@ -1843,7 +1922,7 @@ const POSTS={
   },
   carousel:{
     id:'carousel',cat:'ts',
-    thumb:B+'2026/03/circus-thumbnail.webp',
+    thumb:B+'2026/03/circus-thumbnail.webp',hasVideo:'/ts-rewind-2k-v3.mp4',
     title:'TimeSplitters: Rewind — Carousel',
     tagline:'Hero Prop · Circus Level · Cinder Interactive',
     tags:[['Prop','h'],['Hero Asset','h'],['Circus Level',''],['Maya',''],['Substance Painter',''],['UE5','']],
@@ -1878,7 +1957,7 @@ const POSTS={
   },
   crane:{
     id:'crane',cat:'ts',
-    thumb:B+'2026/03/crane-docks-thumbnail.webp',
+    thumb:B+'2026/03/crane-docks-thumbnail.webp',hasVideo:'/ts-rewind-2k-v3.mp4',
     title:'TimeSplitters: Rewind — Crane',
     tagline:'Prop · Docks Level · Cinder Interactive',
     tags:[['Prop','h'],['Redesign','h'],['Optimisation',''],['Ngon Fix',''],['Maya',''],['UE5','']],
@@ -1911,7 +1990,7 @@ const POSTS={
   },
   bulletproof:{
     id:'bulletproof',cat:'ts',
-    thumb:B+'2026/03/bulletproof-thumbnail.webp',
+    thumb:B+'2026/03/bulletproof-thumbnail.webp',hasVideo:'/ts-rewind-2k-v3.mp4',
     title:'TimeSplitters: Rewind — Bulletproof Pickup',
     tagline:'Pickup Prop · Cinder Interactive · UE5',
     tags:[['Pickup Prop','h'],['Current Gen','h'],['Game Ready',''],['Low Poly',''],['Maya',''],['Substance Painter','']],
@@ -1945,7 +2024,7 @@ const POSTS={
   },
   cryogen:{
     id:'cryogen',cat:'ts',
-    thumb:B+'2026/03/cryogencase-thumbnail.webp',
+    thumb:B+'2026/03/cryogencase-thumbnail.webp',hasVideo:'/ts-rewind-2k-v3.mp4',
     title:'TimeSplitters: Rewind — Cryogen Case',
     tagline:'Prop · Planet X Level · Cinder Interactive',
     tags:[['Prop','h'],['Hi→Lo Bake','h'],['Planet X',''],['ZBrush',''],['Maya',''],['Substance Painter','']],
@@ -1973,7 +2052,7 @@ const POSTS={
   },
   shoal:{
     id:'shoal',cat:'ts',
-    thumb:B+'2026/03/the-shoal-thumbnail.webp',
+    thumb:B+'2026/03/the-shoal-thumbnail.webp',hasVideo:'/ts-rewind-2k-v3.mp4',
     title:'TimeSplitters: Rewind — The Shoal',
     tagline:'Character · Cinder Interactive · UE5',
     tags:[['Character','h'],['Unique Design','h'],['ZBrush',''],['Maya',''],['Substance Painter',''],['UE5','']],
@@ -2162,7 +2241,7 @@ function renderGrid(filter){
     div.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showPost(id);}});
     // video-thumbnail cards use a video element instead of img
     const thumbHTML=p.isVideo
-      ? `<video class="thumb" autoplay muted loop playsinline style="width:100%;height:auto;display:block;object-fit:cover;max-height:340px"><source src="${p.thumb}" type="video/mp4"></video>`
+      ? `<video class="thumb" autoplay muted loop playsinline style="width:100%;height:100%;display:block;object-fit:cover;position:absolute;inset:0"><source src="${p.thumb}" type="video/mp4"></video>`
       : `<img class="thumb" src="${p.thumb}" alt="${p.title}" loading="lazy" decoding="async">`;
     div.innerHTML=`
       ${thumbHTML}
@@ -2290,15 +2369,15 @@ function showPost(id){
   if(p.hasVideo){
     // video hero: hide img, show video with thumb as poster while loading
     phero.style.display='none';
-    vhero.poster=p.thumb;
-    // only reload if source changed
     const newSrc=p.hasVideo;
+    vhero.poster=newSrc==='/ts-rewind-2k-v3.mp4'?'':p.thumb;
     if(vhero.dataset.src!==newSrc){
       vhero.dataset.src=newSrc;
       vhero.innerHTML=`<source src="${newSrc}" type="video/mp4">`;
       vhero.load();
     }
     vhero.style.display='block';
+    if(newSrc!=='/ts-rewind-2k-v3.mp4')vhero.currentTime=0;
     vhero.play().catch(()=>{});
   } else {
     // image hero
@@ -2420,7 +2499,7 @@ function showPost(id){
   }
 
   // related
-  document.getElementById('prel').innerHTML=p.rel.map(rid=>{
+  document.getElementById('prel').innerHTML=ORDER.filter(rid=>rid!==id).slice(0,6).map(rid=>{
     const r=POSTS[rid];if(!r)return'';
     const relThumb=r.isVideo
       ? `<video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block"><source src="${r.hasVideo}" type="video/mp4"></video>`
