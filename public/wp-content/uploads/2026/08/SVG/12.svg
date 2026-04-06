@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 4px;
+      }
+    </style>
+  </defs>
+  <g>
+    <polygon class="cls-1" points="64 34 84 34 84 6 44 6 44 34 64 34"/>
+    <g>
+      <line class="cls-1" x1="74" y1="34" x2="74" y2="6.100054"/>
+      <line class="cls-1" x1="54" y1="34" x2="54" y2="6.100054"/>
+    </g>
+    <rect class="cls-1" x="39" y="34" width="50" height="8" transform="translate(128 76) rotate(180)"/>
+    <circle class="cls-1" cx="64" cy="49" r="7"/>
+  </g>
+  <polygon class="cls-1" points="64 56 74.72235 77.725854 98.698253 81.209757 81.349127 98.120976 85.4447 122 64 110.725854 42.5553 122 46.650873 98.120976 29.301747 81.209757 53.27765 77.725854 64 56"/>
+  <line class="cls-1" x1="64" y1="56" x2="64" y2="89"/>
+  <line class="cls-1" x1="96.19847" y1="81.770993" x2="64" y2="89"/>
+  <line class="cls-1" x1="81.981491" y1="116.67067" x2="64" y2="89"/>
+  <line class="cls-1" x1="45.940221" y1="116.619638" x2="64" y2="89"/>
+  <line class="cls-1" x1="31.80153" y1="81.770993" x2="64" y2="89"/>
+  <line class="cls-1" x1="74.72235" y1="77.725854" x2="64" y2="89"/>
+  <line class="cls-1" x1="81.349127" y1="98.120976" x2="64" y2="89"/>
+  <line class="cls-1" x1="64" y1="110.725854" x2="64" y2="89"/>
+  <line class="cls-1" x1="46.650873" y1="98.120976" x2="64" y2="89"/>
+  <line class="cls-1" x1="53.27765" y1="77.725854" x2="64" y2="89"/>
+</svg>

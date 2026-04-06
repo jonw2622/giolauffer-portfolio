@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 4px;
+      }
+    </style>
+  </defs>
+  <polyline class="cls-1" points="93.66 87.16 106.12 111.54 92.24 109.65 85.64 122 72.93 97.13"/>
+  <polyline class="cls-1" points="34.34 87.16 21.88 111.54 35.76 109.65 42.36 122 55.07 97.13"/>
+  <circle class="cls-1" cx="64" cy="52" r="46"/>
+  <path class="cls-1" d="M64,88c-19.850586,0-36-16.149414-36-36s16.149414-36,36-36,36,16.149414,36,36-16.149414,36-36,36Z"/>
+  <polygon class="cls-1" points="64 32.284799 70.080937 44.606124 83.678327 46.58194 73.839163 56.172754 76.161875 69.715201 64 63.321325 51.838125 69.715201 54.160837 56.172754 44.321673 46.58194 57.919063 44.606124 64 32.284799"/>
+</svg>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 4px;
+      }
+    </style>
+  </defs>
+  <polyline class="cls-1" points="80.36 51.45 95 42 95 14 64 14 33 14 33 42 47.64 51.45"/>
+  <line class="cls-1" x1="46" y1="14" x2="46" y2="50"/>
+  <line class="cls-1" x1="82" y1="14" x2="82" y2="50"/>
+  <rect class="cls-1" x="27" y="6" width="74" height="8"/>
+  <polygon class="cls-1" points="98.641009 102 98.641009 62.000001 63.999993 42.000001 29.358977 62.000001 29.358977 102 63.999993 122 98.641009 102"/>
+  <polygon class="cls-1" points="37.358887 97.380859 37.358887 66.619141 64 51.237305 90.641113 66.619141 90.641113 97.380859 64 112.762695 37.358887 97.380859"/>
+  <polyline class="cls-1" points="47.18 75 37.36 75 37.36 89 54.59 89"/>
+  <polyline class="cls-1" points="80.82 75 90.64 75 90.64 89 73.41 89"/>
+  <polygon class="cls-1" points="64 62.776282 69.198715 73.31003 80.823396 74.999195 72.411698 83.198574 74.39743 94.776282 64 89.31003 53.60257 94.776282 55.588302 83.198574 47.176604 74.999195 58.801285 73.31003 64 62.776282"/>
+</svg>
