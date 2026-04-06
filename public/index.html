@@ -218,9 +218,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .fb-beyond.on,.fb-beyond:hover{border-color:var(--acc2);color:var(--acc2)}
 
 /* Portfolio grid */
-.pgrid{padding:.5rem 2.5rem 6rem;display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
-.pcard{position:relative;overflow:hidden;background:var(--surf);cursor:none;display:block}
-.pcard img.thumb{width:100%;height:auto;display:block;transition:transform .55s cubic-bezier(.25,.46,.45,.94)}
+.pgrid{padding:.5rem 0 6rem;display:grid;grid-template-columns:repeat(6,1fr);gap:3px}
+.pcard{position:relative;overflow:hidden;background:var(--surf);cursor:none;display:block;aspect-ratio:16/9}
+.pcard img.thumb{width:100%;height:100%;display:block;object-fit:cover;transition:transform .55s cubic-bezier(.25,.46,.45,.94)}
 .pcard:hover img.thumb{transform:scale(1.04)}
 .pcard-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,13,14,.95) 0%,rgba(13,13,14,.3) 45%,transparent 70%);opacity:0;transition:opacity .35s;display:flex;flex-direction:column;justify-content:flex-end;padding:1.2rem}
 .pcard:hover .pcard-ov{opacity:1}
@@ -528,8 +528,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   .recgrid{grid-template-columns:1fr}
   .rstrip{padding:0 1.4rem 4rem}
 
-  /* portfolio grid: 2 cols */
-  .pgrid{padding:.5rem 1.4rem 7rem;grid-template-columns:repeat(2,1fr)}
+  /* portfolio grid: 4 cols on tablet */
+  .pgrid{padding:.5rem 0 7rem;grid-template-columns:repeat(4,1fr)}
   .phead{padding:5.5rem 1.4rem 1.5rem;flex-direction:column;align-items:flex-start}
   /* portfolio filters: horizontal scroll, no wrapping */
   .pfilt{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px;max-width:100%}
@@ -591,8 +591,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   .rnav{gap:.3rem}
   .rbtn{width:36px;height:36px}
 
-  /* portfolio: single column */
-  .pgrid{grid-template-columns:1fr;padding:.5rem 1rem 7rem}
+  /* portfolio: 2 columns on mobile */
+  .pgrid{grid-template-columns:repeat(2,1fr);padding:.5rem 0 7rem}
   .phead{padding:5rem 1rem 1.2rem}
   .pfilt{gap:.3rem}
   .fb{font-size:.6rem;padding:.42rem .9rem;min-height:36px}
@@ -2162,7 +2162,7 @@ function renderGrid(filter){
     div.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showPost(id);}});
     // video-thumbnail cards use a video element instead of img
     const thumbHTML=p.isVideo
-      ? `<video class="thumb" autoplay muted loop playsinline style="width:100%;height:auto;display:block;object-fit:cover;max-height:340px"><source src="${p.thumb}" type="video/mp4"></video>`
+      ? `<video class="thumb" autoplay muted loop playsinline style="width:100%;height:100%;display:block;object-fit:cover;position:absolute;inset:0"><source src="${p.thumb}" type="video/mp4"></video>`
       : `<img class="thumb" src="${p.thumb}" alt="${p.title}" loading="lazy" decoding="async">`;
     div.innerHTML=`
       ${thumbHTML}
