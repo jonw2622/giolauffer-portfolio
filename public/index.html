@@ -933,8 +933,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 
       <!-- Slide 1: TimeSplitters Rewind — direct MP4 from giovannilauffer.com -->
       <div class="rslide">
-        <video class="slide-video" autoplay muted loop playsinline preload="metadata"
-          poster="/wp-content/uploads/2024/06/giovanni-lauffer-giovanni-lauffer-thumbnail-4.webp">
+        <video class="slide-video" autoplay muted loop playsinline preload="auto">
           <source src="/ts-rewind-2k-v3.mp4" type="video/mp4">
         </video>
         <div class="rov"></div><div class="rob"></div>
@@ -2297,9 +2296,8 @@ function showPost(id){
   if(p.hasVideo){
     // video hero: hide img, show video with thumb as poster while loading
     phero.style.display='none';
-    vhero.poster=p.thumb;
-    // only reload if source changed
     const newSrc=p.hasVideo;
+    vhero.poster=newSrc==='/ts-rewind-2k-v3.mp4'?'':p.thumb;
     if(vhero.dataset.src!==newSrc){
       vhero.dataset.src=newSrc;
       vhero.innerHTML=`<source src="${newSrc}" type="video/mp4">`;
