@@ -652,6 +652,13 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 /* ════════════════════════════════════
    TOUCH DEVICES — kill sticky hover states
 ════════════════════════════════════ */
+@media(max-width:1024px){
+  .cbadge{display:none}
+  .pcard-ov{opacity:1;background:linear-gradient(to top,rgba(13,13,14,.85) 0%,transparent 55%);padding:.6rem}
+  .pcc{display:none}
+  .pcm{display:none}
+  .pcn{font-size:.7rem;letter-spacing:.03em}
+}
 @media(hover:none){
   .pcard:hover img.thumb,.pcard:hover video.thumb{transform:none}
   .fb:hover:not(.on){border-color:var(--brd);color:var(--mut)}
