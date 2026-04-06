@@ -257,6 +257,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .fb{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;padding:.45rem 1.1rem;border:1px solid var(--brd);background:transparent;color:var(--mut);cursor:none;transition:all .2s;font-family:var(--fb);font-weight:500;border-radius:9999px}
 .fb:hover,.fb.on{border-color:var(--acc);color:var(--acc)}
 .fb-beyond.on,.fb-beyond:hover{border-color:var(--acc2);color:var(--acc2)}
+.fb-personal.on,.fb-personal:hover{border-color:var(--txt);color:var(--txt)}
+.fb-cgi.on,.fb-cgi:hover{border-color:var(--txt);color:var(--txt)}
 
 /* Portfolio grid */
 .pgrid{padding:.5rem 0 6rem;display:grid;grid-template-columns:repeat(6,1fr);gap:3px}
@@ -268,9 +270,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .pcc{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);font-weight:600;margin-bottom:.3rem}
 .pcn{font-family:var(--fd);font-size:1.3rem;letter-spacing:.04em;line-height:1.1}
 .pcm{display:flex;gap:.4rem;margin-top:.5rem;flex-wrap:wrap}
-.pct{font-size:.56rem;letter-spacing:.09em;text-transform:uppercase;color:rgba(238,235,229,.55);border:1px solid rgba(238,235,229,.12);padding:.18rem .45rem}
-.cbadge{position:absolute;top:.85rem;left:.85rem;font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;padding:.25rem .6rem;background:var(--acc2);color:#eeebe5;font-weight:600}
-.cgi-badge{background:var(--surf2);border:1px solid var(--brd);color:var(--mut)}
+.pct{font-size:.56rem;letter-spacing:.09em;text-transform:uppercase;color:rgba(238,235,229,.55);border:1px solid rgba(238,235,229,.12);padding:.18rem .45rem;border-radius:9999px}
+.cbadge{position:absolute;top:.85rem;left:.85rem;font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;padding:.25rem .6rem;background:var(--acc2);color:#eeebe5;font-weight:600;border-radius:9999px}
+.cgi-badge{background:#1a1a1c;border:1px solid var(--brd2);color:var(--mut)}
+.beyond-badge{background:rgba(244,132,95,.12);border:1px solid rgba(244,132,95,.35);color:var(--acc2)}
 .ts-badge{background:rgba(14,184,160,.15);border:1px solid var(--acc);color:var(--acc)}
 .personal-badge{background:rgba(238,235,229,.07);border:1px solid var(--brd2);color:var(--txt)}
 .ts-dl-btn{display:inline-flex;align-items:center;gap:.65rem;background:var(--acc2);color:#eeebe5;font-family:var(--fb);font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.9rem 2rem;text-decoration:none;transition:background .2s,gap .2s}
@@ -1327,8 +1330,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
       <button class="fb on" onclick="fc(this,'all')">All</button>
       <button class="fb fb-beyond" onclick="fc(this,'beyond')">Beyond Extent</button>
       <button class="fb" onclick="fc(this,'ts')">TimeSplitters</button>
-      <button class="fb" onclick="fc(this,'personal')">Personal</button>
-      <button class="fb" onclick="fc(this,'cgi')">CGI</button>
+      <button class="fb fb-personal" onclick="fc(this,'personal')">Personal</button>
+      <button class="fb fb-cgi" onclick="fc(this,'cgi')">CGI</button>
     </div>
   </div>
 
@@ -2231,7 +2234,7 @@ function renderGrid(filter){
     div.innerHTML=`
       ${thumbHTML}
       ${isCgi?`<span class="cbadge cgi-badge">CGI · Non-Gaming</span>`:''}
-      ${isBeyond?`<span class="cbadge" style="background:var(--acc2)">Beyond Extent</span>`:''}
+      ${isBeyond?`<span class="cbadge beyond-badge">Beyond Extent</span>`:''}
       ${isTs?`<span class="cbadge ts-badge">TimeSplitters: Rewind</span>`:''}
       ${isPersonal?`<span class="cbadge personal-badge">Personal Project</span>`:''}
       <div class="pcard-ov">
