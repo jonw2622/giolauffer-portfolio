@@ -256,9 +256,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .pfilt{display:flex;gap:.4rem;flex-wrap:wrap}
 .fb{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;padding:.45rem 1.1rem;border:1px solid var(--brd);background:transparent;color:var(--mut);cursor:none;transition:all .2s;font-family:var(--fb);font-weight:500;border-radius:9999px}
 .fb:hover,.fb.on{border-color:var(--acc);color:var(--acc)}
+.fb.on{animation:fb-pulse 2s ease-in-out infinite}
 .fb-beyond.on,.fb-beyond:hover{border-color:var(--acc2);color:var(--acc2)}
+.fb-beyond.on{animation:fb-pulse-orange 2s ease-in-out infinite}
 .fb-personal.on,.fb-personal:hover{border-color:var(--txt);color:var(--txt)}
+.fb-personal.on{animation:fb-pulse-white 2s ease-in-out infinite}
 .fb-cgi.on,.fb-cgi:hover{border-color:var(--txt);color:var(--txt)}
+.fb-cgi.on{animation:fb-pulse-white 2s ease-in-out infinite}
+@keyframes fb-pulse{0%,100%{box-shadow:0 0 0 0 rgba(14,184,160,0)}50%{box-shadow:0 0 8px 2px rgba(14,184,160,.35)}}
+@keyframes fb-pulse-orange{0%,100%{box-shadow:0 0 0 0 rgba(244,132,95,0)}50%{box-shadow:0 0 8px 2px rgba(244,132,95,.35)}}
+@keyframes fb-pulse-white{0%,100%{box-shadow:0 0 0 0 rgba(238,235,229,0)}50%{box-shadow:0 0 8px 2px rgba(238,235,229,.3)}}
 
 /* Portfolio grid */
 .pgrid{padding:.5rem 0 6rem;display:grid;grid-template-columns:repeat(6,1fr);gap:3px}
