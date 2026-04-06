@@ -51,9 +51,12 @@ body{background:var(--bg);color:var(--txt);font-family:var(--fb);font-weight:300
 ::-webkit-scrollbar-track{background:var(--surf)}
 ::-webkit-scrollbar-thumb{background:#0eb8a0;border-radius:2px}
 ::-webkit-scrollbar-thumb:hover{background:#0dd4b8}
-::-webkit-scrollbar-button:vertical:decrement{background:#f4845f;height:10px;display:block}
-::-webkit-scrollbar-button:vertical:increment{background:#f4845f;height:10px;display:block}
-::-webkit-scrollbar-button:vertical:decrement:hover,::-webkit-scrollbar-button:vertical:increment:hover{background:#e8621a}
+::-webkit-scrollbar-button{background:#f4845f!important;display:block}
+::-webkit-scrollbar-button:vertical:decrement{background:#f4845f!important;height:12px}
+::-webkit-scrollbar-button:vertical:increment{background:#f4845f!important;height:12px}
+::-webkit-scrollbar-button:vertical:start:decrement{background:#f4845f!important}
+::-webkit-scrollbar-button:vertical:end:increment{background:#f4845f!important}
+::-webkit-scrollbar-button:hover{background:#e8621a!important}
 
 /* ── CURSOR ── */
 *,a,button,input,select,textarea,[role="button"]{cursor:none!important}
