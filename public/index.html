@@ -43,12 +43,12 @@
   --fe:'Barlow Condensed',sans-serif; /* extended bold for hero */
   --fb:'Inter',sans-serif;--fm:'DM Mono',monospace;
 }
-html{scroll-behavior:smooth;scrollbar-color:#f4845f rgba(14,184,160,.45)}
+html{scroll-behavior:smooth;scrollbar-color:#f4845f #141414}
 body{background:var(--bg);color:var(--txt);font-family:var(--fb);font-weight:300;overflow-x:hidden;cursor:none}
 
 /* ── SCROLLBAR ── */
 ::-webkit-scrollbar{width:10px}
-::-webkit-scrollbar-track{background:rgba(14,184,160,.45)}
+::-webkit-scrollbar-track{background:#141414}
 ::-webkit-scrollbar-thumb{background:#f4845f;border-radius:2px}
 ::-webkit-scrollbar-thumb:hover{background:#e8621a}
 ::-webkit-scrollbar-button{background:#f4845f!important;display:block}
@@ -80,8 +80,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .nlinks{display:flex;gap:2rem;list-style:none;margin-left:auto}
 .nlinks a{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);text-decoration:none;transition:color .2s;font-weight:500}
 .nlinks a:hover{color:var(--txt)}
-.ncta{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding:.5rem 1.3rem;border:1px solid var(--acc);color:var(--acc);text-decoration:none;font-weight:500;transition:background .2s,color .2s;border-radius:9999px}
-.ncta:hover{background:var(--acc);color:var(--bg)}
+.ncta{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding:.5rem 1.3rem;border:1px solid var(--acc2);color:var(--acc2);text-decoration:none;font-weight:500;transition:background .2s,color .2s;border-radius:9999px}
+.ncta:hover{background:var(--acc2);color:var(--bg)}
 
 /* ════════════════════════════════════
    HOME — VIDEO REEL
@@ -140,8 +140,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .sn{font-family:var(--fd);font-size:1.9rem;color:var(--txt)}
 .sl{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-top:.05rem;font-weight:500}
 .hbtns{display:flex;gap:.85rem;flex-wrap:wrap}
-.bprim{display:inline-flex;align-items:center;gap:.65rem;background:var(--acc);color:var(--bg);font-family:var(--fb);font-size:.74rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 1.8rem;text-decoration:none;transition:background .2s,gap .2s;border-radius:9999px}
-.bprim:hover{background:#0dd4b8;gap:1rem}
+.bprim{display:inline-flex;align-items:center;gap:.65rem;background:var(--acc2);color:var(--bg);font-family:var(--fb);font-size:.74rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 1.8rem;text-decoration:none;transition:background .2s,gap .2s;border-radius:9999px}
+.bprim:hover{background:var(--acc2);gap:1rem}
 .bsec{display:inline-flex;align-items:center;font-size:.74rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);text-decoration:none;border:1px solid var(--brd);padding:.85rem 1.6rem;transition:color .2s,border-color .2s;border-radius:9999px}
 .bsec:hover{color:var(--txt);border-color:var(--brd2)}
 
@@ -685,7 +685,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   .hls:hover{border-color:var(--brd);color:var(--mut)}
   .mob-nav a:hover{color:var(--txt)}
   .footer-links a:hover{color:var(--mut)}
-  .bprim:hover{background:var(--acc);gap:.65rem}
+  .bprim:hover{background:var(--acc2);gap:.65rem}
   .bsec:hover{color:var(--mut);border-color:var(--brd)}
 }
 
