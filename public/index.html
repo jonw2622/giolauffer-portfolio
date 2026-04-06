@@ -121,18 +121,36 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
   line-height:.88;
   letter-spacing:.04em;
   text-transform:uppercase;
-  /* transparent fill, white stroke = see-through bold outline */
   -webkit-text-fill-color:transparent;
   -webkit-text-stroke:1.5px rgba(238,235,229,.75);
   color:transparent;
   display:block;
   user-select:none;
 }
-/* second line gets orange stroke for contrast */
+/* first line wrapper */
+.hname .l1{display:block;position:relative}
+/* outline layer — inherits stroke from .hname */
+.hname .l1-o{display:block}
+/* fill layer — white, wave-clipped to bottom half */
+.hname .l1-f{
+  display:block;
+  position:absolute;
+  top:0;left:0;right:0;
+  -webkit-text-fill-color:rgba(238,235,229,.92);
+  -webkit-text-stroke:0;
+  clip-path:polygon(0% 100%,100% 100%,100% 52%,90% 53%,80% 55%,70% 53%,60% 50%,50% 47%,40% 45%,30% 47%,20% 50%,10% 53%,0% 52%);
+  animation:milk-wave 2.5s ease-in-out infinite;
+}
+@keyframes milk-wave{
+  0%,100%{clip-path:polygon(0% 100%,100% 100%,100% 52%,90% 53%,80% 55%,70% 53%,60% 50%,50% 47%,40% 45%,30% 47%,20% 50%,10% 53%,0% 52%)}
+  50%{clip-path:polygon(0% 100%,100% 100%,100% 48%,90% 47%,80% 45%,70% 47%,60% 50%,50% 53%,40% 55%,30% 53%,20% 50%,10% 47%,0% 48%)}
+}
+/* second line: solid teal fill */
 .hname .l2{
   display:block;
   -webkit-text-stroke:0;
   -webkit-text-fill-color:var(--acc);
+  background:none;
 }
 
 .hrole{font-size:.84rem;letter-spacing:.04em;color:var(--mut);margin-top:1.3rem;margin-bottom:2rem;line-height:1.8;font-weight:400}
@@ -998,7 +1016,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
     <div class="hero">
       <div class="avail-hero ai"><span class="avail-dot"></span>Available for Work</div>
       <div class="htag ai">3D Prop & Environment Artist · Ede, Netherlands</div>
-      <h1 class="hname ai d1">GIOVANNI<span class="l2">LAUFFER</span></h1>
+      <h1 class="hname ai d1"><span class="l1"><span class="l1-o">GIOVANNI</span><span class="l1-f" aria-hidden="true">GIOVANNI</span></span><span class="l2">LAUFFER</span></h1>
       <p class="hrole ai d2">Props · Characters · Vehicles · Environments<br>Maya · ZBrush · Substance · UE5 · 3DS Max · VRay</p>
       <div class="hstats ai d3">
         <div><div class="sn">5+</div><div class="sl">Years Exp</div></div>
@@ -2631,5 +2649,22 @@ window.submitContact=submitContact;
 
 }); // end DOMContentLoaded
 </script>
+<svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <defs>
+    <clipPath id="milk-clip" clipPathUnits="objectBoundingBox">
+      <path>
+        <animate attributeName="d"
+          values="M0,0.52 C0.2,0.42 0.3,0.42 0.5,0.52 C0.7,0.62 0.8,0.62 1,0.52 L1,2 L0,2 Z;
+                  M0,0.48 C0.2,0.58 0.3,0.58 0.5,0.48 C0.7,0.38 0.8,0.38 1,0.48 L1,2 L0,2 Z;
+                  M0,0.52 C0.2,0.42 0.3,0.42 0.5,0.52 C0.7,0.62 0.8,0.62 1,0.52 L1,2 L0,2 Z"
+          dur="2.5s"
+          repeatCount="indefinite"
+          calcMode="spline"
+          keyTimes="0;0.5;1"
+          keySplines="0.45 0 0.55 1;0.45 0 0.55 1"/>
+      </path>
+    </clipPath>
+  </defs>
+</svg>
 </body>
 </html>
