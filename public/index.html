@@ -136,7 +136,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
   display:block;
   position:absolute;
   top:0;left:0;right:0;
-  -webkit-text-fill-color:rgba(238,235,229,.92);
+  -webkit-text-fill-color:rgba(238,235,229,1);
   -webkit-text-stroke:0;
   clip-path:polygon(0% 100%,100% 100%,100% 62%,90% 65%,80% 60%,70% 60%,60% 65%,50% 62%,40% 59%,30% 64%,20% 64%,10% 59%,0% 62%);
   animation:milk-wave 3s ease-in-out infinite;
@@ -145,55 +145,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
   0%,100%{clip-path:polygon(0% 100%,100% 100%,100% 62%,90% 65%,80% 60%,70% 60%,60% 65%,50% 62%,40% 59%,30% 64%,20% 64%,10% 59%,0% 62%)}
   50%{clip-path:polygon(0% 100%,100% 100%,100% 62%,90% 59%,80% 64%,70% 64%,60% 59%,50% 62%,40% 65%,30% 60%,20% 60%,10% 65%,0% 62%)}
 }
-/* shark body layer — dark torpedo below wave, trails the fin */
-.hname .l1-body{
+/* sunset circle — orange half-risen behind wave */
+.hname .l1-sun{
   display:block;
   position:absolute;
   top:0;left:0;right:0;
   -webkit-text-fill-color:transparent;
   color:transparent;
   -webkit-text-stroke:0;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 64 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%231a2535' d='M5,1 Q30,0 58,2 Q64,5 58,10 Q30,12 5,11 Q0,8 0,6 Q0,4 5,1 Z'/%3E%3Cpath fill='%231a2535' d='M0,3 L8,0 L7,5 L8,12 L0,9 Z'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;
-  background-size:120px auto;
-  background-position:-600px 66%;
+  background:radial-gradient(circle 0.28em at 1.82em 62%, #f4845f 0%, #f4845f 96%, transparent 98%);
   -webkit-background-clip:text;
   background-clip:text;
-  clip-path:polygon(0% 100%,100% 100%,100% 62%,90% 65%,80% 60%,70% 60%,60% 65%,50% 62%,40% 59%,30% 64%,20% 64%,10% 59%,0% 62%);
-  animation:milk-wave 3s ease-in-out infinite,shark-body-move 35s linear infinite;
-}
-@keyframes shark-body-move{
-  0%{background-position:-83px 66%}
-  75%{background-position:487px 66%}
-  75.01%{background-position:-600px 66%}
-  100%{background-position:-600px 66%}
-}
-/* shark fin layer — clipped inside letter shapes, drifts G→I */
-.hname .l1-ship{
-  display:block;
-  position:absolute;
-  top:0;left:0;right:0;
-  -webkit-text-fill-color:transparent;
-  color:transparent;
-  -webkit-text-stroke:0;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 16 20' xmlns='http://www.w3.org/2000/svg' fill='white'%3E%3Cpath d='M0,20 L3,4 Q5,0 7,1 Q10,6 16,20 Z'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;
-  background-size:30px auto;
-  background-position:-300px 65%;
-  -webkit-background-clip:text;
-  background-clip:text;
-  clip-path:polygon(0% 0%,100% 0%,100% 62%,90% 65%,80% 60%,70% 60%,60% 65%,50% 62%,40% 59%,30% 64%,20% 64%,10% 59%,0% 62%);
-  animation:shark-wave 4s ease-in-out infinite,shark-move 35s linear infinite;
-}
-@keyframes shark-wave{
-  0%,100%{clip-path:polygon(0% 0%,100% 0%,100% 62%,90% 65%,80% 60%,70% 60%,60% 65%,50% 62%,40% 59%,30% 64%,20% 64%,10% 59%,0% 62%)}
-  50%{clip-path:polygon(0% 0%,100% 0%,100% 62%,90% 59%,80% 64%,70% 64%,60% 59%,50% 62%,40% 65%,30% 60%,20% 60%,10% 65%,0% 62%)}
-}
-@keyframes shark-move{
-  0%{background-position:0px 65%}
-  75%{background-position:570px 65%}
-  75.01%{background-position:-300px 65%}
-  100%{background-position:-300px 65%}
 }
 /* second line: solid teal fill */
 .hname .l2{
@@ -1066,7 +1028,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
     <div class="hero">
       <div class="avail-hero ai"><span class="avail-dot"></span>Available for Work</div>
       <div class="htag ai">3D Prop & Environment Artist · Ede, Netherlands</div>
-      <h1 class="hname ai d1"><span class="l1"><span class="l1-o">GIOVANNI</span><span class="l1-f" aria-hidden="true">GIOVANNI</span><span class="l1-body" aria-hidden="true">GIOVANNI</span><span class="l1-ship" aria-hidden="true">GIOVANNI</span></span><span class="l2">LAUFFER</span></h1>
+      <h1 class="hname ai d1"><span class="l1"><span class="l1-o">GIOVANNI</span><span class="l1-sun" aria-hidden="true">GIOVANNI</span><span class="l1-f" aria-hidden="true">GIOVANNI</span></span><span class="l2">LAUFFER</span></h1>
       <p class="hrole ai d2">Props · Characters · Vehicles · Environments<br>Maya · ZBrush · Substance · UE5 · 3DS Max · VRay</p>
       <div class="hstats ai d3">
         <div><div class="sn">5+</div><div class="sl">Years Exp</div></div>
