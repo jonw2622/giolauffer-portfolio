@@ -69,6 +69,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .nlogo img{height:100%;width:auto}
 .nlogo::after{content:'';position:absolute;top:13px;left:13px;width:14px;height:14px;background:#eeebe5;border-radius:50%;transform:scaleY(0);transform-origin:center top;animation:lidblink 4s ease-in-out infinite;pointer-events:none;z-index:1}
 @keyframes lidblink{0%,80%{transform:scaleY(0)}84%{transform:scaleY(1)}88%,100%{transform:scaleY(0)}}
+.nlogo:hover::after{animation:lidblink-2x .6s ease-in-out}
+@keyframes lidblink-2x{0%{transform:scaleY(0)}15%{transform:scaleY(1)}30%{transform:scaleY(0)}55%{transform:scaleY(1)}70%{transform:scaleY(0)}100%{transform:scaleY(0)}}
 .nlogo span{font-family:var(--fd);font-size:1.3rem;letter-spacing:.1em;color:var(--txt)}
 .musicbtn{background:none;border:1px solid var(--brd);color:var(--mut);width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:none;transition:border-color .2s,color .2s;flex-shrink:0;border-radius:9999px}
 .musicbtn:hover{border-color:var(--acc);color:var(--acc)}
@@ -171,7 +173,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .sl{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-top:.05rem;font-weight:500}
 .hbtns{display:flex;gap:.85rem;flex-wrap:wrap}
 .bprim{display:inline-flex;align-items:center;gap:.65rem;background:var(--acc2);color:var(--bg);font-family:var(--fb);font-size:.74rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 1.8rem;text-decoration:none;transition:background .2s,gap .2s;border-radius:9999px}
-.bprim:hover{background:#e8621a;gap:1rem}
+.bprim:hover{gap:1rem}
 .bsec{display:inline-flex;align-items:center;font-size:.74rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);text-decoration:none;border:1px solid var(--brd);padding:.85rem 1.6rem;transition:color .2s,border-color .2s;border-radius:9999px}
 .bsec:hover{color:var(--txt);border-color:var(--brd2)}
 
@@ -284,7 +286,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .ts-badge{background:rgba(14,184,160,.15);border:1px solid var(--acc);color:var(--acc)}
 .personal-badge{background:rgba(238,235,229,.07);border:1px solid var(--brd2);color:var(--txt)}
 .ts-dl-btn{display:inline-flex;align-items:center;gap:.65rem;background:var(--acc2);color:#eeebe5;font-family:var(--fb);font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.9rem 2rem;text-decoration:none;transition:background .2s,gap .2s}
-.ts-dl-btn:hover{background:#f07030;gap:1rem}
+.ts-dl-btn:hover{gap:1rem}
 .ts-dl-sub{font-size:.65rem;color:var(--mut);margin-top:.55rem;letter-spacing:.06em}
 .ts-dl-date{font-size:.68rem;color:var(--txt);margin-top:.4rem;letter-spacing:.06em;display:flex;align-items:center;gap:.5rem}
 .ts-dl-date-label{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);font-weight:600}
@@ -486,7 +488,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 .cf-status.ok{color:var(--acc)}
 .cf-actions{display:flex;justify-content:flex-end}
 .cf-submit{display:inline-flex;align-items:center;gap:.65rem;background:var(--acc2);color:var(--bg);font-family:var(--fb);font-size:.74rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 1.8rem;border:none;cursor:none;transition:background .2s,gap .2s;border-radius:9999px}
-.cf-submit:hover:not(:disabled){background:#e8621a;gap:1rem}
+.cf-submit:hover:not(:disabled){gap:1rem}
 .cf-submit:disabled{opacity:.5}
 @media(max-width:540px){.cf-panel{padding:1.8rem 1.2rem}.cf-row{grid-template-columns:1fr}.cf-title{font-size:1.8rem}}
 
@@ -506,7 +508,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 .hact{display:flex;gap:.6rem}
 .hl{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;padding:.5rem 1.2rem;font-weight:500;text-decoration:none;transition:all .2s;font-family:var(--fb);border-radius:9999px}
 .hlp{background:var(--acc2);color:#0d0d0e}
-.hlp:hover{background:#f07030}
+.hlp:hover{}
 .hls{border:1px solid var(--brd);color:var(--mut)}
 .hls:hover{border-color:var(--brd2);color:var(--txt)}
 
@@ -732,7 +734,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   .hls:hover{border-color:var(--brd);color:var(--mut)}
   .mob-nav a:hover{color:var(--txt)}
   .footer-links a:hover{color:var(--mut)}
-  .bprim:hover{background:var(--acc2);gap:.65rem}
+  .bprim:hover{gap:.65rem}
   .bsec:hover{color:var(--mut);border-color:var(--brd)}
 }
 
