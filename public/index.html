@@ -1743,6 +1743,13 @@ window.gts=gts; window.ns=ns; window.ps=ps;
 at=setTimeout(()=>gts(1),7000);
 // explicitly play slide 0 video — HTML autoplay is unreliable on mobile
 (function(){const v=document.querySelectorAll('.slide-video')[0];if(v)v.play&&v.play().catch(()=>{});})();
+// on first touch, unblock all slide videos so auto-advance plays them cleanly
+document.addEventListener('touchstart',function unlock(){
+  document.querySelectorAll('.slide-video').forEach(v=>{
+    if(v.paused){v.muted=true;v.play&&v.play().catch(()=>{});v.pause&&v.pause();}
+  });
+  document.removeEventListener('touchstart',unlock);
+},{once:true,passive:true});
 // scroll hint — vanishes once user scrolls
 (function(){var sh=document.getElementById('scroll-hint');if(!sh)return;window.addEventListener('scroll',function(){sh.classList.toggle('gone',window.scrollY>60);},{passive:true});})();
 
