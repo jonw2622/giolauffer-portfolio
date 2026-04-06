@@ -2306,7 +2306,7 @@ function showPost(id){
       vhero.load();
     }
     vhero.style.display='block';
-    vhero.currentTime=0;
+    if(newSrc!=='/ts-rewind-2k-v3.mp4')vhero.currentTime=0;
     vhero.play().catch(()=>{});
   } else {
     // image hero
