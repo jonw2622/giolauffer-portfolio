@@ -92,6 +92,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 #home.hidden{display:none}
 
 .reel{position:relative;width:100%;height:100vh;overflow:hidden;background:#000}
+.reel-badge{display:none;position:absolute;top:1rem;right:1rem;z-index:20;font-size:.55rem;letter-spacing:.18em;font-family:var(--fb);font-weight:600;color:var(--txt);background:rgba(13,13,14,.55);border:1px solid rgba(238,235,229,.18);padding:.3rem .6rem;border-radius:3px;align-items:center;gap:.35rem;backdrop-filter:blur(6px)}
 .rslides{display:flex;height:100%;transition:transform .9s cubic-bezier(.77,0,.18,1)}
 .rslide{min-width:100%;height:100%;position:relative;flex-shrink:0;overflow:hidden}
 .rslide video{width:100%;height:100%;object-fit:cover;display:block}
@@ -253,6 +254,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 #portfolio.on{display:block}
 
 .phead{padding:7rem 2.5rem 2rem;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1.2rem}
+.port-artstation-cta{text-align:center;padding:2rem 1.4rem 9rem}
+.port-artstation-cta a{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);text-decoration:none;font-weight:500;display:inline-flex;align-items:center;gap:.45rem;transition:color .2s}
+.port-artstation-cta a:hover{color:var(--acc)}
 .phead h1{font-family:var(--fd);font-size:3rem;letter-spacing:.06em}
 .phead p{font-size:.76rem;color:var(--mut);margin-top:.35rem}
 .pfilt{display:flex;gap:.4rem;flex-wrap:wrap}
@@ -625,6 +629,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 @media(pointer:coarse){
   *,a,button,input,select,textarea,[role="button"]{cursor:auto!important}
   #cursor{display:none}
+  .reel-badge{display:inline-flex}
 }
 
 /* ════════════════════════════════════
@@ -728,6 +733,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 }
 @media(hover:none){
   .pcard:hover img.thumb,.pcard:hover video.thumb{transform:none}
+  .pcard-ov{opacity:1}
   .fb:hover:not(.on){border-color:var(--brd);color:var(--mut)}
   .fb-beyond:hover:not(.on){border-color:var(--brd);color:var(--mut)}
   .hlp:hover{background:var(--acc2)}
@@ -843,7 +849,6 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   position:fixed;left:calc((100vw - 1080px) / 4 + 1.25rem);top:50%;transform:translate(-50%,-50%);
   pointer-events:none;z-index:0;
   opacity:0;transition:opacity .6s ease;
-  mix-blend-mode:screen;
   color:var(--acc2);user-select:none;will-change:opacity
 }
 #about-kid.yr-kid-on{opacity:.16}
@@ -852,7 +857,6 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   position:fixed;right:calc((100vw - 1080px) / 4 + 1.25rem);top:50%;transform:translate(50%,-50%);
   pointer-events:none;z-index:0;
   opacity:0;transition:opacity .6s ease;
-  mix-blend-mode:screen;
   color:var(--acc2);user-select:none;will-change:opacity
 }
 #about-runner.yr-runner-on{opacity:.16}
@@ -861,13 +865,13 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   position:fixed;left:calc((100vw - 1080px) / 4 + 1.25rem);top:50%;transform:translate(-50%,-50%);
   pointer-events:none;z-index:0;
   opacity:0;transition:opacity .6s ease;
-  mix-blend-mode:screen;
   color:var(--acc2);user-select:none;will-change:opacity
 }
 #about-windsurfer.yr-windsurfer-on{opacity:.16}
 @media(max-width:1280px){#about-windsurfer{display:none}}
 #about-kid img,#about-runner img,#about-windsurfer img{max-width:528px;height:auto;display:block}
-#about-windsurfer img{max-width:1056px}
+#about-runner img{max-width:700px;max-height:640px;width:auto;height:auto}
+#about-windsurfer img{max-width:1056px;max-height:576px;width:auto;height:auto}
 .ablock-img{display:flex;flex-direction:column;gap:12px;margin:-2rem 0}
 .ablock-img-wrap{
   position:relative;border-radius:20px;overflow:hidden;
@@ -970,6 +974,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   <ul class="nlinks">
     <li><a href="#" onclick="showHome();return false">Home</a></li>
     <li><a href="#" onclick="showPortfolio();return false">Portfolio</a></li>
+    <li><a href="#" onclick="showAbout();return false">My Story</a></li>
     <li><a href="https://www.artstation.com/giovannilauffer" target="_blank" rel="noopener noreferrer">ArtStation</a></li>
     <li><a href="https://www.linkedin.com/in/giovanni-lauffer-08558b185/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
   </ul>
@@ -997,6 +1002,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 
   <!-- VIDEO REEL: Witch Den + TimeSplitters -->
   <div class="reel">
+  <div class="reel-badge" aria-hidden="true"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> REEL</div>
     <div class="rslides" id="rslides">
 
       <!-- Slide 1: TimeSplitters Rewind — direct MP4 from giovannilauffer.com -->
@@ -1081,7 +1087,6 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
     </div>
 
     <div id="scroll-hint" aria-hidden="true" onclick="(function(){var el=document.querySelector('.about.reveal');if(el)el.scrollIntoView({behavior:'smooth'});})();">
-      <span>Resume &amp;<em>Recommendations</em></span>
       <svg width="18" height="22" viewBox="0 0 18 22" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="2 2 9 9 16 2"/>
         <polyline points="2 11 9 18 16 11"/>
@@ -1355,6 +1360,9 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   <div class="pgrid" id="pgrid">
     <!-- Cards injected by JS -->
   </div>
+  <div class="port-artstation-cta">
+    <a href="https://www.artstation.com/giovannilauffer" target="_blank" rel="noopener noreferrer">View full portfolio on ArtStation <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="1.8" fill="none"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  </div>
 </div>
 
 <!-- ══════════════════════════════════════
@@ -1363,13 +1371,13 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 <div id="about">
   <div id="about-year"></div>
   <div id="about-kid" aria-hidden="true">
-    <img src="/wp-content/uploads/2026/07/n64-playing-orange.webp" alt="">
+    <img src="/wp-content/uploads/2026/09/handheld-gaming.webp" alt="">
   </div>
   <div id="about-runner" aria-hidden="true">
-    <img src="/wp-content/uploads/2026/07/running-orange.webp" alt="">
+    <img src="/wp-content/uploads/2026/09/runner.webp" alt="">
   </div>
   <div id="about-windsurfer" aria-hidden="true">
-    <img src="/wp-content/uploads/2026/07/windsurfing-orange.webp" alt="">
+    <img src="/wp-content/uploads/2026/09/windsurfing.webp" alt="">
   </div>
   <div class="about-hero">
     <div class="about-hero-top">
