@@ -209,10 +209,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .apn{font-family:var(--fd);font-size:1.3rem;letter-spacing:.06em}
 .aps{font-size:.68rem;color:var(--mut);margin-top:.15rem}
 .langs{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.3rem}
-.lp{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .75rem;border:1px solid var(--brd);color:var(--mut);font-weight:500}
+.lp{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .75rem;border:1px solid var(--brd);color:var(--mut);font-weight:500;border-radius:9999px}
 .lp.nat{border-color:var(--acc);color:var(--acc)}
 .skgrid{display:grid;grid-template-columns:1fr 1fr}
-.ski{font-size:.67rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);font-family:var(--fm);padding:.5rem 0;border-bottom:1px solid var(--brd)}
+.ski{display:inline-flex;align-items:center;gap:.32rem;font-size:.58rem;letter-spacing:.05em;padding:.24rem .55rem;background:var(--surf2);border:1px solid var(--brd);color:var(--mut);font-family:var(--fm);border-radius:9999px}
 
 /* ── HOME: work strip ── */
 .wstrip{padding:0 2.5rem 4rem;max-width:1280px;margin:0 auto}
@@ -295,7 +295,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .beyond-badge{background:rgba(244,132,95,.12);border:1px solid rgba(244,132,95,.35);color:var(--acc2)}
 .ts-badge{background:rgba(14,184,160,.15);border:1px solid var(--acc);color:var(--acc)}
 .personal-badge{background:rgba(238,235,229,.07);border:1px solid var(--brd2);color:var(--txt)}
-.ts-dl-btn{display:inline-flex;align-items:center;gap:.65rem;background:var(--acc2);color:#eeebe5;font-family:var(--fb);font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.9rem 2rem;text-decoration:none;transition:background .2s,gap .2s}
+.ts-dl-btn{display:inline-flex;align-items:center;gap:.65rem;background:var(--acc2);color:#eeebe5;font-family:var(--fb);font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.9rem 2rem;text-decoration:none;transition:gap .2s;border-radius:9999px}
 .ts-dl-btn:hover{gap:1rem}
 .ts-dl-sub{font-size:.65rem;color:var(--mut);margin-top:.55rem;letter-spacing:.06em}
 .ts-dl-date{font-size:.68rem;color:var(--txt);margin-top:.4rem;letter-spacing:.06em;display:flex;align-items:center;gap:.5rem}
@@ -332,7 +332,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .sbv{font-size:.82rem;color:var(--txt);font-weight:400}
 .sbv.m{font-family:var(--fm);font-size:.76rem;color:var(--acc)}
 .swl{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.2rem}
-.sw{font-size:.58rem;letter-spacing:.05em;padding:.24rem .55rem;background:var(--surf2);border:1px solid var(--brd);color:var(--mut);font-family:var(--fm)}
+.sw{display:inline-flex;align-items:center;gap:.32rem;font-size:.58rem;letter-spacing:.05em;padding:.24rem .55rem;background:var(--surf2);border:1px solid var(--brd);color:var(--mut);font-family:var(--fm);border-radius:9999px}
 
 /* image gallery */
 .galh{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);font-weight:600;margin:3.5rem 0 1.2rem;display:flex;align-items:center;gap:.8rem;position:relative;z-index:11}
@@ -435,13 +435,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 @media(max-width:540px){.spec-grid{grid-template-columns:1fr}.spec-strip{padding:0 1rem 2.5rem}.spec-grid .spec-card:first-child{border-top-right-radius:10px;border-bottom-left-radius:0}.spec-grid .spec-card:nth-child(2){border-top-right-radius:0}.spec-grid .spec-card:nth-child(3){border-bottom-left-radius:0}.spec-grid .spec-card:last-child{border-bottom-left-radius:10px;border-top-right-radius:0}.witems-r .wi:nth-child(2){border-top-right-radius:0}.witems-r .wi:nth-last-child(2){border-bottom-left-radius:0}.witems-r .wi:first-child{border-top-right-radius:10px}.witems-r .wi:last-child{border-bottom-left-radius:10px}}
 
 /* ── SKILL CATEGORIES ── */
-.skill-cats{display:flex;flex-direction:column;gap:1.5rem}
-.skill-cat-label{font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--acc2);font-weight:600;margin-bottom:.5rem}
+.skill-cats{display:flex;flex-direction:column;gap:1.2rem}
+.skill-cat-label{font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--acc2);font-weight:600;margin-bottom:.4rem}
 .skill-cat-items{display:flex;flex-wrap:wrap;gap:.35rem}
 
 /* ── OPEN TO (availability pills) ── */
 .avail-pills{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.7rem}
-.avail-pill{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .75rem;border:1px solid rgba(14,184,160,.3);color:var(--acc);font-weight:500;display:inline-flex;align-items:center;gap:.35rem}
+.avail-pill{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .75rem;border:1px solid rgba(14,184,160,.3);color:var(--acc);font-weight:500;display:inline-flex;align-items:center;gap:.35rem;border-radius:9999px}
 .avail-pill::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--acc);flex-shrink:0}
 
 /* ── FOOTER ── */
@@ -1145,19 +1145,19 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
       <div class="skill-cats">
         <div class="skill-cat">
           <div class="skill-cat-label">3D Modeling</div>
-          <div class="skill-cat-items"><span class="ski">Autodesk Maya</span><span class="ski">ZBrush</span><span class="ski">3DS Max</span></div>
+          <div class="skill-cat-items"><span class="ski"><img src="/wp-content/uploads/2026/10/maya (2).svg" width="14" height="14" style="flex-shrink:0" alt="">Autodesk Maya</span><span class="ski"><img src="/wp-content/uploads/2026/10/zbrush-color.svg" width="14" height="14" style="flex-shrink:0" alt="">ZBrush</span><span class="ski"><img src="/wp-content/uploads/2026/10/maya-color.svg" width="14" height="14" style="flex-shrink:0" alt="">3DS Max</span></div>
         </div>
         <div class="skill-cat">
           <div class="skill-cat-label">Texturing</div>
-          <div class="skill-cat-items"><span class="ski">Substance Painter</span><span class="ski">Substance Designer</span><span class="ski">Photoshop</span></div>
+          <div class="skill-cat-items"><span class="ski"><img src="/wp-content/uploads/2026/10/substance-color.svg" width="14" height="14" style="flex-shrink:0" alt="">Substance Painter</span><span class="ski"><img src="/wp-content/uploads/2026/10/substance-color.svg" width="14" height="14" style="flex-shrink:0" alt="">Substance Designer</span><span class="ski"><img src="/wp-content/uploads/2026/10/photoshop-color.svg" width="14" height="14" style="flex-shrink:0" alt="">Photoshop</span></div>
         </div>
         <div class="skill-cat">
           <div class="skill-cat-label">Real-time & Rendering</div>
-          <div class="skill-cat-items"><span class="ski">Unreal Engine 5</span><span class="ski">Unity</span><span class="ski">Marmoset Toolbag</span><span class="ski">VRay</span></div>
+          <div class="skill-cat-items"><span class="ski"><img src="/wp-content/uploads/2026/10/ue5-color.svg" width="14" height="14" style="flex-shrink:0" alt="">Unreal Engine 5</span><span class="ski"><img src="/wp-content/uploads/2026/10/unity-color.svg" width="14" height="14" style="flex-shrink:0" alt="">Unity</span><span class="ski"><img src="/wp-content/uploads/2026/10/marmoset%20toolbag%20logo.png" width="14" height="14" style="flex-shrink:0" alt="">Marmoset Toolbag</span><span class="ski"><img src="/wp-content/uploads/2026/10/vray-color.svg" width="14" height="14" style="flex-shrink:0" alt="">VRay</span></div>
         </div>
         <div class="skill-cat">
           <div class="skill-cat-label">Pipeline & Workflow</div>
-          <div class="skill-cat-items"><span class="ski">Trello / Asana</span><span class="ski">Scrum / Agile</span></div>
+          <div class="skill-cat-items"><span class="ski"><img src="/wp-content/uploads/2026/10/Trello_logo.svg.png" width="14" height="14" style="flex-shrink:0;object-fit:cover;object-position:left center" alt="">Trello</span><span class="ski"><img src="/wp-content/uploads/2026/10/asana-color.svg" width="14" height="14" style="flex-shrink:0" alt="">Asana</span><span class="ski"><img src="/wp-content/uploads/2026/10/Miro.svg" width="14" height="14" style="flex-shrink:0" alt="">Miro</span><span class="ski">Scrum / Agile</span></div>
         </div>
       </div>
       <div style="margin-top:2rem">
@@ -1797,6 +1797,23 @@ document.addEventListener('touchstart',function unlock(){
 // scroll hint — vanishes once user scrolls
 (function(){var sh=document.getElementById('scroll-hint');if(!sh)return;window.addEventListener('scroll',function(){sh.classList.toggle('gone',window.scrollY>60);},{passive:true});})();
 
+// ── software icon map (white inline SVGs) ──
+const SW_ICONS={
+  'Maya':'<img src="/wp-content/uploads/2026/10/maya (2).svg" width="13" height="13" style="opacity:1;flex-shrink:0;vertical-align:middle" alt="">',
+  '3DS Max':'<img src="/wp-content/uploads/2026/10/maya-color.svg" width="13" height="13" style="opacity:1;flex-shrink:0;vertical-align:middle" alt="">',
+  'UE5':'<img src="/wp-content/uploads/2026/10/ue5-color.svg" width="13" height="13" style="opacity:1;flex-shrink:0;vertical-align:middle" alt="">',
+  'Unity':'<img src="/wp-content/uploads/2026/10/unity-color.svg" width="13" height="13" style="opacity:1;flex-shrink:0;vertical-align:middle" alt="">',
+  'Asana':'<img src="/wp-content/uploads/2026/10/asana-color.svg" width="13" height="13" style="opacity:1;flex-shrink:0;vertical-align:middle" alt="">',
+  'Trello':'<img src="/wp-content/uploads/2026/10/Trello_logo.svg.png" width="13" height="13" style="opacity:1;flex-shrink:0;vertical-align:middle;object-fit:cover;object-position:left center" alt="">',
+  'Miro':'<img src="/wp-content/uploads/2026/10/Miro.svg" width="13" height="13" style="opacity:1;flex-shrink:0;vertical-align:middle" alt="">',
+  'ZBrush':'<img src="/wp-content/uploads/2026/10/zbrush-color.svg" width="13" height="13" style="opacity:1;flex-shrink:0;vertical-align:middle" alt="">',
+  'Substance Painter':'<img src="/wp-content/uploads/2026/10/substance-color.svg" width="13" height="13" style="opacity:1;flex-shrink:0;vertical-align:middle" alt="">',
+  'Marmoset Toolbag':'<img src="/wp-content/uploads/2026/10/marmoset%20toolbag%20logo.png" width="13" height="13" style="opacity:1;flex-shrink:0;vertical-align:middle" alt="">',
+  'Marmoset Toolbag 3':'<img src="/wp-content/uploads/2026/10/marmoset%20toolbag%20logo.png" width="13" height="13" style="opacity:1;flex-shrink:0;vertical-align:middle" alt="">',
+  'Photoshop':'<img src="/wp-content/uploads/2026/10/photoshop-color.svg" width="13" height="13" style="opacity:1;flex-shrink:0;vertical-align:middle" alt="">',
+  'VRay':'<img src="/wp-content/uploads/2026/10/vray-color.svg" width="13" height="13" style="opacity:1;flex-shrink:0;vertical-align:middle" alt="">',
+};
+
 // ── image base ──
 const B='/wp-content/uploads/';
 
@@ -2273,7 +2290,7 @@ const POSTS={
       {t:'Voodoo Veve Alphas',b:'Produced a set of Voodoo veve symbol alphas used as decal textures throughout the environment — painted onto wood, rock, and fabric surfaces to add narrative depth and occult atmosphere without additional geometry cost.'},
       {t:'Level Design & Blockout',b:'Collaborated with the team on the overall level design from initial blockout through to final composition, ensuring the environment read clearly at a distance and rewarded exploration with detail at close range.'},
     ],
-    specs:{tris:'6,800',verts:'3,900',textures:'2K PBR · 4 maps (Albedo, Normal, ORM, Emissive) · hero boat prop'},
+    specs:{tris:'6,800 tris · 3,900 verts · Hero Boat Prop<span style="display:block;margin-top:.55rem">840 tris · 440 verts · Skull</span>',textures:'2K PBR · 4 maps (Albedo, Normal, ORM, Emissive) · Hero Boat Prop<span style="display:block;margin-top:.55rem">2K PBR · 4 maps (Albedo, Normal, ORM, Emissive) · Baked High to Low · Skull</span>'},
     rel:['turret','motorcycle','spaceship']
   }
 };
@@ -2473,8 +2490,8 @@ function showPost(id){
     <div class="sb"><div class="sbl">Project</div><div class="sbv">${p.project}</div></div>
     <div class="sb"><div class="sbl">Year</div><div class="sbv m">${p.year}</div></div>
     <div class="sb"><div class="sbl">Engine / Renderer</div><div class="sbv">${p.engine}</div></div>
-    <div class="sb"><div class="sbl">Software</div><div class="swl">${p.sw.map(s=>`<span class="sw">${s}</span>`).join('')}</div></div>
-    ${p.specs?`<div class="sb"><div class="sbl">Poly Count</div><div class="sbv">${p.specs.tris} tris${p.specs.verts?` · ${p.specs.verts} verts`:''}</div></div>`:''}
+    <div class="sb"><div class="sbl">Software</div><div class="swl">${p.sw.map(s=>`<span class="sw">${SW_ICONS[s]||''}${s}</span>`).join('')}</div></div>
+    ${p.specs?`<div class="sb"><div class="sbl">Poly Count</div><div class="sbv">${p.specs.tris&&p.specs.tris.includes(' tris')?p.specs.tris:`${p.specs.tris} tris${p.specs.verts?` · ${p.specs.verts} verts`:''}`}</div></div>`:''}
     ${p.specs&&p.specs.textures?`<div class="sb"><div class="sbl">Textures</div><div class="sbv">${p.specs.textures}</div></div>`:''}
     ${p.artstation?`<div class="sb"><div class="sbl">ArtStation Post</div><a href="${p.artstation}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:.4rem;font-size:.78rem;color:var(--acc);text-decoration:none;margin-top:.1rem;transition:color .2s" onmouseover="this.style.color='var(--txt)'" onmouseout="this.style.color='var(--acc)'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View on ArtStation ↗</a></div>`:''}
   `;
