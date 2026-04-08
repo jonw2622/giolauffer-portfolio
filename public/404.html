@@ -86,8 +86,8 @@
     .err-links{display:flex;gap:.85rem;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:.5rem}
 
     /* pill buttons — matches homepage */
-    .bprim{display:inline-flex;align-items:center;gap:.65rem;background:var(--acc2);color:var(--bg);font-family:var(--fb);font-size:.74rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 1.8rem;text-decoration:none;transition:background .2s;border-radius:9999px}
-    .bprim:hover{background:var(--acc2)}
+    .bprim{display:inline-flex;align-items:center;gap:.65rem;background:var(--acc2);color:var(--bg);font-family:var(--fb);font-size:.74rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 1.8rem;text-decoration:none;transition:background .2s,gap .2s;border-radius:9999px}
+    .bprim:hover{background:var(--acc2);gap:1rem}
     .bsec{display:inline-flex;align-items:center;font-size:.74rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);text-decoration:none;border:1px solid var(--brd);padding:.85rem 1.6rem;transition:color .2s,border-color .2s;border-radius:9999px}
     .bsec:hover{color:var(--txt);border-color:var(--brd2)}
 
@@ -105,7 +105,7 @@
   <p class="err-sub">This page doesn't exist or may have moved. Head back to see the work.</p>
   <div class="err-line"></div>
   <div class="err-links">
-    <a href="/" class="bprim">Back to Home</a>
+    <a href="/" class="bprim">Back to Home <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="1.8" fill="none"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     <a href="/#portfolio" class="bsec">View Portfolio</a>
     <a href="/#about" class="bsec">My Story</a>
   </div>
