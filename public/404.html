@@ -12,39 +12,102 @@
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
       --bg:#0d0d0e;
-      --surf:#111213;
       --brd:rgba(238,235,229,.08);
+      --brd2:rgba(238,235,229,.22);
       --txt:#eeebe5;
       --mut:rgba(238,235,229,.45);
       --acc:#3ec9b0;
-      --fd:'Bebas Neue',sans-serif;
+      --acc2:#f4845f;
       --fb:'Barlow Condensed',sans-serif;
       --fi:'Inter',sans-serif;
+      --fe:'Bebas Neue',sans-serif;
     }
     html,body{height:100%;background:var(--bg);color:var(--txt);font-family:var(--fi)}
     body{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:2rem;text-align:center;cursor:default}
-    .err-code{font-family:var(--fd);font-size:clamp(6rem,20vw,14rem);line-height:1;letter-spacing:.04em;color:transparent;-webkit-text-stroke:1px rgba(238,235,229,.18);user-select:none}
-    .err-title{font-family:var(--fb);font-size:clamp(1.2rem,4vw,1.8rem);letter-spacing:.12em;text-transform:uppercase;font-weight:500;margin-top:1rem;color:var(--txt)}
+
+    /* ── 404 with wave + sunset, same as homepage name ── */
+    .err-code{
+      font-family:var(--fe);
+      font-weight:800;
+      font-size:clamp(7rem,22vw,16rem);
+      line-height:.88;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      -webkit-text-fill-color:transparent;
+      -webkit-text-stroke:1.5px rgba(238,235,229,.75);
+      color:transparent;
+      display:block;
+      position:relative;
+      user-select:none;
+    }
+    /* white milk wave fill */
+    .err-code-f{
+      display:block;
+      position:absolute;
+      top:0;left:0;right:0;bottom:0;
+      font-family:var(--fe);
+      font-weight:800;
+      font-size:clamp(7rem,22vw,16rem);
+      line-height:.88;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      -webkit-text-fill-color:rgba(238,235,229,1);
+      -webkit-text-stroke:0;
+      clip-path:polygon(0% 100%,100% 100%,100% 62%,90% 65%,80% 60%,70% 60%,60% 65%,50% 62%,40% 59%,30% 64%,20% 64%,10% 59%,0% 62%);
+      animation:milk-wave 3s ease-in-out infinite;
+    }
+    /* sunset circle */
+    .err-code-sun{
+      display:block;
+      position:absolute;
+      top:0;left:0;right:0;bottom:0;
+      font-family:var(--fe);
+      font-weight:800;
+      font-size:clamp(7rem,22vw,16rem);
+      line-height:.88;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      -webkit-text-fill-color:transparent;
+      color:transparent;
+      -webkit-text-stroke:0;
+      background:radial-gradient(circle 0.28em at 50% 65%, #f4845f 0%, #f4845f 96%, transparent 98%);
+      -webkit-background-clip:text;
+      background-clip:text;
+    }
+    @keyframes milk-wave{
+      0%,100%{clip-path:polygon(0% 100%,100% 100%,100% 62%,90% 65%,80% 60%,70% 60%,60% 65%,50% 62%,40% 59%,30% 64%,20% 64%,10% 59%,0% 62%)}
+      50%{clip-path:polygon(0% 100%,100% 100%,100% 62%,90% 59%,80% 64%,70% 64%,60% 59%,50% 62%,40% 65%,30% 60%,20% 60%,10% 65%,0% 62%)}
+    }
+
+    .err-wrap{position:relative;display:inline-block}
+    .err-title{font-family:var(--fb);font-size:clamp(1.2rem,4vw,1.8rem);letter-spacing:.12em;text-transform:uppercase;font-weight:500;margin-top:1.2rem;color:var(--txt)}
     .err-sub{font-size:.82rem;color:var(--mut);margin-top:.75rem;max-width:360px;line-height:1.7}
     .err-line{width:40px;height:1px;background:var(--acc);margin:2rem auto}
-    .err-links{display:flex;gap:1rem;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:.5rem}
-    .err-btn{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--fb);font-size:.75rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.7rem 1.6rem;border:1px solid var(--brd);color:var(--mut);transition:color .2s,border-color .2s}
-    .err-btn:hover{color:var(--txt);border-color:rgba(238,235,229,.3)}
-    .err-btn.primary{border-color:var(--acc);color:var(--acc)}
-    .err-btn.primary:hover{color:var(--txt);border-color:var(--txt)}
-    .err-credit{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(238,235,229,.2)}
-    @media(max-width:540px){.err-links{flex-direction:column}.err-btn{width:100%;justify-content:center}}
+    .err-links{display:flex;gap:.85rem;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:.5rem}
+
+    /* pill buttons — matches homepage */
+    .bprim{display:inline-flex;align-items:center;gap:.65rem;background:var(--acc2);color:var(--bg);font-family:var(--fb);font-size:.74rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 1.8rem;text-decoration:none;transition:background .2s;border-radius:9999px}
+    .bprim:hover{background:#f36a40}
+    .bsec{display:inline-flex;align-items:center;font-size:.74rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);text-decoration:none;border:1px solid var(--brd);padding:.85rem 1.6rem;transition:color .2s,border-color .2s;border-radius:9999px}
+    .bsec:hover{color:var(--txt);border-color:var(--brd2)}
+
+    .err-credit{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(238,235,229,.2);white-space:nowrap}
+    @media(max-width:540px){.err-links{flex-direction:column}.bprim,.bsec{width:100%;justify-content:center}}
   </style>
 </head>
 <body>
-  <div class="err-code">404</div>
+  <div class="err-wrap">
+    <span class="err-code">404</span>
+    <span class="err-code-sun" aria-hidden="true">404</span>
+    <span class="err-code-f" aria-hidden="true">404</span>
+  </div>
   <div class="err-title">Page Not Found</div>
   <p class="err-sub">This page doesn't exist or may have moved. Head back to see the work.</p>
   <div class="err-line"></div>
   <div class="err-links">
-    <a href="/" class="err-btn primary">Back to Home</a>
-    <a href="/#portfolio" class="err-btn">View Portfolio</a>
-    <a href="/#about" class="err-btn">My Story</a>
+    <a href="/" class="bprim">Back to Home</a>
+    <a href="/#portfolio" class="bsec">View Portfolio</a>
+    <a href="/#about" class="bsec">My Story</a>
   </div>
   <div class="err-credit">Giovanni Lauffer · 3D Artist</div>
 </body>
