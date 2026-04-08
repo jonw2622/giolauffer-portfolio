@@ -218,8 +218,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .wsec::after{content:'';flex:1;height:1px;background:var(--brd)}
 .witems{display:grid;grid-template-columns:1fr 1fr;gap:2px}
 .wi{background:var(--surf);padding:1.8rem;display:flex;gap:1.3rem;align-items:flex-start}
-.wi-link{text-decoration:none;color:inherit;transition:background .2s,outline .2s;outline:1px solid transparent;cursor:none}
-.wi-link:hover{background:var(--surf2);outline-color:var(--acc)}
+.wi-link{text-decoration:none;color:inherit;transition:background .2s,box-shadow .2s;cursor:none}
+.wi-link:hover{background:var(--surf2);box-shadow:inset 0 0 0 1px var(--acc)}
 .wi-link:hover .wlink{opacity:1}
 .winfo{display:flex;flex-direction:column;gap:.25rem;min-width:0}
 .wlogo{width:72px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
@@ -237,8 +237,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .rstrip{padding:0 2.5rem 5rem}
 .recgrid{display:grid;grid-template-columns:1fr 1fr;gap:2px;overflow:hidden;border-radius:10px}
 /* rec cards are now <a> tags — reset link styles */
-.rc{background:var(--surf);padding:1.8rem;display:block;text-decoration:none;color:inherit;transition:background .2s,outline .2s;outline:1px solid transparent}
-.rc:hover{background:#1c1c1f;outline-color:var(--acc)}
+.rc{background:var(--surf);padding:1.8rem;display:block;text-decoration:none;color:inherit;transition:background .2s,box-shadow .2s}
+.rc:hover{background:#1c1c1f;box-shadow:inset 0 0 0 1px var(--acc)}
 .rq{font-size:.82rem;line-height:1.82;color:#8e8a84;font-style:italic;font-weight:300;margin-bottom:1.3rem;padding-left:.9rem;border-left:2px solid var(--acc)}
 .rp{display:flex;align-items:center;gap:.8rem}
 .rp img{width:40px;height:40px;border-radius:50%;object-fit:cover;border:1px solid var(--brd2);flex-shrink:0}
@@ -411,8 +411,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .spec-strip{padding:0 2.5rem 4rem;max-width:1280px;margin:0 auto}
 .spec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;overflow:hidden;border-radius:10px}
 .witems-r{overflow:hidden;border-radius:10px}
-.spec-card{background:var(--surf);padding:1.8rem 1.5rem;display:flex;flex-direction:column;gap:.9rem;transition:background .2s,outline .2s;outline:1px solid transparent}
-.spec-card:hover{background:var(--surf2);outline-color:var(--acc)}
+.spec-card{background:var(--surf);padding:1.8rem 1.5rem;display:flex;flex-direction:column;gap:.9rem;transition:background .2s,box-shadow .2s}
+.spec-card:hover{background:var(--surf2);box-shadow:inset 0 0 0 1px var(--acc)}
 .spec-icon{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid var(--brd);flex-shrink:0}
 .spec-icon svg{width:18px;height:18px;stroke:var(--acc);stroke-width:1.5;fill:none}
 .spec-name{font-size:.78rem;font-weight:500;color:var(--txt);letter-spacing:.02em}
@@ -1020,7 +1020,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 
       <!-- Slide 1: TimeSplitters Rewind — direct MP4 from giovannilauffer.com -->
       <div class="rslide">
-        <video class="slide-video sv-ts" autoplay muted loop playsinline preload="auto" poster="/wp-content/uploads/2026/03/turret-thumbnail.webp">
+        <video class="slide-video sv-ts" autoplay muted loop playsinline preload="auto">
           <source src="/ts-rewind-2k-v3.mp4" type="video/mp4">
         </video>
         <div class="rov"></div><div class="rob"></div>
