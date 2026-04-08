@@ -114,6 +114,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .slide-info{position:absolute;bottom:9rem;right:2.5rem;text-align:right;z-index:10}
 
 .hero{position:absolute;top:50%;left:2.5rem;transform:translateY(-50%);z-index:10;max-width:528px}
+/* short viewports: anchor hero from bottom so it doesn't overlap slider controls */
+@media(max-height:820px) and (min-width:901px){.hero{top:auto;bottom:6.5rem;transform:none}}
 .htag{font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;color:var(--acc);font-weight:500;margin-bottom:1rem}
 
 /* ── HERO NAME: transparent outline extended bold ── */
@@ -895,8 +897,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 #about-windsurfer.yr-windsurfer-on{opacity:.16}
 @media(max-width:1280px){#about-windsurfer{display:none}}
 #about-kid img,#about-runner img,#about-windsurfer img{max-width:528px;height:auto;display:block}
-#about-runner img{max-width:700px;max-height:640px;width:auto;height:auto}
-#about-windsurfer img{max-width:1056px;max-height:576px;width:auto;height:auto}
+#about-runner img{max-width:480px;max-height:420px;width:auto;height:auto}
+#about-windsurfer img{max-width:420px;max-height:380px;width:auto;height:auto}
 .ablock-img{display:flex;flex-direction:column;gap:12px;margin:-2rem 0}
 .ablock-img-wrap{
   position:relative;border-radius:20px;overflow:hidden;
