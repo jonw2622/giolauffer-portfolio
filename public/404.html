@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>404 — Giovanni Lauffer</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#0d0d0e;
+      --surf:#111213;
+      --brd:rgba(238,235,229,.08);
+      --txt:#eeebe5;
+      --mut:rgba(238,235,229,.45);
+      --acc:#3ec9b0;
+      --fd:'Bebas Neue',sans-serif;
+      --fb:'Barlow Condensed',sans-serif;
+      --fi:'Inter',sans-serif;
+    }
+    html,body{height:100%;background:var(--bg);color:var(--txt);font-family:var(--fi)}
+    body{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:2rem;text-align:center;cursor:default}
+    .err-code{font-family:var(--fd);font-size:clamp(6rem,20vw,14rem);line-height:1;letter-spacing:.04em;color:transparent;-webkit-text-stroke:1px rgba(238,235,229,.18);user-select:none}
+    .err-title{font-family:var(--fb);font-size:clamp(1.2rem,4vw,1.8rem);letter-spacing:.12em;text-transform:uppercase;font-weight:500;margin-top:1rem;color:var(--txt)}
+    .err-sub{font-size:.82rem;color:var(--mut);margin-top:.75rem;max-width:360px;line-height:1.7}
+    .err-line{width:40px;height:1px;background:var(--acc);margin:2rem auto}
+    .err-links{display:flex;gap:1rem;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:.5rem}
+    .err-btn{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--fb);font-size:.75rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:.7rem 1.6rem;border:1px solid var(--brd);color:var(--mut);transition:color .2s,border-color .2s}
+    .err-btn:hover{color:var(--txt);border-color:rgba(238,235,229,.3)}
+    .err-btn.primary{border-color:var(--acc);color:var(--acc)}
+    .err-btn.primary:hover{color:var(--txt);border-color:var(--txt)}
+    .err-credit{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(238,235,229,.2)}
+    @media(max-width:540px){.err-links{flex-direction:column}.err-btn{width:100%;justify-content:center}}
+  </style>
+</head>
+<body>
+  <div class="err-code">404</div>
+  <div class="err-title">Page Not Found</div>
+  <p class="err-sub">This page doesn't exist or may have moved. Head back to see the work.</p>
+  <div class="err-line"></div>
+  <div class="err-links">
+    <a href="/" class="err-btn primary">Back to Home</a>
+    <a href="/#portfolio" class="err-btn">View Portfolio</a>
+    <a href="/#about" class="err-btn">My Story</a>
+  </div>
+  <div class="err-credit">Giovanni Lauffer · 3D Artist</div>
+</body>
+</html>
