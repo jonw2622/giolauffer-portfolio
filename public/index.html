@@ -244,9 +244,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .recgrid .rc:nth-last-child(2){border-bottom-left-radius:10px}
 .recgrid .rc:last-child{border-bottom-right-radius:10px}
 /* rec cards are now <a> tags — reset link styles */
-.rc{background:var(--surf);padding:1.8rem;display:block;text-decoration:none;color:inherit;transition:background .2s,box-shadow .2s}
+.rc{background:var(--surf);padding:1.8rem;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;color:inherit;transition:background .2s,box-shadow .2s}
 .rc:hover{background:#1c1c1f;box-shadow:inset 0 0 0 1px var(--acc)}
-.rq{font-size:.82rem;line-height:1.82;color:#8e8a84;font-style:italic;font-weight:300;margin-bottom:1.3rem;padding-left:.9rem;border-left:2px solid var(--acc)}
+.rq{font-size:.82rem;line-height:1.82;color:#8e8a84;font-style:italic;font-weight:300;margin-bottom:1.8rem;padding-left:.9rem;border-left:2px solid var(--acc)}
 .rp{display:flex;align-items:center;gap:.8rem}
 .rp img{width:40px;height:40px;border-radius:50%;object-fit:cover;border:1px solid var(--brd2);flex-shrink:0}
 .rn{font-size:.8rem;font-weight:500;display:flex;align-items:center;gap:.3rem}
