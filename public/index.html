@@ -285,10 +285,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .pcard img.thumb{width:100%;height:100%;display:block;object-fit:cover;transition:transform .55s cubic-bezier(.25,.46,.45,.94)}
 .pcard:hover img.thumb{transform:scale(1.04)}
 .pcard-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,13,14,.95) 0%,rgba(13,13,14,.3) 45%,transparent 70%);opacity:0;transition:opacity .35s;display:flex;flex-direction:column;justify-content:flex-end;padding:1.2rem}
-.pcard:hover .pcard-ov{opacity:1}
-.pcc{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);font-weight:600;margin-bottom:.3rem}
-.pcn{font-family:var(--fd);font-size:1.3rem;letter-spacing:.04em;line-height:1.1}
-.pcm{display:flex;gap:.4rem;margin-top:.5rem;flex-wrap:wrap}
+.pcard:hover .pcard-ov,.pcard.ov-on .pcard-ov{opacity:1}
+.pcc{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);font-weight:600;margin-bottom:.3rem;transform:translateX(-12px);transition:transform .3s cubic-bezier(.25,.46,.45,.94) .05s}
+.pcn{font-family:var(--fd);font-size:1.3rem;letter-spacing:.04em;line-height:1.1;transform:translateX(-12px);transition:transform .3s cubic-bezier(.25,.46,.45,.94)}
+.pcm{display:flex;gap:.4rem;margin-top:.5rem;flex-wrap:wrap;transform:translateX(-12px);transition:transform .3s cubic-bezier(.25,.46,.45,.94) .09s}
+.pcard:hover .pcc,.pcard.ov-on .pcc,
+.pcard:hover .pcn,.pcard.ov-on .pcn,
+.pcard:hover .pcm,.pcard.ov-on .pcm{transform:translateX(0)}
 .pct{font-size:.56rem;letter-spacing:.09em;text-transform:uppercase;color:rgba(238,235,229,.55);border:1px solid rgba(238,235,229,.12);padding:.18rem .45rem;border-radius:9999px}
 .cbadge{position:absolute;top:.85rem;left:.85rem;font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;padding:.25rem .6rem;background:var(--acc2);color:#eeebe5;font-weight:600;border-radius:9999px}
 .cgi-badge{background:#1a1a1c;border:1px solid var(--brd2);color:var(--mut)}
@@ -2672,7 +2675,7 @@ window.addEventListener('scroll',()=>{
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 })();
 
-// touch: first tap reveals overlay, second tap opens post
+// touch: first tap reveals overlay + animates title from left, second tap opens post
 // uses touchend + scroll-detection so vertical scrolling is never blocked
 let lastCard=null,tStartY=0,tDidScroll=false;
 document.addEventListener('touchstart',function(e){tStartY=e.touches[0]?.clientY||0;tDidScroll=false;},{passive:true});
@@ -2681,12 +2684,11 @@ document.addEventListener('touchend',function(e){
   if(tDidScroll)return;
   const card=e.target.closest('.pcard');
   if(!card)return;
-  const ov=card.querySelector('.pcard-ov');
-  if(!ov)return;
+  if(!card.querySelector('.pcard-ov'))return;
   if(card===lastCard){lastCard=null;return;}
   e.preventDefault();
-  document.querySelectorAll('.pcard-ov').forEach(o=>{o.style.opacity='0';});
-  ov.style.opacity='1';
+  document.querySelectorAll('.pcard').forEach(c=>c.classList.remove('ov-on'));
+  card.classList.add('ov-on');
   lastCard=card;
 },{passive:false});
 
