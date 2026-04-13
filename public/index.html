@@ -284,7 +284,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .pcard{position:relative;overflow:hidden;background:var(--surf);cursor:none;display:block;aspect-ratio:1/1;touch-action:pan-y}
 .pcard img.thumb{width:100%;height:100%;display:block;object-fit:cover;transition:transform .55s cubic-bezier(.25,.46,.45,.94)}
 .pcard:hover img.thumb{transform:scale(1.04)}
-.pcard-ov{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,13,14,.9) 0%,rgba(13,13,14,.4) 50%,transparent 75%);opacity:0;transition:opacity .35s;display:flex;flex-direction:column;justify-content:flex-start;padding:3rem 1.2rem 1.2rem}
+.pcard-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,13,14,.95) 0%,rgba(13,13,14,.3) 45%,transparent 70%);opacity:0;transition:opacity .35s;display:flex;flex-direction:column;justify-content:flex-end;padding:1.2rem}
 .pcard:hover .pcard-ov{opacity:1}
 .pcc{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);font-weight:600;margin-bottom:.3rem}
 .pcn{font-family:var(--fd);font-size:1.3rem;letter-spacing:.04em;line-height:1.1}
@@ -756,7 +756,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   .cbadge{display:none}
   .pcc{display:none}
   .pcm{display:none}
-  .pcn{font-size:.7rem;letter-spacing:.03em}
+  .pcn{font-size:1rem;letter-spacing:.04em}
+  .pcard-ov{background:linear-gradient(to bottom,rgba(13,13,14,.9) 0%,rgba(13,13,14,.4) 50%,transparent 75%);justify-content:flex-start;padding:2.8rem .9rem .9rem}
 }
 @media(hover:none){
   .pcard:hover img.thumb,.pcard:hover video.thumb{transform:none}
