@@ -2537,6 +2537,8 @@ function showPost(id){
   const has3d=p.images.some(i=>i.type==='sketchfab');
   document.querySelector('.galh').textContent=has3d?'3D Viewer & Images':'Images';
   document.getElementById('pgal').innerHTML=galHTML;
+  // explicitly play gallery videos — HTML autoplay is unreliable on mobile
+  document.querySelectorAll('#pgal video').forEach(v=>{v.play&&v.play().catch(()=>{});});
 
   // breakdown
   document.getElementById('pbd').innerHTML=`
