@@ -2323,7 +2323,7 @@ function renderGrid(filter){
   const grid=document.getElementById('pgrid');
   grid.innerHTML='';
   const matches=(p)=>{
-    if(filter==='all')return true;
+    if(filter==='all')return p.cat==='beyond';
     if(filter==='oldwork')return p.cat==='ts'||p.cat==='cgi'||p.cat==='personal';
     return p.cat===filter;
   };
