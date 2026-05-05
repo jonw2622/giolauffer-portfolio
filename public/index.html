@@ -1079,7 +1079,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 
       <!-- Slide 3: TimeSplitters Rewind — direct MP4 from giovannilauffer.com -->
       <div class="rslide">
-        <video class="slide-video sv-ts" autoplay muted loop playsinline preload="metadata">
+        <video class="slide-video sv-ts" autoplay muted loop playsinline preload="auto">
           <source src="/ts-rewind-2k-v3.mp4" type="video/mp4">
         </video>
         <div class="rov"></div><div class="rob"></div>
@@ -1794,7 +1794,9 @@ function gts(n){
   document.querySelectorAll('.rdot').forEach((d,i)=>d.classList.toggle('on',i===cs));
   document.getElementById('rtim').textContent=`0${cs+1} / 0${T}`;
   // play active slide video, pause others
-  document.querySelectorAll('.slide-video').forEach((v,i)=>{
+  document.querySelectorAll('.rslide').forEach((slide,i)=>{
+    const v=slide.querySelector('.slide-video');
+    if(!v)return;
     if(i===cs){if(v.querySelector('source')?.getAttribute('src')!=='/ts-rewind-2k-v3.mp4')v.currentTime=0;v.play&&v.play().catch(()=>{});}
     else{v.pause && v.pause();}
   });
