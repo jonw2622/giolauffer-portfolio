@@ -1809,6 +1809,13 @@ window.gts=gts; window.ns=ns; window.ps=ps;
 at=setTimeout(()=>gts(1),7000);
 // explicitly play slide 0 video — HTML autoplay is unreliable on mobile
 (function(){const v=document.querySelectorAll('.slide-video')[0];if(v)v.play&&v.play().catch(()=>{});})();
+// retry play() once a video buffers enough — handles the case where gts() is
+// called before a large video has loaded (TS reel = 9MB, can miss the 7s window)
+document.querySelectorAll('.rslide').forEach((slide,i)=>{
+  const v=slide.querySelector('.slide-video');
+  if(!v)return;
+  v.addEventListener('canplay',()=>{if(cs===i)v.play&&v.play().catch(()=>{});});
+});
 // on first touch, unblock all slide videos so auto-advance plays them cleanly
 document.addEventListener('touchstart',function unlock(){
   document.querySelectorAll('.slide-video').forEach(v=>{
