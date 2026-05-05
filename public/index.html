@@ -272,10 +272,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .fb.on{animation:fb-pulse 2s ease-in-out infinite}
 .fb-beyond.on,.fb-beyond:hover{border-color:var(--acc2);color:var(--acc2)}
 .fb-beyond.on{animation:fb-pulse-orange 2s ease-in-out infinite}
-.fb-personal.on,.fb-personal:hover{border-color:var(--txt);color:var(--txt)}
-.fb-personal.on{animation:fb-pulse-white 2s ease-in-out infinite}
-.fb-cgi.on,.fb-cgi:hover{border-color:var(--txt);color:var(--txt)}
-.fb-cgi.on{animation:fb-pulse-white 2s ease-in-out infinite}
+.fb-old.on,.fb-old:hover{border-color:var(--mut);color:var(--mut)}
+.fb-old.on{animation:fb-pulse-white 2s ease-in-out infinite}
 @keyframes fb-pulse{0%,100%{box-shadow:0 0 0 0 rgba(14,184,160,0)}50%{box-shadow:0 0 8px 2px rgba(14,184,160,.35)}}
 @keyframes fb-pulse-orange{0%,100%{box-shadow:0 0 0 0 rgba(244,132,95,0)}50%{box-shadow:0 0 8px 2px rgba(244,132,95,.35)}}
 @keyframes fb-pulse-white{0%,100%{box-shadow:0 0 0 0 rgba(238,235,229,0)}50%{box-shadow:0 0 8px 2px rgba(238,235,229,.3)}}
@@ -283,8 +281,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 /* Portfolio grid */
 .pgrid{padding:.5rem 0 6rem;display:grid;grid-template-columns:repeat(6,1fr);gap:3px;touch-action:pan-y}
 .pcard{position:relative;overflow:hidden;background:var(--surf);cursor:none;display:block;aspect-ratio:1/1;touch-action:pan-y}
-.pcard img.thumb{width:100%;height:100%;display:block;object-fit:cover;transition:transform .55s cubic-bezier(.25,.46,.45,.94)}
-.pcard:hover img.thumb{transform:scale(1.04)}
+.pcard img.thumb,.pcard video.thumb{width:100%;height:100%;display:block;object-fit:cover;transition:transform .55s cubic-bezier(.25,.46,.45,.94),filter .35s ease}
+.pcard:hover img.thumb,.pcard:hover video.thumb{transform:scale(1.04)}
+.pcard.archived img.thumb,.pcard.archived video.thumb{filter:brightness(.45) saturate(.7)}
+.pcard.archived:hover img.thumb,.pcard.archived:hover video.thumb,.pcard.archived.ov-on img.thumb,.pcard.archived.ov-on video.thumb{filter:brightness(.7) saturate(.85)}
 .pcard-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,13,14,.95) 0%,rgba(13,13,14,.3) 45%,transparent 70%);opacity:0;transition:opacity .35s;display:flex;flex-direction:column;justify-content:flex-end;padding:1.2rem}
 .pcard:hover .pcard-ov,.pcard.ov-on .pcard-ov{opacity:1}
 .pcc{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);font-weight:600;margin-bottom:.3rem;transform:translateX(-12px);transition:transform .3s cubic-bezier(.25,.46,.45,.94) .05s}
@@ -1053,18 +1053,9 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 
     <div class="rslides" id="rslides">
 
-      <!-- Slide 1: TimeSplitters Rewind — direct MP4 from giovannilauffer.com -->
+      <!-- Slide 1: Witch's Den — direct MP4 from giovannilauffer.com -->
       <div class="rslide">
-        <video class="slide-video sv-ts" autoplay muted loop playsinline preload="auto">
-          <source src="/ts-rewind-2k-v3.mp4" type="video/mp4">
-        </video>
-        <div class="rov"></div><div class="rob"></div>
-        <div class="slide-info"><div class="si-tag">Cinder Interactive</div><div class="si-title">TimeSplitters: Rewind</div><div class="si-sub">Props · Characters · Vehicles · UE5</div></div>
-      </div>
-
-      <!-- Slide 2: Witch's Den — direct MP4 from giovannilauffer.com -->
-      <div class="rslide">
-        <video class="slide-video sv-witchden" autoplay muted loop playsinline preload="metadata" poster="/wp-content/uploads/2026/03/witch-den-thumbnail.webp">
+        <video class="slide-video sv-witchden" autoplay muted loop playsinline preload="auto" poster="/wp-content/uploads/2026/03/witch-den-thumbnail.webp">
           <source src="/wp-content/uploads/2025/12/WitchesDen-2k-1.mp4" type="video/mp4">
         </video>
         <div class="rov"></div><div class="rob"></div>
@@ -1075,7 +1066,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
         </div>
       </div>
 
-      <!-- Slide 3: Kingdom Below — Coming Soon -->
+      <!-- Slide 2: Kingdom Below — Coming Soon -->
       <div class="rslide">
         <div class="vfb fb3">KINGDOM BELOW</div>
         <div class="rov"></div><div class="rob"></div>
@@ -1084,6 +1075,15 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
           <div class="si-title">Kingdom Below</div>
           <div class="si-sub">Environment Art · Coming Soon</div>
         </div>
+      </div>
+
+      <!-- Slide 3: TimeSplitters Rewind — direct MP4 from giovannilauffer.com -->
+      <div class="rslide">
+        <video class="slide-video sv-ts" autoplay muted loop playsinline preload="metadata">
+          <source src="/ts-rewind-2k-v3.mp4" type="video/mp4">
+        </video>
+        <div class="rov"></div><div class="rob"></div>
+        <div class="slide-info"><div class="si-tag">Cinder Interactive</div><div class="si-title">TimeSplitters: Rewind</div><div class="si-sub">Props · Characters · Vehicles · UE5</div></div>
       </div>
 
       <!-- Slide 4: Underground Subway — Upcoming Personal Project -->
@@ -1399,9 +1399,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
     <div class="pfilt">
       <button class="fb on" onclick="fc(this,'all')">All</button>
       <button class="fb fb-beyond" onclick="fc(this,'beyond')">Beyond Extent</button>
-      <button class="fb" onclick="fc(this,'ts')">TimeSplitters</button>
-      <button class="fb fb-personal" onclick="fc(this,'personal')">Personal</button>
-      <button class="fb fb-cgi" onclick="fc(this,'cgi')">CGI</button>
+      <button class="fb fb-old" onclick="fc(this,'oldwork')">Old Work</button>
     </div>
   </div>
 
@@ -2324,14 +2322,20 @@ const ORDER=['witchden','turret','spaceship','helicopter','airplane','carousel',
 function renderGrid(filter){
   const grid=document.getElementById('pgrid');
   grid.innerHTML='';
-  ORDER.filter(id=>filter==='all'||POSTS[id].cat===filter).forEach(id=>{
+  const matches=(p)=>{
+    if(filter==='all')return true;
+    if(filter==='oldwork')return p.cat==='ts'||p.cat==='cgi'||p.cat==='personal';
+    return p.cat===filter;
+  };
+  ORDER.filter(id=>matches(POSTS[id])).forEach(id=>{
     const p=POSTS[id];
     const isCgi=p.cat==='cgi';
     const isBeyond=p.cat==='beyond';
     const isTs=p.cat==='ts';
     const isPersonal=p.cat==='personal';
+    const isArchived=!isBeyond;
     const div=document.createElement('div');
-    div.className='pcard'+(isCgi?' cgi-card':'');
+    div.className='pcard'+(isCgi?' cgi-card':'')+(isArchived?' archived':'');
     div.dataset.cat=p.cat;
     div.onclick=()=>showPost(id);
     div.setAttribute('role','button');
