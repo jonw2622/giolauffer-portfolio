@@ -180,6 +180,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .bsec{display:inline-flex;align-items:center;font-size:.74rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);text-decoration:none;border:1px solid var(--brd);padding:.85rem 1.6rem;transition:color .2s,border-color .2s;border-radius:9999px}
 .bsec:hover{color:var(--txt);border-color:var(--brd2)}
 
+/* shrink hero on short-height laptops (e.g. 1366x768) so it clears the nav */
+@media(max-height:820px) and (min-width:901px){
+  .hname{font-size:clamp(3.5rem,7vw,6rem)}
+  .avail-hero{margin-bottom:.6rem}
+  .htag{margin-bottom:.7rem}
+  .hrole{margin-top:.9rem;margin-bottom:1.4rem;line-height:1.6}
+  .hstats{margin-bottom:1.4rem;gap:1.8rem}
+  .sn{font-size:1.6rem}
+}
+
 .rctrl{position:absolute;bottom:3rem;left:2.5rem;right:2.5rem;display:flex;align-items:center;gap:1.8rem;z-index:20}
 .rdots{display:flex;gap:.45rem}
 .rdot{width:2.2rem;height:2px;background:rgba(238,235,229,.18);cursor:none;transition:background .3s,width .3s}
@@ -296,7 +306,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .pct{font-size:.56rem;letter-spacing:.09em;text-transform:uppercase;color:rgba(238,235,229,.55);border:1px solid rgba(238,235,229,.12);padding:.18rem .45rem;border-radius:9999px}
 .cbadge{position:absolute;top:.85rem;left:.85rem;font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;padding:.25rem .6rem;background:var(--acc2);color:#eeebe5;font-weight:600;border-radius:9999px}
 .cgi-badge{background:#1a1a1c;border:1px solid var(--brd2);color:var(--mut)}
-.beyond-badge{background:rgba(244,132,95,.12);border:1px solid rgba(244,132,95,.35);color:var(--acc2)}
+.beyond-badge{left:auto;right:.85rem;background:rgba(244,132,95,.12);border:1px solid rgba(244,132,95,.35);color:var(--acc2)}
 .ts-badge{background:rgba(14,184,160,.15);border:1px solid var(--acc);color:var(--acc)}
 .personal-badge{background:rgba(238,235,229,.07);border:1px solid var(--brd2);color:var(--txt)}
 .ts-dl-btn{display:inline-flex;align-items:center;gap:.65rem;background:var(--acc2);color:#eeebe5;font-family:var(--fb);font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.9rem 2rem;text-decoration:none;transition:gap .2s;border-radius:9999px}
