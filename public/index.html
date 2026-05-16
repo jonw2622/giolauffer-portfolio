@@ -2455,7 +2455,7 @@ function renderGrid(filter){
       ${isPersonal?`<span class="cbadge personal-badge">Personal Project</span>`:''}
       <div class="pcard-ov">
         <div class="pcc">${p.tagline}</div>
-        <div class="pcn">${p.title.replace("Witch's Den — ",'').replace('Kingdom Below — ','').replace('TimeSplitters: Rewind — ','')}</div>
+        <div class="pcn">${p.title.replace(' — Beyond Extent Team Challenge','').replace('TimeSplitters: Rewind — ','')}</div>
         <div class="pcm">${p.tags.slice(0,3).map(([t])=>`<span class="pct">${t}</span>`).join('')}</div>
       </div>`;
     grid.appendChild(div);
@@ -2768,7 +2768,7 @@ function showPost(id){
       : `<img src="${r.thumb}" alt="${r.title}" loading="lazy" decoding="async">`;
     return`<div class="relcard" onclick="showPost('${rid}')">
       ${relThumb}
-      <div class="relcard-ov"><div class="reln">${r.title.replace("Witch's Den — ",'').replace('Kingdom Below — ','').replace('TimeSplitters: Rewind — ','')}</div><div class="relc">${r.tagline}</div></div>
+      <div class="relcard-ov"><div class="reln">${r.title.replace(' — Beyond Extent Team Challenge','').replace('TimeSplitters: Rewind — ','')}</div><div class="relc">${r.tagline}</div></div>
     </div>`;
   }).join('');
 
