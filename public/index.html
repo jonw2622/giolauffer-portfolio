@@ -253,6 +253,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .recgrid .rc:nth-child(2){border-top-right-radius:10px}
 .recgrid .rc:nth-last-child(2){border-bottom-left-radius:10px}
 .recgrid .rc:last-child{border-bottom-right-radius:10px}
+/* odd count: last card spans both columns so the grid doesn't leave a half-empty row */
+.recgrid .rc:last-child:nth-child(odd){grid-column:1/-1;border-bottom-left-radius:10px}
 /* rec cards are now <a> tags — reset link styles */
 .rc{background:var(--surf);padding:1.8rem;display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;color:inherit;transition:background .2s,box-shadow .2s}
 .rc:hover{background:#1c1c1f;box-shadow:inset 0 0 0 1px var(--acc)}
@@ -404,6 +406,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .critgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
 .critgrid.single{grid-template-columns:1fr;max-width:820px}
 @media(max-width:900px){.critgrid{grid-template-columns:1fr}}
+/* judges credit row appears below the live-review video in the critic section */
+.judges-sub{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--acc2);font-weight:600;margin:2rem 0 1rem;display:flex;align-items:center;gap:.8rem}
+.judges-sub::after{content:'';flex:1;height:1px;background:var(--brd)}
+.credgrid.judges-grid{grid-template-columns:repeat(3,1fr);max-width:820px}
+@media(max-width:900px){.credgrid.judges-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:540px){.credgrid.judges-grid{grid-template-columns:1fr}}
 
 .relsec{margin-top:4.5rem;padding-top:2.5rem;border-top:1px solid var(--brd);position:relative;z-index:11}
 .reltit{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);font-weight:600;margin-bottom:1.6rem}
@@ -576,6 +584,11 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   #cursor{display:none}
   .sv-witchden{object-position:72% center}
   .sv-ts{object-position:center 30%}
+  /* Kingdom Below clip is 2.39:1 cinemascope — on tall mobile portrait viewports
+     object-fit:cover crops the sides heavily. Shift the focal point slightly right
+     and a bit toward the lower-middle so the lit hero (flag/boat + godrays) stays
+     in frame instead of being clipped off the right edge. */
+  .sv-kingdom{object-position:55% 55%}
 
   /* nav: hide links, show hamburger — logo left, controls right */
   nav{padding:1rem 1.4rem}
@@ -1335,6 +1348,16 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   <div class="rstrip reveal">
     <div class="wsec">Industry Recommendations</div>
     <div class="recgrid">
+      <a class="rc" href="https://www.linkedin.com/in/andres-o-897bb7163/" target="_blank" rel="noopener noreferrer">
+        <div class="rq">"I want to give a special shout-out to Giovanni for his incredible presence on my team. Beyond his technical skill, Giovanni is exceptionally mindful of those around him. He consistently boosted our morale with his motivation and kind words, keeping the energy positive even during difficult stretches. Furthermore, his ability to take critique and iterate with a growth mindset made our collaboration seamless. He is a true asset to any creative team."</div>
+        <div class="rp">
+          <img src="/wp-content/uploads/2026/05/team/andres-olave.webp" alt="Andres Olave" loading="lazy" decoding="async">
+          <div>
+            <div class="rn">Andres Olave <span class="rlink">↗</span></div>
+            <div class="rr">3D Artist · Beyond Extent Kingdom Below Team<br>May 2026 · Worked with Giovanni on the same team</div>
+          </div>
+        </div>
+      </a>
       <a class="rc" href="https://cameronwgames.com/" target="_blank" rel="noopener noreferrer">
         <div class="rq">"Prior to beginning my time at Rockstar, I acted as producer for Giovanni, providing him with ongoing tasks and critique. Giovanni has a striking mindset of 'what's next' and was always extremely enthusiastic in providing high quality assets for TimeSplitters Rewind with a strong diligence not often found among other prop and environment artists. He would always run with critique and go above and beyond the expectations of the team to the point where we put him on the highest quality hero assets, trusting him with some of the most commonly viewed props throughout the game. I highly recommend Giovanni from my time managing him and think he'd do great in any studio!"</div>
         <div class="rp">
@@ -2271,6 +2294,64 @@ const POSTS={
     ],
     rel:['motorcycle','spaceship','turret']
   },
+  kingdom:{
+    id:'kingdom',cat:'beyond',
+    thumb:B+'2026/05/kb/kingdom-thumbnail.webp',
+    isVideo:false,
+    title:'Kingdom Below — Beyond Extent Team Challenge',
+    tagline:'Environment Art · Beyond Extent · 2nd Place',
+    tags:[['Environment Art','h'],['Beyond Extent','h'],['Rock Kit',''],['Modular Stairs',''],['RGBA Masks',''],['UE5','']],
+    desc:`<p>I am thrilled to share my work for <strong style="color:var(--txt)">"The Kingdom Below"</strong> challenge — a 5-week team challenge hosted by Beyond Extent. 14 teams of 5 artists each had only 5 weeks to create a complete environment.</p>
+    <p>As an Environment Artist for <strong style="color:var(--txt)">Team 5 (CTRL ALT DESCENT)</strong>, we won <strong style="color:var(--acc)">2nd place</strong>. My contributions included a modular rock kit (boulders, rocks, and stones), a modular stairs kit, RGBA masks, UV0/UV1 setup for tiling textures and RGBA masking, and the full high-to-low poly baking pipeline.</p>
+    <p>Be sure to check out the amazing work from the rest of the team:<br>
+    <a href="https://www.artstation.com/leaseiler" target="_blank" rel="noopener noreferrer" style="color:var(--acc)">Lea Seiler</a> ·
+    <a href="https://www.artstation.com/justinc92i" target="_blank" rel="noopener noreferrer" style="color:var(--acc)">Justin Colombini</a> ·
+    <a href="https://www.artstation.com/ark_art" target="_blank" rel="noopener noreferrer" style="color:var(--acc)">Kirill Semenov</a> ·
+    <a href="https://www.artstation.com/andresolave" target="_blank" rel="noopener noreferrer" style="color:var(--acc)">Andres Olave</a></p>
+    <p>Mentor: <a href="https://www.artstation.com/amaterasuami" target="_blank" rel="noopener noreferrer" style="color:var(--acc)">Frederieke Wagner</a> &nbsp;·&nbsp; Special thanks: <a href="https://www.artstation.com/timothydries" target="_blank" rel="noopener noreferrer" style="color:var(--acc)">Timothy Dries</a> · <a href="https://www.artstation.com/sunnyday" target="_blank" rel="noopener noreferrer" style="color:var(--acc)">Sunny Day</a></p>`,
+    studio:'Beyond Extent',project:'Kingdom Below Team Challenge',year:'May 2026',engine:'Unreal Engine 5',
+    sw:['Maya','ZBrush','Substance Painter','UE5'],
+    images:[
+      {src:'/wp-content/uploads/2026/05/kb/kingdom-hero-shot.webp', fw:true,  type:'img',   label:''},
+      {src:'/wp-content/uploads/2026/05/kb/kingdom-flythrough.mp4', fw:true,  type:'video', label:'Cinematic Flythrough'},
+      {src:'/wp-content/uploads/2026/05/kb/kingdom-rock-kit-render.webp', fw:true, type:'img', label:'Rock Kit'},
+      {src:'/wp-content/uploads/2026/05/kb/rock-solo.mp4',          fw:false, type:'video', label:''},
+      {src:'/wp-content/uploads/2026/05/kb/rock-set-dress.mp4',     fw:false, type:'video', label:''},
+      {src:'/wp-content/uploads/2026/05/kb/kingdom-clip-1.mp4',     fw:false, type:'video', label:''},
+      {src:'/wp-content/uploads/2026/05/kb/stairs-set-dress.mp4',   fw:false, type:'video', label:''},
+      {src:'/wp-content/uploads/2026/05/kb/stairs-close-up.mp4',    fw:false, type:'video', label:''},
+      {src:'/wp-content/uploads/2026/05/kb/kingdom-clip-2.mp4',     fw:false, type:'video', label:''},
+      {src:'/wp-content/uploads/2026/05/kb/kingdom-vfx.mp4',        fw:true,  type:'video', label:'Final Cinematic — VFX Pass'},
+      {src:'/wp-content/uploads/2026/05/kb/project-breakdown.mp4',  fw:true,  type:'video', label:'Project Breakdown'},
+    ],
+    hasVideo:'/wp-content/uploads/2026/05/kingdom-below-2k-v2.mp4',
+    artstation:'https://www.artstation.com/artwork/ZlN0bZ',
+    mentor:{
+      name:'Frederieke Wagner',
+      img:'/wp-content/uploads/2026/05/team/frederieke-wagner-1.webp',
+      exp:'Environment Artist at Climax Studios · Exodus',
+      li:'https://www.linkedin.com/in/frederieke-wagner-332642251/',
+    },
+    team:[
+      {name:'Lea Seiler',       role:'Team Lead · 3D Technical Artist',          img:'/wp-content/uploads/2026/05/team/lea-seiler.webp',         li:'https://www.linkedin.com/in/lea-seiler-a85aa22ab/'},
+      {name:'Justin Colombini', role:'Environment Artist · Textures',            img:'/wp-content/uploads/2026/05/team/justin-colombini-1.webp', li:'https://www.linkedin.com/in/justin-colombini-8b552ba3/'},
+      {name:'Kirill Semenov',   role:'3D Artist · Hero Asset',                   img:'/wp-content/uploads/2026/05/team/kirill-semenov.webp',     li:'https://www.linkedin.com/in/kirill-semenov-511493268/'},
+      {name:'Andres Olave',     role:'3D Artist · Foliage · Scanning Workflows', img:'/wp-content/uploads/2026/05/team/andres-olave.webp',       li:'https://www.linkedin.com/in/andres-o-897bb7163/'},
+    ],
+    judges:[
+      {name:'Zehra Khan',             role:'Senior Environment Artist at Singularity 6', img:'/wp-content/uploads/2026/05/team/zehra-khan.webp',             li:'https://www.linkedin.com/in/zehra-khan-16b165112/'},
+      {name:'Rishab Nanda',           role:'Lead Environment Artist at Crytek',          img:'/wp-content/uploads/2026/05/team/rishab-nanda.webp',           li:'https://www.linkedin.com/in/rishabnanda25/'},
+      {name:'Johann William Löffler', role:'Lead Prop Artist at PUBG Amsterdam',         img:'/wp-content/uploads/2026/05/team/johann-william-loffler.webp', li:'https://www.linkedin.com/in/johann-william-l%C3%B6ffler-aba929142/?locale=en'},
+    ],
+    bd:[
+      {t:'Modular Rock Kit',b:'Designed and built a modular set of boulders, rocks, and stones with consistent texel density and shared trim materials. Driven by Nanite for high-density geometry without bake-down compromises, the kit holds strong silhouettes from any camera angle.'},
+      {t:'Modular Stairs Kit',b:'A tileable stair kit assembled across the environment to read as carved ruins. Geometry snaps cleanly at all rotations, and tiling textures wrap via UV1 to keep texel density consistent regardless of segment length.'},
+      {t:'RGBA Masks & UV0/UV1 Setup',b:'UV0 carries RGBA mask channels (baked AO + Normal) and UV1 handles tiling material wrap. This combo enables per-asset variation through tinting and layered tiling materials while keeping memory cost low across the modular sets.'},
+      {t:'High-to-Low Poly Baking',b:'Sculpted high-poly source meshes in ZBrush, retopologised in Maya, and baked AO + Normal maps down to game-ready low-poly counterparts. Baked maps feed back into the RGBA mask channels for clean blending in the final material network.'},
+    ],
+    specs:{tris:'20,000 tris · Nanite-enabled · Rock Kit<span style="display:block;margin-top:.55rem">High-to-Low Poly Baked</span>',textures:'UV0 — RGBA mask channels (AO + Normal bake)<span style="display:block;margin-top:.55rem">UV1 — Tiling material wrap</span>'},
+    rel:['witchden']
+  },
   witchden:{
     id:'witchden',cat:'beyond',
     thumb:B+'2026/03/witch-den-thumbnail.webp',
@@ -2336,7 +2417,7 @@ const POSTS={
 };
 
 // ── order for grid display (Beyond Extent first, then gaming, CGI last) ──
-const ORDER=['witchden','turret','spaceship','helicopter','airplane','carousel','crane','bulletproof','cryogen','shoal','motorcycle','grabaduck','rituals'];
+const ORDER=['kingdom','witchden','turret','spaceship','helicopter','airplane','carousel','crane','bulletproof','cryogen','shoal','motorcycle','grabaduck','rituals'];
 
 // ── render portfolio grid ──
 function renderGrid(filter){
@@ -2374,7 +2455,7 @@ function renderGrid(filter){
       ${isPersonal?`<span class="cbadge personal-badge">Personal Project</span>`:''}
       <div class="pcard-ov">
         <div class="pcc">${p.tagline}</div>
-        <div class="pcn">${p.title.replace("Witch's Den — ",'').replace('TimeSplitters: Rewind — ','')}</div>
+        <div class="pcn">${p.title.replace("Witch's Den — ",'').replace('Kingdom Below — ','').replace('TimeSplitters: Rewind — ','')}</div>
         <div class="pcm">${p.tags.slice(0,3).map(([t])=>`<span class="pct">${t}</span>`).join('')}</div>
       </div>`;
     grid.appendChild(div);
@@ -2596,8 +2677,9 @@ function showPost(id){
   const credsec=document.getElementById('pcredits');
   if(p.team && p.team.length){
     const liIcon=`<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>`;
+    const mentorLink=p.mentor?(p.mentor.li||`https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(p.mentor.name)}`):'';
     const mentorHTML=p.mentor?`
-      <a class="credcard mentor" href="https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(p.mentor.name)}" target="_blank" rel="noopener noreferrer">
+      <a class="credcard mentor" href="${mentorLink}" target="_blank" rel="noopener noreferrer">
         <img src="${p.mentor.img}" alt="${p.mentor.name}" loading="lazy" decoding="async">
         <div class="cred-mentor-info">
           <span class="cred-mentor-badge">Mentor</span>
@@ -2651,20 +2733,42 @@ function showPost(id){
       <div class="crittit">Witch's Den Challenge — Live Review by Industry Professionals</div>
       <div class="critgrid single">${ytCard('HZmUv9n60KI',"Witch's Den Challenge — Live Industry Review")}</div>`;
     critsec.style.display='block';
+  } else if(id==='kingdom'){
+    const liIcon=`<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>`;
+    const judgesHTML=(p.judges||[]).map(j=>`
+      <a class="credcard" href="${j.li}" target="_blank" rel="noopener noreferrer">
+        <img src="${j.img}" alt="${j.name}" loading="lazy" decoding="async">
+        <div>
+          <div class="credname">${j.name}</div>
+          <div class="credrole">${j.role}</div>
+        </div>
+        <span class="credli">${liIcon} LinkedIn</span>
+      </a>`).join('');
+    critsec.innerHTML=`
+      <div class="crittit">Kingdom Below Challenge — Live Review by Industry Professionals</div>
+      <div class="critgrid single">${ytCard('v9XDyZ_ViAs','Kingdom Below Challenge — Live Industry Review')}</div>
+      <div class="judges-sub">Judged by</div>
+      <div class="credgrid judges-grid">${judgesHTML}</div>`;
+    critsec.style.display='block';
   } else {
     critsec.style.display='none';
     critsec.innerHTML='';
   }
 
-  // related
-  document.getElementById('prel').innerHTML=ORDER.filter(rid=>rid!==id).slice(0,6).map(rid=>{
+  // related — for new-work (Beyond Extent) posts, only show other new-work posts;
+  // older categories still get a mixed slice so Old Work pages don't go empty.
+  document.getElementById('prel').innerHTML=ORDER.filter(rid=>{
+    if(rid===id)return false;
+    if(p.cat==='beyond')return POSTS[rid].cat==='beyond';
+    return true;
+  }).slice(0,6).map(rid=>{
     const r=POSTS[rid];if(!r)return'';
     const relThumb=r.isVideo
       ? `<video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block"><source src="${r.hasVideo}" type="video/mp4"></video>`
       : `<img src="${r.thumb}" alt="${r.title}" loading="lazy" decoding="async">`;
     return`<div class="relcard" onclick="showPost('${rid}')">
       ${relThumb}
-      <div class="relcard-ov"><div class="reln">${r.title.replace("Witch's Den — ",'').replace('TimeSplitters: Rewind — ','')}</div><div class="relc">${r.tagline}</div></div>
+      <div class="relcard-ov"><div class="reln">${r.title.replace("Witch's Den — ",'').replace('Kingdom Below — ','').replace('TimeSplitters: Rewind — ','')}</div><div class="relc">${r.tagline}</div></div>
     </div>`;
   }).join('');
 
