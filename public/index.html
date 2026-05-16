@@ -162,6 +162,25 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
   -webkit-background-clip:text;
   background-clip:text;
 }
+/* orange outline layer — clipped to ABOVE the wave line so the outline above
+   the wave reads orange (matching the sun) while the part below stays in the
+   default cream stroke. Clip-path mirrors .l1-f's wave but with the polygon
+   anchored to the top corners instead of the bottom — and the keyframes use
+   the same wave deltas so the two halves sway in lock-step. */
+.hname .l1-o-orange{
+  display:block;
+  position:absolute;
+  top:0;left:0;right:0;
+  -webkit-text-fill-color:transparent;
+  color:transparent;
+  -webkit-text-stroke:1.5px var(--acc2);
+  clip-path:polygon(0% 0%,100% 0%,100% 62%,90% 65%,80% 60%,70% 60%,60% 65%,50% 62%,40% 59%,30% 64%,20% 64%,10% 59%,0% 62%);
+  animation:milk-wave-top 3s ease-in-out infinite;
+}
+@keyframes milk-wave-top{
+  0%,100%{clip-path:polygon(0% 0%,100% 0%,100% 62%,90% 65%,80% 60%,70% 60%,60% 65%,50% 62%,40% 59%,30% 64%,20% 64%,10% 59%,0% 62%)}
+  50%{clip-path:polygon(0% 0%,100% 0%,100% 62%,90% 59%,80% 64%,70% 64%,60% 59%,50% 62%,40% 65%,30% 60%,20% 60%,10% 65%,0% 62%)}
+}
 /* second line: solid teal fill */
 .hname .l2{
   display:block;
@@ -278,7 +297,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .port-artstation-cta a:hover{color:var(--acc)}
 .phead h1{font-family:var(--fd);font-size:3rem;letter-spacing:.06em}
 .phead p{font-size:.76rem;color:var(--mut);margin-top:.35rem}
-.pfilt{display:flex;gap:.4rem;flex-wrap:wrap}
+/* anchor filter group to the right in BOTH row-flex (desktop) and column-flex
+   (tablet/mobile) layouts of .phead — keeps the buttons top-right regardless
+   of the active filter or viewport width */
+.pfilt{display:flex;gap:.4rem;flex-wrap:wrap;margin-left:auto;align-self:flex-end}
 .fb{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;padding:.45rem 1.1rem;border:1px solid var(--brd);background:transparent;color:var(--mut);cursor:none;transition:all .2s;font-family:var(--fb);font-weight:500;border-radius:9999px}
 .fb:hover,.fb.on{border-color:var(--acc);color:var(--acc)}
 .fb.on{animation:fb-pulse 2s ease-in-out infinite}
@@ -292,11 +314,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 
 /* Portfolio grid */
 .pgrid{padding:.5rem 0 6rem;display:grid;grid-template-columns:repeat(6,1fr);gap:3px;touch-action:pan-y}
-/* Beyond Extent filter only has a handful of cards — let each card span 2 of the
-   6 columns on desktop so they feel like featured work, not stranded thumbnails.
-   Old Work and other filters keep 1-column cards. Tablet/mobile breakpoints
-   below have their own column counts (4 / 2), so this only fires on desktop. */
-@media(min-width:901px){.pgrid.beyond .pcard{grid-column:span 2}}
 .pcard{position:relative;overflow:hidden;background:var(--surf);cursor:none;display:block;aspect-ratio:1/1;touch-action:pan-y}
 .pcard img.thumb,.pcard video.thumb{width:100%;height:100%;display:block;object-fit:cover;transition:transform .55s cubic-bezier(.25,.46,.45,.94),filter .35s ease}
 .pcard:hover img.thumb,.pcard:hover video.thumb{transform:scale(1.04)}
@@ -1132,7 +1149,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
     <div class="hero">
       <div class="avail-hero ai"><span class="avail-dot"></span>Available for Work</div>
       <div class="htag ai">3D Prop & Environment Artist · Ede, Netherlands</div>
-      <h1 class="hname ai d1"><span class="l1"><span class="l1-o">GIOVANNI</span><span class="l1-sun" aria-hidden="true">GIOVANNI</span><span class="l1-f" aria-hidden="true">GIOVANNI</span></span><span class="l2">LAUFFER</span></h1>
+      <h1 class="hname ai d1"><span class="l1"><span class="l1-o">GIOVANNI</span><span class="l1-sun" aria-hidden="true">GIOVANNI</span><span class="l1-o-orange" aria-hidden="true">GIOVANNI</span><span class="l1-f" aria-hidden="true">GIOVANNI</span></span><span class="l2">LAUFFER</span></h1>
       <p class="hrole ai d2">Props · Characters · Vehicles · Environments<br>Maya · ZBrush · Substance · UE5 · 3DS Max · VRay</p>
       <div class="hstats ai d3">
         <div><div class="sn">5+</div><div class="sl">Years Exp</div></div>
@@ -2316,18 +2333,21 @@ const POSTS={
     <p>Mentor: <a href="https://www.artstation.com/amaterasuami" target="_blank" rel="noopener noreferrer" style="color:var(--acc)">Frederieke Wagner</a> &nbsp;·&nbsp; Special thanks: <a href="https://www.artstation.com/timothydries" target="_blank" rel="noopener noreferrer" style="color:var(--acc)">Timothy Dries</a> · <a href="https://www.artstation.com/sunnyday" target="_blank" rel="noopener noreferrer" style="color:var(--acc)">Sunny Day</a></p>`,
     studio:'Beyond Extent',project:'Kingdom Below Team Challenge',year:'May 2026',engine:'Unreal Engine 5',
     sw:['Maya','ZBrush','Substance Painter','UE5'],
+    // Gallery order mirrors the ArtStation post exactly (per Giovanni):
+    // 1 flythrough · 2 hero shot · 3-4 clips · 5 VFX · 6-7 rock kit motion ·
+    // 8-9 stairs kit motion · 10 project breakdown · 11 rock kit render
     images:[
-      {src:'/wp-content/uploads/2026/05/kb/kingdom-hero-shot.webp', fw:true,  type:'img',   label:''},
-      {src:'/wp-content/uploads/2026/05/kb/kingdom-flythrough.mp4', fw:true,  type:'video', label:'Cinematic Flythrough'},
-      {src:'/wp-content/uploads/2026/05/kb/kingdom-rock-kit-render.webp', fw:true, type:'img', label:'Rock Kit'},
-      {src:'/wp-content/uploads/2026/05/kb/rock-solo.mp4',          fw:false, type:'video', label:''},
-      {src:'/wp-content/uploads/2026/05/kb/rock-set-dress.mp4',     fw:false, type:'video', label:''},
-      {src:'/wp-content/uploads/2026/05/kb/kingdom-clip-1.mp4',     fw:false, type:'video', label:''},
-      {src:'/wp-content/uploads/2026/05/kb/stairs-set-dress.mp4',   fw:false, type:'video', label:''},
-      {src:'/wp-content/uploads/2026/05/kb/stairs-close-up.mp4',    fw:false, type:'video', label:''},
-      {src:'/wp-content/uploads/2026/05/kb/kingdom-clip-2.mp4',     fw:false, type:'video', label:''},
-      {src:'/wp-content/uploads/2026/05/kb/kingdom-vfx.mp4',        fw:true,  type:'video', label:'Final Cinematic — VFX Pass'},
-      {src:'/wp-content/uploads/2026/05/kb/project-breakdown.mp4',  fw:true,  type:'video', label:'Project Breakdown'},
+      {src:'/wp-content/uploads/2026/05/kb/kingdom-flythrough.mp4',       fw:true,  type:'video', label:'Cinematic Flythrough'},
+      {src:'/wp-content/uploads/2026/05/kb/kingdom-hero-shot.webp',       fw:true,  type:'img',   label:''},
+      {src:'/wp-content/uploads/2026/05/kb/kingdom-clip-1.mp4',           fw:false, type:'video', label:''},
+      {src:'/wp-content/uploads/2026/05/kb/kingdom-clip-2.mp4',           fw:false, type:'video', label:''},
+      {src:'/wp-content/uploads/2026/05/kb/kingdom-vfx.mp4',              fw:true,  type:'video', label:'Final Cinematic — VFX Pass'},
+      {src:'/wp-content/uploads/2026/05/kb/rock-solo.mp4',                fw:false, type:'video', label:''},
+      {src:'/wp-content/uploads/2026/05/kb/rock-set-dress.mp4',           fw:false, type:'video', label:''},
+      {src:'/wp-content/uploads/2026/05/kb/stairs-set-dress.mp4',         fw:false, type:'video', label:''},
+      {src:'/wp-content/uploads/2026/05/kb/stairs-close-up.mp4',          fw:false, type:'video', label:''},
+      {src:'/wp-content/uploads/2026/05/kb/project-breakdown.mp4',        fw:true,  type:'video', label:'Project Breakdown'},
+      {src:'/wp-content/uploads/2026/05/kb/kingdom-rock-kit-render.webp', fw:true,  type:'img',   label:'Rock Kit'},
     ],
     hasVideo:'/wp-content/uploads/2026/05/kingdom-below-2k-v2.mp4',
     artstation:'https://www.artstation.com/artwork/ZlN0bZ',
@@ -2427,8 +2447,6 @@ const ORDER=['kingdom','witchden','turret','spaceship','helicopter','airplane','
 // ── render portfolio grid ──
 function renderGrid(filter){
   const grid=document.getElementById('pgrid');
-  // beyond modifier scales the cards 2x on desktop — Old Work keeps default size
-  grid.classList.toggle('beyond',filter==='all');
   grid.innerHTML='';
   const matches=(p)=>{
     if(filter==='all')return p.cat==='beyond';
