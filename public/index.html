@@ -1862,9 +1862,12 @@ addHov('a,button,.pcard,.gi,.relcard,.rbtn,.fb,.rc');
 }
 
 // ── small global helper: pause every <video> inside the given selectors.
-// Used when navigating away from a page so background videos stop chewing CPU. ──
+// Used when navigating away from a page so background videos stop chewing CPU.
+// Splits comma-separated selectors so we don't accidentally turn "#home, #post"
+// into "#home, #post video" (which would miss every video inside #home). ──
 function pauseAllVideosIn(sel){
-  document.querySelectorAll(sel+' video').forEach(v=>{ try{v.pause();}catch(e){} });
+  const compound=sel.split(',').map(s=>s.trim()+' video').join(',');
+  document.querySelectorAll(compound).forEach(v=>{ try{v.pause();}catch(e){} });
 }
 window.pauseAllVideosIn=pauseAllVideosIn;
 
