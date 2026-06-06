@@ -960,9 +960,36 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 }
 #about-windsurfer.yr-windsurfer-on{opacity:.16}
 @media(max-width:1280px){#about-windsurfer{display:none}}
+#about-karting{
+  position:fixed;right:calc((100vw - 1080px) / 4 + 1.25rem);top:50%;transform:translate(50%,-50%);
+  pointer-events:none;z-index:0;
+  opacity:0;transition:opacity .6s ease;
+  color:var(--acc2);user-select:none;will-change:opacity
+}
+#about-karting.yr-karting-on{opacity:.16}
+@media(max-width:1280px){#about-karting{display:none}}
+#about-basketball{
+  position:fixed;left:calc((100vw - 1080px) / 4 + 1.25rem);top:50%;transform:translate(-50%,-50%);
+  pointer-events:none;z-index:0;
+  opacity:0;transition:opacity .6s ease;
+  color:var(--acc2);user-select:none;will-change:opacity
+}
+#about-basketball.yr-basketball-on{opacity:.16}
+@media(max-width:1280px){#about-basketball{display:none}}
+#about-fighter{
+  position:fixed;right:calc((100vw - 1080px) / 4 + 1.25rem);top:50%;transform:translate(50%,-50%);
+  pointer-events:none;z-index:0;
+  opacity:0;transition:opacity .6s ease;
+  color:var(--acc2);user-select:none;will-change:opacity
+}
+#about-fighter.yr-fighter-on{opacity:.16}
+@media(max-width:1280px){#about-fighter{display:none}}
 #about-kid img,#about-runner img,#about-windsurfer img{max-width:528px;height:auto;display:block}
 #about-runner img{max-width:480px;max-height:420px;width:auto;height:auto}
 #about-windsurfer img{max-width:420px;max-height:380px;width:auto;height:auto}
+#about-karting img{max-width:480px;max-height:420px;width:auto;height:auto;display:block}
+#about-basketball img{max-width:480px;max-height:420px;width:auto;height:auto;display:block}
+#about-fighter img{max-width:420px;max-height:380px;width:auto;height:auto;display:block}
 .ablock-img{display:flex;flex-direction:column;gap:12px;margin:-2rem 0}
 .ablock-img-wrap{
   position:relative;border-radius:20px;overflow:hidden;
@@ -1492,13 +1519,22 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 <div id="about">
   <div id="about-year"></div>
   <div id="about-kid" aria-hidden="true">
-    <img src="/wp-content/uploads/2026/09/handheld-gaming.webp" alt="">
+    <img src="/wp-content/uploads/2026/09/gio-gaming.webp" alt="">
   </div>
   <div id="about-runner" aria-hidden="true">
-    <img src="/wp-content/uploads/2026/09/runner.webp" alt="">
+    <img src="/wp-content/uploads/2026/09/gio-running.webp" alt="">
   </div>
   <div id="about-windsurfer" aria-hidden="true">
-    <img src="/wp-content/uploads/2026/09/windsurfing.webp" alt="">
+    <img src="/wp-content/uploads/2026/09/gio-windsurfing.webp" alt="">
+  </div>
+  <div id="about-karting" aria-hidden="true">
+    <img src="/wp-content/uploads/2026/09/gio-karting.webp" alt="">
+  </div>
+  <div id="about-basketball" aria-hidden="true">
+    <img src="/wp-content/uploads/2026/09/gio-basketball.webp" alt="">
+  </div>
+  <div id="about-fighter" aria-hidden="true">
+    <img src="/wp-content/uploads/2026/09/gio-martial-arts.webp" alt="">
   </div>
   <div class="about-hero">
     <div class="about-hero-top">
@@ -2577,6 +2613,12 @@ function showAbout(){
       if(runnerEl)runnerEl.classList.toggle('yr-runner-on',y==='2007');
       const wsEl=document.getElementById('about-windsurfer');
       if(wsEl)wsEl.classList.toggle('yr-windsurfer-on',y!==''&&Number(y)>=2020);
+      const kartingEl=document.getElementById('about-karting');
+      if(kartingEl)kartingEl.classList.toggle('yr-karting-on',y==='1994'||y==='2002');
+      const bballEl=document.getElementById('about-basketball');
+      if(bballEl)bballEl.classList.toggle('yr-basketball-on',y==='2007');
+      const fighterEl=document.getElementById('about-fighter');
+      if(fighterEl)fighterEl.classList.toggle('yr-fighter-on',y!==''&&Number(y)>=2020);
     }
     let yrTick=false;
     function onYrScroll(){
