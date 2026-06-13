@@ -1803,6 +1803,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
     </div>
     <div class="galh">Images</div>
     <div class="gal" id="pgal"></div>
+    <div class="credsec" id="prelightsec" style="display:none"></div>
     <div class="bdsec" id="pbd"></div>
     <div class="credsec" id="pcredits" style="display:none"></div>
     <div class="critsec" id="pcrit" style="display:none"></div>
@@ -2424,9 +2425,20 @@ const POSTS={
       {src:'/wp-content/uploads/2026/05/kb/stairs-close-up.mp4',          fw:false, type:'video', label:''},
       {src:'/wp-content/uploads/2026/05/kb/project-breakdown.mp4',        fw:true,  type:'video', label:'Project Breakdown'},
       {src:'/wp-content/uploads/2026/05/kb/kingdom-rock-kit-render.webp', fw:true,  type:'img',   label:'Rock Kit'},
+      // Relight by Elliot McSherry — added Jun 2026
+      {src:'/wp-content/uploads/2026/06/kb/kb-relight-video.mp4', fw:true,  type:'video', label:'Relight — Cinematic by Elliot McSherry'},
+      {src:'/wp-content/uploads/2026/06/kb/kb-relight-1.webp',    fw:true,  type:'img',   label:'Relight — Elliot McSherry'},
+      {src:'/wp-content/uploads/2026/06/kb/kb-relight-2.webp',    fw:false, type:'img',   label:''},
+      {src:'/wp-content/uploads/2026/06/kb/kb-relight-3.webp',    fw:false, type:'img',   label:''},
     ],
     hasVideo:'/wp-content/uploads/2026/05/kingdom-below-2k-v2.mp4',
     artstation:'https://www.artstation.com/artwork/ZlN0bZ',
+    relight:{
+      name:'Elliot McSherry',
+      img:'/wp-content/uploads/2026/06/kb/elliot-mcsherry-profile.webp',
+      artstation:'https://www.artstation.com/artwork/kNAPNd',
+      desc:'Elliot McSherry relighted Giovanni Lauffer\'s team environment from the Beyond Extents Kingdom Below challenge with permission.',
+    },
     mentor:{
       name:'Frederieke Wagner',
       img:'/wp-content/uploads/2026/05/team/frederieke-wagner-1.webp',
@@ -2799,6 +2811,31 @@ function showPost(id){
     });
   },{rootMargin:'200px 0px'});
   document.querySelectorAll('#pgal video').forEach(v=>{window._galIO.observe(v);});
+
+  // relight credit section — only shown when post has a relight contributor
+  const relightsec=document.getElementById('prelightsec');
+  if(p.relight){
+    const r=p.relight;
+    const asIcon=`<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
+    relightsec.innerHTML=`
+      <div class="credtit">Relight</div>
+      <div class="credsub">${r.desc}</div>
+      <div class="credgrid">
+        <a class="credcard mentor" href="${r.artstation}" target="_blank" rel="noopener noreferrer">
+          <img src="${r.img}" alt="${r.name}" loading="lazy" decoding="async">
+          <div class="cred-mentor-info">
+            <span class="cred-mentor-badge">Relight Artist</span>
+            <div class="credname">${r.name}</div>
+            <div class="credexp">View the full relight post on ArtStation ↗</div>
+            <span class="credli">${asIcon} View ArtStation</span>
+          </div>
+        </a>
+      </div>`;
+    relightsec.style.display='block';
+  } else {
+    relightsec.style.display='none';
+    relightsec.innerHTML='';
+  }
 
   // breakdown
   document.getElementById('pbd').innerHTML=`
