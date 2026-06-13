@@ -2424,12 +2424,7 @@ const POSTS={
       {src:'/wp-content/uploads/2026/05/kb/stairs-set-dress.mp4',         fw:false, type:'video', label:''},
       {src:'/wp-content/uploads/2026/05/kb/stairs-close-up.mp4',          fw:false, type:'video', label:''},
       {src:'/wp-content/uploads/2026/05/kb/project-breakdown.mp4',        fw:true,  type:'video', label:'Project Breakdown'},
-      {src:'/wp-content/uploads/2026/05/kb/kingdom-rock-kit-render.webp', fw:true,  type:'img',   label:'Rock Kit'},
-      // Relight by Elliot McSherry — added Jun 2026
-      {src:'/wp-content/uploads/2026/06/kb/kb-relight-video.mp4', fw:true,  type:'video', label:'Relight — Cinematic by Elliot McSherry'},
-      {src:'/wp-content/uploads/2026/06/kb/kb-relight-1.webp',    fw:true,  type:'img',   label:'Relight — Elliot McSherry'},
-      {src:'/wp-content/uploads/2026/06/kb/kb-relight-2.webp',    fw:false, type:'img',   label:''},
-      {src:'/wp-content/uploads/2026/06/kb/kb-relight-3.webp',    fw:false, type:'img',   label:''},
+      {src:'/wp-content/uploads/2026/05/kb/kingdom-rock-kit-render.webp', fw:false, type:'img',   label:'Rock Kit'},
     ],
     hasVideo:'/wp-content/uploads/2026/05/kingdom-below-2k-v2.mp4',
     artstation:'https://www.artstation.com/artwork/ZlN0bZ',
@@ -2438,6 +2433,12 @@ const POSTS={
       img:'/wp-content/uploads/2026/06/kb/elliot-mcsherry-profile.webp',
       artstation:'https://www.artstation.com/artwork/kNAPNd',
       desc:'Elliot McSherry relighted Giovanni Lauffer\'s team environment from the Beyond Extents Kingdom Below challenge with permission.',
+      images:[
+        {src:'/wp-content/uploads/2026/06/kb/kb-relight-video.mp4', fw:true,  type:'video'},
+        {src:'/wp-content/uploads/2026/06/kb/kb-relight-1.webp',    fw:true,  type:'img'},
+        {src:'/wp-content/uploads/2026/06/kb/kb-relight-2.webp',    fw:false, type:'img'},
+        {src:'/wp-content/uploads/2026/06/kb/kb-relight-3.webp',    fw:false, type:'img'},
+      ],
     },
     mentor:{
       name:'Frederieke Wagner',
@@ -2817,6 +2818,10 @@ function showPost(id){
   if(p.relight){
     const r=p.relight;
     const asIcon=`<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
+    const relightImgsHTML=(r.images&&r.images.length)?`<div class="gal" style="margin-top:3px">${r.images.map(item=>{
+      if(item.type==='video')return`<div class="gi${item.fw?' fw':''}"><video autoplay muted loop playsinline style="width:100%;height:auto;display:block"><source src="${item.src}" type="video/mp4"></video></div>`;
+      return`<div class="gi${item.fw?' fw':''}"><img src="${item.src}" alt="${r.name}" loading="lazy" decoding="async"></div>`;
+    }).join('')}</div>`:'';
     relightsec.innerHTML=`
       <div class="credtit">Relight</div>
       <div class="credsub">${r.desc}</div>
@@ -2830,8 +2835,12 @@ function showPost(id){
             <span class="credli">${asIcon} View ArtStation</span>
           </div>
         </a>
-      </div>`;
+      </div>
+      ${relightImgsHTML}`;
     relightsec.style.display='block';
+    if(r.images&&r.images.length){
+      relightsec.querySelectorAll('video').forEach(v=>{window._galIO&&window._galIO.observe(v);});
+    }
   } else {
     relightsec.style.display='none';
     relightsec.innerHTML='';
