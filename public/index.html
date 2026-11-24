@@ -104,6 +104,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 
 /* direct mp4 video fills slide */
 .slide-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+/* From the Void is 2.4:1 — crop from the left so the portal clears the hero text */
+.sv-void{object-position:15% center}
 
 .si-tag{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--acc2);font-weight:600;margin-bottom:.3rem}
 .si-title{font-family:var(--fd);font-size:1.4rem;letter-spacing:.06em}
@@ -618,6 +620,9 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
      and a bit toward the lower-middle so the lit hero (flag/boat + godrays) stays
      in frame instead of being clipped off the right edge. */
   .sv-kingdom{object-position:55% 55%}
+  .sv-void{object-position:46% center} /* keep the portal centred on phones */
+  /* the bright portal sits right behind the hero text here — darken the lower part */
+  .sv-void+.rov{background:linear-gradient(to top,rgba(13,13,14,.52) 0,rgba(13,13,14,.52) 500px,rgba(13,13,14,.42) 620px,rgba(13,13,14,0) 760px),linear-gradient(to right,rgba(13,13,14,.78) 0%,rgba(13,13,14,.25) 70%,transparent 100%)}
 
   /* nav: hide links, show hamburger — logo left, controls right */
   nav{padding:1rem 1.4rem}
@@ -1167,7 +1172,20 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
         <div class="slide-info"><div class="si-tag">Cinder Interactive</div><div class="si-title">TimeSplitters: Rewind</div><div class="si-sub">Props · Characters · Vehicles · UE5</div></div>
       </div>
 
-      <!-- Slide 4: Underground Subway — Upcoming Personal Project -->
+      <!-- Slide 4: From the Void — upcoming team project -->
+      <div class="rslide">
+        <video class="slide-video sv-void" muted loop playsinline preload="metadata" poster="/wp-content/uploads/2026/11/from-the-void-poster.webp">
+          <source src="/wp-content/uploads/2026/11/from-the-void.mp4" type="video/mp4">
+        </video>
+        <div class="rov"></div><div class="rob"></div>
+        <div class="slide-info">
+          <div class="si-tag">Team Project</div>
+          <div class="si-title">From the Void</div>
+          <div class="si-sub">Environment Art · Coming Soon</div>
+        </div>
+      </div>
+
+      <!-- Slide 5: Underground Subway — Upcoming Personal Project -->
       <div class="rslide">
         <div class="vfb fb4">UNDERGROUND SUBWAY</div>
         <div class="rov"></div><div class="rob"></div>
@@ -1207,8 +1225,9 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
         <div class="rdot" onclick="gts(1)" role="button" tabindex="0" aria-label="Go to slide 2"></div>
         <div class="rdot" onclick="gts(2)" role="button" tabindex="0" aria-label="Go to slide 3"></div>
         <div class="rdot" onclick="gts(3)" role="button" tabindex="0" aria-label="Go to slide 4"></div>
+        <div class="rdot" onclick="gts(4)" role="button" tabindex="0" aria-label="Go to slide 5"></div>
       </div>
-      <div class="rtim" id="rtim">01 / 04</div>
+      <div class="rtim" id="rtim">01 / 05</div>
       <div class="rnav">
         <button class="rbtn" onclick="ps()" aria-label="Previous slide"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
         <button class="rbtn" onclick="ns()" aria-label="Next slide"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
@@ -1923,7 +1942,7 @@ window.pauseAllVideosIn=pauseAllVideosIn;
 function homeVisible(){return !document.getElementById('home').classList.contains('hidden');}
 
 // ── reel (3 slides) — also pause/play videos on slide change ──
-let cs=0; const T=4; let at;
+let cs=0; const T=5; let at;
 function gts(n){
   cs=(n+T)%T;
   document.getElementById('rslides').style.transform=`translateX(-${cs*100}%)`;
