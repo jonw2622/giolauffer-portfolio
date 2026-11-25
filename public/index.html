@@ -668,6 +668,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
   /* work: single column */
   .witems{grid-template-columns:1fr}
   .witems .wi[style*="grid-column"]{grid-column:1}
+  .wi-empty{display:none}
+  .wi:has(+.wi-empty){border-top-right-radius:10px}
   .wstrip{padding:0 1.4rem 3rem}
 
   /* recs: single column */
@@ -1179,7 +1181,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
         </video>
         <div class="rov"></div><div class="rob"></div>
         <div class="slide-info">
-          <div class="si-tag">Team Project</div>
+          <div class="si-tag">Beyond Extent Challenge</div>
           <div class="si-title">From the Void</div>
           <div class="si-sub">Environment Art · Coming Soon</div>
         </div>
@@ -1362,8 +1364,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
     <div class="wsec" style="margin-top:3rem">Education</div>
     <div class="witems witems-r">
 
-      <!-- Reverse-chronological: From the Void (Oct 2026, full width) · Kingdom Below (Apr 2026) · Witch's Den (Nov 2025) · Saxion (2016-20) · ISC (2007-13) -->
-      <a class="wi wi-link" href="https://www.beyondextent.com/" target="_blank" rel="noopener noreferrer" style="grid-column:1/-1;border-top-right-radius:10px">
+      <!-- Reverse-chronological: From the Void (Oct 2026) · Kingdom Below (Apr 2026) · Witch's Den (Nov 2025) · Saxion (2016-20) · ISC (2007-13) -->
+      <a class="wi wi-link" href="https://www.beyondextent.com/" target="_blank" rel="noopener noreferrer">
         <div class="wlogo"><img src="/wp-content/uploads/2025/11/BeyondExtent_Logo_White_Monotone-150x150.webp" alt="Beyond Extent" loading="lazy" decoding="async"></div>
         <div class="wdiv"></div>
         <div class="winfo">
@@ -1372,8 +1374,10 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
           <div class="wdsc"><strong style="color:var(--txt);font-weight:500">From the Void Challenge</strong><br>Team environment art challenge</div>
         </div>
       </a>
+      <!-- empty cell: swap for the next education entry -->
+      <div class="wi wi-empty" aria-hidden="true"></div>
 
-      <a class="wi wi-link" href="https://www.beyondextent.com/" target="_blank" rel="noopener noreferrer" style="border-top-right-radius:0">
+      <a class="wi wi-link" href="https://www.beyondextent.com/" target="_blank" rel="noopener noreferrer">
         <div class="wlogo"><img src="/wp-content/uploads/2025/11/BeyondExtent_Logo_White_Monotone-150x150.webp" alt="Beyond Extent" loading="lazy" decoding="async"></div>
         <div class="wdiv"></div>
         <div class="winfo">
