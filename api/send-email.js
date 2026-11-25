@@ -53,7 +53,8 @@ export default async function handler(req, res) {
     : `[Portfolio] Message from ${name.trim()}`;
 
   try {
-    await resend.emails.send({
+    // Resend returns API errors instead of throwing them
+    const { error } = await resend.emails.send({
       from: 'Portfolio Contact <contact@giovannilauffer.com>',
       to: 'giovannielauffer@gmail.com',
       replyTo: email.trim(),
@@ -64,6 +65,7 @@ export default async function handler(req, res) {
              <hr>
              <p>${esc(message.trim()).replace(/\n/g, '<br>')}</p>`,
     });
+    if (error) throw error;
     return res.status(200).json({ ok: true });
   } catch (err) {
     console.error('Resend error:', err);
