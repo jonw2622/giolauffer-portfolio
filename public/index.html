@@ -566,11 +566,16 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 .cf-status{font-size:.78rem;line-height:1.6;margin-bottom:1rem;min-height:1.2rem}
 .cf-status.err{color:var(--acc2)}
 .cf-status.ok{color:var(--acc)}
-.cf-actions{display:flex;justify-content:flex-end}
+.cf-actions{display:flex;justify-content:flex-end;align-items:center;gap:.8rem}
+.cf-mailto{display:inline-flex;align-items:center;gap:.65rem;background:transparent;color:var(--txt);border:1px solid var(--brd2);font-size:.74rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:.8rem 1.5rem;border-radius:100px;text-decoration:none;transition:border-color .25s,color .25s}
+.cf-mailto:hover,.cf-mailto:focus-visible{border-color:var(--acc);color:var(--acc)}
+.cf-direct{font-size:.78rem;line-height:1.6;color:var(--mut);margin:-1.2rem 0 1.6rem}
+.cf-direct a{color:var(--acc);text-decoration:none;overflow-wrap:anywhere}
+.cf-direct a:hover,.cf-direct a:focus-visible{text-decoration:underline}
 .cf-submit{display:inline-flex;align-items:center;gap:.65rem;background:var(--acc2);color:var(--bg);font-family:var(--fb);font-size:.74rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 1.8rem;border:none;cursor:none;transition:background .2s,gap .2s;border-radius:9999px}
 .cf-submit:hover:not(:disabled){gap:1rem}
 .cf-submit:disabled{opacity:.5}
-@media(max-width:540px){.cf-panel{padding:1.8rem 1.2rem}.cf-row{grid-template-columns:1fr}.cf-title{font-size:1.8rem}}
+@media(max-width:540px){.cf-panel{padding:1.8rem 1.2rem}.cf-row{grid-template-columns:1fr}.cf-title{font-size:1.8rem}.cf-actions{flex-direction:column-reverse;align-items:stretch}.cf-mailto,.cf-submit{justify-content:center}}
 
 /* back nav */
 .bnav{position:fixed;top:50%;left:1rem;transform:translateY(-50%);z-index:50;display:none}
@@ -1855,6 +1860,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
     <button class="cf-close" onclick="closeContact()" aria-label="Close">&#10005;</button>
     <div class="cf-tag">Get In Touch</div>
     <h2 class="cf-title">LET'S WORK<br><span>TOGETHER</span></h2>
+    <p class="cf-direct">Email me directly: <a href="mailto:giovannielauffer@gmail.com">giovannielauffer@gmail.com</a></p>
     <form id="cfForm" onsubmit="submitContact(event)" novalidate>
       <div style="display:none" aria-hidden="true">
         <input type="text" name="_trap" id="cfTrap" tabindex="-1" autocomplete="off">
@@ -1879,6 +1885,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
       </div>
       <div class="cf-status" id="cfStatus" aria-live="polite"></div>
       <div class="cf-actions">
+        <a href="mailto:giovannielauffer@gmail.com" class="cf-mailto" onclick="fillMailto(this)">Open in mail app</a>
         <button type="submit" class="cf-submit" id="cfSubmit">
           <span id="cfBtnTxt">Send Message</span>
           <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="1.8" fill="none"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -3105,6 +3112,15 @@ document.getElementById('cfModal').addEventListener('click',e=>{
   if(e.target.id==='cfModal') closeContact();
 });
 
+// carry over whatever is already typed, so it isn't lost when switching to mail
+function fillMailto(a){
+  const q=[['subject','cfSubject'],['body','cfMsg']]
+    .map(([k,id])=>[k,document.getElementById(id).value.trim()])
+    .filter(([,v])=>v)
+    .map(([k,v])=>k+'='+encodeURIComponent(v.replace(/\r?\n/g,'\r\n')));
+  a.href='mailto:giovannielauffer@gmail.com'+(q.length?'?'+q.join('&'):'');
+}
+
 async function submitContact(e){
   e.preventDefault();
   const btn=document.getElementById('cfSubmit');
@@ -3152,6 +3168,7 @@ async function submitContact(e){
 window.openContact=openContact;
 window.closeContact=closeContact;
 window.submitContact=submitContact;
+window.fillMailto=fillMailto;
 
 }); // end DOMContentLoaded
 </script>
