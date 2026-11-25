@@ -775,6 +775,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 
   /* slide info hidden on very small */
   .slide-info{display:none}
+  /* ...except From the Void: the label is the only thing naming an upcoming project */
+  .sv-void~.slide-info{display:block;bottom:4.2rem;right:1rem}
 
   /* about page: mobile reorder + show hobbies + quote */
   #about .about-hero{flex-direction:column}
@@ -1185,17 +1187,6 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
         </div>
       </div>
 
-      <!-- Slide 5: Underground Subway — Upcoming Personal Project -->
-      <div class="rslide">
-        <div class="vfb fb4">UNDERGROUND SUBWAY</div>
-        <div class="rov"></div><div class="rob"></div>
-        <div class="slide-info">
-          <div class="si-tag">Personal Project</div>
-          <div class="si-title">Underground Subway</div>
-          <div class="si-sub">Environment Art · Coming Soon</div>
-        </div>
-      </div>
-
     </div>
 
     <div class="hero">
@@ -1225,9 +1216,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
         <div class="rdot" onclick="gts(1)" role="button" tabindex="0" aria-label="Go to slide 2"></div>
         <div class="rdot" onclick="gts(2)" role="button" tabindex="0" aria-label="Go to slide 3"></div>
         <div class="rdot" onclick="gts(3)" role="button" tabindex="0" aria-label="Go to slide 4"></div>
-        <div class="rdot" onclick="gts(4)" role="button" tabindex="0" aria-label="Go to slide 5"></div>
       </div>
-      <div class="rtim" id="rtim">01 / 05</div>
+      <div class="rtim" id="rtim">01 / 04</div>
       <div class="rnav">
         <button class="rbtn" onclick="ps()" aria-label="Previous slide"><svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
         <button class="rbtn" onclick="ns()" aria-label="Next slide"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
@@ -1951,8 +1941,8 @@ window.pauseAllVideosIn=pauseAllVideosIn;
 // auto-advancing slides + retrying play() on hidden videos.
 function homeVisible(){return !document.getElementById('home').classList.contains('hidden');}
 
-// ── reel (3 slides) — also pause/play videos on slide change ──
-let cs=0; const T=5; let at;
+// ── reel (4 slides) — also pause/play videos on slide change ──
+let cs=0; const T=4; let at;
 function gts(n){
   cs=(n+T)%T;
   document.getElementById('rslides').style.transform=`translateX(-${cs*100}%)`;
@@ -1965,7 +1955,9 @@ function gts(n){
   document.querySelectorAll('.rslide').forEach((slide,i)=>{
     const v=slide.querySelector('.slide-video');
     if(!v)return;
-    if(showing && i===cs){if(v.querySelector('source')?.getAttribute('src')!=='/ts-rewind-2k-v3.mp4')v.currentTime=0;v.play&&v.play().catch(()=>{});}
+    // rewind only if it has played: seeking drops the poster, so a blocked autoplay
+    // (iOS Low Power Mode) would be left on the clip's first frame instead
+    if(showing && i===cs){if(v.currentTime>0 && v.querySelector('source')?.getAttribute('src')!=='/ts-rewind-2k-v3.mp4')v.currentTime=0;v.play&&v.play().catch(()=>{});}
     else{v.pause && v.pause();}
   });
   clearTimeout(at);
