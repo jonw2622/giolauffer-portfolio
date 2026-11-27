@@ -2504,7 +2504,8 @@ const POSTS={
       {name:'Alexandre Panizzoli', role:'Light Artist · Prop Artist', img:'/wp-content/uploads/2026/11/ftv/alexandre-panizzoli.webp', li:'https://www.linkedin.com/in/alexandre-panizzoli/'},
       {name:'Nathaniel Busschaert', role:'Prop Artist', img:'/wp-content/uploads/2026/11/ftv/nathaniel-busschaert.webp', li:'https://www.linkedin.com/in/just-n8te/'},
     ],
-    judgesTitle:'From the Void Challenge — Our Panel of Judges',
+    judgesTitle:'From the Void Challenge — Live Review by Industry Professionals',
+    review:{ytid:'omo5yiZnUzA', label:'From the Void Challenge — Live Industry Review'},
     judges:[
       {name:'Zehra Khan', role:'Senior Environment Artist at Singularity 6', img:'/wp-content/uploads/2026/05/team/zehra-khan.webp', art:'https://www.artstation.com/zehrakhan'},
       {name:'Rishab Nanda', role:'Lead Environment Artist at Crytek', img:'/wp-content/uploads/2026/05/team/rishab-nanda.webp', art:'https://www.artstation.com/rishabnanda'},
@@ -3049,9 +3050,11 @@ function showPost(id){
       <div class="credgrid judges-grid">${judgesHTML}</div>`;
     critsec.style.display='block';
   } else if(p.judgesTitle){
-    // judges without a review video: ArtStation links, initials when there is no photo
+    // judges with ArtStation links (initials when there is no photo), below the review video if there is one
     critsec.innerHTML=`
       <div class="crittit">${p.judgesTitle}</div>
+      ${p.review?`<div class="critgrid single">${ytCard(p.review.ytid,p.review.label)}</div>
+      <div class="judges-sub">Judged by</div>`:''}
       <div class="credgrid judges-grid">${p.judges.map(j=>`
       <a class="credcard" href="${j.art}" target="_blank" rel="noopener noreferrer">
         ${j.img?`<img src="${j.img}" alt="${j.name}" loading="lazy" decoding="async">`:`<span class="credini" aria-hidden="true">${j.name.split(' ').map(w=>w[0]).join('')}</span>`}
