@@ -213,7 +213,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 
 .rctrl{position:absolute;bottom:3rem;left:2.5rem;right:2.5rem;display:flex;align-items:center;gap:1.8rem;z-index:20}
 .rdots{display:flex;gap:.45rem}
-.rdot{width:2.2rem;height:2px;background:rgba(238,235,229,.18);cursor:none;transition:background .3s,width .3s}
+.rdot{position:relative;width:2.2rem;height:2px;border:0;padding:0;background:rgba(238,235,229,.18);cursor:none;transition:background .3s,width .3s}
+/* the line is 2px thin; this invisible box makes it 44px tall to click or tap */
+.rdot::after{content:'';position:absolute;inset:-21px -.22rem}
+.rdot:not(.on):hover{background:rgba(238,235,229,.55)}
 .rdot.on{background:var(--acc);width:3.5rem}
 .rtim{font-size:.65rem;letter-spacing:.1em;color:var(--mut);font-family:var(--fm)}
 .rnav{margin-left:auto;display:flex;gap:.4rem}
@@ -1142,15 +1145,28 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 ══════════════════════════════════════ -->
 <div id="home">
 
-  <!-- VIDEO REEL: Witch Den + TimeSplitters -->
+  <!-- VIDEO REEL -->
   <div class="reel">
 
     <div class="rslides" id="rslides">
 
-      <!-- Slide 1: Kingdom Below — direct MP4 from giovannilauffer.com -->
+      <!-- Slide 1: From the Void — team project. First slide: the only one loaded up front -->
       <div class="rslide">
-        <video class="slide-video sv-kingdom" autoplay muted loop playsinline preload="auto">
-          <source src="/wp-content/uploads/2026/05/kingdom-below-2k-v2.mp4" type="video/mp4">
+        <video class="slide-video sv-void" autoplay muted loop playsinline preload="auto" poster="/wp-content/uploads/2026/11/hero/from-the-void-poster.webp">
+          <source src="/wp-content/uploads/2026/11/hero/from-the-void-hero.mp4" type="video/mp4">
+        </video>
+        <div class="rov"></div><div class="rob"></div>
+        <div class="slide-info">
+          <div class="si-tag">Beyond Extent Challenge</div>
+          <div class="si-title">From the Void</div>
+          <div class="si-sub">Environment Art · Beyond Extent</div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Kingdom Below — hero copy at 30fps; the project page keeps the original -->
+      <div class="rslide">
+        <video class="slide-video sv-kingdom" muted loop playsinline preload="none" data-poster="/wp-content/uploads/2026/11/hero/kingdom-below-poster.webp">
+          <source src="/wp-content/uploads/2026/11/hero/kingdom-below-hero.mp4" type="video/mp4">
         </video>
         <div class="rov"></div><div class="rob"></div>
         <div class="slide-info">
@@ -1160,9 +1176,9 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
         </div>
       </div>
 
-      <!-- Slide 2: Witch's Den — direct MP4 from giovannilauffer.com -->
+      <!-- Slide 3: Witch's Den — direct MP4 from giovannilauffer.com -->
       <div class="rslide">
-        <video class="slide-video sv-witchden" autoplay muted loop playsinline preload="auto" poster="/wp-content/uploads/2026/03/witch-den-thumbnail-v2.webp">
+        <video class="slide-video sv-witchden" muted loop playsinline preload="none" data-poster="/wp-content/uploads/2026/03/witch-den-thumbnail-v2.webp">
           <source src="/wp-content/uploads/2025/12/WitchesDen-2k-1.mp4" type="video/mp4">
         </video>
         <div class="rov"></div><div class="rob"></div>
@@ -1173,26 +1189,13 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
         </div>
       </div>
 
-      <!-- Slide 3: TimeSplitters Rewind — direct MP4 from giovannilauffer.com -->
+      <!-- Slide 4: TimeSplitters Rewind — direct MP4 from giovannilauffer.com -->
       <div class="rslide">
-        <video class="slide-video sv-ts" autoplay muted loop playsinline preload="auto">
+        <video class="slide-video sv-ts" muted loop playsinline preload="none" data-poster="/wp-content/uploads/2026/11/hero/timesplitters-poster.webp">
           <source src="/ts-rewind-2k-v3.mp4" type="video/mp4">
         </video>
         <div class="rov"></div><div class="rob"></div>
         <div class="slide-info"><div class="si-tag">Cinder Interactive</div><div class="si-title">TimeSplitters: Rewind</div><div class="si-sub">Props · Characters · Vehicles · UE5</div></div>
-      </div>
-
-      <!-- Slide 4: From the Void — team project -->
-      <div class="rslide">
-        <video class="slide-video sv-void" muted loop playsinline preload="metadata" poster="/wp-content/uploads/2026/11/from-the-void-poster-v2.webp">
-          <source src="/wp-content/uploads/2026/11/from-the-void-v2.mp4" type="video/mp4">
-        </video>
-        <div class="rov"></div><div class="rob"></div>
-        <div class="slide-info">
-          <div class="si-tag">Beyond Extent Challenge</div>
-          <div class="si-title">From the Void</div>
-          <div class="si-sub">Environment Art · Beyond Extent</div>
-        </div>
       </div>
 
     </div>
@@ -1220,10 +1223,10 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.pcard:focus-
 
     <div class="rctrl">
       <div class="rdots" id="rdots">
-        <div class="rdot on" onclick="gts(0)" role="button" tabindex="0" aria-label="Go to slide 1"></div>
-        <div class="rdot" onclick="gts(1)" role="button" tabindex="0" aria-label="Go to slide 2"></div>
-        <div class="rdot" onclick="gts(2)" role="button" tabindex="0" aria-label="Go to slide 3"></div>
-        <div class="rdot" onclick="gts(3)" role="button" tabindex="0" aria-label="Go to slide 4"></div>
+        <button type="button" class="rdot on" onclick="gts(0)" aria-label="Go to slide 1"></button>
+        <button type="button" class="rdot" onclick="gts(1)" aria-label="Go to slide 2"></button>
+        <button type="button" class="rdot" onclick="gts(2)" aria-label="Go to slide 3"></button>
+        <button type="button" class="rdot" onclick="gts(3)" aria-label="Go to slide 4"></button>
       </div>
       <div class="rtim" id="rtim">01 / 04</div>
       <div class="rnav">
@@ -1938,7 +1941,7 @@ function addHov(sel){document.querySelectorAll(sel).forEach(el=>{
   el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
 });}
-addHov('a,button,.pcard,.gi,.relcard,.rbtn,.fb,.rc');
+addHov('a,button,.pcard,.gi,.relcard,.rbtn,.rdot,.fb,.rc');
 }
 
 // ── small global helper: pause every <video> inside the given selectors.
@@ -1956,7 +1959,7 @@ window.pauseAllVideosIn=pauseAllVideosIn;
 function homeVisible(){return !document.getElementById('home').classList.contains('hidden');}
 
 // ── reel (4 slides) — also pause/play videos on slide change ──
-let cs=0; const T=4; let at;
+let cs=0; const T=4; let at, rw;
 function gts(n){
   cs=(n+T)%T;
   document.getElementById('rslides').style.transform=`translateX(-${cs*100}%)`;
@@ -1969,22 +1972,48 @@ function gts(n){
   document.querySelectorAll('.rslide').forEach((slide,i)=>{
     const v=slide.querySelector('.slide-video');
     if(!v)return;
-    // rewind only if it has played: seeking drops the poster, so a blocked autoplay
-    // (iOS Low Power Mode) would be left on the clip's first frame instead
-    if(showing && i===cs){if(v.currentTime>0 && v.querySelector('source')?.getAttribute('src')!=='/ts-rewind-2k-v3.mp4')v.currentTime=0;v.play&&v.play().catch(()=>{});}
+    if(showing && i===cs){v.preload='auto';v.play&&v.play().catch(()=>showPoster(v));}
     else{v.pause && v.pause();}
   });
-  clearTimeout(at);
+  clearTimeout(at); clearTimeout(rw);
   // Only schedule the next auto-advance when home is visible — otherwise the
   // carousel keeps ticking + calling play() on hidden videos which causes the
   // desktop reel to feel laggy after navigating around the site.
-  if(showing) at=setTimeout(()=>gts(cs+1),7000);
+  if(showing){
+    warmSlide(cs+1);
+    // after the .9s slide transition, not during it
+    rw=setTimeout(rewindHidden,1000);
+    at=setTimeout(()=>gts(cs+1),7000);
+  }
+}
+// Later slides get their still only if playback is refused (iOS Low Power Mode).
+// A poster attribute in the HTML made Lighthouse count it as the main image the
+// moment the slide arrived, seven seconds in.
+function showPoster(v){
+  if(v.dataset.poster && v.paused && !v.currentTime)v.poster=v.dataset.poster;
+}
+// slides other than the first are preload="none"; fetch each one a slide ahead
+function warmSlide(n){
+  const v=document.querySelectorAll('.rslide')[(n+T)%T].querySelector('.slide-video');
+  if(v)v.preload='auto';
+}
+// Put off-screen clips back on their first frame so they are ready when they return.
+// Seeking while a slide moves in made the reel stutter from the second loop on.
+// Only if it has played: seeking drops the poster, so a blocked autoplay
+// (iOS Low Power Mode) would be left on the clip's first frame instead.
+function rewindHidden(){
+  document.querySelectorAll('.rslide').forEach((slide,i)=>{
+    const v=slide.querySelector('.slide-video');
+    if(i!==cs && v && v.currentTime>0)v.currentTime=0;
+  });
 }
 function ns(){gts(cs+1);}
 function ps(){gts(cs-1);}
 // expose to onclick handlers
 window.gts=gts; window.ns=ns; window.ps=ps;
 at=setTimeout(()=>gts(1),7000);
+// start fetching slide 2 once the first clip has had the connection to itself
+setTimeout(()=>warmSlide(cs+1),3000);
 // explicitly play slide 0 video — HTML autoplay is unreliable on mobile
 (function(){const v=document.querySelectorAll('.slide-video')[0];if(v)v.play&&v.play().catch(()=>{});})();
 // retry play() once a video buffers enough — handles the case where gts() is
